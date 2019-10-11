@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6f7d53cf-b46d-4f85-9799-03c52a0fa9b8" name="sportiq" url="http://localhost:63342">
+        <fileTransfer port="0" accessType="LOCAL" />
+      </webServer>
+      <webServer id="2342da90-6fdf-44f5-8485-1ba6c2221afd" name="ludarous.com" url="http://ludarous.com/sportiq">
+        <fileTransfer host="ludarous.com" port="50021">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="50021" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
