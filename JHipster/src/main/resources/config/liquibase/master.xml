@@ -5,6 +5,33 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201708_added_entity_Event.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201709_added_entity_Workout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201710_added_entity_Activity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201711_added_entity_ActivityResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201712_added_entity_ActivityResultSplit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201713_added_entity_WorkoutCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201714_added_entity_ActivityCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201715_added_entity_AthleteEvent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201716_added_entity_AthleteWorkout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201717_added_entity_AthleteActivity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201718_added_entity_AthleteActivityResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201719_added_entity_AthleteActivityResultSplit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201720_added_entity_Athlete.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201721_added_entity_Address.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201722_added_entity_Sport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201723_added_entity_Unit.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20191012201708_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201709_added_entity_constraints_Workout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201710_added_entity_constraints_Activity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201711_added_entity_constraints_ActivityResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201712_added_entity_constraints_ActivityResultSplit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201715_added_entity_constraints_AthleteEvent.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201716_added_entity_constraints_AthleteWorkout.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201717_added_entity_constraints_AthleteActivity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201718_added_entity_constraints_AthleteActivityResult.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201719_added_entity_constraints_AthleteActivityResultSplit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201720_added_entity_constraints_Athlete.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

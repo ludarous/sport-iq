@@ -1,0 +1,40 @@
+{
+    "name": "AthleteActivityResult",
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "athleteActivity",
+            "otherEntityName": "athleteActivity",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "athleteActivityResultSplits",
+            "otherEntityName": "athleteActivityResultSplit",
+            "otherEntityRelationshipName": "athleteActivityResult"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "activityResult",
+            "otherEntityName": "activityResult",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191012201718",
+    "entityTableName": "athlete_activity_result",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

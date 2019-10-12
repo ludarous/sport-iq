@@ -1,0 +1,27 @@
+
+{
+    "sportiqApp": {
+        "workout" : {
+            "home": {
+                "title": "Workouts",
+                "createLabel": "Vytvořit Workout",
+                "createOrEditLabel": "Vytvořit nebo upravit Workout",
+                "search": "Vyhledat Workout"
+            },
+            "created": "Byl vytvořen potomek entity Workout s identifikátorem {{ param }}",
+            "updated": "Potomek entity Workout s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Workout s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Workout {{ id }}?"
+            },
+            "detail": {
+                "title": "Workout"
+            },
+            "name": "Name",
+            "description": "Description",
+            "activities": "Activities",
+            "categories": "Categories",
+            "sports": "Sports"
+        }
+    }
+}

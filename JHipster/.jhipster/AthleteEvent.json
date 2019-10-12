@@ -1,0 +1,48 @@
+{
+    "name": "AthleteEvent",
+    "fields": [
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "actualHeightInCm",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "actualWeightInKg",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "event",
+            "otherEntityName": "event",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "athleteWorkouts",
+            "otherEntityName": "athleteWorkout",
+            "otherEntityRelationshipName": "athleteEvent"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "athlete",
+            "otherEntityName": "athlete",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191012201715",
+    "entityTableName": "athlete_event",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

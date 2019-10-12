@@ -1,0 +1,27 @@
+{
+    "name": "AthleteActivityResultSplit",
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "athleteActivityResult",
+            "otherEntityName": "athleteActivityResult",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191012201719",
+    "entityTableName": "athlete_activity_result_split",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

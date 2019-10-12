@@ -1,0 +1,26 @@
+
+{
+    "sportiqApp": {
+        "address" : {
+            "home": {
+                "title": "Addresses",
+                "createLabel": "Vytvořit Address",
+                "createOrEditLabel": "Vytvořit nebo upravit Address",
+                "search": "Vyhledat Address"
+            },
+            "created": "Byl vytvořen potomek entity Address s identifikátorem {{ param }}",
+            "updated": "Potomek entity Address s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Address s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Address {{ id }}?"
+            },
+            "detail": {
+                "title": "Address"
+            },
+            "country": "Country",
+            "city": "City",
+            "street": "Street",
+            "zipCode": "Zip Code"
+        }
+    }
+}

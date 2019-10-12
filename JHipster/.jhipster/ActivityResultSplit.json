@@ -1,0 +1,33 @@
+{
+    "name": "ActivityResultSplit",
+    "fields": [
+        {
+            "fieldName": "splitValue",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "activityResult",
+            "otherEntityName": "activityResult",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "splitUnit",
+            "otherEntityName": "unit",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191012201712",
+    "entityTableName": "activity_result_split",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

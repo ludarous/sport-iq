@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-athlete-event-heading" jhiTranslate="sportiqApp.athleteEvent.home.createOrEditLabel">Create or edit a Athlete Event</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!athleteEvent.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="athleteEvent.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteEvent.note" for="field_note">Note</label>
+                    <input type="text" class="form-control" name="note" id="field_note"
+                        [(ngModel)]="athleteEvent.note" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteEvent.actualHeightInCm" for="field_actualHeightInCm">Actual Height In Cm</label>
+                    <input type="number" class="form-control" name="actualHeightInCm" id="field_actualHeightInCm"
+                        [(ngModel)]="athleteEvent.actualHeightInCm" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteEvent.actualWeightInKg" for="field_actualWeightInKg">Actual Weight In Kg</label>
+                    <input type="number" class="form-control" name="actualWeightInKg" id="field_actualWeightInKg"
+                        [(ngModel)]="athleteEvent.actualWeightInKg" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteEvent.event" for="field_event">Event</label>
+                    <select class="form-control" id="field_event" name="event" [(ngModel)]="athleteEvent.eventId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="eventOption.id" *ngFor="let eventOption of events; trackBy: trackEventById">{{eventOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteEvent.athlete" for="field_athlete">Athlete</label>
+                    <select class="form-control" id="field_athlete" name="athlete" [(ngModel)]="athleteEvent.athleteId"  required>
+                        <option *ngIf="!editForm.value.athlete" [ngValue]="null" selected></option>
+                        <option [ngValue]="athleteOption.id" *ngFor="let athleteOption of athletes; trackBy: trackAthleteById">{{athleteOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.athlete?.dirty && editForm.controls.athlete?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.athlete?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

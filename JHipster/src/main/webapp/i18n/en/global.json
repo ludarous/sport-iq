@@ -7,6 +7,22 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
+                "event": "Event",
+                "workout": "Workout",
+                "activity": "Activity",
+                "activityResult": "Activity Result",
+                "activityResultSplit": "Activity Result Split",
+                "workoutCategory": "Workout Category",
+                "activityCategory": "Activity Category",
+                "athleteEvent": "Athlete Event",
+                "athleteWorkout": "Athlete Workout",
+                "athleteActivity": "Athlete Activity",
+                "athleteActivityResult": "Athlete Activity Result",
+                "athleteActivityResultSplit": "Athlete Activity Result Split",
+                "athlete": "Athlete",
+                "address": "Address",
+                "sport": "Sport",
+                "unit": "Unit",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

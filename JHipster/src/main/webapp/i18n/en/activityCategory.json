@@ -1,0 +1,24 @@
+
+{
+    "sportiqApp": {
+        "activityCategory" : {
+            "home": {
+                "title": "Activity Categories",
+                "createLabel": "Create a new Activity Category",
+                "createOrEditLabel": "Create or edit a Activity Category",
+                "search": "Search for Activity Category"
+            },
+            "created": "A new Activity Category is created with identifier {{ param }}",
+            "updated": "A Activity Category is updated with identifier {{ param }}",
+            "deleted": "A Activity Category is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Activity Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Activity Category"
+            },
+            "name": "Name",
+            "description": "Description"
+        }
+    }
+}

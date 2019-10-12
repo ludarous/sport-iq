@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="athleteActivityResultSplit">
+            <h2><span jhiTranslate="sportiqApp.athleteActivityResultSplit.detail.title">Athlete Activity Result Split</span> {{athleteActivityResultSplit.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sportiqApp.athleteActivityResultSplit.value">Value</span></dt>
+                <dd>
+                    <span>{{athleteActivityResultSplit.value}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteActivityResultSplit.athleteActivityResult">Athlete Activity Result</span></dt>
+                <dd>
+                    <div *ngIf="athleteActivityResultSplit.athleteActivityResultId">
+                        <a [routerLink]="['/athlete-activity-result', athleteActivityResultSplit.athleteActivityResultId, 'view']">{{athleteActivityResultSplit.athleteActivityResultId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/athlete-activity-result-split', athleteActivityResultSplit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+
+{
+    "sportiqApp": {
+        "workoutCategory" : {
+            "home": {
+                "title": "Workout Categories",
+                "createLabel": "Vytvořit Workout Category",
+                "createOrEditLabel": "Vytvořit nebo upravit Workout Category",
+                "search": "Vyhledat Workout Category"
+            },
+            "created": "Byl vytvořen potomek entity Workout Category s identifikátorem {{ param }}",
+            "updated": "Potomek entity Workout Category s identifikátorem {{ param }} byl upravený.",
+            "deleted": "Potomek entity Workout Category s identifikátorem {{ param }} bol smazaný.",
+            "delete": {
+                "question": "Jste si jisti, že chcete smazat Workout Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Workout Category"
+            },
+            "name": "Name",
+            "description": "Description"
+        }
+    }
+}

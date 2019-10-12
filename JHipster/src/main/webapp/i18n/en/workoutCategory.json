@@ -1,0 +1,24 @@
+
+{
+    "sportiqApp": {
+        "workoutCategory" : {
+            "home": {
+                "title": "Workout Categories",
+                "createLabel": "Create a new Workout Category",
+                "createOrEditLabel": "Create or edit a Workout Category",
+                "search": "Search for Workout Category"
+            },
+            "created": "A new Workout Category is created with identifier {{ param }}",
+            "updated": "A Workout Category is updated with identifier {{ param }}",
+            "deleted": "A Workout Category is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Workout Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Workout Category"
+            },
+            "name": "Name",
+            "description": "Description"
+        }
+    }
+}

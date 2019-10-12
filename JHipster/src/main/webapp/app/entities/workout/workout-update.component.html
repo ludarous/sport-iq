@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-workout-heading" jhiTranslate="sportiqApp.workout.home.createOrEditLabel">Create or edit a Workout</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!workout.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="workout.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.workout.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="workout.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.workout.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="workout.description" />
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="sportiqApp.workout.activities" for="field_activities">Activities</label>
+                    <select class="form-control" id="field_activities" multiple name="activities" [(ngModel)]="workout.activities">
+                        <option [ngValue]="getSelected(workout.activities, activityOption)" *ngFor="let activityOption of activities; trackBy: trackActivityById">{{activityOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="sportiqApp.workout.categories" for="field_categories">Categories</label>
+                    <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="workout.categories">
+                        <option [ngValue]="getSelected(workout.categories, workoutCategoryOption)" *ngFor="let workoutCategoryOption of workoutcategories; trackBy: trackWorkoutCategoryById">{{workoutCategoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label jhiTranslate="sportiqApp.workout.sports" for="field_sports">Sports</label>
+                    <select class="form-control" id="field_sports" multiple name="sports" [(ngModel)]="workout.sports">
+                        <option [ngValue]="getSelected(workout.sports, sportOption)" *ngFor="let sportOption of sports; trackBy: trackSportById">{{sportOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

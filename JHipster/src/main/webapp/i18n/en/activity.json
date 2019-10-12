@@ -1,0 +1,31 @@
+
+{
+    "sportiqApp": {
+        "activity" : {
+            "home": {
+                "title": "Activities",
+                "createLabel": "Create a new Activity",
+                "createOrEditLabel": "Create or edit a Activity",
+                "search": "Search for Activity"
+            },
+            "created": "A new Activity is created with identifier {{ param }}",
+            "updated": "A Activity is updated with identifier {{ param }}",
+            "deleted": "A Activity is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Activity {{ id }}?"
+            },
+            "detail": {
+                "title": "Activity"
+            },
+            "name": "Name",
+            "description": "Description",
+            "help": "Help",
+            "minAge": "Min Age",
+            "maxAge": "Max Age",
+            "targetValue": "Target Value",
+            "activityResults": "Activity Results",
+            "targetUnit": "Target Unit",
+            "categories": "Categories"
+        }
+    }
+}

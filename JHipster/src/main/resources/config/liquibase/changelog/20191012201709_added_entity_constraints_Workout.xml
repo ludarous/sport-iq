@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Workout.
+    -->
+    <changeSet id="20191012201709-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="workouts_id"
+                                 baseTableName="workout_activities"
+                                 constraintName="fk_workout_activities_workouts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workout"/>
+        <addForeignKeyConstraint baseColumnNames="activities_id"
+                                 baseTableName="workout_activities"
+                                 constraintName="fk_workout_activities_activities_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity"/>
+        
+        <addForeignKeyConstraint baseColumnNames="workouts_id"
+                                 baseTableName="workout_categories"
+                                 constraintName="fk_workout_categories_workouts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workout"/>
+        <addForeignKeyConstraint baseColumnNames="categories_id"
+                                 baseTableName="workout_categories"
+                                 constraintName="fk_workout_categories_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workout_category"/>
+        
+        <addForeignKeyConstraint baseColumnNames="workouts_id"
+                                 baseTableName="workout_sports"
+                                 constraintName="fk_workout_sports_workouts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workout"/>
+        <addForeignKeyConstraint baseColumnNames="sports_id"
+                                 baseTableName="workout_sports"
+                                 constraintName="fk_workout_sports_sports_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sport"/>
+        
+    </changeSet>
+</databaseChangeLog>

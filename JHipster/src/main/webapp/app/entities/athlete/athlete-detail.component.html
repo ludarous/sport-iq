@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="athlete">
+            <h2><span jhiTranslate="sportiqApp.athlete.detail.title">Athlete</span> {{athlete.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sportiqApp.athlete.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{athlete.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{athlete.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.email">Email</span></dt>
+                <dd>
+                    <span>{{athlete.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.birthDate">Birth Date</span></dt>
+                <dd>
+                    <span>{{athlete.birthDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.nationality">Nationality</span></dt>
+                <dd>
+                    <span>{{athlete.nationality}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.sex">Sex</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'sportiqApp.Sex.' + athlete.sex}}">{{athlete.sex}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.address">Address</span></dt>
+                <dd>
+                    <div *ngIf="athlete.addressId">
+                        <a [routerLink]="['/address', athlete.addressId, 'view']">{{athlete.addressId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/athlete', athlete.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

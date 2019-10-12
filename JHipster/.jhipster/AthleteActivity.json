@@ -1,0 +1,44 @@
+{
+    "name": "AthleteActivity",
+    "fields": [
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "athleteWorkout",
+            "otherEntityName": "athleteWorkout",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "athleteActivityResults",
+            "otherEntityName": "athleteActivityResult",
+            "otherEntityRelationshipName": "athleteActivity"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "activity",
+            "otherEntityName": "activity",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191012201717",
+    "entityTableName": "athlete_activity",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}

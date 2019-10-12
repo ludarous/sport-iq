@@ -1,0 +1,24 @@
+
+{
+    "sportiqApp": {
+        "athleteActivityResultSplit" : {
+            "home": {
+                "title": "Athlete Activity Result Splits",
+                "createLabel": "Create a new Athlete Activity Result Split",
+                "createOrEditLabel": "Create or edit a Athlete Activity Result Split",
+                "search": "Search for Athlete Activity Result Split"
+            },
+            "created": "A new Athlete Activity Result Split is created with identifier {{ param }}",
+            "updated": "A Athlete Activity Result Split is updated with identifier {{ param }}",
+            "deleted": "A Athlete Activity Result Split is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Athlete Activity Result Split {{ id }}?"
+            },
+            "detail": {
+                "title": "Athlete Activity Result Split"
+            },
+            "value": "Value",
+            "athleteActivityResult": "Athlete Activity Result"
+        }
+    }
+}

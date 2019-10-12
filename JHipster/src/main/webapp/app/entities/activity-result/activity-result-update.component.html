@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-activity-result-heading" jhiTranslate="sportiqApp.activityResult.home.createOrEditLabel">Create or edit a Activity Result</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!activityResult.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="activityResult.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="activityResult.name" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.resultType" for="field_resultType">Result Type</label>
+                    <select class="form-control" name="resultType" [(ngModel)]="activityResult.resultType" id="field_resultType" >
+                        <option value="LESS_IS_BETTER">{{'sportiqApp.ResultType.LESS_IS_BETTER' | translate}}</option>
+                        <option value="MORE_IS_BETTER">{{'sportiqApp.ResultType.MORE_IS_BETTER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.ratingWeight" for="field_ratingWeight">Rating Weight</label>
+                    <input type="number" class="form-control" name="ratingWeight" id="field_ratingWeight"
+                        [(ngModel)]="activityResult.ratingWeight" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.activity" for="field_activity">Activity</label>
+                    <select class="form-control" id="field_activity" name="activity" [(ngModel)]="activityResult.activityId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="activityOption.id" *ngFor="let activityOption of activities; trackBy: trackActivityById">{{activityOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.resultUnit" for="field_resultUnit">Result Unit</label>
+                    <select class="form-control" id="field_resultUnit" name="resultUnit" [(ngModel)]="activityResult.resultUnitId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="unitOption.id" *ngFor="let unitOption of units; trackBy: trackUnitById">{{unitOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+{
+    "name": "ActivityResult",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "resultType",
+            "fieldType": "ResultType",
+            "fieldValues": "LESS_IS_BETTER,MORE_IS_BETTER"
+        },
+        {
+            "fieldName": "ratingWeight",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "activity",
+            "otherEntityName": "activity",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "resultSplits",
+            "otherEntityName": "activityResultSplit",
+            "otherEntityRelationshipName": "activityResult"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "resultUnit",
+            "otherEntityName": "unit",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20191012201711",
+    "entityTableName": "activity_result",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "searchEngine": "elasticsearch"
+}
