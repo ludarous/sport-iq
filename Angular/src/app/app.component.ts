@@ -14,6 +14,22 @@ export class AppComponent implements OnInit{
     $('#status').delay(100).fadeOut('slow');
     $('#preloader').delay(500).fadeOut('slow');
     $('body').delay(500).css({overflow : 'visible'});
+
+    /* Scroll Up */
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 100) {
+        $('.scroll-up').fadeIn();
+      } else {
+        $('.scroll-up').fadeOut();
+      }
+    });
+
+    $('.scroll-up').click(function() {
+      $('html, body').animate({
+        scrollTop: 0
+      }, 600);
+      return false;
+    });
   }
 }
 

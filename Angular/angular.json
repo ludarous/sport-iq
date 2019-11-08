@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Angular",
+            "outputPath": "dist/sportiq",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -40,7 +40,6 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/wow.js/dist/wow.min.js",
-              "node_modules/waypoints/lib/jquery.waypoints.min.js",
               "node_modules/waypoints/lib/noframework.waypoints.min.js",
               "node_modules/jquery-countto/jquery.countTo.js",
               "node_modules/jquery.easing/jquery.easing.min.js",

@@ -36,7 +36,7 @@ export class CountToDirective implements OnChanges, OnInit {
   }
 
   calculate() {
-    this.durationInMilies = this.duration * 2 * 1000;
+    this.durationInMilies = this.duration * 1000;
 
     this.steps = Math.ceil(this.durationInMilies / this.refreshInterval);
     this.increment = ((this.CountTo - this.from) / this.steps);

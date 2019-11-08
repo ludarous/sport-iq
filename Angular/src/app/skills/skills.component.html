@@ -1,49 +1,10 @@
-<!--<div class="skills">-->
-<!--  <div class="overlay">-->
-<!--    <div class="wrapper-block-skills">-->
-
-<!--      <div id="skills-slider" class="carousel slide carousel-fade" data-ride="carousel" data-interval="10000">-->
-<!--        <div class="carousel-inner">-->
-<!--          <div>-->
-<!--            <app-skill-slide [backgroundUrl]="''" [countToSettings]="countToSettingsSprint"></app-skill-slide>-->
-<!--            ahoj-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <app-skill-slide [backgroundUrl]="''" [countToSettings]="countToSettingsArsenal"></app-skill-slide>-->
-<!--            cau-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <a class="left-control" href="#skills-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>-->
-<!--        <a class="right-control" href="#skills-slider" data-slide="next"><i-->
-<!--          class="fa fa-angle-right"></i></a>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<div class="skills">
-  <div class="overlay">
-    <div class="wrapper-block-skills">
-      <div id="skills-carousel" class="carousel slide" data-ride="carousel" data-interval="10000">
-        <ol class="carousel-indicators">
-          <li data-target="#skills-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#skills-carousel" data-slide-to="1"></li>
-        </ol>
-        <div class="carousel-inner">
-          <app-skill-slide class="carousel-item active" [backgroundUrl]="'assets/images/basketball-np.jpg'"
-                           [countToSettings]="countToSettingsSprint"></app-skill-slide>
-          <app-skill-slide class="carousel-item" [backgroundUrl]="'assets/images/football-3-np.jpg'"
-                           [countToSettings]="countToSettingsArsenal"></app-skill-slide>
-        </div>
-        <a class="carousel-control-prev" href="#skills-carousel" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#skills-carousel" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+<ngb-carousel (slide)="onSlide($event)">
+  <ng-template ngbSlide>
+    <app-skill-slide [backgroundUrl]="'assets/images/basketball-np.jpg'"
+                     [countToSettings]="countToSettingsSprint"></app-skill-slide>
+  </ng-template>
+  <ng-template ngbSlide>
+    <app-skill-slide [backgroundUrl]="'assets/images/football-3-np.jpg'"
+                     [countToSettings]="countToSettingsArsenal"></app-skill-slide>
+  </ng-template>
+</ngb-carousel>

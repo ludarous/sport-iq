@@ -11,6 +11,9 @@ import { TechnologiesComponent } from './technologies/technologies.component';
 import { SkillsComponent } from './skills/skills.component';
 import { SkillSlideComponent } from './skills/skill-slide/skill-slide.component';
 import {CountToDirective} from './shared/directives/count-to.directive';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContactsComponent } from './contacts/contacts.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,14 @@ import {CountToDirective} from './shared/directives/count-to.directive';
     TechnologiesComponent,
     SkillsComponent,
     SkillSlideComponent,
-    CountToDirective
+    CountToDirective,
+    ContactsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbCarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

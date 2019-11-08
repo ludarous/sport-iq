@@ -1,6 +1,7 @@
-import {Component, Input, OnInit, ViewChildren} from '@angular/core';
-import {CountToSettings, SkillSlideComponent} from './skill-slide/skill-slide.component';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { CountToSettings, SkillSlideComponent } from './skill-slide/skill-slide.component';
 import * as $ from 'jquery';
+import { NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-skills',
@@ -9,10 +10,11 @@ import * as $ from 'jquery';
 })
 export class SkillsComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
-  @ViewChildren('app-skill-slide')
-  slides: Array<SkillSlideComponent>;
+  @ViewChildren(SkillSlideComponent)
+  slides: QueryList<SkillSlideComponent>;
 
   @Input()
   slideInterval = 5000;
@@ -21,17 +23,6 @@ export class SkillsComponent implements OnInit {
   countToSettingsArsenal: Array<CountToSettings> = new Array<CountToSettings>();
 
   ngOnInit() {
-
-    setTimeout(() => {
-      const $carousel = $('#skills-carousel');
-      const slides = this.slides;
-      $carousel.on('slide.bs.carousel', function() {
-        alert('asdasd')
-        for (const slide of slides) {
-          slide.startCount();
-        }
-      });
-    }, 2000);
 
     this.countToSettingsSprint = [
       {
@@ -79,5 +70,20 @@ export class SkillsComponent implements OnInit {
   }
 
 
+  onSlide($event: NgbSlideEvent) {
+    let currentSlide;
+    if ($event.current === 'ngb-slide-4') {
+      currentSlide = this.slides.find((item, index) => {
+        return index === 0;
+      });
+    } else if ($event.current === 'ngb-slide-5') {
+      currentSlide = this.slides.find((item, index) => {
+        return index === 1;
+      });
+    }
 
+    if(currentSlide) {
+      currentSlide.startCount();
+    }
+  }
 }
