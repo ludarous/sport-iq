@@ -1,0 +1,43 @@
+<div class="parallax" [style.background-image]="sanitizedBackgroundImage">
+  <div class="skill-slider-item">
+    <!-- Block Title -->
+    <div class="element-title">
+      <div class="row">
+        <div class="container">
+          <h1 class="accent fadeInDown" data-wow-duration="1s"
+              data-wow-delay="300ms">
+            Zjisti jak jsi na tom v porovnání s nejlepšími sportovci na světě</h1>
+          <h3 class="fadeInDown" data-wow-duration="1s"
+              data-wow-delay="300ms">
+            3/4 court sprint
+          </h3>
+        </div>
+      </div>
+    </div>
+    <!-- End Block Title -->
+    <div class="row">
+      <div class="container">
+        <div class="wrapper-count">
+          <div class="row">
+            <div class="col" *ngFor="let playerSettings of countToSettings">
+              <div class="number fadeInRight" data-wow-duration="1s"
+                   data-wow-delay="300ms">
+                <div class="text-nowrap">
+                  <span class="timer" [CountTo]="playerSettings.time" [from]="0" [duration]="playerSettings.time">{{playerSettings.time}}</span> s
+                </div>
+              </div>
+              <div class="number-title fadeInLeft" data-wow-duration="1s"
+                   data-wow-delay="300ms">
+                {{playerSettings.name}}
+              </div>
+              <div class="fadeInLeft" data-wow-duration="1s"
+                   data-wow-delay="300ms">
+                {{playerSettings.club}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

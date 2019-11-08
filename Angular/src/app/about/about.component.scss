@@ -1,0 +1,84 @@
+@import "colors.scss";
+
+.slide-wrap {
+  /*background-image: url(../images/sportiq/all-sports.jpg);*/
+  /*background-size: cover;*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: center;*/
+  /*background-attachment: fixed;*/
+  background-color: black;
+  min-height: 100vh;
+  padding-top: 95px;
+}
+
+.slide-football {
+  background-image: url('~src/assets/images/football-3-np.jpg');
+  background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.slide-basketball {
+  background-image: url('~src/assets/images/basketball-np.jpg');
+  background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-position: center;
+  background-position-y: 0px;
+  background-repeat: no-repeat;
+}
+
+.slide-hockey {
+  background-image: url('~src/assets/images/hockey-np.jpg');
+  background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.why-us {
+  padding: 60px 2% 80px;
+  background-color: rgba(0, 0, 0, .6);
+}
+
+.wrapper-why-us {
+  padding: 40px 0;
+}
+
+.about-us h2 {
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.carousel-wrapper {
+
+}
+
+.carousel-indicators li {
+  background-color: $primary-color;
+}
+
+.overlay, .why-us, .carousel, .carousel-inner, .carousel-item {
+  height: 100%;
+}
+
+.carousel-control-next span, .carousel-control-prev span {
+  color: $primary-color;
+}
+
+.siq-list {
+  list-style-type: disc;
+}
+
+.siq-list .siq-list-item {
+  text-align: left;
+  margin: 25px;
+}
+
+
