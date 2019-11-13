@@ -5,11 +5,10 @@
       <div class="row">
         <div class="container">
           <h1 class="accent fadeInDown" data-wow-duration="1s"
-              data-wow-delay="300ms">
-            Zjisti jak jsi na tom v porovnání s nejlepšími sportovci na světě</h1>
+              data-wow-delay="300ms">{{'skills.title' | translate}}</h1>
           <h3 class="fadeInDown" data-wow-duration="1s"
               data-wow-delay="300ms">
-            3/4 court sprint
+            {{countToSettings.name}}
           </h3>
         </div>
       </div>
@@ -19,7 +18,7 @@
       <div class="container">
         <div class="wrapper-count">
           <div class="row">
-            <div class="col" *ngFor="let playerSettings of countToSettings">
+            <div class="col" *ngFor="let playerSettings of countToSettings.values">
               <div class="number fadeInRight" data-wow-duration="1s"
                    data-wow-delay="300ms">
                 <div class="text-nowrap">

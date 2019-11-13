@@ -36,7 +36,7 @@
   <div class="navbar-wrapper scroll-fixed-navbar">
     <nav class="navbar navbar-inverse navbar-expand-lg navbar-light">
       <div class="container">
-        <div class="row">
+        <div class="row flex-fill">
           <a class="navbar-brand" href="#">
             <div class="logo navbar-logo">sport<span class="accent">iq</span></div>
           </a>
@@ -45,17 +45,17 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse navbar-list" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto main-nav-list">
               <li class="nav-item"><a class="nav-link" href="#aboutSportIQ">O SportIQ </a></li>
               <li class="nav-item"><a class="nav-link" href="#">Testy</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Technologie</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Kontakt</a></li>
             </ul>
-<!--            <form class="form-inline my-2 my-lg-0">-->
-<!--              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-<!--            </form>-->
+            <div class="language-selector">
+              <span (click)="setLang('cs')" class="pointer">CZ</span>
+              <span (click)="setLang('en')" class="pointer">EN</span>
+            </div>
           </div>
         </div>
       </div>

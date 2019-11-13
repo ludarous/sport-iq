@@ -6,6 +6,11 @@ import {DomSanitizer} from '@angular/platform-browser';
 
 declare const Waypoint: any;
 
+export interface SkillSlideSettings {
+  name: string,
+  values: Array<CountToSettings>
+}
+
 export interface CountToSettings {
   time?: number;
   name?: string;
@@ -26,7 +31,7 @@ export class SkillSlideComponent implements OnInit {
   backgroundUrl: string;
 
   @Input()
-  countToSettings: Array<CountToSettings>;
+  countToSettings: SkillSlideSettings;
 
   sanitizedBackgroundImage: any;
 

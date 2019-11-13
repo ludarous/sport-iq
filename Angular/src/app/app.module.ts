@@ -14,6 +14,15 @@ import {CountToDirective} from './shared/directives/count-to.directive';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactsComponent } from './contacts/contacts.component';
 import { FooterComponent } from './footer/footer.component';
+import { TestsComponent } from './tests/tests.component';
+import {MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import * as $ from 'jquery';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -27,12 +36,22 @@ import { FooterComponent } from './footer/footer.component';
     SkillSlideComponent,
     CountToDirective,
     ContactsComponent,
-    FooterComponent
+    FooterComponent,
+    TestsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbCarouselModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      useDefaultLang: false,
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
