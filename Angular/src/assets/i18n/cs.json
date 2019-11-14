@@ -32,8 +32,23 @@
 			"point-6": "<h2>další <b>korekce tréninku</b> a cvičení s ohledem na dosažené výsledky a nově stanovené cíle</h2>"
 		}
 	},
+	"contacts": {
+		"title": "Kontaktujte nás",
+		"call-us": "Zavolejte nám",
+		"write-us": "Napište nám e-mail"
+	},
+	"home": {
+		"title": "Jaká je tvá pohybová <span class=\"accent\">inteligence</span>?",
+		"get-more": "Zjisti víc"
+	},
+	"menu": {
+		"about": "O SportIQ",
+		"tests": "Testy",
+		"technology": "Technologie",
+		"contact": "Kontakt"
+	},
 	"skills": {
-		"title": "Zjisti jak jsi na tom v porovnání s nejlepšími sportovci na světě"
+		"title": "Zjisti, jak jsi na tom v porovnání s nejlepšími sportovci na světě"
 	},
 	"technology": {
 		"title": "Technologie",
@@ -41,5 +56,8 @@
 		"text-2": "Přesnost měření je rozhodující při poskytování dat sportovcům, kterým mohou důvěřovat. Měřící brány používají algoritmus zpracování chyb, aby eliminovaly chyby způsobené protnutím bran končetinami, které ovlivňují přesnost výsledků.",
 		"text-3": " Pro sběr, analýzu a prezentaci dat jsme vyvinuli vlastní software, který pomůže sportovcům ke zvyšování jejich výkonnosti.",
 		"using-title": "Technologii měření používají v nejlepších ligách na světě"
+	},
+	"tests": {
+		"title": "Testy"
 	}
 }

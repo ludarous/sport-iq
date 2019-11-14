@@ -1,45 +1,63 @@
 {
 	"about": {
 		"what-is-sportiq": {
-			"title": "",
-			"point-1": "",
-			"point-2": "",
-			"point-3": "",
-			"point-4": ""
+			"title": "Co je SportIQ?",
+			"point-1": "<h2>komplexní <b>nástroj</b> sestávající z <b>jedinečnýchtestů</b> a nejnovějších <b>technologií</b> (používáno týmy NBA, NHL,NFL, MLB, Premier league).<br><b>identifikuje silné stránky</b> sportovce a jeho <b>oblasti  rozvoje</b> s podporou <b>know-how</b> založeného na originálnímnámi vytvořeném <b>softwaru</b>.</h2>",
+			"point-2": "<h2>podporuje <b>nejvyšší</b> možný <b>výkonsportovců</b>.</h2>",
+			"point-3": "<h2>zaměřuje se na <b>všestrannos</b>t a <b>schopnostpohybu s míčem při maximální rychlosti</b>.</h2>",
+			"point-4": "<h2>umožňuje určit úroveň <b>pohybových schopností/ dovedností jednotlivce</b> - rychlosti, síly, vytrvalosti a předevšímkoordinace - které jsou <b>základem sportovního růstu</b>.</h2>"
 		},
 		"why-test": {
-			"title": "",
-			"point-1": "",
-			"point-2": "",
-			"point-3": "",
-			"point-4": "",
-			"point-5": ""
+			"title": "Proč testovat",
+			"point-1": "<h2>identifikace <b>silných a slabých stránek</b> umožňuje sportovcům a trenérům adekvátně <b>přizpůsobit trénink,   sledovat vývoj / zlepšení</b> a <b>srovnat</b> se s ostatními sportovci / týmy.</h2>",
+			"point-2": "<h2>za účelem <b>dosažení maximálního výkonu</b> sportovce</h2>",
+			"point-3": "<h2>sportovec potřebuje <b>maximální kontrolu nad základními pohyby</b>, které jsou <b>předpokladem</b> pro další vývoj a zvládnutí <b>složitějších pohybů</b> (např .: běh vs. běh s míčem (s minimální ztrátou rychlosti nebo bez ní))</h2>",
+			"point-4": "<h2><b>úroveň zvládnutí základních i složitých pohybů</b>, tj. úroveň motorických dovedností <b>měří SportIQ</b></h2>",
+			"point-5": "<h2>za účelem <b>zjištění úrovně všestrannosti a výjimečnosti</b> sportovce</h2>"
 		},
 		"whom": {
-			"title": "",
-			"point-1": "",
-			"point-2": "",
-			"point-3": "",
-			"point-4": ""
+			"title": "Pro koho je SportIQ?",
+			"point-1": "<h2>všem, kteří chtějí dosáhnout svého <b>maximálního sportovního výkonu</b></h2>",
+			"point-2": "<h2>všem, kteří chtějí <b>zjistit</b> svou <b>úroveň</b>.</h2>",
+			"point-3": "<h2>vhodné pro děti a dospívající od 6 let, <b>testy jsou přizpůsobeny věkové kategorii</b></h2>",
+			"point-4": "<h2><b>test pohybové všestrannosti</b> je vhodný pro sportovce jakéhokoli zaměření a pro některé sporty je k dispozici test <b>specializovaný</b>. <b>Test míčových sportů</b> ukáže, v kterém z míčových sportů by se sportovec mohl realizovat.</h2>"
 		},
 		"how": {
-			"title": "",
-			"point-1": "",
-			"point-2": "",
-			"point-3": "",
-			"point-4": "",
-			"point-5": "",
-			"point-6": ""
+			"title": "Jak SportIQ funguje?",
+			"point-1": "<h2>výběr <b>vhodného testu</b> podle věku a sportovní specializace</h2>",
+			"point-2": "<h2><b>testování</b></h2>",
+			"point-3": "<h2><b>vyhodnocení</b> testu</h2>",
+			"point-4": "<h2>pravidelné <b>cvičení / přizpůsobený trénink</b> (na základě výsledků)</h2>",
+			"point-5": "<h2><b>opětovné testování</b> ideálně po 4-6 měsících a vyhodnocení zlepšení</h2>",
+			"point-6": "<h2>další <b>korekce tréninku</b> a cvičení s ohledem na dosažené výsledky a nově stanovené cíle</h2>"
 		}
 	},
+	"contacts": {
+		"title": "Contact us",
+		"call-us": "Call us",
+		"write-us": "E-mail us"
+	},
+	"home": {
+		"title": "What is your moving <span class=\"accent\">inteligence</span>?",
+		"get-more": "Get more"
+	},
+	"menu": {
+		"about": "About SportIQ",
+		"tests": "Tests",
+		"technology": "Technology",
+		"contact": "Contact"
+	},
 	"skills": {
-		"title": ""
+		"title": "Zjisti, jak jsi na tom v porovnání s nejlepšími sportovci na světě"
 	},
 	"technology": {
-		"title": "",
-		"text-1": "",
-		"text-2": "",
-		"text-3": "",
-		"using-title": ""
+		"title": "Technology",
+		"text-1": "We use newest technology to measure the speed, response and power used by the teams from the best leagues in the world.",
+		"text-2": "Measurement accuracy is critical in providing data to athletes they can trust. Measuring gates use an error-handling algorithm to eliminate errors caused by the intersection of gates with limbs that affect the accuracy of the results.",
+		"text-3": "We have developed our own software to collect, analyze and present data to help athletes improve their performance.",
+		"using-title": "They use measurement technology in the best leagues in the world."
+	},
+	"tests": {
+		"title": "Tests"
 	}
 }

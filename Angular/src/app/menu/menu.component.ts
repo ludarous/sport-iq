@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -6,11 +6,26 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, AfterViewChecked {
 
   constructor(private translateService: TranslateService) {
 
   }
+
+  private _toggleButton: ElementRef;
+  @ViewChild('toggleButton', {static: true})
+  get toggleButton(): ElementRef<any> {
+    return this._toggleButton;
+  }
+
+  set toggleButton(value: ElementRef<any>) {
+    if (value) {
+      this._toggleButton = value;
+      this.setToggleNav();
+    }
+  }
+
+  toggleButtonVisible: boolean;
 
   ngOnInit() {
   }
@@ -19,4 +34,16 @@ export class MenuComponent implements OnInit {
     this.translateService.use(lang);
   }
 
+  getSelectedLang(): string {
+    return this.translateService.currentLang;
+  }
+
+  setToggleNav() {
+    const display = getComputedStyle(this.toggleButton.nativeElement).display;
+    this.toggleButtonVisible = (display !== 'none');
+  }
+
+  ngAfterViewChecked(): void {
+    //this.setToggleNav();
+  }
 }

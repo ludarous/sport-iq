@@ -11,8 +11,8 @@ import {TranslateService} from '@ngx-translate/core';
 export class AppComponent implements OnInit {
 
   constructor(translate: TranslateService) {
-    translate.setDefaultLang('en');
-    translate.use('en');
+    translate.setDefaultLang('cs');
+    translate.use('cs');
   }
 
 
@@ -39,6 +39,24 @@ export class AppComponent implements OnInit {
         scrollTop: 0
       }, 600);
       return false;
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const yOffset = -95;
+        const id = this.getAttribute('href');
+        const element = document.querySelector(id);
+        if (element) {
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({top: y, behavior: 'smooth'});
+        }
+
+        // document.querySelector(this.getAttribute('href')).scrollIntoView({
+        //   behavior: 'smooth',
+        // });
+      });
     });
   }
 }

@@ -191,8 +191,18 @@
 
 .language-selector {
   justify-self: end;
+  &:hover {
+    color: $primary-color;
+  }
+
+  text-transform: none;
 }
 
-.navbar-list {
-  flex: 1;
+.navbar-toggler {
+  color: white;
+  justify-self: end;
+}
+
+#toggle-button-container {
+  justify-content: end;
 }

@@ -1,60 +1,35 @@
-<!-- Bootstrap Menu -->
-<!--<div id="navigation">-->
-<!--  <div class="navbar-wrapper scroll-fixed-navbar">-->
-<!--    <nav class="navbar navbar-expand-lg navbar-inverse navbar-static-top" role="navigation">-->
-<!--      <div class="container">-->
-<!--        <div class="row">-->
-<!--          <div class="navbar-header">-->
-<!--            <button type="button" class="navbar-toggler" data-toggle="collapse"-->
-<!--                    data-target=".navbar-collapse">-->
-<!--              <span class="icon-bar"></span>-->
-<!--              <span class="icon-bar"></span>-->
-<!--              <span class="icon-bar"></span>-->
-<!--            </button>-->
-<!--            <a class="navbar-brand" href="#">-->
-<!--              <div class="logo navbar-logo">sport<span class="accent">iq</span></div>-->
-<!--            </a>-->
-<!--          </div>-->
-<!--          <div id="mynav" class="navbar-collapse collapse">-->
-<!--            <ul class="nav navbar-nav main-nav-list">-->
-<!--              <li><a href="#aboutSportIQ">O SportIQ</a></li>-->
-<!--              <li><a href="#tests">Testy</a></li>-->
-<!--              &lt;!&ndash;                                <li><a href="#aboutUs">O nás</a></li>&ndash;&gt;-->
-<!--              <li><a href="#technology">Technologie</a></li>-->
-<!--              &lt;!&ndash;                                <li><a href="#reference">Reference</a></li>&ndash;&gt;-->
-<!--              <li><a href="#contacts">Kontakt</a></li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </nav>-->
-<!--  </div>-->
-<!--</div>-->
-<!-- End Bootstrap Menu -->
-
 <div id="navigation">
   <div class="navbar-wrapper scroll-fixed-navbar">
-    <nav class="navbar navbar-inverse navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark">
       <div class="container">
         <div class="row flex-fill">
-          <a class="navbar-brand" href="#">
-            <div class="logo navbar-logo">sport<span class="accent">iq</span></div>
+          <a class="navbar-brand" href="#home">
+            <div class="logo navbar-logo">Sport<span class="accent">iq</span></div>
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
+          <div class="d-flex align-items-center justify-content-end" [ngClass]="{'flex-fill' : toggleButtonVisible}">
+            <button #toggleButton class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
           <div class="collapse navbar-collapse navbar-list" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto main-nav-list">
-              <li class="nav-item"><a class="nav-link" href="#aboutSportIQ">O SportIQ </a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Testy</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Technologie</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Kontakt</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="#aboutSportIQ">{{'menu.about' | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#tests">{{'menu.tests' | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#technology">{{'menu.technology' | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contacts">{{'menu.contact' | translate}}</a>
+              </li>
             </ul>
             <div class="language-selector">
-              <span (click)="setLang('cs')" class="pointer">CZ</span>
-              <span (click)="setLang('en')" class="pointer">EN</span>
+              <span *ngIf="getSelectedLang() !== 'cs'" (click)="setLang('cs')" class="pointer">Čeština</span>
+              <span *ngIf="getSelectedLang() !== 'en'" (click)="setLang('en')" class="pointer">English</span>
             </div>
           </div>
         </div>
