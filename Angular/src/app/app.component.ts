@@ -1,20 +1,34 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import 'jquery.easing';
 import {TranslateService} from '@ngx-translate/core';
+import {NavigationEnd, Router} from '@angular/router';
+import {NgwWowService} from 'ngx-wow';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
-  constructor(translate: TranslateService) {
+  constructor(translate: TranslateService,
+              private router: Router,
+              private wowService: NgwWowService) {
     translate.setDefaultLang('cs');
     translate.use('cs');
+
+    this.router.events.subscribe(event => {
+      // Reload WoW animations when done navigating to page,
+      // but you are free to call it whenever/wherever you like
+      if (event instanceof NavigationEnd) {
+        this.wowService.init();
+      }
+    });
   }
 
+  private wowSubscription: Subscription;
 
   title = 'Angular';
 
@@ -52,13 +66,20 @@ export class AppComponent implements OnInit {
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({top: y, behavior: 'smooth'});
         }
-
-        // document.querySelector(this.getAttribute('href')).scrollIntoView({
-        //   behavior: 'smooth',
-        // });
       });
     });
+
+    this.wowSubscription = this.wowService.itemRevealed$.subscribe(
+      (item: HTMLElement) => {
+        // do whatever you want with revealed element
+        console.log(item);
+      });
   }
+  ngOnDestroy() {
+    // unsubscribe (if necessary) to WOW observable to prevent memory leaks
+    this.wowSubscription.unsubscribe();
+  }
+
 }
 
 

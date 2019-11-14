@@ -3,12 +3,13 @@ import * as $ from 'jquery';
 import {element} from 'protractor';
 import {CountToDirective} from '../../shared/directives/count-to.directive';
 import {DomSanitizer} from '@angular/platform-browser';
+import {CountToTimeService} from '../../shared/count-to-time/count-to-time.service';
 
 declare const Waypoint: any;
 
 export interface SkillSlideSettings {
-  name: string,
-  values: Array<CountToSettings>
+  name: string;
+  values: Array<CountToSettings>;
 }
 
 export interface CountToSettings {
@@ -24,7 +25,7 @@ export interface CountToSettings {
 })
 export class SkillSlideComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private countToTimeService: CountToTimeService) {
   }
 
   @Input()
@@ -56,18 +57,18 @@ export class SkillSlideComponent implements OnInit {
   }
 
   run() {
-    setTimeout(() => {
-      for (const countToElement of this._countToElements) {
-        const waypoint = new Waypoint({
-          element: countToElement.e,
-          handler(direction) {
-
-            countToElement.start();
-          },
-          offset: 'bottom-in-view'
-        });
-      }
-    }, 0);
+    // setTimeout(() => {
+    //   for (const countToElement of this._countToElements) {
+    //     const waypoint = new Waypoint({
+    //       element: countToElement.e,
+    //       handler(direction) {
+    //
+    //         countToElement.start();
+    //       },
+    //       offset: 'bottom-in-view'
+    //     });
+    //   }
+    // }, 0);
   }
 
 }

@@ -15,7 +15,7 @@ export class CountToDirective implements OnChanges, OnInit {
 
   public e = this.el.nativeElement;
   num: number;
-  refreshInterval = 30;
+  refreshInterval = 77;
   steps: number;
   step = 0;
   increment: number;
