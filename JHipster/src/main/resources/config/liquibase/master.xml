@@ -21,6 +21,7 @@
     <include file="config/liquibase/changelog/20191012201721_added_entity_Address.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191012201722_added_entity_Sport.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191012201723_added_entity_Unit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191118094653_added_entity_activity_category-activity_category_relationship.xml" relativeToChangelogFile="false" />
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20191012201708_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191012201709_added_entity_constraints_Workout.xml" relativeToChangelogFile="false"/>
@@ -33,5 +34,6 @@
     <include file="config/liquibase/changelog/20191012201718_added_entity_constraints_AthleteActivityResult.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191012201719_added_entity_constraints_AthleteActivityResultSplit.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191012201720_added_entity_constraints_Athlete.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191012201714_added_entity_constraints_ActivityCategory.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -16,6 +16,8 @@ public class ActivityCategoryDTO implements Serializable {
 
     private String description;
 
+    private Long parentActivityCategoryId;
+
     public Long getId() {
         return id;
     }
@@ -38,6 +40,14 @@ public class ActivityCategoryDTO implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getParentActivityCategoryId() {
+        return parentActivityCategoryId;
+    }
+
+    public void setParentActivityCategoryId(Long activityCategoryId) {
+        this.parentActivityCategoryId = activityCategoryId;
     }
 
     @Override
@@ -67,6 +77,7 @@ public class ActivityCategoryDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
+            ", parentActivityCategory=" + getParentActivityCategoryId() +
             "}";
     }
 }

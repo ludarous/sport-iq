@@ -13,6 +13,12 @@
                 <dd>
                     <span>{{activityCategory.description}}</span>
                 </dd>
+                <dt><span jhiTranslate="sportiqApp.activityCategory.parentActivityCategory">Parent Activity Category</span></dt>
+                <dd>
+                    <div *ngIf="activityCategory.parentActivityCategoryId">
+                        <a [routerLink]="['/activity-category', activityCategory.parentActivityCategoryId, 'view']">{{activityCategory.parentActivityCategoryId}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

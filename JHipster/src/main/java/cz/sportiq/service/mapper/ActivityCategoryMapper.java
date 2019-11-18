@@ -11,7 +11,12 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {})
 public interface ActivityCategoryMapper extends EntityMapper<ActivityCategoryDTO, ActivityCategory> {
 
+    @Mapping(source = "parentActivityCategory.id", target = "parentActivityCategoryId")
+    ActivityCategoryDTO toDto(ActivityCategory activityCategory);
 
+    @Mapping(target = "childActivityCategories", ignore = true)
+    @Mapping(source = "parentActivityCategoryId", target = "parentActivityCategory")
+    ActivityCategory toEntity(ActivityCategoryDTO activityCategoryDTO);
 
     default ActivityCategory fromId(Long id) {
         if (id == null) {

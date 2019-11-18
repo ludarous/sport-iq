@@ -13,7 +13,20 @@
             "fieldType": "String"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "childActivityCategories",
+            "otherEntityName": "activityCategory",
+            "otherEntityRelationshipName": "parentActivityCategory"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "parentActivityCategory",
+            "otherEntityName": "activityCategory",
+            "otherEntityField": "id"
+        }
+    ],
     "changelogDate": "20191012201714",
     "entityTableName": "activity_category",
     "dto": "mapstruct",

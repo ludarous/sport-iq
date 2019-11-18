@@ -18,7 +18,9 @@
                 "title": "Activity Category"
             },
             "name": "Name",
-            "description": "Description"
+            "description": "Description",
+            "childActivityCategories": "Child Activity Categories",
+            "parentActivityCategory": "Parent Activity Category"
         }
     }
 }

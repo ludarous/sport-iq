@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { JhiAlertService } from 'ng-jhipster';
 
 import { IActivityCategory } from 'app/shared/model/activity-category.model';
 import { ActivityCategoryService } from './activity-category.service';
@@ -14,13 +15,25 @@ export class ActivityCategoryUpdateComponent implements OnInit {
     private _activityCategory: IActivityCategory;
     isSaving: boolean;
 
-    constructor(private activityCategoryService: ActivityCategoryService, private activatedRoute: ActivatedRoute) {}
+    activitycategories: IActivityCategory[];
+
+    constructor(
+        private jhiAlertService: JhiAlertService,
+        private activityCategoryService: ActivityCategoryService,
+        private activatedRoute: ActivatedRoute
+    ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ activityCategory }) => {
             this.activityCategory = activityCategory;
         });
+        this.activityCategoryService.query().subscribe(
+            (res: HttpResponse<IActivityCategory[]>) => {
+                this.activitycategories = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     previousState() {
@@ -47,6 +60,14 @@ export class ActivityCategoryUpdateComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackActivityCategoryById(index: number, item: IActivityCategory) {
+        return item.id;
     }
     get activityCategory() {
         return this._activityCategory;

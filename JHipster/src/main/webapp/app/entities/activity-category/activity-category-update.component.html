@@ -26,6 +26,13 @@
                         [(ngModel)]="activityCategory.description" />
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityCategory.parentActivityCategory" for="field_parentActivityCategory">Parent Activity Category</label>
+                    <select class="form-control" id="field_parentActivityCategory" name="parentActivityCategory" [(ngModel)]="activityCategory.parentActivityCategoryId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="activityCategoryOption.id" *ngFor="let activityCategoryOption of activitycategories; trackBy: trackActivityCategoryById">{{activityCategoryOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

@@ -117,7 +117,7 @@ relationship OneToMany {
     Event{athleteEvents} to AthleteEvent
     Activity{activityResults} to ActivityResult
     ActivityResult{resultSplits} to ActivityResultSplit
-    ActivityCategory{childActivityCategories} to ActivityCategory
+    ActivityCategory{childActivityCategories} to ActivityCategory{parentActivityCategory}
 }
 
 relationship ManyToOne {
@@ -129,7 +129,6 @@ relationship ManyToOne {
     ActivityResult{resultUnit(name)} to Unit
     Activity{targetUnit(name)} to Unit
     ActivityResultSplit{splitUnit(name)} to Unit
-    ActivityCategory{parentActivityCategory} to ActivityCategory
 }
 
 // Set pagination options

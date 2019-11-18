@@ -32,6 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="sportiqApp.activityCategory.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="sportiqApp.activityCategory.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="parentActivityCategoryId"><span jhiTranslate="sportiqApp.activityCategory.parentActivityCategory">Parent Activity Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -40,6 +41,11 @@
                 <td><a [routerLink]="['/activity-category', activityCategory.id, 'view' ]">{{activityCategory.id}}</a></td>
                 <td>{{activityCategory.name}}</td>
                 <td>{{activityCategory.description}}</td>
+                <td>
+                    <div *ngIf="activityCategory.parentActivityCategoryId">
+                        <a [routerLink]="['../activity-category', activityCategory.parentActivityCategoryId , 'view' ]" >{{activityCategory.parentActivityCategoryId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
