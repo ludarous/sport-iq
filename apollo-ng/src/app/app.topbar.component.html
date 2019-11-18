@@ -1,16 +1,22 @@
 <div class="topbar clearfix">
 
-    <img class="logo" alt="apollo-layout" src="assets/layout/images/apollo_logo.png" />
+    <img class="logo" alt="apollo-layout" src="assets/layout/images/apollo_logo.png"/>
 
     <a id="menu-button" href="#" (click)="app.onMenuButtonClick($event)">
         <i class="fa fa-align-left"></i>
     </a>
 
-    <a href="#" class="profile" (click)="app.onTopbarMenuButtonClick($event)">
-        <span class="username">Sarah Miller</span>
-        <img src="assets/layout/images/avatar/avatar.png" alt="apollo-layout" />
-        <i class="fa fa-angle-down"></i>
-    </a>
+    <ng-container *ngIf="isLoggeedIn">
+        <a href="#" class="profile" (click)="app.onTopbarMenuButtonClick($event)">
+            <span class="username">{{currentUser.firstName + ' ' + currentUser.lastName}}</span>
+            <img src="assets/layout/images/avatar/avatar.png" alt="apollo-layout"/>
+            <i class="fa fa-angle-down"></i>
+        </a>
+    </ng-container>
+
+    <ng-container *ngIf="!isLoggeedIn">
+        <a class="profile pointer" (click)="login()"><span class="username">{{'Přihlásit' | translate}}</span></a>
+    </ng-container>
 
     <span class="topbar-search">
         <input type="text" pInputText placeholder="Search"/>
@@ -48,8 +54,8 @@
                 </li>
                 <li role="menuitem">
                     <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                      <i class="fa fa-fw fa-sign-out"></i>
-                      <span>Logout</span>
+                        <i class="fa fa-fw fa-sign-out"></i>
+                        <span>Logout</span>
                     </a>
                 </li>
             </ul>
@@ -62,15 +68,15 @@
             <ul>
                 <li role="menuitem">
                     <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                      <i class="fa fa-fw fa-paint-brush"></i>
-                      <span>Change Theme</span>
-                      <span class="topbar-badge">1</span>
+                        <i class="fa fa-fw fa-paint-brush"></i>
+                        <span>Change Theme</span>
+                        <span class="topbar-badge">1</span>
                     </a>
                 </li>
                 <li role="menuitem">
                     <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                      <i class="fa fa-fw fa-star-o"></i>
-                      <span>Favorites</span>
+                        <i class="fa fa-fw fa-star-o"></i>
+                        <span>Favorites</span>
                     </a>
                 </li>
                 <li role="menuitem">
@@ -82,11 +88,11 @@
                 </li>
                 <li role="menuitem">
                     <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                      <i class="fa fa-fw fa-picture-o"></i>
-                      <span>Wallpaper</span>
+                        <i class="fa fa-fw fa-picture-o"></i>
+                        <span>Wallpaper</span>
                     </a>
                 </li>
-          </ul>
+            </ul>
         </li>
         <li #messages [ngClass]="{'menuitem-active':app.activeTopbarItem === messages}">
             <a href="#" (click)="app.onTopbarItemClick($event, messages)">
@@ -96,33 +102,33 @@
             </a>
             <ul>
                 <li role="menuitem">
-                  <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
-                    <img src="assets/layout/images/avatar/avatar1.png" alt="avatar1" style="width: 35px;"/>
-                    <span>Give me a call</span>
-                  </a>
-                </li>
-                <li role="menuitem">
                     <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
-                      <img src="assets/layout/images/avatar/avatar2.png" alt="avatar2" style="width: 35px;"/>
-                      <span>Reports attached</span>
+                        <img src="assets/layout/images/avatar/avatar1.png" alt="avatar1" style="width: 35px;"/>
+                        <span>Give me a call</span>
                     </a>
                 </li>
                 <li role="menuitem">
                     <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
-                      <img src="assets/layout/images/avatar/avatar3.png" alt="avatar3" style="width: 35px;"/>
-                      <span>About your invoice</span>
+                        <img src="assets/layout/images/avatar/avatar2.png" alt="avatar2" style="width: 35px;"/>
+                        <span>Reports attached</span>
                     </a>
                 </li>
                 <li role="menuitem">
                     <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
-                      <img src="assets/layout/images/avatar/avatar2.png" alt="avatar2" style="width: 35px;"/>
-                      <span>Meeting today</span>
+                        <img src="assets/layout/images/avatar/avatar3.png" alt="avatar3" style="width: 35px;"/>
+                        <span>About your invoice</span>
                     </a>
                 </li>
                 <li role="menuitem">
                     <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
-                      <img src="assets/layout/images/avatar/avatar4.png" alt="avatar4" style="width: 35px;"/>
-                      <span>Out of office</span>
+                        <img src="assets/layout/images/avatar/avatar2.png" alt="avatar2" style="width: 35px;"/>
+                        <span>Meeting today</span>
+                    </a>
+                </li>
+                <li role="menuitem">
+                    <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
+                        <img src="assets/layout/images/avatar/avatar4.png" alt="avatar4" style="width: 35px;"/>
+                        <span>Out of office</span>
                     </a>
                 </li>
             </ul>
@@ -136,26 +142,26 @@
             <ul>
                 <li role="menuitem">
                     <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                      <i class="fa fa-fw fa-tasks"></i>
-                      <span>Pending tasks</span>
+                        <i class="fa fa-fw fa-tasks"></i>
+                        <span>Pending tasks</span>
                     </a>
                 </li>
                 <li role="menuitem">
                     <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                      <i class="fa fa-fw fa-calendar-check-o"></i>
-                      <span>Meeting today</span>
+                        <i class="fa fa-fw fa-calendar-check-o"></i>
+                        <span>Meeting today</span>
                     </a>
                 </li>
                 <li role="menuitem">
                     <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                      <i class="fa fa-fw fa-download"></i>
-                      <span>Download</span>
+                        <i class="fa fa-fw fa-download"></i>
+                        <span>Download</span>
                     </a>
                 </li>
                 <li role="menuitem">
                     <a href="#" (click)="app.onTopbarSubItemClick($event)">
-                      <i class="fa fa-fw fa-plane"></i>
-                      <span>Book flight</span>
+                        <i class="fa fa-fw fa-plane"></i>
+                        <span>Book flight</span>
                     </a>
                 </li>
             </ul>

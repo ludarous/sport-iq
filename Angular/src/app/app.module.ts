@@ -11,7 +11,7 @@ import {TechnologiesComponent} from './technologies/technologies.component';
 import {SkillsComponent} from './skills/skills.component';
 import {SkillSlideComponent} from './skills/skill-slide/skill-slide.component';
 import {CountToDirective} from './shared/directives/count-to.directive';
-import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCarouselModule, NgbTabsetModule} from '@ng-bootstrap/ng-bootstrap';
 import {ContactsComponent} from './contacts/contacts.component';
 import {FooterComponent} from './footer/footer.component';
 import {TestsComponent} from './tests/tests.component';
@@ -46,6 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     AppRoutingModule,
     NgbCarouselModule,
+    NgbTabsetModule,
     HttpClientModule,
     NgwWowModule,
     TranslateModule.forRoot({

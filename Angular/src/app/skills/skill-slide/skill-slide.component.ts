@@ -47,7 +47,6 @@ export class SkillSlideComponent implements OnInit {
     const backgroundUrl = this.backgroundUrl;
     this.sanitizedBackgroundImage = this.sanitizer.bypassSecurityTrustStyle(`url('${backgroundUrl}')`);
 
-    this.run();
   }
 
   startCount() {
@@ -56,19 +55,11 @@ export class SkillSlideComponent implements OnInit {
     }
   }
 
-  run() {
-    // setTimeout(() => {
-    //   for (const countToElement of this._countToElements) {
-    //     const waypoint = new Waypoint({
-    //       element: countToElement.e,
-    //       handler(direction) {
-    //
-    //         countToElement.start();
-    //       },
-    //       offset: 'bottom-in-view'
-    //     });
-    //   }
-    // }, 0);
+  stopCount() {
+    for (const countToElement of this._countToElements) {
+      countToElement.stop();
+    }
   }
+
 
 }

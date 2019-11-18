@@ -1,12 +1,17 @@
-import { Component, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import {Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import {ScrollPanel} from 'primeng/primeng';
+import {AuthService} from './modules/auth/services/auth.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
+
+    constructor(private authService: AuthService) {
+
+    }
 
     darkTheme = false;
 
@@ -33,6 +38,11 @@ export class AppComponent implements AfterViewInit {
     menuHoverActive: boolean;
 
     @ViewChild('layoutMenuScroller', { static: true }) layoutMenuScrollerViewChild: ScrollPanel;
+
+
+    ngOnInit(): void {
+        this.authService.updateUser().subscribe();
+    }
 
     ngAfterViewInit() {
         setTimeout(() => {this.layoutMenuScrollerViewChild.moveBar(); }, 100);
@@ -156,4 +166,5 @@ export class AppComponent implements AfterViewInit {
           this.darkTheme = false;
         }
     }
+
 }

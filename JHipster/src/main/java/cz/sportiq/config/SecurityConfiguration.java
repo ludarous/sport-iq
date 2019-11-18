@@ -53,8 +53,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
             .csrf()
+            .ignoringAntMatchers("/api/account")
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         .and()
+            .addFilterAfter(new CsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class)
             .addFilterBefore(corsFilter, CsrfFilter.class)
             .exceptionHandling()
             .authenticationEntryPoint(problemSupport)

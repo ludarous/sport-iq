@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AppComponent } from './app.component';
+import {AuthService} from './modules/auth/services/auth.service';
+import {IUser} from './modules/entities/user';
 
 @Component({
     selector: 'app-topbar',
@@ -7,7 +9,18 @@ import { AppComponent } from './app.component';
 })
 export class AppTopBarComponent {
 
-    constructor(public app: AppComponent) { }
+    constructor(public app: AppComponent,
+                private authService: AuthService) {
+
+    }
+
+    get isLoggeedIn(): boolean {
+        return !!this.currentUser;
+    }
+
+    get currentUser(): IUser {
+        return this.authService.getCurrentUser();
+    }
 
     themeChange(e) {
         const themeLink: HTMLLinkElement = document.getElementById('theme-css') as HTMLLinkElement;
@@ -19,5 +32,9 @@ export class AppTopBarComponent {
         const newThemeMode = (themeMode === 'dark') ? 'light' : 'dark';
 
         this.app.changeTheme(themeName + '-' + newThemeMode);
+    }
+
+    login() {
+        this.authService.login();
     }
 }

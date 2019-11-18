@@ -1,1 +1,11 @@
 @import "../app.component";
+@import "colors.scss";
+
+.nav-tabs .nav-link.active {
+  background-color: black;
+  color: $primary-color;
+}
+
+.nav-tabs .nav-link:not(.active):hover {
+  border-color: transparent;
+}

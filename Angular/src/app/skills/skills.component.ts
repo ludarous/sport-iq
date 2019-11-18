@@ -78,10 +78,14 @@ export class SkillsComponent implements OnInit {
 
   onSlide($event: NgbSlideEvent) {
     let currentSlide;
+
+    this.slides.map(s => s.stopCount());
+
     if ($event.current === 'ngb-slide-4') {
       currentSlide = this.slides.find((item, index) => {
         return index === 0;
       });
+
     } else if ($event.current === 'ngb-slide-5') {
       currentSlide = this.slides.find((item, index) => {
         return index === 1;

@@ -71,13 +71,13 @@ spring:
 security:
     oauth2:
         client:
-            access-token-uri: http://192.168.1.116:2080/auth/realms/dev/protocol/openid-connect/token
-            user-authorization-uri: http://192.168.1.116:2080/auth/realms/dev/protocol/openid-connect/auth
+            access-token-uri: http://ludarous.com:2080/auth/realms/dev/protocol/openid-connect/token
+            user-authorization-uri: http://ludarous.com:2080/auth/realms/dev/protocol/openid-connect/auth
             client-id: sportiq
             client-secret: 92f93787-4c60-42a6-ab52-db50adbb3408
             scope: openid profile email
         resource:
-            user-info-uri: http://192.168.1.116:2080/auth/realms/dev/protocol/openid-connect/userinfo
+            user-info-uri: http://ludarous.com:2080/auth/realms/dev/protocol/openid-connect/userinfo
 
 server:
     port: 9090

@@ -1,0 +1,32 @@
+<div class="activity-category-edit-container">
+  <form class="form" *ngIf="categoryForm" [formGroup]="categoryForm" (submit)="saveCategory()">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Název" formControlName="name" required>
+      <p-message severity="error" text="Název kategorie je povinný" *ngIf="!categoryForm.controls['name'].valid && categoryForm.controls['name'].touched"></p-message>
+    </div>
+    <div class="ui-inputgroup">
+      <textarea type="text" pInputTextarea placeholder="Popis" formControlName="description" autoResize="autoResize"></textarea>
+    </div>
+    <div class="ui-inputgroup">
+      <input type="text" pInputText placeholder="Klíč" formControlName="key">
+    </div>
+
+
+    <span class="parent-category-heading">Nadřazená kategorie</span>
+    <div class="ui-inputgroup">
+      <input pInputText type="text" placeholder="Zadej hledanou kategorii" [(ngModel)]="categoriesFilter" [ngModelOptions]="{standalone: true}">
+    </div>
+    <p-tree class="activity-category-tree"
+            [value]="filteredCategoriesNodes"
+            selectionMode="single"
+            [(selection)]="parentCategoryNode"
+            (onNodeSelect)="nodeSelect($event)">
+      <ng-template let-node pTemplate="default">
+        <span>{{node.data.name}}</span>
+      </ng-template>
+    </p-tree>
+    <div class="form-button-container">
+      <button mat-raised-button>{{'Uložit' | translate}}</button>
+    </div>
+  </form>
+</div>
