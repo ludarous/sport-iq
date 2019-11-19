@@ -13,6 +13,7 @@ import { FileDemoComponent } from './demo/view/filedemo.component';
 import { MiscDemoComponent } from './demo/view/miscdemo.component';
 import { EmptyDemoComponent } from './demo/view/emptydemo.component';
 import { DocumentationComponent } from './demo/view/documentation.component';
+import {ActivityCategoriesModule} from './pages/activity-categories/activity-categories.module';
 
 export const routes: Routes = [
     { path: '', component: DashboardDemoComponent },
@@ -28,6 +29,7 @@ export const routes: Routes = [
     { path: 'misc', component: MiscDemoComponent },
     { path: 'empty', component: EmptyDemoComponent },
     { path: 'documentation', component: DocumentationComponent },
+    { path: 'activity-categories', loadChildren: () => ActivityCategoriesModule}
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'});

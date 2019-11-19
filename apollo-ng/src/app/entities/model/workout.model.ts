@@ -1,6 +1,6 @@
-import { IActivity } from 'app/shared/model//activity.model';
-import { IWorkoutCategory } from 'app/shared/model//workout-category.model';
-import { ISport } from 'app/shared/model//sport.model';
+import {IActivity} from './activity.model';
+import {IWorkoutCategory} from './workout-category.model';
+import {ISport} from './sport.model';
 
 export interface IWorkout {
     id?: number;

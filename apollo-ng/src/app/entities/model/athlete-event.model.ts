@@ -1,4 +1,4 @@
-import { IAthleteWorkout } from 'app/shared/model//athlete-workout.model';
+import {IAthleteWorkout} from './athlete-workout.model';
 
 export interface IAthleteEvent {
     id?: number;

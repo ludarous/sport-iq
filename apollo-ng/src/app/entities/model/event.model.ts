@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
-import { IAthleteEvent } from 'app/shared/model//athlete-event.model';
-import { IWorkout } from 'app/shared/model//workout.model';
+import {IAthleteEvent} from './athlete-event.model';
+import {IWorkout} from './workout.model';
 
 export interface IEvent {
     id?: number;

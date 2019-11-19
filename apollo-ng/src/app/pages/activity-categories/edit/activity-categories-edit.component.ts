@@ -4,9 +4,11 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {MessageService, TreeNode} from 'primeng/api';
-import {IActivityCategory} from '../../../entities/model/activity-category.model';
+import {TreeNode} from 'primeng/api';
+import {ActivityCategory, IActivityCategory} from '../../../entities/model/activity-category.model';
 import {ActivityCategoryService} from '../../../services/rest/activity-category.service';
+import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
+import {MessageService} from '../../../modules/core/services/message.service';
 
 @Component({
     selector: 'app-activity-categories-edit',
@@ -40,13 +42,13 @@ export class ActivityCategoriesEditComponent implements OnInit {
 
     set categoriesFilter(value: string) {
         this._categoriesFilter = value;
-        this.filteredCategoriesNodes = this.categoriesNodes.filter(n => this.filterNode(n, value));
+        //this.filteredCategoriesNodes = this.categoriesNodes.filter(n => this.filterNode(n, value));
     }
 
     ngOnInit() {
         const params$ = this.activatedRoute.params;
         params$.subscribe((params) => {
-            this.categoryId = +params['id'];
+            this.categoryId = +params.id;
             const getActivityCategory$ = this.getActivityCategory(this.categoryId);
             const getCategories$ = this.activityCategoryService.query({
                 page: 0,
@@ -58,13 +60,13 @@ export class ActivityCategoriesEditComponent implements OnInit {
                 this.setCategoryForm(this.category);
 
                 this.categories = categories.body;
-                this.mainCategories = this.categories.filter(c => c.parentId == null);
+                this.mainCategories = this.categories.filter(c => c.parentActivityCategoryId == null);
 
                 this.categoriesNodes = new Array<TreeNode>();
                 for (const c of this.mainCategories) {
                     this.categoriesNodes.push(this.createCategoryNode(c));
                 }
-                this.filteredCategoriesNodes = this.categoriesNodes;
+                //this.filteredCategoriesNodes = this.categoriesNodes;
             });
 
         });
@@ -76,15 +78,14 @@ export class ActivityCategoriesEditComponent implements OnInit {
             id: new FormControl(category.id),
             name: new FormControl(category.name, [Validators.required]),
             description: new FormControl(category.description),
-            key: new FormControl(category.key),
-            parentId: new FormControl(category.parentId)
+            parentActivityCategoryId: new FormControl(category.parentActivityCategoryId)
         });
     }
 
     saveCategory() {
         if (this.categoryForm.valid) {
 
-            const categoryToSave = <IActivityCategory>this.categoryForm.value;
+            const categoryToSave = this.categoryForm.value as IActivityCategory;
             let saveCategory$;
             if (categoryToSave.id) {
                 saveCategory$ = this.activityCategoryService.update(categoryToSave);
@@ -97,28 +98,30 @@ export class ActivityCategoriesEditComponent implements OnInit {
                 (categoryResponse: HttpResponse<IActivityCategory>) => {
                     this.category = categoryResponse.body;
                     this.setCategoryForm(this.category);
-                    this.messageService.add({severity: 'success', summary: 'Kategorie uložena'});
-                    this.router.navigate(['/admin/activity-categories/list']);
+                    this.messageService.showSuccess('Kategorie uložena');
+                    this.router.navigate(['/activity-categories/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Kategorie nebyla uložena',
-                        detail: errorResponse.error.detail
-                    });
+                    this.messageService.showError('Kategorie nebyla uložena', errorResponse.error.detail);
                 });
         }
     }
 
     nodeSelect(event: any) {
         if (event.node && event.node.data) {
-            this.categoryForm.controls['parentId'].setValue(event.node.data.id);
+            this.categoryForm.controls.parentActivityCategoryId.setValue(event.node.data.id);
         }
+    }
+
+    nodeUnselect(event: any) {
+        this.categoryForm.controls.parentActivityCategoryId.setValue(null);
     }
 
     getActivityCategory(activityCategoryId: number): Observable<IActivityCategory> {
         if (activityCategoryId) {
-            return this.activityCategoryService.find(activityCategoryId).pipe(map((activityCategoryResponse: HttpResponse<IActivityCategory>) => {
+            return this.activityCategoryService
+                .find(activityCategoryId)
+                .pipe(map((activityCategoryResponse: HttpResponse<IActivityCategory>) => {
                 return activityCategoryResponse.body;
             }));
 
@@ -127,29 +130,42 @@ export class ActivityCategoriesEditComponent implements OnInit {
         }
     }
 
-    createCategoryNode(category: IActivityCategory): TreeNode {
-        const children = Array<TreeNode>();
-        if (category.children && category.children.length > 0) {
-            for (const child of category.children) {
-                children.push(this.createCategoryNode(child));
+    createCategoryNode(category: IActivityCategory, parentNode: TreeNode = null): TreeNode {
+
+        const treeNode = {
+            label: category.name,
+            data: category,
+            children: null,
+            leaf: true,
+            expanded: false, // (children && children.length > 0)
+            selectable: (!parentNode || parentNode.selectable) && this.category && this.category.id !== category.id
+        };
+
+        const childActivityCategories = Array<TreeNode>();
+        if (category.childActivityCategories && category.childActivityCategories.length > 0) {
+            for (const child of category.childActivityCategories) {
+                childActivityCategories.push(this.createCategoryNode(child, treeNode));
             }
         }
 
-        const treeNode = {
-            data: category,
-            children: children,
-            leaf: !(children && children.length > 0),
-            expanded: false // (children && children.length > 0)
-        };
+        treeNode.children = childActivityCategories;
+        treeNode.leaf = !(childActivityCategories && childActivityCategories.length > 0);
+
+        if (this.category && parentNode && parentNode.data.id === this.category.parentActivityCategoryId) {
+            this.parentCategoryNode = parentNode;
+        }
 
         return treeNode;
     }
 
     filterNode(node: TreeNode, query: string): boolean {
 
-        if (query === '') node.expanded = false;
+        if (query === '') {
+            node.expanded = false;
+        }
+
         if (node.data) {
-            const category = <IActivityCategory>node.data;
+            const category = node.data as IActivityCategory;
 
             if (category.name.includes(query)) {
                 return true;
@@ -157,7 +173,9 @@ export class ActivityCategoriesEditComponent implements OnInit {
 
             for (const ch of node.children) {
                 const containsChild = this.filterNode(ch, query);
-                if (containsChild) node.expanded = true;
+                if (containsChild) {
+                    node.expanded = true;
+                }
                 return containsChild;
             }
         }

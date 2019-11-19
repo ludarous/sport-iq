@@ -1,24 +1,57 @@
-<div class="component-container-center">
-  <!--<button mat-raised-button (click)="addCategory()">{{'Přidat kategorii' | translate}}</button>-->
-  <p-treeTable class="table-top-margin" *ngIf="categoriesNodes" [value]="categoriesNodes">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Název</th>
-        <th>Popis</th>
-        <th class="table-action-column"></th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-      <tr>
-        <td>
-          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-          {{rowData.name}}
-        </td>
-        <td>{{rowData.description}}</td>
-        <td class="table-action-column">
-          <button pButton type="button" icon="pi pi-times" (click)="delete($event, rowData)" class="ui-button-danger"></button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-treeTable>
+<!--<div class="component-container-center">-->
+<!--  &lt;!&ndash;<button mat-raised-button (click)="addCategory()">{{'Přidat kategorii' | translate}}</button>&ndash;&gt;-->
+<!--  <p-treeTable class="table-top-margin" *ngIf="categoriesNodes" [value]="categoriesNodes">-->
+<!--    <ng-template pTemplate="header">-->
+<!--      <tr>-->
+<!--        <th>Název</th>-->
+<!--        <th>Popis</th>-->
+<!--        <th class="table-action-column"></th>-->
+<!--      </tr>-->
+<!--    </ng-template>-->
+<!--    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">-->
+<!--      <tr>-->
+<!--        <td>-->
+<!--          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>-->
+<!--          {{rowData.name}}-->
+<!--        </td>-->
+<!--        <td>{{rowData.description}}</td>-->
+<!--        <td class="table-action-column">-->
+<!--          <button pButton type="button" icon="pi pi-times" (click)="delete($event, rowData)" class="ui-button-danger"></button>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--    </ng-template>-->
+<!--  </p-treeTable>-->
+<!--</div>-->
+
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <h1>{{'Kategorie aktivit' | translate}}</h1>
+            <div class="btn-panel">
+                <button pButton type="button" class="cyan-btn" [label]="'Vytvořit kategorii aktivit' | translate"
+                        [routerLink]="['/activity-categories/create']"></button>
+            </div>
+            <p-treeTable *ngIf="categoriesNodes" [value]="categoriesNodes" [columns]="tableCols"
+                         selectionMode="checkbox">
+                <ng-template pTemplate="header" let-columns="columns">
+                    <tr>
+                        <th *ngFor="let col of tableCols">{{col.header}}</th>
+                        <th class="table-action-column"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                    <tr>
+                        <td>
+                            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                            <span class="pointer" [routerLink]="['/activity-categories/edit', rowData.id]">{{rowData.name}}</span>
+                        </td>
+                        <td>{{rowData.description}}</td>
+                        <td class="table-action-column">
+                            <button class="ui-button-danger" type="button" icon="fa fa-trash" pButton (click)="delete($event, rowData)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-treeTable>
+        </div>
+    </div>
 </div>

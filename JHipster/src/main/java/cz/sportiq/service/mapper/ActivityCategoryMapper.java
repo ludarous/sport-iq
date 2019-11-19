@@ -14,7 +14,7 @@ public interface ActivityCategoryMapper extends EntityMapper<ActivityCategoryDTO
     @Mapping(source = "parentActivityCategory.id", target = "parentActivityCategoryId")
     ActivityCategoryDTO toDto(ActivityCategory activityCategory);
 
-    @Mapping(target = "childActivityCategories", ignore = true)
+    @Mapping(source = "childActivityCategories", target = "childActivityCategories")
     @Mapping(source = "parentActivityCategoryId", target = "parentActivityCategory")
     ActivityCategory toEntity(ActivityCategoryDTO activityCategoryDTO);
 

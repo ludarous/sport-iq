@@ -1,5 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
 
+body {
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+* {
+    outline: none;
+}
+
+app-root {
+    flex: 1;
+    display: flex;
+}
+
+.layout-wrapper {
+    flex: 1;
+    display: flex;
+}
+
+.layout-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.layout-content-container {
+    flex: 1;
+}
+
+
+
+.btn {
+    padding: 10px 5px;
+}
+
+.btn-panel {
+    padding: 10px 0px;
+    button:not(:first-child) {
+        margin-left: 10px;
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
 .pointer {
     cursor: pointer;
+}
+
+.table-action-column {
+    width: 100px;
 }

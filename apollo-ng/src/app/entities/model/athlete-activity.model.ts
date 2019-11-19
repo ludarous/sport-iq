@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IAthleteActivityResult } from 'app/shared/model//athlete-activity-result.model';
+import {IAthleteActivityResult} from './athlete-activity-result.model';
 
 export interface IAthleteActivity {
     id?: number;

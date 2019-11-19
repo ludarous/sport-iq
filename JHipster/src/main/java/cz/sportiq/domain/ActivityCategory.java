@@ -38,7 +38,7 @@ public class ActivityCategory implements Serializable {
     private String description;
 
     @OneToMany(mappedBy = "parentActivityCategory")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<ActivityCategory> childActivityCategories = new HashSet<>();
 
     @ManyToOne

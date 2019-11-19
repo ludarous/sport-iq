@@ -1,4 +1,4 @@
-import { IActivityResultSplit } from 'app/shared/model//activity-result-split.model';
+import {IActivityResultSplit} from './activity-result-split.model';
 
 export const enum ResultType {
     LESS_IS_BETTER = 'LESS_IS_BETTER',

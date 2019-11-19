@@ -177,6 +177,34 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
+            {
+                label: 'Admin', icon: 'fa fa-fw fa-gg',
+                items: [
+                    {
+                        label: 'Kategorie aktivit', icon: 'fa fa-fw fa-sign-in', routerLink: ['/activity-categories']
+                    },
+                    {
+                        label: 'Submenu 2', icon: 'fa fa-fw fa-sign-in',
+                        items: [
+                            {
+                                label: 'Submenu 2.1', icon: 'fa fa-fw fa-sign-in',
+                                items: [
+                                    { label: 'Submenu 2.1.1', icon: 'fa fa-fw fa-sign-in' },
+                                    { label: 'Submenu 2.1.2', icon: 'fa fa-fw fa-sign-in' },
+                                    { label: 'Submenu 2.1.3', icon: 'fa fa-fw fa-sign-in' },
+                                ]
+                            },
+                            {
+                                label: 'Submenu 2.2', icon: 'fa fa-fw fa-sign-in',
+                                items: [
+                                    { label: 'Submenu 2.2.1', icon: 'fa fa-fw fa-sign-in' },
+                                    { label: 'Submenu 2.2.2', icon: 'fa fa-fw fa-sign-in' }
+                                ]
+                            },
+                        ]
+                    }
+                ]
+            },
             { label: 'Docs', icon: 'fa fa-fw fa-book', routerLink: ['/documentation'] }
         ];
     }

@@ -34,19 +34,19 @@ export class MessageService {
     this.showError('Problém s načtením dat', 'Načtení dat se nezdařilo, detaily: ' + error);
   }
 
-  public showError(summary: string, detail: string, critical: boolean = true): void {
+  public showError(summary: string, detail?: string, critical: boolean = true): void {
     this.showMessage(summary, detail, 'error', critical);
   }
 
-  public showWarn(summary: string, detail: string, critical: boolean = false): void {
+  public showWarn(summary: string, detail?: string, critical: boolean = false): void {
     this.showMessage(summary, detail, 'warn', critical);
   }
 
-  public showInfo(summary: string, detail: string, critical: boolean = false): void {
+  public showInfo(summary: string, detail?: string, critical: boolean = false): void {
     this.showMessage(summary, detail, 'info', critical);
   }
 
-  public showSuccess(summary: string, detail: string, critical: boolean = false): void {
+  public showSuccess(summary: string, detail?: string, critical: boolean = false): void {
     this.showMessage(summary, detail, 'success', critical);
   }
 

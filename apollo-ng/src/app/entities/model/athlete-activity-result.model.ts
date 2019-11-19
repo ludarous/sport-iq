@@ -1,4 +1,4 @@
-import { IAthleteActivityResultSplit } from 'app/shared/model//athlete-activity-result-split.model';
+import {IAthleteActivityResultSplit} from './athlete-activity-result-split.model';
 
 export interface IAthleteActivityResult {
     id?: number;

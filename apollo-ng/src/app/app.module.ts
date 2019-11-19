@@ -39,6 +39,7 @@ import {EnumTranslatorServiceImpl} from './services/enum-translator.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {CoreModule} from './modules/core/core.module';
+import {MessageService} from './modules/core/services/message.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -90,7 +91,11 @@ export function createTranslateLoader(http: HttpClient) {
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
-        CarService, CountryService, EventService, NodeService, BreadcrumbService
+        CarService,
+        CountryService,
+        EventService,
+        NodeService,
+        BreadcrumbService,
     ],
     bootstrap: [AppComponent]
 })
