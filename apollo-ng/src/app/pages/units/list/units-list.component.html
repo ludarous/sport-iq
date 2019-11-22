@@ -16,7 +16,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
-                    <tr>
+                    <tr class="pointer" [routerLink]="['/units/edit', item.id]">
                         <td *ngFor="let col of tableCols">
                             {{item[col.field]}}
                         </td>

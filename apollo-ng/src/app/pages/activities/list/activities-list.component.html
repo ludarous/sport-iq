@@ -13,12 +13,16 @@
                         <th *ngFor="let col of tableCols">
                             {{col.header}}
                         </th>
+                        <th class="table-action-column"></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
-                    <tr>
+                    <tr class="pointer" [routerLink]="['/activities/edit', item.id]">
                         <td *ngFor="let col of tableCols">
                             {{item[col.field]}}
+                        </td>
+                        <td class="table-action-column">
+                            <button class="ui-button-danger" type="button" icon="fa fa-trash" pButton (click)="delete($event, item)"></button>
                         </td>
                     </tr>
                 </ng-template>

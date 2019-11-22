@@ -1,16 +1,13 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, zip} from 'rxjs';
+import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {TreeNode} from 'primeng/api';
 import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
 import {MessageService} from '../../../modules/core/services/message.service';
 import {ActivityService} from '../../../services/rest/activity.service';
-import {IActivity, Activity} from '../../../entities/model/activity.model';
-import {RxFormBuilder} from '@rxweb/reactive-form-validators';
-import {FormUtils} from '../../../modules/core/utils/form.utils';
+import {Activity, IActivity} from '../../../entities/model/activity.model';
 
 @Component({
     selector: 'app-activity-categories-edit',
@@ -70,11 +67,11 @@ export class ActivitiesEditComponent implements OnInit {
                 (activityResponse: HttpResponse<IActivity>) => {
                     this.activity = activityResponse.body;
                     this.setActivityForm(this.activity);
-                    this.messageService.showSuccess('Jednotka uložena');
+                    this.messageService.showSuccess('Aktivita uložena');
                     this.router.navigate(['/activities/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.messageService.showError('Jednota nebyla uložena', errorResponse.error.detail);
+                    this.messageService.showError('Aktivita nebyla uložena', errorResponse.error.detail);
                 });
         }
     }
