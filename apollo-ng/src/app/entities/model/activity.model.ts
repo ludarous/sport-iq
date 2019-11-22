@@ -1,5 +1,6 @@
 import {IActivityResult} from './activity-result.model';
-import {IActivityCategory} from './activity-category.model';
+import {ActivityCategory, IActivityCategory} from './activity-category.model';
+import {required} from '@rxweb/reactive-form-validators';
 
 export interface IActivity {
     id?: number;
@@ -16,19 +17,21 @@ export interface IActivity {
 }
 
 export class Activity implements IActivity {
-    constructor(
-        public id?: number,
-        public name?: string,
-        public description?: string,
-        public help?: string,
-        public minAge?: number,
-        public maxAge?: number,
-        public targetValue?: number,
-        public activityResults?: IActivityResult[],
-        public targetUnitName?: string,
-        public targetUnitId?: number,
-        public categories?: IActivityCategory[]
-    ) {}
+
+    id: number = null;
+
+    @required()
+    name: string = null;
+
+    description: string = null;
+    help: string = null;
+    minAge: number = null;
+    maxAge: number = null;
+    targetValue: number = null;
+    activityResults: IActivityResult[] = new Array<IActivityResult>();
+    targetUnitName: string = null;
+    targetUnitId: number = null;
+    categories: IActivityCategory[] = new Array<IActivityCategory>();
 
     static parseItemEnums(activity: any): IActivity {
         if (activity) {

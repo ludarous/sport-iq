@@ -37,8 +37,7 @@
             <h1>{{category?.name ? category.name : 'Nová kategorie aktivit' | translate}}</h1>
             <div class="ui-g">
                 <div class="ui-g-6 ui-md-6 ui-sm-12">
-                    <div class="card">
-                        <h2>{{'Základní údaje' | translate}}</h2>
+                    <p-panel [header]="'Základní údaje' | translate">
                         <div class="ui-g">
                             <div class="ui-g-12">
                                 <form class="form-group" *ngIf="categoryForm" [formGroup]="categoryForm"
@@ -47,7 +46,8 @@
                                         <label for="activity-category-name">{{'Název' | translate}}</label>
                                     </div>
                                     <div class="ui-g-12 ui-md-8">
-                                        <input id="activity-category-name" class="w-100" type="text" pInputText formControlName="name"
+                                        <input id="activity-category-name" class="w-100" type="text" pInputText
+                                               formControlName="name"
                                                required/>
                                     </div>
 
@@ -66,11 +66,10 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </p-panel>
                 </div>
                 <div class="ui-g-6 ui-md-6 ui-sm-12">
-                    <div class="card">
-                        <h2>{{'Nadřazená kategorie aktivity' | translate}}</h2>
+                    <p-panel [header]="'Nadřazená kategorie aktivity' | translate">
                         <div class="ui-g">
                             <div class="ui-g-12">
                                 <p-tree class="activity-category-tree"
@@ -87,7 +86,7 @@
                                 </p-tree>
                             </div>
                         </div>
-                    </div>
+                    </p-panel>
                 </div>
             </div>
             <div class="ui-g">

@@ -27,6 +27,7 @@
         "@fullcalendar/timegrid": "4.0.1",
         "@ngx-translate/core": "^11.0.1",
         "@ngx-translate/http-loader": "^4.0.0",
+        "@rxweb/reactive-form-validators": "^1.9.7",
         "@types/jquery": "^3.3.31",
         "chart.js": "2.7.3",
         "file-saver": "^2.0.2",

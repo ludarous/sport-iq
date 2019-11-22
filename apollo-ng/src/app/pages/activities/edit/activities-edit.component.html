@@ -1,0 +1,48 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card">
+            <h1>{{activity?.name ? activity.name : 'Nová aktivita' | translate}}</h1>
+            <div class="ui-g">
+                <div class="ui-g-6 ui-md-6 ui-sm-12">
+                    <p-panel [header]="'Základní údaje' | translate">
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <form class="form-group" *ngIf="activityForm" [formGroup]="activityForm"
+                                      (submit)="saveActivity()">
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-name">{{'Název' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="activity-name" class="w-100" type="text" pInputText
+                                               formControlName="name"
+                                               required/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-abbreviation">{{'Popis' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <textarea id="activity-abbreviation"
+                                                  class="w-100"
+                                                  [rows]="3"
+                                                  [cols]="30"
+                                                  formControlName="description"
+                                                  pInputTextarea
+                                                  autoResize="autoResize"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </p-panel>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <button pButton type="button" class="cyan-btn"
+                            [label]="!activity?.id ? ('Vytvořit jednotku výsledku' | translate) : ('Ulož jednotku výsledku' | translate)"
+                            (click)="saveActivity()">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

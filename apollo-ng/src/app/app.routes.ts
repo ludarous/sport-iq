@@ -14,6 +14,8 @@ import { MiscDemoComponent } from './demo/view/miscdemo.component';
 import { EmptyDemoComponent } from './demo/view/emptydemo.component';
 import { DocumentationComponent } from './demo/view/documentation.component';
 import {ActivityCategoriesModule} from './pages/activity-categories/activity-categories.module';
+import {UnitsModule} from './pages/units/units.module';
+import {ActivitiesModule} from './pages/activities/activities.module';
 
 export const routes: Routes = [
     { path: '', component: DashboardDemoComponent },
@@ -29,7 +31,9 @@ export const routes: Routes = [
     { path: 'misc', component: MiscDemoComponent },
     { path: 'empty', component: EmptyDemoComponent },
     { path: 'documentation', component: DocumentationComponent },
-    { path: 'activity-categories', loadChildren: () => ActivityCategoriesModule}
+    { path: 'activity-categories', loadChildren: () => ActivityCategoriesModule},
+    { path: 'units', loadChildren: () => UnitsModule},
+    { path: 'activities', loadChildren: () => ActivitiesModule}
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'});
