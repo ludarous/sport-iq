@@ -1,14 +1,15 @@
 <div class="ui-g">
     <div class="ui-g-12">
         <div class="card">
-            <h1>{{activity?.name ? activity.name : 'Nová aktivita' | translate}}</h1>
-            <div class="ui-g">
-                <div class="ui-g-6 ui-md-6 ui-sm-12">
-                    <p-panel [header]="'Základní údaje' | translate">
-                        <div class="ui-g">
-                            <div class="ui-g-12">
-                                <form class="form-group" *ngIf="activityForm" [formGroup]="activityForm"
-                                      (submit)="saveActivity()">
+            <form class="form-group" *ngIf="activityForm" [formGroup]="activityForm"
+                  (submit)="saveActivity()">
+                <h1>{{activity?.name ? activity.name : 'Nová aktivita' | translate}}</h1>
+                <div class="ui-g">
+                    <div class="ui-g-6 ui-md-6 ui-sm-12">
+                        <p-panel [header]="'Základní údaje' | translate">
+                            <div class="ui-g">
+                                <div class="ui-g-12">
+
                                     <div class="ui-g-12 ui-md-4">
                                         <label for="activity-name">{{'Název' | translate}}</label>
                                     </div>
@@ -30,19 +31,97 @@
                                                   pInputTextarea
                                                   autoResize="autoResize"></textarea>
                                     </div>
-                                </form>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-help">{{'Nápověda' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <textarea id="activity-help"
+                                                  class="w-100"
+                                                  [rows]="3"
+                                                  [cols]="30"
+                                                  formControlName="help"
+                                                  pInputTextarea
+                                                  autoResize="autoResize"></textarea>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-name">{{'Minimální věk' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="activity-min-age" class="w-100" type="text" pInputText
+                                               formControlName="minAge"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-max-age">{{'Maximální věk' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="activity-max-age" class="w-100" type="text" pInputText
+                                               formControlName="maxAge"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-target-value">{{'Cílová hodnota' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-4 ui-md-4">
+                                        <input id="activity-target-value" class="w-100" type="text" pInputText
+                                               formControlName="targetValue"
+                                               required/>
+                                    </div>
+                                    <div class="ui-g-4 ui-md-4">
+                                        <p-dropdown id="activity-target-value-unit"
+                                                    [styleClass]="'w-100'"
+                                                    [placeholder]="'Vyberte jednotku' | translate"
+                                                    [options]="unitsSelectItems"
+                                                    formControlName="targetUnitId"
+                                                    [filter]="false"
+                                                    [showClear]="true">
+                                        </p-dropdown>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-target-value">{{'Kategorie aktivity' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <p-multiSelect class='w-100'
+                                                       [defaultLabel]="'Vyber kategorie aktivity' | translate"
+                                                       [styleClass]="'w-100'"
+                                                       [options]="categories"
+                                                       [(ngModel)]="activity.categories"
+                                                       [ngModelOptions]="{standalone: true}"
+                                                       optionLabel="name"
+                                        ></p-multiSelect>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </p-panel>
+                        </p-panel>
+                    </div>
+                    <div class="ui-g-6 ui-md-6 ui-sm-12">
+                        <p-panel [header]="'Výsledky aktivity' | translate">
+                            <div class="ui-g">
+                                <div class="ui-g-12">
+                                    <app-activity-results-list
+                                        [activity]="activity"
+                                        [units]="units"
+                                        (resultDelete)="onResultDelete($event)"
+                                        (activityResultSaved)="onResultSaved($event)">
+                                    </app-activity-results-list>
+                                </div>
+                            </div>
+                        </p-panel>
+                    </div>
                 </div>
-            </div>
-            <div class="ui-g">
-                <div class="ui-g-12">
-                    <button pButton type="button" class="cyan-btn"
-                            [label]="!activity?.id ? ('Vytvořit aktivitu' | translate) : ('Uložit aktivitu' | translate)"
-                            (click)="saveActivity()">
-                    </button>
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <button pButton type="button" class="cyan-btn"
+                                [label]="!activity?.id ? ('Vytvořit jednotku výsledku' | translate) : ('Ulož jednotku výsledku' | translate)"
+                                (click)="saveActivity()">
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
+

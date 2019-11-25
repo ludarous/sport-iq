@@ -1,17 +1,20 @@
+import {IUnit} from './unit.model';
+
 export interface IActivityResultSplit {
     id?: number;
     splitValue?: number;
     activityResultId?: number;
-    splitUnitName?: string;
-    splitUnitId?: number;
+    splitUnit?: IUnit;
 }
 
 export class ActivityResultSplit implements IActivityResultSplit {
-    constructor(
-        public id?: number,
-        public splitValue?: number,
-        public activityResultId?: number,
-        public splitUnitName?: string,
-        public splitUnitId?: number
-    ) {}
+    constructor(activityResultId: number, selectedUnit: IUnit) {
+        this.activityResultId = activityResultId;
+        this.splitUnit = selectedUnit;
+    }
+
+    id?: number;
+    splitValue?: number;
+    activityResultId?: number;
+    splitUnit?: IUnit;
 }

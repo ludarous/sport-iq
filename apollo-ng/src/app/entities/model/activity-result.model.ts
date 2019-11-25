@@ -1,8 +1,39 @@
 import {IActivityResultSplit} from './activity-result-split.model';
+import {IUnit} from './unit.model';
+import {EnumWrapper} from '../../modules/entities/enum-wrapper';
+import {IActivity} from './activity.model';
 
-export const enum ResultType {
-    LESS_IS_BETTER = 'LESS_IS_BETTER',
-    MORE_IS_BETTER = 'MORE_IS_BETTER'
+export enum ResultTypeEnum {
+    LESS_IS_BETTER,
+    MORE_IS_BETTER
+}
+
+export class ResultType extends EnumWrapper {
+    constructor(value: number | string) {
+        super(ResultTypeEnum, value);
+    }
+
+    public static LESS_IS_BETTER = new ResultType(ResultTypeEnum.LESS_IS_BETTER);
+    public static MORE_IS_BETTER = new ResultType(ResultTypeEnum.MORE_IS_BETTER);
+
+
+    private static all: Array<ResultType> = new Array<ResultType>(
+        ResultType.LESS_IS_BETTER,
+        ResultType.MORE_IS_BETTER,
+    );
+
+    public static getAll(): Array<ResultType> {
+        return ResultType.all;
+    }
+
+    public static get(value: number | string | EnumWrapper): ResultType {
+        if (value instanceof EnumWrapper) {
+            return value;
+        } else {
+            return this.all.find(e => e.ordinal === value || e.value === value);
+        }
+    }
+
 }
 
 export interface IActivityResult {
@@ -12,19 +43,24 @@ export interface IActivityResult {
     ratingWeight?: number;
     activityId?: number;
     resultSplits?: IActivityResultSplit[];
-    resultUnitName?: string;
-    resultUnitId?: number;
+    resultUnit?: IUnit;
 }
 
 export class ActivityResult implements IActivityResult {
-    constructor(
-        public id?: number,
-        public name?: string,
-        public resultType?: ResultType,
-        public ratingWeight?: number,
-        public activityId?: number,
-        public resultSplits?: IActivityResultSplit[],
-        public resultUnitName?: string,
-        public resultUnitId?: number
-    ) {}
+    id?: number;
+    name?: string;
+    resultType?: ResultType;
+    ratingWeight?: number;
+    activityId?: number;
+    resultSplits?: IActivityResultSplit[] = new Array<IActivityResultSplit>();
+    resultUnit?: IUnit;
+
+    static parseItemEnums(activityResult: IActivityResult): IActivityResult {
+        if (activityResult) {
+            if (activityResult.resultType) {
+               activityResult.resultType = ResultType.get(activityResult.resultType);
+            }
+        }
+        return activityResult;
+    }
 }

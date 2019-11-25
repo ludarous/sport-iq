@@ -1,7 +1,10 @@
 package cz.sportiq.service.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 import cz.sportiq.domain.enumeration.ResultType;
 
 /**
@@ -19,9 +22,9 @@ public class ActivityResultDTO implements Serializable {
 
     private Long activityId;
 
-    private Long resultUnitId;
+    private UnitDTO resultUnit;
 
-    private String resultUnitName;
+    private Set<ActivityResultSplitDTO> resultSplits = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -63,20 +66,20 @@ public class ActivityResultDTO implements Serializable {
         this.activityId = activityId;
     }
 
-    public Long getResultUnitId() {
-        return resultUnitId;
+    public UnitDTO getResultUnit() {
+        return resultUnit;
     }
 
-    public void setResultUnitId(Long unitId) {
-        this.resultUnitId = unitId;
+    public void setResultUnit(UnitDTO resultUnit) {
+        this.resultUnit = resultUnit;
     }
 
-    public String getResultUnitName() {
-        return resultUnitName;
+    public Set<ActivityResultSplitDTO> getResultSplits() {
+        return resultSplits;
     }
 
-    public void setResultUnitName(String unitName) {
-        this.resultUnitName = unitName;
+    public void setResultSplits(Set<ActivityResultSplitDTO> resultSplits) {
+        this.resultSplits = resultSplits;
     }
 
     @Override
@@ -108,8 +111,7 @@ public class ActivityResultDTO implements Serializable {
             ", resultType='" + getResultType() + "'" +
             ", ratingWeight=" + getRatingWeight() +
             ", activity=" + getActivityId() +
-            ", resultUnit=" + getResultUnitId() +
-            ", resultUnit='" + getResultUnitName() + "'" +
             "}";
     }
+
 }

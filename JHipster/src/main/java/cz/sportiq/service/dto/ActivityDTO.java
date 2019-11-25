@@ -32,6 +32,8 @@ public class ActivityDTO implements Serializable {
 
     private Set<ActivityCategoryDTO> categories = new HashSet<>();
 
+    private Set<ActivityResultDTO> activityResults = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -112,6 +114,10 @@ public class ActivityDTO implements Serializable {
         this.categories = activityCategories;
     }
 
+    public Set<ActivityResultDTO> getActivityResults() { return activityResults; }
+
+    public void setActivityResults(Set<ActivityResultDTO> activityResults) { this.activityResults = activityResults; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -147,4 +153,5 @@ public class ActivityDTO implements Serializable {
             ", targetUnit='" + getTargetUnitName() + "'" +
             "}";
     }
+
 }

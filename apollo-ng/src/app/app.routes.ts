@@ -16,6 +16,7 @@ import { DocumentationComponent } from './demo/view/documentation.component';
 import {ActivityCategoriesModule} from './pages/activity-categories/activity-categories.module';
 import {UnitsModule} from './pages/units/units.module';
 import {ActivitiesModule} from './pages/activities/activities.module';
+import {WorkoutsModule} from './pages/workouts/workouts.module';
 
 export const routes: Routes = [
     { path: '', component: DashboardDemoComponent },
@@ -33,7 +34,8 @@ export const routes: Routes = [
     { path: 'documentation', component: DocumentationComponent },
     { path: 'activity-categories', loadChildren: () => ActivityCategoriesModule},
     { path: 'units', loadChildren: () => UnitsModule},
-    { path: 'activities', loadChildren: () => ActivitiesModule}
+    { path: 'activities', loadChildren: () => ActivitiesModule},
+    { path: 'workouts', loadChildren: () => WorkoutsModule}
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'});

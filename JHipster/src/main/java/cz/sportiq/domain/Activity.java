@@ -50,7 +50,7 @@ public class Activity implements Serializable {
     private Float targetValue;
 
     @OneToMany(mappedBy = "activity")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<ActivityResult> activityResults = new HashSet<>();
 
     @ManyToOne

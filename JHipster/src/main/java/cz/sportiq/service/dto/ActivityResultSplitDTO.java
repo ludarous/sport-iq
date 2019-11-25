@@ -14,9 +14,7 @@ public class ActivityResultSplitDTO implements Serializable {
 
     private Long activityResultId;
 
-    private Long splitUnitId;
-
-    private String splitUnitName;
+    private UnitDTO splitUnit;
 
     public Long getId() {
         return id;
@@ -42,20 +40,12 @@ public class ActivityResultSplitDTO implements Serializable {
         this.activityResultId = activityResultId;
     }
 
-    public Long getSplitUnitId() {
-        return splitUnitId;
+    public UnitDTO getSplitUnit() {
+        return splitUnit;
     }
 
-    public void setSplitUnitId(Long unitId) {
-        this.splitUnitId = unitId;
-    }
-
-    public String getSplitUnitName() {
-        return splitUnitName;
-    }
-
-    public void setSplitUnitName(String unitName) {
-        this.splitUnitName = unitName;
+    public void setSplitUnit(UnitDTO splitUnit) {
+        this.splitUnit = splitUnit;
     }
 
     @Override
@@ -85,8 +75,7 @@ public class ActivityResultSplitDTO implements Serializable {
             "id=" + getId() +
             ", splitValue=" + getSplitValue() +
             ", activityResult=" + getActivityResultId() +
-            ", splitUnit=" + getSplitUnitId() +
-            ", splitUnit='" + getSplitUnitName() + "'" +
             "}";
     }
+
 }
