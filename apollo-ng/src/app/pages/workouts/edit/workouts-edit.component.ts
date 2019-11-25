@@ -1,10 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {TreeNode} from 'primeng/api';
 import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
 import {MessageService} from '../../../modules/core/services/message.service';
 import {WorkoutService} from '../../../services/rest/workout.service';
@@ -32,7 +31,7 @@ export class WorkoutsEditComponent implements OnInit {
     workout: IWorkout;
     workoutForm: FormGroup;
 
-    activities: Array<IActivity>;
+    allActivities: Array<IActivity>;
 
 
     ngOnInit() {
@@ -47,10 +46,8 @@ export class WorkoutsEditComponent implements OnInit {
 
             zip(getWorkout$, getActivities$).subscribe(([workout, activitiesResponse]) => {
                 this.workout = workout;
-                this.activities = activitiesResponse.body;
-                // for (let activity of this.workout.activities) {
-                //     activity = this.activities.find(a => a.id === activity.id);
-                // }
+                this.allActivities = activitiesResponse.body;
+                this.workout.activities = this.allActivities.filter(a => this.workout.activities.some(wa => wa.id === a.id));
                 this.setWorkoutForm(this.workout);
             });
 
@@ -59,11 +56,7 @@ export class WorkoutsEditComponent implements OnInit {
 
     setWorkoutForm(workout: IWorkout) {
 
-        this.workoutForm = new FormGroup({
-            id: new FormControl(workout.id),
-            name: new FormControl(workout.name, [Validators.required]),
-            description: new FormControl(workout.description, [Validators.required]),
-        });
+        this.workoutForm = this.formBuilder.group(workout);
         this.workoutForm.setControl('activities', this.formBuilder.array(workout.activities));
     }
 
