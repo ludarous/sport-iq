@@ -12,9 +12,9 @@ export interface IWorkout {
 }
 
 export class Workout implements IWorkout {
-    id: number;
-    name: string;
-    description: string;
+    id: number = null;
+    name: string = null;
+    description: string  = null;
     activities: IActivity[] = new Array<IActivity>();
     categories: IWorkoutCategory[] = new Array<IWorkoutCategory>();
     sports: ISport[] = new Array<ISport>();

@@ -42,7 +42,7 @@ export class ActivityResultsEditComponent implements OnInit {
     ngOnInit() {
         this.activityResult = this.config.data.result;
         this.units = this.config.data.units;
-        this.useSplits = this.activityResult.resultSplits.length > 0;
+        this.useSplits = (this.activityResult.resultSplits.length > 0)  && !!this.activityResult.id;
 
         this.setActivityResultForm(this.activityResult);
         this.resultTypes = ResultType.getAll().map(v => {
@@ -56,7 +56,9 @@ export class ActivityResultsEditComponent implements OnInit {
             id: new FormControl(activityResult.id),
             name: new FormControl(activityResult.name, [Validators.required]),
             activityId: new FormControl(activityResult.activityId),
-            resultType: new FormControl(activityResult.resultType ? activityResult.resultType : ResultType.LESS_IS_BETTER, [Validators.required]),
+            resultType: new FormControl(activityResult.resultType ?
+                activityResult.resultType :
+                ResultType.LESS_IS_BETTER, [Validators.required]),
             resultUnit: this.formBuilder.group(activityResult.resultUnit ? activityResult.resultUnit : this.units[0]),
         });
     }
@@ -77,6 +79,7 @@ export class ActivityResultsEditComponent implements OnInit {
 
             saveActivityResult$.subscribe(
                 (activityResultResponse: HttpResponse<IActivityResult>) => {
+                    this.activityResult = activityResultResponse.body;
                     this.messageService.showSuccess('Jednotka uložena');
                     if (close) {
                         this.ref.close(activityResultResponse.body);
@@ -89,12 +92,17 @@ export class ActivityResultsEditComponent implements OnInit {
     }
 
     addSplitResult() {
-        this.activityResult.resultSplits.push(new ActivityResultSplit(this.activityResult.id, this.units[0]));
+        const split = new ActivityResultSplit(this.activityResult.id, this.units[0]);
+        this.activityResult.resultSplits.push(split);
     }
 
     deleteSplit($event: MouseEvent, item: IActivityResultSplit) {
-        this.activityResultSplitService.remove(item.id).subscribe(() => {
+        if (item.id) {
+            this.activityResultSplitService.remove(item.id).subscribe(() => {
+                ArrayUtils.removeItem(this.activityResult.resultSplits, item);
+            });
+        } else {
             ArrayUtils.removeItem(this.activityResult.resultSplits, item);
-        });
+        }
     }
 }

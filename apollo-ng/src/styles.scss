@@ -54,3 +54,27 @@ app-root {
 .table-action-column {
     width: 100px;
 }
+
+.ui-picklist {
+    display: flex;
+    align-items: stretch;
+
+    & > div {
+
+    }
+}
+
+.ui-picklist-listwrapper {
+    flex: 1;
+}
+
+.ui-picklist .ui-picklist-buttons {
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.ui-picklist .ui-picklist-list {
+    height: 100%;
+    width: 100%;
+}

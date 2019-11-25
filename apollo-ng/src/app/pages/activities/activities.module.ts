@@ -19,6 +19,7 @@ import { ActivityResultsEditComponent } from './activity-results/edit/activity-r
 import {DialogService} from 'primeng/api';
 import {DynamicDialogComponent} from 'primeng/dynamicdialog';
 import {ActivityResultSplitService} from '../../services/rest/activity-result-split.service';
+import { ActivitiesPagesService } from './activities-pages.service';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import {ActivityResultSplitService} from '../../services/rest/activity-result-sp
     providers: [
         ActivityService,
         ActivityCategoryService,
+        ActivitiesPagesService,
         UnitService,
         ActivityResultService,
         ActivityResultSplitService,

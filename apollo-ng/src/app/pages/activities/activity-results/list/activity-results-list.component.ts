@@ -9,6 +9,7 @@ import {EnumTranslatorService} from '../../../../modules/shared-components/servi
 import {IUnit} from '../../../../entities/model/unit.model';
 import {Dialog} from 'primeng/dialog';
 import {ActivityResultsEditComponent} from '../edit/activity-results-edit.component';
+import { ActivitiesPagesService } from '../../activities-pages.service';
 
 @Component({
     selector: 'app-activity-results-list',
@@ -20,6 +21,7 @@ export class ActivityResultsListComponent implements OnInit {
     constructor(private activityResultService: ActivityResultService,
                 private messageService: MessageService,
                 private enumTranslateService: EnumTranslatorService,
+                private activitiesPagesService: ActivitiesPagesService,
                 public dialogService: DialogService) {
     }
 
@@ -63,6 +65,7 @@ export class ActivityResultsListComponent implements OnInit {
     }
 
     editActivityResult(item?: IActivityResult) {
+
         if (!item) {
             const activityResult = new ActivityResult();
             activityResult.activityId = this.activity.id;

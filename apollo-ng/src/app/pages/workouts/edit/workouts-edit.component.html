@@ -1,7 +1,7 @@
-<div class="ui-g">
+<div class="ui-g" *ngIf="workoutForm">
     <div class="ui-g-12">
         <div class="card">
-            <h1>{{workout?.name ? workout.name : 'Nová jednotka' | translate}}</h1>
+            <h1>{{workout?.name ? workout.name : 'Nový test' | translate}}</h1>
             <div class="ui-g">
                 <div class="ui-g-6 ui-md-6 ui-sm-12">
                     <p-panel [header]="'Základní údaje' | translate">
@@ -50,11 +50,23 @@
                         </div>
                     </p-panel>
                 </div>
+
+                <div class="ui-g-12 ui-md-12">
+                    <p-panel [header]="'Activity testu'" >
+                        <p-pickList [source]="suggestedActivities" [target]="workout.activities" [styleClass]="'activities-picklist'" [dragdrop]="true">
+                            <ng-template let-activity pTemplate="item">
+                                <div class="ui-helper-clearfix">
+                                    <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{activity.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-pickList>
+                    </p-panel>
+                </div>
             </div>
             <div class="ui-g">
                 <div class="ui-g-12">
                     <button pButton type="button" class="cyan-btn"
-                            [label]="!workout?.id ? ('Vytvořit jednotku výsledku' | translate) : ('Ulož jednotku výsledku' | translate)"
+                            [label]="!workout?.id ? ('Vytvořit test' | translate) : ('Ulož test' | translate)"
                             (click)="saveWorkout()">
                     </button>
                 </div>

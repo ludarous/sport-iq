@@ -32,6 +32,7 @@ export class WorkoutsEditComponent implements OnInit {
     workoutForm: FormGroup;
 
     allActivities: Array<IActivity>;
+    suggestedActivities: Array<IActivity>;
 
 
     ngOnInit() {
@@ -48,6 +49,7 @@ export class WorkoutsEditComponent implements OnInit {
                 this.workout = workout;
                 this.allActivities = activitiesResponse.body;
                 this.workout.activities = this.allActivities.filter(a => this.workout.activities.some(wa => wa.id === a.id));
+                this.suggestedActivities = this.allActivities.filter((a) => !this.workout.activities.some((sa) => sa.id === a.id));
                 this.setWorkoutForm(this.workout);
             });
 

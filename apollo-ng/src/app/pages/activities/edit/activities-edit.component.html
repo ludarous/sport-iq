@@ -97,7 +97,7 @@
                             </div>
                         </p-panel>
                     </div>
-                    <div class="ui-g-6 ui-md-6 ui-sm-12">
+                    <div *ngIf="activity.id" class="ui-g-6 ui-md-6 ui-sm-12">
                         <p-panel [header]="'Výsledky aktivity' | translate">
                             <div class="ui-g">
                                 <div class="ui-g-12">
@@ -116,7 +116,7 @@
                     <div class="ui-g-12">
                         <button pButton type="button" class="cyan-btn"
                                 [label]="!activity?.id ? ('Vytvořit jednotku výsledku' | translate) : ('Ulož jednotku výsledku' | translate)"
-                                (click)="saveActivity()">
+                                (click)="saveActivity(!!activity.id)">
                         </button>
                     </div>
                 </div>

@@ -1,24 +1,26 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, zip} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {MessageService} from '../../../modules/core/services/message.service';
-import {ActivityService} from '../../../services/rest/activity.service';
-import {Activity, IActivity} from '../../../entities/model/activity.model';
-import {ActivityCategoryService} from '../../../services/rest/activity-category.service';
-import {UnitService} from '../../../services/rest/unit.service';
-import {IActivityCategory} from '../../../entities/model/activity-category.model';
-import {IUnit, Unit} from '../../../entities/model/unit.model';
-import {ArrayUtils} from '../../../modules/core/utils/array.utils';
-import {SelectItem} from 'primeng/api';
-import {MultiSelectItem} from 'primeng/primeng';
-import {PrimengUtils} from '../../../modules/core/utils/primeng.utils';
-import {RxFormBuilder} from '@rxweb/reactive-form-validators';
-import {CustomValidators} from '../../../modules/shared-components/validators/custom-validators';
-import {IActivityResult} from '../../../entities/model/activity-result.model';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, zip } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { RxjsUtils } from '../../../modules/core/utils/rxjs.utils';
+import { MessageService } from '../../../modules/core/services/message.service';
+import { ActivityService } from '../../../services/rest/activity.service';
+import { Activity, IActivity } from '../../../entities/model/activity.model';
+import { ActivityCategoryService } from '../../../services/rest/activity-category.service';
+import { UnitService } from '../../../services/rest/unit.service';
+import { IActivityCategory } from '../../../entities/model/activity-category.model';
+import { IUnit, Unit } from '../../../entities/model/unit.model';
+import { ArrayUtils } from '../../../modules/core/utils/array.utils';
+import { SelectItem } from 'primeng/api';
+import { MultiSelectItem } from 'primeng/primeng';
+import { PrimengUtils } from '../../../modules/core/utils/primeng.utils';
+import { RxFormBuilder } from '@rxweb/reactive-form-validators';
+import { CustomValidators } from '../../../modules/shared-components/validators/custom-validators';
+import { IActivityResult } from '../../../entities/model/activity-result.model';
+import { ActivitiesPagesService } from '../activities-pages.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-activity-categories-edit',
@@ -30,12 +32,14 @@ export class ActivitiesEditComponent implements OnInit {
 
     constructor(private activityService: ActivityService,
                 private activityCategoryService: ActivityCategoryService,
+                private activitiesPagesService: ActivitiesPagesService,
                 private unitService: UnitService,
                 private activatedRoute: ActivatedRoute,
                 private messageService: MessageService,
                 private formBuilder: FormBuilder,
                 private rxFormBuilder: RxFormBuilder,
-                private router: Router) {
+                private router: Router,
+                private location: Location) {
     }
 
     activityId: number;
@@ -85,7 +89,7 @@ export class ActivitiesEditComponent implements OnInit {
         this.activityForm.get('maxAge').setValidators([CustomValidators.integerPositive]);
     }
 
-    saveActivity() {
+    saveActivity$() {
         if (this.activityForm.valid) {
 
             const activityToSave = this.activityForm.value as IActivity;
@@ -97,18 +101,29 @@ export class ActivitiesEditComponent implements OnInit {
             } else {
                 saveActivity$ = this.activityService.create(activityToSave);
             }
-
-            saveActivity$.subscribe(
-                (activityResponse: HttpResponse<IActivity>) => {
-                    this.activity = activityResponse.body;
-                    this.setActivityForm(this.activity);
-                    this.messageService.showSuccess('Aktivita uložena');
-                    this.router.navigate(['/activities/list']);
-                },
-                (errorResponse: HttpErrorResponse) => {
-                    this.messageService.showError('Aktivita nebyla uložena', errorResponse.error.detail);
-                });
+            return saveActivity$;
+        } else {
+            throw new Error('Form is not valid');
         }
+    }
+
+    saveActivity(goBack: boolean = true) {
+        const saveActivity$ = this.saveActivity$();
+        saveActivity$.subscribe(
+            (activityResponse: HttpResponse<IActivity>) => {
+                this.activity = activityResponse.body;
+                this.activityId = this.activity.id;
+                this.setActivityForm(this.activity);
+                this.messageService.showSuccess('Aktivita uložena');
+                if (goBack) {
+                    this.router.navigate(['/activities/list']);
+                } else {
+                    this.location.go(`/activities/edit/${this.activity.id}`);
+                }
+            },
+            (errorResponse: HttpErrorResponse) => {
+                this.messageService.showError('Aktivita nebyla uložena', errorResponse.error.detail);
+            });
     }
 
     getActivity(activityId: number): Observable<IActivity> {
@@ -116,8 +131,8 @@ export class ActivitiesEditComponent implements OnInit {
             return this.activityService
                 .find(activityId)
                 .pipe(map((activityResponse: HttpResponse<IActivity>) => {
-                return activityResponse.body;
-            }));
+                    return activityResponse.body;
+                }));
 
         } else {
             return RxjsUtils.create(new Activity());
