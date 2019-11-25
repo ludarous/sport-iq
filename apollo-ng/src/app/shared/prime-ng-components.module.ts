@@ -68,6 +68,7 @@ import {FullCalendarModule} from 'primeng/fullcalendar';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 
 const PRIME_NG_MODULES = [
     CommonModule,
@@ -87,6 +88,7 @@ const PRIME_NG_MODULES = [
     ContextMenuModule,
     DataViewModule,
     DialogModule,
+    DynamicDialogModule,
     DropdownModule,
     EditorModule,
     FieldsetModule,

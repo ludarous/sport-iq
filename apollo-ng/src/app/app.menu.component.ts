@@ -184,6 +184,9 @@ export class AppMenuComponent implements OnInit {
                         label: 'Aktivity', icon: 'fa fa-fw fa-sign-in', routerLink: ['/activities']
                     },
                     {
+                        label: 'Testy', icon: 'fa fa-fw fa-sign-in', routerLink: ['/workouts']
+                    },
+                    {
                         label: 'Kategorie aktivit', icon: 'fa fa-fw fa-sign-in', routerLink: ['/activity-categories']
                     },
                     {

@@ -12,12 +12,9 @@ import org.mapstruct.*;
 public interface ActivityResultSplitMapper extends EntityMapper<ActivityResultSplitDTO, ActivityResultSplit> {
 
     @Mapping(source = "activityResult.id", target = "activityResultId")
-    @Mapping(source = "splitUnit.id", target = "splitUnitId")
-    @Mapping(source = "splitUnit.name", target = "splitUnitName")
     ActivityResultSplitDTO toDto(ActivityResultSplit activityResultSplit);
 
     @Mapping(source = "activityResultId", target = "activityResult")
-    @Mapping(source = "splitUnitId", target = "splitUnit")
     ActivityResultSplit toEntity(ActivityResultSplitDTO activityResultSplitDTO);
 
     default ActivityResultSplit fromId(Long id) {

@@ -11,12 +11,22 @@ import {PrimeNgComponentsModule} from '../../shared/prime-ng-components.module';
 import {MessageService} from '../../modules/core/services/message.service';
 import {ActivityService} from '../../services/rest/activity.service';
 import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators';
+import {ActivityCategoryService} from '../../services/rest/activity-category.service';
+import {UnitService} from '../../services/rest/unit.service';
+import { ActivityResultsListComponent } from './activity-results/list/activity-results-list.component';
+import {ActivityResultService} from '../../services/rest/activity-result.service';
+import { ActivityResultsEditComponent } from './activity-results/edit/activity-results-edit.component';
+import {DialogService} from 'primeng/api';
+import {DynamicDialogComponent} from 'primeng/dynamicdialog';
+import {ActivityResultSplitService} from '../../services/rest/activity-result-split.service';
 
 @NgModule({
     declarations: [
         ActivitiesComponent,
         ActivitiesListComponent,
         ActivitiesEditComponent,
+        ActivityResultsListComponent,
+        ActivityResultsEditComponent,
     ],
     imports: [
         CommonModule,
@@ -29,12 +39,20 @@ import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators';
     ],
     providers: [
         ActivityService,
-        MessageService
+        ActivityCategoryService,
+        UnitService,
+        ActivityResultService,
+        ActivityResultSplitService,
+        MessageService,
+        DialogService
     ],
     exports: [
         ActivitiesComponent,
         ActivitiesListComponent,
         ActivitiesEditComponent,
+    ],
+    entryComponents: [
+        ActivityResultsEditComponent,
     ]
 })
 export class ActivitiesModule {
