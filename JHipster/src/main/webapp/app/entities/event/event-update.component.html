@@ -41,6 +41,12 @@
                         <option [ngValue]="getSelected(event.tests, workoutOption)" *ngFor="let workoutOption of workouts; trackBy: trackWorkoutById">{{workoutOption.name}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label jhiTranslate="sportiqApp.event.athletes" for="field_athletes">Athletes</label>
+                    <select class="form-control" id="field_athletes" multiple name="athletes" [(ngModel)]="event.athletes">
+                        <option [ngValue]="getSelected(event.athletes, athleteOption)" *ngFor="let athleteOption of athletes; trackBy: trackAthleteById">{{athleteOption.email}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

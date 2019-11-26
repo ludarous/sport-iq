@@ -12,6 +12,8 @@ import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address';
 import { IWorkout } from 'app/shared/model/workout.model';
 import { WorkoutService } from 'app/entities/workout';
+import { IAthlete } from 'app/shared/model/athlete.model';
+import { AthleteService } from 'app/entities/athlete';
 
 @Component({
     selector: 'jhi-event-update',
@@ -24,6 +26,8 @@ export class EventUpdateComponent implements OnInit {
     addresses: IAddress[];
 
     workouts: IWorkout[];
+
+    athletes: IAthlete[];
     date: string;
 
     constructor(
@@ -31,6 +35,7 @@ export class EventUpdateComponent implements OnInit {
         private eventService: EventService,
         private addressService: AddressService,
         private workoutService: WorkoutService,
+        private athleteService: AthleteService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -48,6 +53,12 @@ export class EventUpdateComponent implements OnInit {
         this.workoutService.query().subscribe(
             (res: HttpResponse<IWorkout[]>) => {
                 this.workouts = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.athleteService.query().subscribe(
+            (res: HttpResponse<IAthlete[]>) => {
+                this.athletes = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -89,6 +100,10 @@ export class EventUpdateComponent implements OnInit {
     }
 
     trackWorkoutById(index: number, item: IWorkout) {
+        return item.id;
+    }
+
+    trackAthleteById(index: number, item: IAthlete) {
         return item.id;
     }
 

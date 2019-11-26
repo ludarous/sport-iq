@@ -33,6 +33,14 @@
             "otherEntityName": "workout",
             "otherEntityField": "name",
             "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "",
+            "relationshipName": "athletes",
+            "otherEntityName": "athlete",
+            "otherEntityField": "email",
+            "ownerSide": true
         }
     ],
     "changelogDate": "20191012201708",

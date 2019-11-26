@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { IAthleteEvent } from 'app/shared/model//athlete-event.model';
 import { IWorkout } from 'app/shared/model//workout.model';
+import { IAthlete } from 'app/shared/model//athlete.model';
 
 export interface IEvent {
     id?: number;
@@ -10,6 +11,7 @@ export interface IEvent {
     addressStreet?: string;
     addressId?: number;
     tests?: IWorkout[];
+    athletes?: IAthlete[];
 }
 
 export class Event implements IEvent {
@@ -20,6 +22,7 @@ export class Event implements IEvent {
         public athleteEvents?: IAthleteEvent[],
         public addressStreet?: string,
         public addressId?: number,
-        public tests?: IWorkout[]
+        public tests?: IWorkout[],
+        public athletes?: IAthlete[]
     ) {}
 }

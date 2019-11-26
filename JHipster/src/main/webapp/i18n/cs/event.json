@@ -21,7 +21,8 @@
             "date": "Date",
             "athleteEvents": "Athlete Events",
             "address": "Address",
-            "tests": "Tests"
+            "tests": "Tests",
+            "athletes": "Athletes"
         }
     }
 }

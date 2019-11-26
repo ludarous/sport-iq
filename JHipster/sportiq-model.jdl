@@ -105,6 +105,7 @@ relationship ManyToMany {
     Workout{categories(name)} to WorkoutCategory
     Workout{sports(name)} to Sport
     Event{tests(name)} to Workout
+    Event{athletes(email)} to Athlete
 }
 
 // defining multiple OneToMany relationships with comments

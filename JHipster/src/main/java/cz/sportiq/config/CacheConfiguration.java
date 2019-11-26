@@ -67,6 +67,7 @@ public class CacheConfiguration {
             cm.createCache(cz.sportiq.domain.Sport.class.getName(), jcacheConfiguration);
             cm.createCache(cz.sportiq.domain.Unit.class.getName(), jcacheConfiguration);
             cm.createCache(cz.sportiq.domain.ActivityCategory.class.getName() + ".childActivityCategories", jcacheConfiguration);
+            cm.createCache(cz.sportiq.domain.Event.class.getName() + ".athletes", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

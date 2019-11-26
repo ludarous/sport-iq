@@ -25,6 +25,12 @@
                         <a [routerLink]="['/workout', tests?.id, 'view' ]">{{tests.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
+                <dt><span jhiTranslate="sportiqApp.event.athletes">Athletes</span></dt>
+                <dd>
+                    <span *ngFor="let athletes of event.athletes; let last = last">
+                        <a [routerLink]="['/athlete', athletes?.id, 'view' ]">{{athletes.email}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"
