@@ -13,12 +13,14 @@ import {EventService} from '../../services/rest/event.service';
 import {WorkoutService} from '../../services/rest/workout.service';
 import {Athlete} from '../../entities/model/athlete.model';
 import {AthleteService} from '../../services/rest/athlete.service';
+import { EventsResultsComponent } from './results/events-results.component';
 
 @NgModule({
     declarations: [
         EventsComponent,
         EventsListComponent,
         EventsEditComponent,
+        EventsResultsComponent,
     ],
     imports: [
         CommonModule,

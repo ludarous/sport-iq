@@ -16,16 +16,15 @@ export interface IEvent {
 }
 
 export class Event implements IEvent {
-    constructor(
-        public id?: number,
-        public name?: string,
-        public date?: Moment,
-        public athleteEvents?: IAthleteEvent[],
-        public addressStreet?: string,
-        public addressId?: number,
-        public tests?: IWorkout[],
-        public athletes?: IAthlete[]
-    ) {}
+
+    id: number = null;
+    name: string = null;
+    date: Moment = null;
+    athleteEvents: IAthleteEvent[] = new Array<IAthleteEvent>();
+    addressStreet: string = null;
+    addressId: number = null;
+    tests: IWorkout[] = new Array<IWorkout>();
+    athletes: IAthlete[] = new Array<IAthlete>();
 
     static parseItemEnums(event: IEvent): IEvent {
         if (event) {

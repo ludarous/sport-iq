@@ -1,0 +1,56 @@
+.list {
+    overflow: hidden;
+}
+.list .ui-panel .ui-panel-content {
+    min-height: 366px;
+    padding: 0px !important;
+}
+.list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.list ul li {
+    border-bottom: 1px solid #dddddd;
+    padding: 10px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    text-decoration: none;
+    position: relative;
+    display: block;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-transition: background-color 0.2s;
+    -o-transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+.list ul li img {
+    float: left;
+    margin-right: 8px;
+}
+.list ul li .contact-info {
+    float: left;
+}
+.list ul li .contact-info .name {
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+}
+.list ul li .contact-info .location {
+    margin-top: 4px;
+    display: block;
+    font-size: 12px;
+    color: #7a7a7a;
+}
+.list ul li .contact-actions {
+    float: right;
+    padding-top: 12px;
+}
+.list ul li .contact-actions button:last-child {
+    margin-left: 6px;
+}
+.list ul li:last-child {
+    border: 0;
+}

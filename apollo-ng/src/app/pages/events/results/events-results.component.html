@@ -1,0 +1,21 @@
+<div class="ui-g" *ngIf="event">
+    <div class="ui-g-12">
+        <div class="card">
+            <h1 *ngIf="event">{{event.name}}</h1>
+            <h1 *ngIf="!event">{{'Nová událost' | translate}}</h1>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-2">
+                    <div class="ui-g-12 list">
+                        <p-panel [header]="'Testy' | translate">
+                            <ul>
+                                <li *ngFor="let test of event.tests" class="clearfix">
+                                    {{test.name}}
+                                </li>
+                            </ul>
+                        </p-panel>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -56,7 +56,7 @@ export class AthletesEditComponent implements OnInit {
 
             getAthlete$.subscribe((athlete: IAthlete) => {
                 this.athlete = athlete;
-                this.birthDate = this.athlete.birthDate.toDate();
+                this.birthDate = this.athlete.birthDate ? this.athlete.birthDate.toDate() : null;
                 this.setAthleteForm(this.athlete);
             });
 
