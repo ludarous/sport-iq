@@ -1,12 +1,12 @@
 <div class="ui-g">
     <div class="ui-g-12">
         <div class="card card-w-title">
-            <h1>{{'Testy' | translate}}</h1>
+            <h1>{{'Události' | translate}}</h1>
             <div class="btn-panel">
-                <button pButton type="button" class="cyan-btn" [label]="'Vytvořit test' | translate"
-                        [routerLink]="['/workouts/create']"></button>
+                <button pButton type="button" class="cyan-btn" [label]="'Vytvořit událost' | translate"
+                        [routerLink]="['/events/create']"></button>
             </div>
-            <p-table [value]="workouts">
+            <p-table [value]="events">
                 <ng-template pTemplate="header">
                     <tr>
                         <th *ngFor="let col of tableCols">
@@ -16,9 +16,9 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
-                    <tr class="pointer" [routerLink]="['/workouts/edit', item.id]">
+                    <tr class="pointer" [routerLink]="['/events/edit', item.id]">
                         <td *ngFor="let col of tableCols">
-                            {{item[col.field]}}
+                            {{col.map ? col.map(item, col) : item[col.field]}}
                         </td>
                         <td class="table-action-column">
                             <button class="ui-button-danger" type="button" icon="fa fa-trash" pButton (click)="delete($event, item)"></button>

@@ -42,11 +42,11 @@ export class UnitsListComponent implements OnInit {
         });
     }
 
-    delete(event, category: IUnit) {
+    delete(event, unit: IUnit) {
         event.stopPropagation();
 
-        if (confirm('Opravdu chceš smazat jednotku ' + category.name)) {
-            this.unitsService.remove(category.id).subscribe(() => {
+        if (confirm('Opravdu chceš smazat jednotku ' + unit.name)) {
+            this.unitsService.remove(unit.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
                 this.messageService.showError('Kategorii se nepodařilo smazat', errorResponse.message);

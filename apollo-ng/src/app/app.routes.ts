@@ -17,6 +17,8 @@ import {ActivityCategoriesModule} from './pages/activity-categories/activity-cat
 import {UnitsModule} from './pages/units/units.module';
 import {ActivitiesModule} from './pages/activities/activities.module';
 import {WorkoutsModule} from './pages/workouts/workouts.module';
+import {AthletesModule} from './pages/athletes/athletes.module';
+import {EventsModule} from './pages/events/events.module';
 
 export const routes: Routes = [
     { path: '', component: DashboardDemoComponent },
@@ -35,7 +37,9 @@ export const routes: Routes = [
     { path: 'activity-categories', loadChildren: () => ActivityCategoriesModule},
     { path: 'units', loadChildren: () => UnitsModule},
     { path: 'activities', loadChildren: () => ActivitiesModule},
-    { path: 'workouts', loadChildren: () => WorkoutsModule}
+    { path: 'workouts', loadChildren: () => WorkoutsModule},
+    { path: 'athletes', loadChildren: () => AthletesModule},
+    { path: 'events', loadChildren: () => EventsModule}
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'});

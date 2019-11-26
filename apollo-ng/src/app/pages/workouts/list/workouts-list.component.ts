@@ -41,11 +41,11 @@ export class WorkoutsListComponent implements OnInit {
         });
     }
 
-    delete(event, category: IWorkout) {
+    delete(event, workout: IWorkout) {
         event.stopPropagation();
 
-        if (confirm('Opravdu chceš smazat test ' + category.name)) {
-            this.workoutsService.remove(category.id).subscribe(() => {
+        if (confirm('Opravdu chceš smazat test ' + workout.name)) {
+            this.workoutsService.remove(workout.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
                 this.messageService.showError('Test se nepodařilo smazat', errorResponse.message);

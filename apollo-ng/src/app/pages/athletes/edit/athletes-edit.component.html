@@ -1,0 +1,82 @@
+<div class="ui-g" *ngIf="athleteForm">
+    <div class="ui-g-12">
+        <div class="card">
+            <h1 *ngIf="athlete">{{athlete.firstName + ' ' + athlete.lastName}}</h1>
+            <h1 *ngIf="!athlete">{{'Nový test' | translate}}</h1>
+            <div class="ui-g">
+                <div class="ui-g-6 ui-md-6 ui-sm-12">
+                    <p-panel [header]="'Základní údaje' | translate">
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <form class="form-group" *ngIf="athleteForm" [formGroup]="athleteForm"
+                                      (submit)="saveAthlete()">
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="athlete-firstName">{{'Kestní jméno' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="athlete-firstName" class="w-100" type="text" pInputText
+                                               formControlName="firstName"
+                                               required/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="athlete-lastName">{{'Příjmení' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="athlete-lastName" class="w-100" type="text" pInputText
+                                               formControlName="lastName"
+                                               required/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="athlete-email">{{'E-mail' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="athlete-email" class="w-100" type="text" pInputText
+                                               formControlName="email"
+                                               required/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="athlete-birthDate">{{'Datum narození' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <p-calendar id="athlete-birthDate"
+                                                    [(ngModel)]="birthDate"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    [locale]="csLocale"
+                                                    [yearNavigator]="true"
+                                                    [yearRange]="'1950:2010'"
+                                                    [dateFormat]="csLocale.dateFormat"
+                                        ></p-calendar>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-result-type">{{'Pohlaví' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-4 ui-md-8">
+                                        <p-dropdown id="activity-result-type"
+                                                    [styleClass]="'w-100'"
+                                                    [placeholder]="'Vyberte pohlaví' | translate"
+                                                    [options]="sexTypes"
+                                                    formControlName="sex"
+                                                    [filter]="false"
+                                                    [showClear]="true" required>
+                                        </p-dropdown>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </p-panel>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <button pButton type="button" class="cyan-btn"
+                            [label]="!athlete?.id ? ('Vytvořit sportovce' | translate) : ('Ulož sportovce' | translate)"
+                            (click)="saveAthlete()">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -187,10 +187,16 @@ export class AppMenuComponent implements OnInit {
                         label: 'Testy', icon: 'fa fa-fw fa-sign-in', routerLink: ['/workouts']
                     },
                     {
+                        label: 'Události', icon: 'fa fa-fw fa-sign-in', routerLink: ['/events']
+                    },
+                    {
                         label: 'Kategorie aktivit', icon: 'fa fa-fw fa-sign-in', routerLink: ['/activity-categories']
                     },
                     {
                         label: 'Jednotky', icon: 'fa fa-fw fa-sign-in', routerLink: ['/units']
+                    },
+                    {
+                        label: 'Sportovci', icon: 'fa fa-fw fa-sign-in', routerLink: ['/athletes']
                     }
                 ]
             },
