@@ -4,6 +4,8 @@ import cz.sportiq.domain.AthleteEvent;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 /**
  * Spring Data  repository for the AthleteEvent entity.
@@ -12,4 +14,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AthleteEventRepository extends JpaRepository<AthleteEvent, Long> {
 
+    Optional<AthleteEvent> findByEventIdAndAthleteId(Long eventId, Long athleteId);
 }

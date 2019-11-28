@@ -38,6 +38,14 @@ public interface AthleteEventService {
     Optional<AthleteEventDTO> findOne(Long id);
 
     /**
+     * Get the "id" athleteEvent.
+     *
+     * @param id the id of the entity
+     * @return the entity
+     */
+    Optional<AthleteEventDTO> findByEventIdAndAthleteId(Long eventId, Long athleteId);
+
+    /**
      * Delete the "id" athleteEvent.
      *
      * @param id the id of the entity
@@ -48,7 +56,7 @@ public interface AthleteEventService {
      * Search for the athleteEvent corresponding to the query.
      *
      * @param query the query of the search
-     * 
+     *
      * @param pageable the pagination information
      * @return the list of entities
      */

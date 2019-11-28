@@ -2,13 +2,19 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import { RxjsUtils } from '../../../modules/core/utils/rxjs.utils';
 import { EventService } from '../../../services/rest/event.service';
 import { Event, IEvent } from '../../../entities/model/event.model';
 import { CalendarUtils } from '../../../modules/core/utils/calendar-utils';
 import { WorkoutService } from '../../../services/rest/workout.service';
 import { AthleteService } from '../../../services/rest/athlete.service';
+import {IWorkout} from '../../../entities/model/workout.model';
+import {IActivity} from '../../../entities/model/activity.model';
+import {MenuItem, TreeNode} from 'primeng/api';
+import {IAthlete} from '../../../entities/model/athlete.model';
+import {AthleteEvent, IAthleteEvent} from '../../../entities/model/athlete-event.model';
+import {AthleteEventService} from '../../../services/rest/athlete-event.service';
 
 @Component({
     selector: 'app-activity-categories-edit',
@@ -19,6 +25,7 @@ import { AthleteService } from '../../../services/rest/athlete.service';
 export class EventsResultsComponent implements OnInit {
 
     constructor(private eventService: EventService,
+                private athleteEventService: AthleteEventService,
                 private workoutService: WorkoutService,
                 private athleteService: AthleteService,
                 private activatedRoute: ActivatedRoute) {
@@ -27,8 +34,19 @@ export class EventsResultsComponent implements OnInit {
     eventId: number;
     event: IEvent;
 
+    selectedWorkout: IWorkout;
+    selectedActivity: IActivity;
+    selectedAthlete: IAthlete;
+    selectedAthleteEvent: IAthleteEvent;
+
     csLocale = CalendarUtils.calendarLocale.cs;
     enLocale: any;
+
+    menuItems: Array<MenuItem> = new Array<MenuItem>();
+    workoutTreeNodes: Array<TreeNode> = new Array<TreeNode>();
+    athletesTreeNodes: Array<TreeNode> = new Array<TreeNode>();
+    selectedWorkoutNode: TreeNode;
+    selectedAthleteNode: TreeNode;
 
     ngOnInit() {
 
@@ -40,7 +58,6 @@ export class EventsResultsComponent implements OnInit {
             getEvent$.subscribe((event: IEvent) => {
                 this.event = event;
             });
-
         });
     }
 
@@ -57,4 +74,45 @@ export class EventsResultsComponent implements OnInit {
         }
     }
 
+    getAthleteEvent(eventId: number, athleteId: number): Observable<IAthleteEvent> {
+        if (eventId && athleteId) {
+            return this.athleteEventService
+                .getAthleteEventByEventIdAndAthleteId(eventId, athleteId)
+                .pipe(map((eventResponse: HttpResponse<IAthleteEvent>) => {
+                    return eventResponse.body;
+                }), catchError((err, caught) => {
+                    return RxjsUtils.create(new AthleteEvent());
+                }));
+
+        } else {
+            return RxjsUtils.create(new AthleteEvent());
+        }
+    }
+
+    selectAthlete(athlete: IAthlete) {
+        if (this.selectedAthlete === athlete) {
+            this.selectedAthlete = null;
+        } else {
+            this.selectedAthlete = athlete;
+            this.getAthleteEvent(this.eventId, athlete.id).subscribe((athleteEvent: IAthleteEvent) => {
+                this.selectedAthleteEvent = athleteEvent;
+            });
+        }
+    }
+
+    selectWorkout(workout: IWorkout) {
+        if (this.selectedWorkout === workout) {
+            this.selectedWorkout = null;
+        } else {
+            this.selectedWorkout = workout;
+        }
+    }
+
+    selectActivity(activity: IActivity) {
+        if (this.selectedActivity === activity) {
+            this.selectedActivity = null;
+        } else {
+            this.selectedActivity = activity;
+        }
+    }
 }

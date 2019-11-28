@@ -19,6 +19,11 @@
                         "polyfills": "src/polyfills.ts",
                         "tsConfig": "tsconfig.app.json",
                         "aot": false,
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "src/assets/sass"
+                            ]
+                        },
                         "assets": [
                             "src/assets",
                             "src/upload.php",

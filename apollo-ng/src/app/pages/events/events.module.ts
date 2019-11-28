@@ -14,6 +14,7 @@ import {WorkoutService} from '../../services/rest/workout.service';
 import {Athlete} from '../../entities/model/athlete.model';
 import {AthleteService} from '../../services/rest/athlete.service';
 import { EventsResultsComponent } from './results/events-results.component';
+import {AthleteEventService} from '../../services/rest/athlete-event.service';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { EventsResultsComponent } from './results/events-results.component';
         EventService,
         WorkoutService,
         AthleteService,
+        AthleteEventService,
         MessageService
     ],
     exports: [

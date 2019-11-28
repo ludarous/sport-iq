@@ -84,6 +84,13 @@ public class AthleteEventServiceImpl implements AthleteEventService {
             .map(athleteEventMapper::toDto);
     }
 
+    @Override
+    public Optional<AthleteEventDTO> findByEventIdAndAthleteId(Long eventId, Long athleteId) {
+        log.debug("Request to get AthleteEvent : {}", eventId, athleteId);
+        return athleteEventRepository.findByEventIdAndAthleteId(eventId, athleteId)
+            .map(athleteEventMapper::toDto);
+    }
+
     /**
      * Delete the athleteEvent by id.
      *

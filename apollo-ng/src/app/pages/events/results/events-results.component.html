@@ -4,16 +4,68 @@
             <h1 *ngIf="event">{{event.name}}</h1>
             <h1 *ngIf="!event">{{'Nová událost' | translate}}</h1>
             <div class="ui-g">
-                <div class="ui-g-12 ui-md-2">
-                    <div class="ui-g-12 list">
-                        <p-panel [header]="'Testy' | translate">
-                            <ul>
-                                <li *ngFor="let test of event.tests" class="clearfix">
-                                    {{test.name}}
-                                </li>
-                            </ul>
-                        </p-panel>
-                    </div>
+                <div class="ui-g-12 ui-md-2 list">
+                    <p-panel [header]="'Sportovec' | translate">
+                        <ul>
+                            <li *ngFor="let athlete of event.athletes" (click)="selectAthlete(athlete)" [ngClass]="{'selected' : selectedAthlete === athlete}">
+                                {{athlete.firstName + ' ' + athlete.lastName}}
+                            </li>
+                        </ul>
+                    </p-panel>
+                </div>
+                <div *ngIf="selectedAthlete" class="ui-g-12 ui-md-2 list">
+                    <p-panel [header]="'Test' | translate">
+                        <ul>
+                            <li (click)="selectWorkout(null)" [ngClass]="{'selected' : selectedWorkout === null}">{{'Obecné údaje události'}}</li>
+                            <li *ngFor="let workout of event.tests" (click)="selectWorkout(workout)" [ngClass]="{'selected' : selectedWorkout === workout}">
+                                {{workout.name}}
+                            </li>
+                        </ul>
+                    </p-panel>
+                </div>
+                <div *ngIf="selectedAthlete && !selectedWorkout" class="ui-g-12 ui-md-8">
+                    <p-panel [header]="'Obecné údaje události' | translate">
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <form class="form-group" *ngIf="eventForm" [formGroup]="eventForm"
+                                      (submit)="saveEvent()">
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="event-name">{{'Název' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="event-name" class="w-100" type="text" pInputText
+                                               formControlName="name"
+                                               required/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="event-date">{{'Datum konání' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <p-calendar id="event-date"
+                                                    [(ngModel)]="date"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    [locale]="csLocale"
+                                                    [yearNavigator]="true"
+                                                    [yearRange]="'2019:2050'"
+                                                    [dateFormat]="csLocale.dateFormat"
+                                        ></p-calendar>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </p-panel>
+                </div>
+                <div *ngIf="selectedAthlete && selectedWorkout" class="ui-g-12 ui-md-2 list">
+                    <p-panel [header]="'Aktivita' | translate">
+                        <ul>
+                            <li (click)="selectWorkout(null)" [ngClass]="{'selected' : selectedActivity === null}">{{'Obecné údaje testu'}}</li>
+                            <li *ngFor="let activity of selectedWorkout.activities" (click)="selectActivity(activity)" [ngClass]="{'selected' : selectedActivity === activity}">
+                                {{activity.name}}
+                            </li>
+                        </ul>
+                    </p-panel>
                 </div>
             </div>
         </div>

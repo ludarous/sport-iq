@@ -1,8 +1,10 @@
+@import "variables";
+@import "overrides/layout_variables";
+
 .list {
     overflow: hidden;
 }
 .list .ui-panel .ui-panel-content {
-    min-height: 366px;
     padding: 0px !important;
 }
 .list ul {
@@ -11,7 +13,7 @@
     margin: 0;
 }
 .list ul li {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid black;
     padding: 10px 15px;
     width: 100%;
     box-sizing: border-box;
@@ -25,6 +27,17 @@
     -o-transition: background-color 0.2s;
     -webkit-transition: background-color 0.2s;
     transition: background-color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $cyan;
+        color: black;
+    }
+
+    &.selected {
+        background-color: $cyan-light;
+        color: black;
+    }
 }
 .list ul li img {
     float: left;
