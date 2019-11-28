@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,14 +18,15 @@ import {IWorkout} from '../../../entities/model/workout.model';
 import {WorkoutService} from '../../../services/rest/workout.service';
 import {AthleteService} from '../../../services/rest/athlete.service';
 import {IAthlete} from '../../../entities/model/athlete.model';
+import { IAthleteEvent } from '../../../../entities/model/athlete-event.model';
 
 @Component({
-    selector: 'app-events-edit',
-    templateUrl: './events-edit.component.html',
-    styleUrls: ['./events-edit.component.scss'],
+    selector: 'app-event-general-result',
+    templateUrl: './athlete-event.component.html',
+    styleUrls: ['./athlete-event.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class EventsEditComponent implements OnInit {
+export class AthleteEventComponent implements OnInit {
 
     constructor(private eventService: EventService,
                 private workoutService: WorkoutService,
@@ -38,20 +39,12 @@ export class EventsEditComponent implements OnInit {
                 private location: Location) {
     }
 
-    eventId: number;
+    @Input()
     event: IEvent;
-    eventForm: FormGroup;
 
-    csLocale = CalendarUtils.calendarLocale.cs;
-    enLocale: any;
+    athleteEvent: IAthleteEvent;
+    athleteEventForm: FormGroup;
 
-    date: Date;
-
-    allWorkouts: Array<IWorkout>;
-    suggestedWorkouts: Array<IWorkout>;
-
-    allAthletes: Array<IAthlete>;
-    suggestedAthletes: Array<IAthlete>;
 
     ngOnInit() {
 

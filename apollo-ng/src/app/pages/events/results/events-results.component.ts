@@ -17,7 +17,7 @@ import {AthleteEvent, IAthleteEvent} from '../../../entities/model/athlete-event
 import {AthleteEventService} from '../../../services/rest/athlete-event.service';
 
 @Component({
-    selector: 'app-activity-categories-edit',
+    selector: 'app-events-results',
     templateUrl: './events-results.component.html',
     styleUrls: ['./events-results.component.scss'],
     encapsulation: ViewEncapsulation.None

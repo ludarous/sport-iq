@@ -1,8 +1,17 @@
 @import "variables";
 @import "overrides/layout_variables";
 
+:host {
+    flex: 1;
+    display: flex;
+    background-color: red;
+}
+
 .list {
     overflow: hidden;
+}
+.list .ui-panel {
+    margin-bottom: 15px;
 }
 .list .ui-panel .ui-panel-content {
     padding: 0px !important;
