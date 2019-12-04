@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {AthleteService} from '../../../services/rest/athlete.service';
 import {IAthlete, Athlete, Sex} from '../../../entities/model/athlete.model';
 import {IActivity} from '../../../entities/model/activity.model';
@@ -26,7 +26,7 @@ export class AthletesEditComponent implements OnInit {
 
     constructor(private athleteService: AthleteService,
                 private activatedRoute: ActivatedRoute,
-                private messageService: MessageService,
+                private ToastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
                 private formBuilder: FormBuilder,
                 private router: Router) {
@@ -85,11 +85,11 @@ export class AthletesEditComponent implements OnInit {
                 (athleteResponse: HttpResponse<IAthlete>) => {
                     this.athlete = athleteResponse.body;
                     this.setAthleteForm(this.athlete);
-                    this.messageService.showSuccess('Sportovec uložen');
+                    this.ToastService.showSuccess('Sportovec uložen');
                     this.router.navigate(['/athletes/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.messageService.showError('Sportovec nebyl uložen', errorResponse.error.detail);
+                    this.ToastService.showError('Sportovec nebyl uložen', errorResponse.error.detail);
                 });
         }
     }

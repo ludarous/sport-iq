@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TreeNode} from 'primeng/api';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {UnitService} from '../../../services/rest/unit.service';
 import {IUnit} from '../../../entities/model/unit.model';
 import {Router} from '@angular/router';
@@ -17,7 +17,7 @@ export class UnitsListComponent implements OnInit {
     units: Array<IUnit>;
 
     constructor(private unitsService: UnitService,
-                private messageService: MessageService) {
+                private ToastService: ToastService) {
     }
 
     ngOnInit() {
@@ -49,7 +49,7 @@ export class UnitsListComponent implements OnInit {
             this.unitsService.remove(unit.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.messageService.showError('Kategorii se nepodařilo smazat', errorResponse.message);
+                this.ToastService.showError('Kategorii se nepodařilo smazat', errorResponse.message);
             });
         }
 

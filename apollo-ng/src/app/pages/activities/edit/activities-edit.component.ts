@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RxjsUtils } from '../../../modules/core/utils/rxjs.utils';
-import { MessageService } from '../../../modules/core/services/message.service';
+import { ToastService } from '../../../modules/core/services/message.service';
 import { ActivityService } from '../../../services/rest/activity.service';
 import { Activity, IActivity } from '../../../entities/model/activity.model';
 import { ActivityCategoryService } from '../../../services/rest/activity-category.service';
@@ -35,7 +35,7 @@ export class ActivitiesEditComponent implements OnInit {
                 private activitiesPagesService: ActivitiesPagesService,
                 private unitService: UnitService,
                 private activatedRoute: ActivatedRoute,
-                private messageService: MessageService,
+                private ToastService: ToastService,
                 private formBuilder: FormBuilder,
                 private rxFormBuilder: RxFormBuilder,
                 private router: Router,
@@ -114,7 +114,7 @@ export class ActivitiesEditComponent implements OnInit {
                 this.activity = activityResponse.body;
                 this.activityId = this.activity.id;
                 this.setActivityForm(this.activity);
-                this.messageService.showSuccess('Aktivita uložena');
+                this.ToastService.showSuccess('Aktivita uložena');
                 if (goBack) {
                     this.router.navigate(['/activities/list']);
                 } else {
@@ -122,7 +122,7 @@ export class ActivitiesEditComponent implements OnInit {
                 }
             },
             (errorResponse: HttpErrorResponse) => {
-                this.messageService.showError('Aktivita nebyla uložena', errorResponse.error.detail);
+                this.ToastService.showError('Aktivita nebyla uložena', errorResponse.error.detail);
             });
     }
 

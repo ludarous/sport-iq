@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {IAthlete} from '../../../entities/model/athlete.model';
 import {AthleteService} from '../../../services/rest/athlete.service';
 
@@ -16,7 +16,7 @@ export class AthletesListComponent implements OnInit {
     athletes: Array<IAthlete>;
 
     constructor(private athletesService: AthleteService,
-                private messageService: MessageService) {
+                private ToastService: ToastService) {
     }
 
     ngOnInit() {
@@ -48,7 +48,7 @@ export class AthletesListComponent implements OnInit {
             this.athletesService.remove(athlete.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.messageService.showError('Sportovce se nepodařilo smazat', errorResponse.message);
+                this.ToastService.showError('Sportovce se nepodařilo smazat', errorResponse.message);
             });
         }
 

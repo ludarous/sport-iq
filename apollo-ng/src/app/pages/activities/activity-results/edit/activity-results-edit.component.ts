@@ -5,7 +5,7 @@ import {IUnit, Unit} from '../../../../entities/model/unit.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityResultService} from '../../../../services/rest/activity-result.service';
-import {MessageService} from '../../../../modules/core/services/message.service';
+import {ToastService} from '../../../../modules/core/services/message.service';
 import {DynamicDialogConfig, DynamicDialogRef, SelectItem} from 'primeng/api';
 import {PrimengUtils} from '../../../../modules/core/utils/primeng.utils';
 import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
@@ -23,7 +23,7 @@ export class ActivityResultsEditComponent implements OnInit {
 
     constructor(private activityResultService: ActivityResultService,
                 private activityResultSplitService: ActivityResultSplitService,
-                private messageService: MessageService,
+                private ToastService: ToastService,
                 private formBuilder: FormBuilder,
                 private enumTranslateService: EnumTranslatorService,
                 public ref: DynamicDialogRef,
@@ -80,13 +80,13 @@ export class ActivityResultsEditComponent implements OnInit {
             saveActivityResult$.subscribe(
                 (activityResultResponse: HttpResponse<IActivityResult>) => {
                     this.activityResult = activityResultResponse.body;
-                    this.messageService.showSuccess('Jednotka uložena');
+                    this.ToastService.showSuccess('Jednotka uložena');
                     if (close) {
                         this.ref.close(activityResultResponse.body);
                     }
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.messageService.showError('Jednota nebyla uložena', errorResponse.error.detail);
+                    this.ToastService.showError('Jednota nebyla uložena', errorResponse.error.detail);
                 });
         }
     }

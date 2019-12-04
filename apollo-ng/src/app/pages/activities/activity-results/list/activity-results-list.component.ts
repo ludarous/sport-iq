@@ -3,7 +3,7 @@ import {IActivity} from '../../../../entities/model/activity.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivityResultService} from '../../../../services/rest/activity-result.service';
 import {ActivityResult, IActivityResult} from '../../../../entities/model/activity-result.model';
-import {MessageService} from '../../../../modules/core/services/message.service';
+import {ToastService} from '../../../../modules/core/services/message.service';
 import {DialogService, SelectItem} from 'primeng/api';
 import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
 import {IUnit} from '../../../../entities/model/unit.model';
@@ -19,7 +19,7 @@ import { ActivitiesPagesService } from '../../activities-pages.service';
 export class ActivityResultsListComponent implements OnInit {
 
     constructor(private activityResultService: ActivityResultService,
-                private messageService: MessageService,
+                private ToastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
                 private activitiesPagesService: ActivitiesPagesService,
                 public dialogService: DialogService) {
@@ -58,7 +58,7 @@ export class ActivityResultsListComponent implements OnInit {
             this.activityResultService.remove(activityResult.id).subscribe(() => {
                 this.resultDelete.emit(activityResult);
             }, (errorResponse: HttpErrorResponse) => {
-                this.messageService.showError('Aktivitu se nepodařilo smazat', errorResponse.message);
+                this.ToastService.showError('Aktivitu se nepodařilo smazat', errorResponse.message);
             });
         }
 

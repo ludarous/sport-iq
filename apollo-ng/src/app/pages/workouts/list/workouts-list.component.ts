@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {IWorkout} from '../../../entities/model/workout.model';
 import {WorkoutService} from '../../../services/rest/workout.service';
 
@@ -16,7 +16,7 @@ export class WorkoutsListComponent implements OnInit {
     workouts: Array<IWorkout>;
 
     constructor(private workoutsService: WorkoutService,
-                private messageService: MessageService) {
+                private ToastService: ToastService) {
     }
 
     ngOnInit() {
@@ -48,7 +48,7 @@ export class WorkoutsListComponent implements OnInit {
             this.workoutsService.remove(workout.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.messageService.showError('Test se nepodařilo smazat', errorResponse.message);
+                this.ToastService.showError('Test se nepodařilo smazat', errorResponse.message);
             });
         }
 

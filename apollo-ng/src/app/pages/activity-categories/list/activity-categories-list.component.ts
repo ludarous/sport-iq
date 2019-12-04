@@ -3,7 +3,7 @@ import {TreeNode} from 'primeng/api';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {IActivityCategory} from '../../../entities/model/activity-category.model';
 import {ActivityCategoryService} from '../../../services/rest/activity-category.service';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 
 @Component({
     selector: 'app-activity-categories-list',
@@ -19,7 +19,7 @@ export class ActivityCategoriesListComponent implements OnInit {
     categoriesNodes: Array<TreeNode>;
 
     constructor(private activityCategoryService: ActivityCategoryService,
-                private messageService: MessageService) {
+                private ToastService: ToastService) {
     }
 
     ngOnInit() {
@@ -76,7 +76,7 @@ export class ActivityCategoriesListComponent implements OnInit {
             this.activityCategoryService.remove(category.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.messageService.showError('Kategorii se nepodařilo smazat', errorResponse.message);
+                this.ToastService.showError('Kategorii se nepodařilo smazat', errorResponse.message);
             });
         }
 

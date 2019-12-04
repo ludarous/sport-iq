@@ -8,7 +8,7 @@ import {UnitsListComponent} from './list/units-list.component';
 import {UnitsEditComponent} from './edit/units-edit.component';
 import {UnitsComponent} from './units.component';
 import {PrimeNgComponentsModule} from '../../shared/prime-ng-components.module';
-import {MessageService} from '../../modules/core/services/message.service';
+import {ToastService} from '../../modules/core/services/message.service';
 import {UnitService} from '../../services/rest/unit.service';
 
 @NgModule({
@@ -27,7 +27,6 @@ import {UnitService} from '../../services/rest/unit.service';
     ],
     providers: [
         UnitService,
-        MessageService
     ],
     exports: [
         UnitsComponent,

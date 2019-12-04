@@ -113,7 +113,7 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
 
     @Override
     public Optional<AthleteWorkoutDTO> findByWorkoutIdAndAthleteEventId(Long workoutId, Long athleteEventId) {
-        return athleteWorkoutRepository.findByEventIdAndAthleteEventId(workoutId, athleteEventId)
+        return athleteWorkoutRepository.findByWorkoutIdAndAthleteEventId(workoutId, athleteEventId)
             .map(athleteWorkoutMapper::toDto);
     }
 }

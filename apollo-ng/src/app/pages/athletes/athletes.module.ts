@@ -8,7 +8,7 @@ import {AthletesListComponent} from './list/athletes-list.component';
 import {AthletesEditComponent} from './edit/athletes-edit.component';
 import {AthletesComponent} from './athletes.component';
 import {PrimeNgComponentsModule} from '../../shared/prime-ng-components.module';
-import {MessageService} from '../../modules/core/services/message.service';
+import {ToastService} from '../../modules/core/services/message.service';
 import {WorkoutService} from '../../services/rest/workout.service';
 import {ActivityService} from '../../services/rest/activity.service';
 import {AthleteService} from '../../services/rest/athlete.service';
@@ -29,7 +29,6 @@ import {AthleteService} from '../../services/rest/athlete.service';
     ],
     providers: [
         AthleteService,
-        MessageService
     ],
     exports: [
         AthletesComponent,

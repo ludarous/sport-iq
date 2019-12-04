@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {zip} from 'rxjs';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {EventService} from '../../../services/rest/event.service';
 import {IEvent} from '../../../entities/model/event.model';
 import {CalendarUtils} from '../../../modules/core/utils/calendar-utils';
@@ -27,7 +27,7 @@ export class EventsEditComponent implements OnInit {
                 private workoutService: WorkoutService,
                 private athleteService: AthleteService,
                 private activatedRoute: ActivatedRoute,
-                private messageService: MessageService,
+                private ToastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
                 private formBuilder: FormBuilder,
                 private router: Router,
@@ -108,7 +108,7 @@ export class EventsEditComponent implements OnInit {
                 (eventResponse: HttpResponse<IEvent>) => {
                     this.event = eventResponse.body;
                     this.setEventForm(this.event);
-                    this.messageService.showSuccess('Událost uložena');
+                    this.ToastService.showSuccess('Událost uložena');
 
                     if (goBack) {
                         this.router.navigate(['/events/list']);
@@ -117,7 +117,7 @@ export class EventsEditComponent implements OnInit {
                     }
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.messageService.showError('Událost nebyla uložena', errorResponse.error.detail);
+                    this.ToastService.showError('Událost nebyla uložena', errorResponse.error.detail);
                 });
         }
     }

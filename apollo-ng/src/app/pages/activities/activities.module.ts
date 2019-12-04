@@ -8,7 +8,7 @@ import {ActivitiesListComponent} from './list/activities-list.component';
 import {ActivitiesEditComponent} from './edit/activities-edit.component';
 import {ActivitiesComponent} from './activities.component';
 import {PrimeNgComponentsModule} from '../../shared/prime-ng-components.module';
-import {MessageService} from '../../modules/core/services/message.service';
+import {ToastService} from '../../modules/core/services/message.service';
 import {ActivityService} from '../../services/rest/activity.service';
 import {RxReactiveFormsModule} from '@rxweb/reactive-form-validators';
 import {ActivityCategoryService} from '../../services/rest/activity-category.service';
@@ -45,7 +45,6 @@ import { ActivitiesPagesService } from './activities-pages.service';
         UnitService,
         ActivityResultService,
         ActivityResultSplitService,
-        MessageService,
         DialogService
     ],
     exports: [

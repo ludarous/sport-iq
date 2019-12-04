@@ -6,7 +6,7 @@
                  'layout-static-inactive': staticMenuDesktopInactive,
                  'layout-mobile-active': staticMenuMobileActive,
                  'layout-overlay-active':overlayMenuActive}">
-
+    <p-toast key="global" [style]="{marginTop: '70px'}"></p-toast>
     <app-topbar></app-topbar>
     <div class="layout-menu-container" (click)="onMenuClick($event)">
         <p-scrollPanel #layoutMenuScroller [style]="{height: '100%'}">

@@ -4,7 +4,7 @@ import { IUser } from '../../../entities/user';
 import { environment } from '../../../../../environments/environment';
 import { Injectable, Injector } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { MessageService } from '../../../core/services/message.service';
+import { ToastService } from '../../../core/services/message.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { catchError, map } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class CrudBaseService<T> {
         this.mappers = mappers;
         this.http = injector.get(HttpClient);
         this.translateService = injector.get(TranslateService);
-        this.messageService = injector.get(MessageService);
+        this.ToastService = injector.get(ToastService);
         this.authService = injector.get(AuthService);
         this.router = injector.get(Router);
     }
@@ -29,7 +29,7 @@ export class CrudBaseService<T> {
 
     protected http: HttpClient;
     protected translateService: TranslateService;
-    protected messageService: MessageService;
+    protected ToastService: ToastService;
     protected authService: AuthService;
     protected router: Router;
 
@@ -144,14 +144,14 @@ export class CrudBaseService<T> {
         if (error.status === 401) {
             this.authService.updateUser().subscribe(
                 (user: IUser) => {
-                    this.messageService.showError(
+                    this.ToastService.showError(
                         this.translateService.instant('Přístup zamítnut.'),
                         this.translateService.instant('Je nám líto, ale na tuto stránku nemáte oprávněný přístup.')
                     );
                 },
                 (accountError: HttpErrorResponse) => {
                     if (accountError.status === 401) {
-                        this.messageService.showWarn(
+                        this.ToastService.showWarn(
                             this.translateService.instant('Přihlášení vypršelo'),
                             this.translateService.instant('Je nám líto, ale přihlášení k aplikaci vypršelo. Prosím, přihlaste se znovu.')
                         );
@@ -160,7 +160,7 @@ export class CrudBaseService<T> {
                 }
             );
         } else if (error.status === 500) {
-            this.messageService.showError(
+            this.ToastService.showError(
                 this.translateService.instant('Chyba'),
                 this.translateService.instant('Nastala chyba na serveru')
             );

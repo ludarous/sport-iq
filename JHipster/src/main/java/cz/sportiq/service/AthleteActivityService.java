@@ -48,9 +48,11 @@ public interface AthleteActivityService {
      * Search for the athleteActivity corresponding to the query.
      *
      * @param query the query of the search
-     * 
+     *
      * @param pageable the pagination information
      * @return the list of entities
      */
     Page<AthleteActivityDTO> search(String query, Pageable pageable);
+
+    Optional<AthleteActivityDTO> findByActivityIdAndAthleteWorkoutId(Long activityId, Long athleteWorkoutId);
 }

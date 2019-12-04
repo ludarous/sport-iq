@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {IEvent} from '../../../entities/model/event.model';
 import {EventService} from '../../../services/rest/event.service';
 
@@ -15,7 +15,7 @@ export class EventsListComponent implements OnInit {
     events: Array<IEvent>;
 
     constructor(private eventsService: EventService,
-                private messageService: MessageService) {
+                private ToastService: ToastService) {
     }
 
     ngOnInit() {
@@ -47,7 +47,7 @@ export class EventsListComponent implements OnInit {
             this.eventsService.remove(event.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.messageService.showError('Událost se nepodařilo smazat', errorResponse.message);
+                this.ToastService.showError('Událost se nepodařilo smazat', errorResponse.message);
             });
         }
 

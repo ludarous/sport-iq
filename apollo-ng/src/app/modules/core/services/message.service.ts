@@ -1,53 +1,45 @@
 import {Injectable} from '@angular/core';
-import {Message} from 'primeng/primeng';
+import { Message, MessageService } from 'primeng/primeng';
 import {TranslateService} from '@ngx-translate/core';
 
 
 /**
- * MessageService for the global Growl messages.
+ * ToastService for the global Growl messages.
  */
 @Injectable()
-export class MessageService {
-
-  public messages: Message[] = [];
-  public criticalMessages: Message[] = [];
+export class ToastService {
 
   private serverErrorMessageBeginValue = 'Je nám líto, ale nastala chyba na serveru. Kontaktujte, prosím, technickou podporu na';
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              private messageService: MessageService) {
 
   }
 
 
-  public showMessage(summary: string, detail: string, severity: string, critical: boolean = false): void {
-    const msg: Message = {summary: summary, detail: detail, severity: severity};
-    if (critical) this.criticalMessages = [...this.criticalMessages, msg];
-    else this.messages = [...this.messages, msg];
-  }
-
-  public cleanMessages(): void {
-    this.messages = [];
-    this.criticalMessages = [];
+  public showToast(summary: string, detail: string, severity: string): void {
+    const msg: Message = {key: 'global', summary, detail, severity};
+    this.messageService.add(msg);
   }
 
   public showLoadError(error: any): void {
     this.showError('Problém s načtením dat', 'Načtení dat se nezdařilo, detaily: ' + error);
   }
 
-  public showError(summary: string, detail?: string, critical: boolean = true): void {
-    this.showMessage(summary, detail, 'error', critical);
+  public showError(summary: string, detail?: string): void {
+    this.showToast(summary, detail, 'error');
   }
 
-  public showWarn(summary: string, detail?: string, critical: boolean = false): void {
-    this.showMessage(summary, detail, 'warn', critical);
+  public showWarn(summary: string, detail?: string): void {
+    this.showToast(summary, detail, 'warn');
   }
 
-  public showInfo(summary: string, detail?: string, critical: boolean = false): void {
-    this.showMessage(summary, detail, 'info', critical);
+  public showInfo(summary: string, detail?: string): void {
+    this.showToast(summary, detail, 'info');
   }
 
-  public showSuccess(summary: string, detail?: string, critical: boolean = false): void {
-    this.showMessage(summary, detail, 'success', critical);
+  public showSuccess(summary: string, detail?: string): void {
+    this.showToast(summary, detail, 'success');
   }
 
 }

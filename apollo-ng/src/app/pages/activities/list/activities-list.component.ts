@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {ActivityService} from '../../../services/rest/activity.service';
 import {IActivity} from '../../../entities/model/activity.model';
 
@@ -15,7 +15,7 @@ export class ActivitiesListComponent implements OnInit {
     activities: Array<IActivity>;
 
     constructor(private activityService: ActivityService,
-                private messageService: MessageService) {
+                private ToastService: ToastService) {
     }
 
     ngOnInit() {
@@ -47,7 +47,7 @@ export class ActivitiesListComponent implements OnInit {
             this.activityService.remove(activity.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.messageService.showError('Aktivitu se nepodařilo smazat', errorResponse.message);
+                this.ToastService.showError('Aktivitu se nepodařilo smazat', errorResponse.message);
             });
         }
 

@@ -6,7 +6,7 @@ import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {TreeNode} from 'primeng/api';
 import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {UnitService} from '../../../services/rest/unit.service';
 import {IUnit, Unit} from '../../../entities/model/unit.model';
 
@@ -20,7 +20,7 @@ export class UnitsEditComponent implements OnInit {
 
     constructor(private unitService: UnitService,
                 private activatedRoute: ActivatedRoute,
-                private messageService: MessageService,
+                private ToastService: ToastService,
                 private router: Router) {
     }
 
@@ -72,11 +72,11 @@ export class UnitsEditComponent implements OnInit {
                 (unitResponse: HttpResponse<IUnit>) => {
                     this.unit = unitResponse.body;
                     this.setUnitForm(this.unit);
-                    this.messageService.showSuccess('Jednotka uložena');
+                    this.ToastService.showSuccess('Jednotka uložena');
                     this.router.navigate(['/units/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.messageService.showError('Jednota nebyla uložena', errorResponse.error.detail);
+                    this.ToastService.showError('Jednota nebyla uložena', errorResponse.error.detail);
                 });
         }
     }

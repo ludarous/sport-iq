@@ -14,5 +14,5 @@ import java.util.Optional;
 @Repository
 public interface AthleteWorkoutRepository extends JpaRepository<AthleteWorkout, Long> {
 
-    Optional<AthleteWorkout> findByEventIdAndAthleteEventId(Long workoutId, Long athleteEventId);
+    Optional<AthleteWorkout> findByWorkoutIdAndAthleteEventId(Long workoutId, Long athleteEventId);
 }

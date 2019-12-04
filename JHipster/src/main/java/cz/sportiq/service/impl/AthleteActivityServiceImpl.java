@@ -5,6 +5,7 @@ import cz.sportiq.domain.AthleteActivity;
 import cz.sportiq.repository.AthleteActivityRepository;
 import cz.sportiq.repository.search.AthleteActivitySearchRepository;
 import cz.sportiq.service.dto.AthleteActivityDTO;
+import cz.sportiq.service.dto.AthleteWorkoutDTO;
 import cz.sportiq.service.mapper.AthleteActivityMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,6 +109,12 @@ public class AthleteActivityServiceImpl implements AthleteActivityService {
     public Page<AthleteActivityDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of AthleteActivities for query {}", query);
         return athleteActivitySearchRepository.search(queryStringQuery(query), pageable)
+            .map(athleteActivityMapper::toDto);
+    }
+
+    @Override
+    public Optional<AthleteActivityDTO> findByActivityIdAndAthleteWorkoutId(Long activityId, Long athleteWorkoutId) {
+        return athleteActivityRepository.findByActivityIdAndAthleteWorkoutId(activityId, athleteWorkoutId)
             .map(athleteActivityMapper::toDto);
     }
 }

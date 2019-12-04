@@ -9,7 +9,7 @@ import {ActivityCategoriesEditComponent} from './edit/activity-categories-edit.c
 import {ActivityCategoriesComponent} from './activity-categories.component';
 import {PrimeNgComponentsModule} from '../../shared/prime-ng-components.module';
 import {ActivityCategoryService} from '../../services/rest/activity-category.service';
-import {MessageService} from '../../modules/core/services/message.service';
+import {ToastService} from '../../modules/core/services/message.service';
 
 @NgModule({
     declarations: [
@@ -26,8 +26,7 @@ import {MessageService} from '../../modules/core/services/message.service';
         PrimeNgComponentsModule,
     ],
     providers: [
-        ActivityCategoryService,
-        MessageService
+        ActivityCategoryService
     ],
     exports: [
         ActivityCategoriesComponent,

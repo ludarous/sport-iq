@@ -8,7 +8,7 @@ import {TreeNode} from 'primeng/api';
 import {ActivityCategory, IActivityCategory} from '../../../entities/model/activity-category.model';
 import {ActivityCategoryService} from '../../../services/rest/activity-category.service';
 import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {MessageService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 
 @Component({
     selector: 'app-activity-categories-edit',
@@ -20,7 +20,7 @@ export class ActivityCategoriesEditComponent implements OnInit {
 
     constructor(private activityCategoryService: ActivityCategoryService,
                 private activatedRoute: ActivatedRoute,
-                private messageService: MessageService,
+                private ToastService: ToastService,
                 private router: Router) {
     }
 
@@ -98,11 +98,11 @@ export class ActivityCategoriesEditComponent implements OnInit {
                 (categoryResponse: HttpResponse<IActivityCategory>) => {
                     this.category = categoryResponse.body;
                     this.setCategoryForm(this.category);
-                    this.messageService.showSuccess('Kategorie uložena');
+                    this.ToastService.showSuccess('Kategorie uložena');
                     this.router.navigate(['/activity-categories/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.messageService.showError('Kategorie nebyla uložena', errorResponse.error.detail);
+                    this.ToastService.showError('Kategorie nebyla uložena', errorResponse.error.detail);
                 });
         }
     }

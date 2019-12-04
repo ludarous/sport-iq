@@ -114,11 +114,11 @@ export class EventsResultsComponent implements OnInit {
     selectWorkout(workout: IWorkout) {
         if (workout === null) {
             this.selectedWorkout = null;
-            this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}`);
+            this.selectAthlete(this.selectedAthlete);
         } else {
             this.selectedWorkout = workout;
             this.athleteWorkoutService
-                .getAthleteWorkout(this.event.id, this.selectedAthlete.id)
+                .getAthleteWorkout(this.selectedWorkout.id, this.selectedAthleteEvent.id)
                 .subscribe((athleteWorkout: IAthleteWorkout) => {
                     this.selectedAthleteWorkout = athleteWorkout;
                     this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}`);
@@ -129,7 +129,7 @@ export class EventsResultsComponent implements OnInit {
     selectActivity(activity: IActivity) {
         if (activity === null) {
             this.selectedActivity = null;
-            this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}`);
+            this.selectWorkout(this.selectedWorkout);
         } else {
             this.selectedActivity = activity;
             this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}/activity/${this.selectedActivity.id}`);

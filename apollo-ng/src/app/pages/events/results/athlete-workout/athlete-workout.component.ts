@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -6,7 +6,7 @@ import {Location} from '@angular/common';
 import {IAthleteWorkout} from '../../../../entities/model/athlete-workout.model';
 import {IWorkout} from '../../../../entities/model/workout.model';
 import {AthleteService} from '../../../../services/rest/athlete.service';
-import {MessageService} from '../../../../modules/core/services/message.service';
+import {ToastService} from '../../../../modules/core/services/message.service';
 import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
 import {AthleteWorkoutService} from '../../../../services/rest/athlete-workout.service';
 import {IAthleteEvent} from '../../../../entities/model/athlete-event.model';
@@ -17,12 +17,12 @@ import {IAthleteEvent} from '../../../../entities/model/athlete-event.model';
     styleUrls: ['./athlete-workout.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AthleteWorkoutComponent implements OnInit {
+export class AthleteWorkoutComponent implements OnInit, OnDestroy {
 
     constructor(private athleteService: AthleteService,
                 private athleteWorkoutService: AthleteWorkoutService,
                 private activatedRoute: ActivatedRoute,
-                private messageService: MessageService,
+                private toastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
                 private formBuilder: FormBuilder,
                 private router: Router,
@@ -72,6 +72,10 @@ export class AthleteWorkoutComponent implements OnInit {
 
     }
 
+    ngOnDestroy(): void {
+        this.saveAthleteWorkout();
+    }
+
     setAthleteWorkoutForm(athleteWorkout: IAthleteWorkout) {
         this.athleteWorkoutForm = this.formBuilder.group(athleteWorkout);
         this.athleteWorkoutForm.get('workoutId').setValidators(Validators.required);
@@ -98,10 +102,10 @@ export class AthleteWorkoutComponent implements OnInit {
                 (athleteWorkoutResponse: HttpResponse<IAthleteWorkout>) => {
                     this._athleteWorkout = athleteWorkoutResponse.body;
                     this.setAthleteWorkoutForm(this._athleteWorkout);
-                    this.messageService.showSuccess('Událost uložena');
+                    this.toastService.showSuccess('Událost uložena');
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.messageService.showError('Událost nebyla uložena', errorResponse.error.detail);
+                    this.toastService.showError('Událost nebyla uložena', errorResponse.error.detail);
                 });
         }
     }
