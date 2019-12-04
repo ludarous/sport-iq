@@ -145,4 +145,21 @@ public class AthleteWorkoutResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /*--------------------------------- CUSTOM ENDPOINTS -----------------------------------------------*/
+
+    /**
+     * GET  /athlete-workouts/by-workout-id-and-athlete-id : get the athleteWorkout by athleteEventId and workoutId
+     *
+     * @param workoutId workout Id
+     * @param athleteEventId athlete event Id
+     * @return the ResponseEntity with status 200 (OK) and the athleteEvent in body
+     */
+    @GetMapping("/athlete-workouts/by-workout-id-and-athlete-id")
+    @Timed
+    public ResponseEntity<AthleteWorkoutDTO> getAthleteWorkoutByWorkoutIdAndAthleteEventId(@RequestParam Long workoutId, @RequestParam Long athleteEventId) {
+        log.debug("REST request to get a page of AthleteWorkouts");
+        Optional<AthleteWorkoutDTO> athleteWorkoutDTO = athleteWorkoutService.findByWorkoutIdAndAthleteEventId(workoutId, athleteEventId);
+        return ResponseUtil.wrapOrNotFound(athleteWorkoutDTO);
+    }
+
 }

@@ -110,4 +110,10 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
         return athleteWorkoutSearchRepository.search(queryStringQuery(query), pageable)
             .map(athleteWorkoutMapper::toDto);
     }
+
+    @Override
+    public Optional<AthleteWorkoutDTO> findByWorkoutIdAndAthleteEventId(Long workoutId, Long athleteEventId) {
+        return athleteWorkoutRepository.findByEventIdAndAthleteEventId(workoutId, athleteEventId)
+            .map(athleteWorkoutMapper::toDto);
+    }
 }

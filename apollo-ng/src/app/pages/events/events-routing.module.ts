@@ -29,6 +29,22 @@ const routes: Routes = [
             {
                 path: 'results/:id',
                 component: EventsResultsComponent
+            },
+            {
+                path: 'results/:id/athlete',
+                component: EventsResultsComponent
+            },
+            {
+                path: 'results/:id/athlete/:athleteId',
+                component: EventsResultsComponent
+            },
+            {
+                path: 'results/:id/athlete/:athleteId/workout/:workoutId',
+                component: EventsResultsComponent
+            },
+            {
+                path: 'results/:id/athlete/:athleteId/workout/:workoutId/activity/:activityId',
+                component: EventsResultsComponent
             }
         ]
     }

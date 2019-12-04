@@ -1,24 +1,17 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, zip} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {MessageService} from '../../../modules/core/services/message.service';
-import {EventService} from '../../../services/rest/event.service';
-import {Event, IEvent} from '../../../entities/model/event.model';
-import {CalendarUtils} from '../../../modules/core/utils/calendar-utils';
-import * as moment from 'moment';
-import {SelectItem} from 'primeng/api';
-import {EnumTranslatorService} from '../../../modules/shared-components/services/enum-translator.service';
+import {zip} from 'rxjs';
 import {Location} from '@angular/common';
-import {IActivity} from '../../../entities/model/activity.model';
-import {IWorkout} from '../../../entities/model/workout.model';
-import {WorkoutService} from '../../../services/rest/workout.service';
-import {AthleteService} from '../../../services/rest/athlete.service';
-import {IAthlete} from '../../../entities/model/athlete.model';
-import { IAthleteEvent } from '../../../../entities/model/athlete-event.model';
+import {IAthleteEvent} from '../../../../entities/model/athlete-event.model';
+import {IEvent} from '../../../../entities/model/event.model';
+import {IAthlete} from '../../../../entities/model/athlete.model';
+import {EventService} from '../../../../services/rest/event.service';
+import {AthleteService} from '../../../../services/rest/athlete.service';
+import {MessageService} from '../../../../modules/core/services/message.service';
+import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
+import {AthleteEventService} from '../../../../services/rest/athlete-event.service';
 
 @Component({
     selector: 'app-event-general-result',
@@ -28,9 +21,12 @@ import { IAthleteEvent } from '../../../../entities/model/athlete-event.model';
 })
 export class AthleteEventComponent implements OnInit {
 
+
+
+
     constructor(private eventService: EventService,
-                private workoutService: WorkoutService,
                 private athleteService: AthleteService,
+                private athleteEventService: AthleteEventService,
                 private activatedRoute: ActivatedRoute,
                 private messageService: MessageService,
                 private enumTranslateService: EnumTranslatorService,
@@ -39,97 +35,79 @@ export class AthleteEventComponent implements OnInit {
                 private location: Location) {
     }
 
+    private _event: IEvent;
     @Input()
-    event: IEvent;
+    get event(): IEvent {
+        return this._event;
+    }
 
-    athleteEvent: IAthleteEvent;
+    set event(value: IEvent) {
+        this._event = value;
+    }
+
+
+    private _athlete: IAthlete
+    @Input()
+    get athlete(): IAthlete {
+        return this._athlete;
+    }
+
+    set athlete(value: IAthlete) {
+        this._athlete = value;
+    }
+
+
+    private _athleteEvent: IAthleteEvent;
+    @Input()
+    get athleteEvent(): IAthleteEvent {
+        return this._athleteEvent;
+    }
+
+    set athleteEvent(value: IAthleteEvent) {
+        this._athleteEvent = value;
+    }
+
     athleteEventForm: FormGroup;
 
 
     ngOnInit() {
 
-        const params$ = this.activatedRoute.params;
-        params$.subscribe((params) => {
-            this.eventId = +params.id;
-            const getEvent$ = this.getEvent(this.eventId);
-
-            const getWorkouts$ = this.workoutService.query({
-                page: 0,
-                size: 1000,
-            });
-
-            const getAthletes$ = this.athleteService.query({
-                page: 0,
-                size: 1000,
-            });
-
-            zip(getEvent$, getWorkouts$, getAthletes$).subscribe(([event, workoutsResponse, athletesResponse]) => {
-                this.event = event;
-
-                this.allWorkouts = workoutsResponse.body;
-                this.event.tests = this.allWorkouts.filter(a => this.event.tests.some(wa => wa.id === a.id));
-                this.suggestedWorkouts = this.allWorkouts.filter((a) => !this.event.tests.some((sa) => sa.id === a.id));
-
-                this.allAthletes = athletesResponse.body;
-                this.event.athletes = this.allAthletes.filter(a => this.event.athletes.some(wa => wa.id === a.id));
-                this.suggestedAthletes = this.allAthletes.filter((a) => !this.event.athletes.some((sa) => sa.id === a.id));
-
-                this.date = this.event.date ? this.event.date.toDate() : null;
-                this.setEventForm(this.event);
-            });
-
-        });
+        if (this.athleteEvent) {
+            this.setAthleteEventForm(this.athleteEvent);
+        }
     }
 
-    setEventForm(event: IEvent) {
-        this.eventForm = this.formBuilder.group(event);
+    setAthleteEventForm(athleteEvent: IAthleteEvent) {
+        this.athleteEventForm = this.formBuilder.group(athleteEvent);
+        this.athleteEventForm.get('eventId').setValidators(Validators.required);
+        this.athleteEventForm.get('athleteId').setValidators(Validators.required);
     }
 
-    saveEvent(goBack: boolean = true) {
-        if (this.eventForm.valid) {
+    saveAthleteEvent() {
+        this.athleteEventForm.get('eventId').setValue(this.event.id);
+        this.athleteEventForm.get('athleteId').setValue(this.athlete.id);
 
-            const eventToSave = this.eventForm.value as IEvent;
-            eventToSave.date = moment(this.date);
-            eventToSave.athletes = this.event.athletes;
-            eventToSave.tests = this.event.tests;
+        if (this.athleteEventForm.valid) {
 
-            let saveEvent$;
-            if (eventToSave.id) {
-                saveEvent$ = this.eventService.update(eventToSave);
+            const athleteEventToSave = this.athleteEventForm.value as IAthleteEvent;
+
+            let saveAthleteEvent$;
+            if (athleteEventToSave.id) {
+                saveAthleteEvent$ = this.athleteEventService.update(athleteEventToSave);
             } else {
-                saveEvent$ = this.eventService.create(eventToSave);
+                saveAthleteEvent$ = this.athleteEventService.create(athleteEventToSave);
             }
 
 
-            saveEvent$.subscribe(
-                (eventResponse: HttpResponse<IEvent>) => {
-                    this.event = eventResponse.body;
-                    this.setEventForm(this.event);
+            saveAthleteEvent$.subscribe(
+                (athleteEventResponse: HttpResponse<IAthleteEvent>) => {
+                    this._athleteEvent = athleteEventResponse.body;
+                    this.setAthleteEventForm(this._athleteEvent);
                     this.messageService.showSuccess('Událost uložena');
-
-                    if (goBack) {
-                        this.router.navigate(['/events/list']);
-                    } else {
-                        this.location.go(`/events/edit/${this.event.id}`);
-                    }
                 },
                 (errorResponse: HttpErrorResponse) => {
                     this.messageService.showError('Událost nebyla uložena', errorResponse.error.detail);
                 });
-        }
-    }
-
-
-    getEvent(eventId: number): Observable<IEvent> {
-        if (eventId) {
-            return this.eventService
-                .find(eventId)
-                .pipe(map((eventResponse: HttpResponse<IEvent>) => {
-                    return eventResponse.body;
-                }));
-
-        } else {
-            return RxjsUtils.create(new Event());
         }
     }
 

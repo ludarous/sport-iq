@@ -2,18 +2,14 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, zip} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
+import {zip} from 'rxjs';
 import {MessageService} from '../../../modules/core/services/message.service';
 import {EventService} from '../../../services/rest/event.service';
-import {Event, IEvent} from '../../../entities/model/event.model';
+import {IEvent} from '../../../entities/model/event.model';
 import {CalendarUtils} from '../../../modules/core/utils/calendar-utils';
 import * as moment from 'moment';
-import {SelectItem} from 'primeng/api';
 import {EnumTranslatorService} from '../../../modules/shared-components/services/enum-translator.service';
 import {Location} from '@angular/common';
-import {IActivity} from '../../../entities/model/activity.model';
 import {IWorkout} from '../../../entities/model/workout.model';
 import {WorkoutService} from '../../../services/rest/workout.service';
 import {AthleteService} from '../../../services/rest/athlete.service';
@@ -58,7 +54,7 @@ export class EventsEditComponent implements OnInit {
         const params$ = this.activatedRoute.params;
         params$.subscribe((params) => {
             this.eventId = +params.id;
-            const getEvent$ = this.getEvent(this.eventId);
+            const getEvent$ = this.eventService.getEvent(this.eventId);
 
             const getWorkouts$ = this.workoutService.query({
                 page: 0,
@@ -125,19 +121,4 @@ export class EventsEditComponent implements OnInit {
                 });
         }
     }
-
-
-    getEvent(eventId: number): Observable<IEvent> {
-        if (eventId) {
-            return this.eventService
-                .find(eventId)
-                .pipe(map((eventResponse: HttpResponse<IEvent>) => {
-                    return eventResponse.body;
-                }));
-
-        } else {
-            return RxjsUtils.create(new Event());
-        }
-    }
-
 }

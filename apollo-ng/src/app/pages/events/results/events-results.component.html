@@ -31,58 +31,16 @@
                         </ul>
                     </p-panel>
                 </div>
-                <div *ngIf="selectedAthlete && !selectedWorkout" class="ui-g-12 ui-md-8">
+                <div *ngIf="selectedAthlete && selectedAthleteEvent && !selectedWorkout" class="ui-g-12 ui-md-8">
                     <p-panel [header]="'Obecné údaje události' | translate">
-                        <div class="ui-g">
-                            <div class="ui-g-12">
-                                <form class="form-group" *ngIf="eventForm" [formGroup]="eventForm"
-                                      (submit)="saveEvent()">
-                                    <div class="ui-g-12 ui-md-4">
-                                        <label for="event-name">{{'Název' | translate}}</label>
-                                    </div>
-                                    <div class="ui-g-12 ui-md-8">
-                                        <input id="event-name" class="w-100" type="text" pInputText
-                                               formControlName="name"
-                                               required/>
-                                    </div>
-
-                                    <div class="ui-g-12 ui-md-4">
-                                        <label for="event-date">{{'Datum konání' | translate}}</label>
-                                    </div>
-                                    <div class="ui-g-12 ui-md-8">
-                                        <p-calendar id="event-date"
-                                                    [(ngModel)]="date"
-                                                    [ngModelOptions]="{standalone: true}"
-                                                    [locale]="csLocale"
-                                                    [yearNavigator]="true"
-                                                    [yearRange]="'2019:2050'"
-                                                    [dateFormat]="csLocale.dateFormat"
-                                        ></p-calendar>
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-                    </p-panel>
-                    <p-panel *ngIf="selectedAthlete && selectedWorkout" [header]="'Aktivita' | translate">
-                        <ul>
-                            <li (click)="selectActivity(null)" [ngClass]="{'selected' : selectedActivity === null}">{{'Obecné údaje testu'}}</li>
-                            <li *ngFor="let activity of selectedWorkout.activities" (click)="selectActivity(activity)" [ngClass]="{'selected' : selectedActivity === activity}">
-                                {{activity.name}}
-                            </li>
-                        </ul>
+                       <app-event-general-result [event]="this.event" [athlete]="this.selectedAthlete" [athleteEvent]="selectedAthleteEvent"></app-event-general-result>
                     </p-panel>
                 </div>
-<!--                <div *ngIf="selectedAthlete && selectedWorkout" class="ui-g-12 ui-md-2 list">-->
-<!--                    <p-panel [header]="'Aktivita' | translate">-->
-<!--                        <ul>-->
-<!--                            <li (click)="selectActivity(null)" [ngClass]="{'selected' : selectedActivity === null}">{{'Obecné údaje testu'}}</li>-->
-<!--                            <li *ngFor="let activity of selectedWorkout.activities" (click)="selectActivity(activity)" [ngClass]="{'selected' : selectedActivity === activity}">-->
-<!--                                {{activity.name}}-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </p-panel>-->
-<!--                </div>-->
+                <div *ngIf="selectedAthlete && selectedAthleteWorkout && selectedWorkout" class="ui-g-12 ui-md-8">
+                    <p-panel [header]="selectedWorkout.name + ' - ' + ('Obecné údaje' | translate)">
+                        <app-workout-general-result [athleteEvent]="selectedAthleteEvent" [workout]="selectedWorkout" [athleteWorkout]="selectedAthleteWorkout"></app-workout-general-result>
+                    </p-panel>
+                </div>
             </div>
         </div>
     </div>

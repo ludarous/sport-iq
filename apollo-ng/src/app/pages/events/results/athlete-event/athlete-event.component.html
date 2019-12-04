@@ -1,93 +1,47 @@
-<div class="ui-g" *ngIf="eventForm">
+<div class="ui-g" *ngIf="athleteEventForm">
     <div class="ui-g-12">
-        <div class="card">
-            <h1 *ngIf="event">{{event.name}}</h1>
-            <h1 *ngIf="!event">{{'Nová událost' | translate}}</h1>
-            <div class="ui-g">
-                <div class="ui-g-6 ui-md-6 ui-sm-12">
-                    <p-panel [header]="'Základní údaje' | translate">
-                        <div class="ui-g">
-                            <div class="ui-g-12">
-                                <form class="form-group" *ngIf="eventForm" [formGroup]="eventForm"
-                                      (submit)="saveEvent()">
-                                    <div class="ui-g-12 ui-md-4">
-                                        <label for="event-name">{{'Název' | translate}}</label>
-                                    </div>
-                                    <div class="ui-g-12 ui-md-8">
-                                        <input id="event-name" class="w-100" type="text" pInputText
-                                               formControlName="name"
-                                               required/>
-                                    </div>
 
-                                    <div class="ui-g-12 ui-md-4">
-                                        <label for="event-date">{{'Datum konání' | translate}}</label>
-                                    </div>
-                                    <div class="ui-g-12 ui-md-8">
-                                        <p-calendar id="event-date"
-                                                    [(ngModel)]="date"
-                                                    [ngModelOptions]="{standalone: true}"
-                                                    [locale]="csLocale"
-                                                    [yearNavigator]="true"
-                                                    [yearRange]="'2019:2050'"
-                                                    [dateFormat]="csLocale.dateFormat"
-                                        ></p-calendar>
-                                    </div>
+        <h1 *ngIf="event">{{event.name}}</h1>
+        <h1 *ngIf="!event">{{'Nová událost' | translate}}</h1>
+        <div class="ui-g">
 
-                                </form>
-                            </div>
-                        </div>
-                    </p-panel>
-                </div>
-                <div class="ui-g-12 ui-md-12">
-                    <p-panel [header]="'Testy'" >
-                        <p-pickList [source]="suggestedWorkouts"
-                                    [target]="event.tests"
-                                    [styleClass]="'activities-picklist'"
-                                    [dragdrop]="true"
-                                    [showSourceFilter]="true"
-                                    [showTargetFilter]="true"
-                                    [filterBy]="'name,description'">
-                            <ng-template let-workout pTemplate="item">
-                                <div class="ui-helper-clearfix">
-                                    <div class="picklist-item-container">
-                                        <div class="picklist-item-name">{{workout.name}}</div>
-                                        <div class="picklist-item-description">{{workout.description}}</div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </p-pickList>
-                    </p-panel>
-                </div>
+            <div class="ui-g-12">
+                <form class="form-group" *ngIf="athleteEventForm" [formGroup]="athleteEventForm"
+                      (submit)="saveAthleteEvent()">
+                    <div class="ui-g-12 ui-md-4">
+                        <label for="height-in-cm">{{'Výška v cm' | translate}}</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8">
+                        <input id="height-in-cm" class="w-100" type="text" pInputText formControlName="actualHeightInCm"/>
+                    </div>
 
-                <div class="ui-g-12 ui-md-12">
-                    <p-panel [header]="'Sportovci'" >
-                        <p-pickList [source]="suggestedAthletes"
-                                    [target]="event.athletes"
-                                    [styleClass]="'activities-picklist'"
-                                    [dragdrop]="true"
-                                    [showSourceFilter]="true"
-                                    [showTargetFilter]="true"
-                                    [filterBy]="'firstName,lastName'">
-                            <ng-template let-athlete pTemplate="item">
-                                <div class="ui-helper-clearfix">
-                                    <div class="picklist-item-container">
-                                        <div class="picklist-item-name">{{athlete.firstName + ' ' + athlete.lastName}}</div>
-                                        <div class="picklist-item-description">{{athlete.email}}</div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </p-pickList>
-                    </p-panel>
-                </div>
+                    <div class="ui-g-12 ui-md-4">
+                        <label for="weight-in-kg">{{'Váha v kg' | translate}}</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8">
+                        <input id="weight-in-kg" class="w-100" type="text" pInputText formControlName="actualWeightInKg"/>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-4">
+                        <label for="note">{{'Poznámka k události' | translate}}</label>
+                    </div>
+                    <div class="ui-g-12 ui-md-8">
+                        <textarea id="note" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" formControlName="note"></textarea>
+                    </div>
+
+                </form>
             </div>
 
-            <div class="ui-g">
-                <div class="ui-g-12">
-                    <button pButton type="button" class="cyan-btn"
-                            [label]="!event?.id ? ('Vytvořit událost' | translate) : ('Ulož událost' | translate)"
-                            (click)="saveEvent(!!event.id)">
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
+
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <button pButton type="button" class="cyan-btn"
+                    [label]="!event?.id ? ('Vytvořit' | translate) : ('Uložit' | translate)"
+                    (click)="saveAthleteEvent(!!event.id)">
+            </button>
+        </div>
+    </div>
+
+</div>
