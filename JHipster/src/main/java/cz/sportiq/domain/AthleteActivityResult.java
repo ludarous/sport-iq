@@ -18,7 +18,7 @@ import java.util.Objects;
  * A AthleteActivityResult.
  */
 @Entity
-@Table(name = "athlete_activity_result")
+@Table(name = "athlete_activity_result", uniqueConstraints={@UniqueConstraint(columnNames = {"activity_result_id", "athlete_activity_id"})})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "athleteactivityresult")
 public class AthleteActivityResult implements Serializable {
@@ -37,7 +37,7 @@ public class AthleteActivityResult implements Serializable {
     @JsonIgnoreProperties("athleteActivityResults")
     private AthleteActivity athleteActivity;
 
-    @OneToMany(mappedBy = "athleteActivityResult")
+    @OneToMany(mappedBy = "athleteActivityResult", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<AthleteActivityResultSplit> athleteActivityResultSplits = new HashSet<>();
 

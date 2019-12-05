@@ -57,7 +57,7 @@ public class AthleteActivityResource {
         if (athleteActivityDTO.getId() != null) {
             throw new BadRequestAlertException("A new athleteActivity cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        AthleteActivityDTO result = athleteActivityService.save(athleteActivityDTO);
+        AthleteActivityDTO result = athleteActivityService.saveComplete(athleteActivityDTO);
         return ResponseEntity.created(new URI("/api/athlete-activities/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -154,11 +154,15 @@ public class AthleteActivityResource {
      * @param athleteWorkoutId athlete event Id
      * @return the ResponseEntity with status 200 (OK) and the athleteWorkout in body
      */
-    @GetMapping("/athlete-activities/by-activity-id-and-athlete-id")
+    @GetMapping("/athlete-activities/by-activity-id-and-athleteWorkout-id")
     @Timed
     public ResponseEntity<AthleteActivityDTO> getAthleteActivityByActivityIdAndAthleteWorkoutId(@RequestParam Long activityId, @RequestParam Long athleteWorkoutId) {
         log.debug("REST request to get a page of AthleteActivities");
-        Optional<AthleteActivityDTO> athleteActivityDTO = athleteActivityService.findByActivityIdAndAthleteWorkoutId(activityId, athleteWorkoutId);
-        return ResponseUtil.wrapOrNotFound(athleteActivityDTO);
+        AthleteActivityDTO athleteActivityDTO = athleteActivityService.findByActivityIdAndAthleteWorkoutId(activityId, athleteWorkoutId);
+        if(athleteActivityDTO != null) {
+            return new ResponseEntity<>(athleteActivityDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

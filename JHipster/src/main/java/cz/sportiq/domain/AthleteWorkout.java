@@ -18,7 +18,7 @@ import java.util.Objects;
  * A AthleteWorkout.
  */
 @Entity
-@Table(name = "athlete_workout")
+@Table(name = "athlete_workout", uniqueConstraints={@UniqueConstraint(columnNames = {"workout_id", "athlete_event_id"})})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "athleteworkout")
 public class AthleteWorkout implements Serializable {

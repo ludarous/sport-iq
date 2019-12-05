@@ -35,8 +35,10 @@ export class Activity implements IActivity {
 
     static parseItemEnums(activity: IActivity): IActivity {
         if (activity) {
-            for (const result of activity.activityResults) {
-                ActivityResult.parseItemEnums(result);
+            if (activity.activityResults) {
+                for (const result of activity.activityResults) {
+                    ActivityResult.parseItemEnums(result);
+                }
             }
         }
         return activity;

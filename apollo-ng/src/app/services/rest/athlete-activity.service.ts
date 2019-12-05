@@ -13,7 +13,7 @@ import { Activity } from '../../entities/model/activity.model';
 @Injectable()
 export class AthleteActivityService extends CrudBaseService<IAthleteActivity> {
     constructor(injector: Injector) {
-        super(environment.apiUrl, '/athlete-activities', injector, [Activity.parseItemEnums]);
+        super(environment.apiUrl, '/athlete-activities', injector);
     }
 
     getAthleteActivityByActivityIdAndAthleteWorkoutId(activityId: number, athleteWorkoutId: number): Observable<HttpResponse<IAthleteActivity>> {

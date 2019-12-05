@@ -32,6 +32,7 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="value"><span jhiTranslate="sportiqApp.athleteActivityResultSplit.value">Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="athleteActivityResultId"><span jhiTranslate="sportiqApp.athleteActivityResultSplit.athleteActivityResult">Athlete Activity Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="activityResultSplitId"><span jhiTranslate="sportiqApp.athleteActivityResultSplit.activityResultSplit">Activity Result Split</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -42,6 +43,11 @@
                 <td>
                     <div *ngIf="athleteActivityResultSplit.athleteActivityResultId">
                         <a [routerLink]="['../athlete-activity-result', athleteActivityResultSplit.athleteActivityResultId , 'view' ]" >{{athleteActivityResultSplit.athleteActivityResultId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="athleteActivityResultSplit.activityResultSplitId">
+                        <a [routerLink]="['../activity-result-split', athleteActivityResultSplit.activityResultSplitId , 'view' ]" >{{athleteActivityResultSplit.activityResultSplitId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

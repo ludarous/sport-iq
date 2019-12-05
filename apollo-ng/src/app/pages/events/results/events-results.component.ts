@@ -19,6 +19,7 @@ import {Location} from '@angular/common';
 import {IAthleteWorkout} from '../../../entities/model/athlete-workout.model';
 import {IAthleteActivity} from '../../../entities/model/athlete-activity.model';
 import {AthleteWorkoutService} from '../../../services/rest/athlete-workout.service';
+import {AthleteActivityService} from '../../../services/rest/athlete-activity.service';
 
 @Component({
     selector: 'app-events-results',
@@ -31,6 +32,7 @@ export class EventsResultsComponent implements OnInit {
     constructor(private eventService: EventService,
                 private athleteEventService: AthleteEventService,
                 private athleteWorkoutService: AthleteWorkoutService,
+                private athleteActivityService: AthleteActivityService,
                 private workoutService: WorkoutService,
                 private athleteService: AthleteService,
                 private activatedRoute: ActivatedRoute,
@@ -102,7 +104,7 @@ export class EventsResultsComponent implements OnInit {
         } else {
             this.selectedAthlete = athlete;
             this.athleteEventService
-                .getAthleteEvent(this.event.id, this.selectedAthlete.id)
+                .getAthleteEvent(this.event.id, athlete.id)
                 .subscribe((athleteEvent: IAthleteEvent) => {
                     this.selectedAthleteEvent = athleteEvent;
                     this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}`);
@@ -116,11 +118,11 @@ export class EventsResultsComponent implements OnInit {
             this.selectedWorkout = null;
             this.selectAthlete(this.selectedAthlete);
         } else {
-            this.selectedWorkout = workout;
             this.athleteWorkoutService
-                .getAthleteWorkout(this.selectedWorkout.id, this.selectedAthleteEvent.id)
+                .getAthleteWorkout(workout.id, this.selectedAthleteEvent.id)
                 .subscribe((athleteWorkout: IAthleteWorkout) => {
                     this.selectedAthleteWorkout = athleteWorkout;
+                    this.selectedWorkout = workout;
                     this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}`);
                 });
         }
@@ -131,8 +133,29 @@ export class EventsResultsComponent implements OnInit {
             this.selectedActivity = null;
             this.selectWorkout(this.selectedWorkout);
         } else {
-            this.selectedActivity = activity;
-            this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}/activity/${this.selectedActivity.id}`);
+
+            this.athleteActivityService
+                .getAthleteActivity(activity.id, this.selectedAthleteWorkout.id)
+                .subscribe((athleteActivity: IAthleteActivity) => {
+                    this.selectedAthleteActivity = athleteActivity;
+                    this.selectedActivity = activity;
+                    this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}/activity/${this.selectedActivity.id}`);
+                });
         }
+    }
+
+    showAthleteEventForm(): boolean {
+        return !!this.selectedAthlete &&
+            !!this.selectedAthleteEvent &&
+            !this.showAthleteWorkoutForm() &&
+            !this.showAthleteActivityForm();
+    }
+
+    showAthleteWorkoutForm(): boolean {
+        return !!this.selectedWorkout && !!this.selectedAthleteWorkout && !this.showAthleteActivityForm();
+    }
+
+    showAthleteActivityForm(): boolean {
+        return !!this.selectedActivity && !!this.selectedAthleteActivity;
     }
 }

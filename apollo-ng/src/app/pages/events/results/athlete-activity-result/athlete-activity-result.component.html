@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-4">
+            <label for="activity-result-value">{{activityResult.name}}</label>
+        </div>
+        <div class="ui-g-11 ui-md-7">
+            <input id="activity-result-value" class="w-100" type="text" pInputText
+                   [(ngModel)]="athleteActivityResult.value"/>
+        </div>
+        <div class="ui-g-1 ui-md-1">
+            <span>{{activityResult.resultUnit.abbreviation}}</span>
+        </div>
+    </div>
+    <div class="ui-g">
+        <div class="ui-g-offset-4 ui-md-6">
+            <div class="ui-g">
+                <ng-container *ngFor="let aars of athleteActivityResult.athleteActivityResultSplits">
+                    <app-activity-result-split-general-result [athleteActivityResultSplit]="aars"
+                                                              [activityResultSplit]="getActivityResultSplit(aars)"></app-activity-result-split-general-result>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

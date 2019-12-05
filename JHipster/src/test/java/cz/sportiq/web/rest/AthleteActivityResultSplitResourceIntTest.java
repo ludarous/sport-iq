@@ -3,6 +3,7 @@ package cz.sportiq.web.rest;
 import cz.sportiq.SportiqApp;
 
 import cz.sportiq.domain.AthleteActivityResultSplit;
+import cz.sportiq.domain.ActivityResultSplit;
 import cz.sportiq.repository.AthleteActivityResultSplitRepository;
 import cz.sportiq.repository.search.AthleteActivityResultSplitSearchRepository;
 import cz.sportiq.service.AthleteActivityResultSplitService;
@@ -104,6 +105,11 @@ public class AthleteActivityResultSplitResourceIntTest {
     public static AthleteActivityResultSplit createEntity(EntityManager em) {
         AthleteActivityResultSplit athleteActivityResultSplit = new AthleteActivityResultSplit()
             .value(DEFAULT_VALUE);
+        // Add required entity
+        ActivityResultSplit activityResultSplit = ActivityResultSplitResourceIntTest.createEntity(em);
+        em.persist(activityResultSplit);
+        em.flush();
+        athleteActivityResultSplit.setActivityResultSplit(activityResultSplit);
         return athleteActivityResultSplit;
     }
 

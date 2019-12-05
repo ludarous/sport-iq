@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,8 +8,12 @@ import {IActivity} from '../../../../entities/model/activity.model';
 import {AthleteService} from '../../../../services/rest/athlete.service';
 import {ToastService} from '../../../../modules/core/services/message.service';
 import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
-import { IAthleteWorkout } from '../../../../entities/model/athlete-workout.model';
-import { AthleteActivityService } from '../../../../services/rest/athlete-activity.service';
+import {IAthleteWorkout} from '../../../../entities/model/athlete-workout.model';
+import {AthleteActivityService} from '../../../../services/rest/athlete-activity.service';
+import {IActivityResult} from '../../../../entities/model/activity-result.model';
+import {IActivityResultSplit} from '../../../../entities/model/activity-result-split.model';
+import {IAthleteActivityResult} from '../../../../entities/model/athlete-activity-result.model';
+import {IAthleteActivityResultSplit} from '../../../../entities/model/athlete-activity-result-split.model';
 
 @Component({
     selector: 'app-activity-general-result',
@@ -66,48 +70,41 @@ export class AthleteActivityComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        if (this.athleteActivity) {
-            this.setAthleteActivityForm(this.athleteActivity);
-        }
-
     }
 
     ngOnDestroy(): void {
         this.saveAthleteActivity();
     }
 
-    setAthleteActivityForm(athleteActivity: IAthleteActivity) {
-        this.athleteActivityForm = this.formBuilder.group(athleteActivity);
-        this.athleteActivityForm.get('activityId').setValidators(Validators.required);
-        this.athleteActivityForm.get('athleteWorkoutId').setValidators(Validators.required);
+    saveAthleteActivity() {
+        const athleteActivityToSave = this.athleteActivity;
+
+        let saveAthleteActivity$;
+        if (athleteActivityToSave.id) {
+            saveAthleteActivity$ = this.athleteActivityService.update(athleteActivityToSave);
+        } else {
+            saveAthleteActivity$ = this.athleteActivityService.create(athleteActivityToSave);
+        }
+
+        saveAthleteActivity$.subscribe(
+            (athleteActivityResponse: HttpResponse<IAthleteActivity>) => {
+                this._athleteActivity = athleteActivityResponse.body;
+                this.toastService.showSuccess('Událost uložena');
+            },
+            (errorResponse: HttpErrorResponse) => {
+                this.toastService.showError('Událost nebyla uložena', errorResponse.error.detail);
+            });
     }
 
-    saveAthleteActivity() {
-        this.athleteActivityForm.get('activityId').setValue(this.activity.id);
-        this.athleteActivityForm.get('athleteWorkoutId').setValue(this.athleteWorkout.id);
-
-        if (this.athleteActivityForm.valid) {
-
-            const athleteActivityToSave = this.athleteActivityForm.value as IAthleteActivity;
-
-            let saveAthleteActivity$;
-            if (athleteActivityToSave.id) {
-                saveAthleteActivity$ = this.athleteActivityService.update(athleteActivityToSave);
-            } else {
-                saveAthleteActivity$ = this.athleteActivityService.create(athleteActivityToSave);
-            }
+    getActivityResult(athleteActivityResult: IAthleteActivityResult): IActivityResult {
+        const activityResult = this.activity.activityResults.find(ar => ar.id === athleteActivityResult.activityResultId);
+        return activityResult;
+    }
 
 
-            saveAthleteActivity$.subscribe(
-                (athleteActivityResponse: HttpResponse<IAthleteActivity>) => {
-                    this._athleteActivity = athleteActivityResponse.body;
-                    this.setAthleteActivityForm(this._athleteActivity);
-                    this.toastService.showSuccess('Událost uložena');
-                },
-                (errorResponse: HttpErrorResponse) => {
-                    this.toastService.showError('Událost nebyla uložena', errorResponse.error.detail);
-                });
-        }
+
+    trackByIndex(index: number, obj: any): any {
+        return index;
     }
 
 }

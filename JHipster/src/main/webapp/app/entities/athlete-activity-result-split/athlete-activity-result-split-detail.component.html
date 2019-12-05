@@ -15,6 +15,12 @@
                         <a [routerLink]="['/athlete-activity-result', athleteActivityResultSplit.athleteActivityResultId, 'view']">{{athleteActivityResultSplit.athleteActivityResultId}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteActivityResultSplit.activityResultSplit">Activity Result Split</span></dt>
+                <dd>
+                    <div *ngIf="athleteActivityResultSplit.activityResultSplitId">
+                        <a [routerLink]="['/activity-result-split', athleteActivityResultSplit.activityResultSplitId, 'view']">{{athleteActivityResultSplit.activityResultSplitId}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

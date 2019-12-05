@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="RLU (generated)" id="1575545601123-1">
+        <addColumn tableName="athlete_activity_result_split">
+            <column name="activity_result_split_id" type="int8">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1575545601123-2">
+        <addUniqueConstraint columnNames="activity_result_id, athlete_activity_id" constraintName="UK12ajaeapvhk0scrpg3590syli" tableName="athlete_activity_result"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1575545601123-3">
+        <addUniqueConstraint columnNames="activity_id, athlete_workout_id" constraintName="UK1839qnak2ik14jl1ci7t8kbax" tableName="athlete_activity"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1575545601123-4">
+        <addUniqueConstraint columnNames="event_id, athlete_id" constraintName="UK71bdrwfppeom3qph1ro49r9sa" tableName="athlete_event"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1575545601123-5">
+        <addUniqueConstraint columnNames="workout_id, athlete_event_id" constraintName="UKfnudl8lbggu9xfppxoknp1ufa" tableName="athlete_workout"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1575545601123-6">
+        <addUniqueConstraint columnNames="activity_result_split_id, athlete_activity_result_id" constraintName="UKnbbhp8i8mvxdfkihtfwlhyp6c" tableName="athlete_activity_result_split"/>
+    </changeSet>
+    <changeSet author="RLU (generated)" id="1575545601123-7">
+        <addForeignKeyConstraint baseColumnNames="activity_result_split_id" baseTableName="athlete_activity_result_split" constraintName="FKij8cxpusj8q63t49b0le3xqav" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="activity_result_split"/>
+    </changeSet>
+</databaseChangeLog>

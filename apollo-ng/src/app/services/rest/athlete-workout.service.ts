@@ -16,7 +16,7 @@ export class AthleteWorkoutService extends CrudBaseService<IAthleteWorkout> {
 
     getAthleteWorkoutByWorkoutIdAndAthleteEventId(workoutId: number, athleteEventId: number): Observable<HttpResponse<IAthleteWorkout>> {
         const params = {workoutId, athleteEventId};
-        return this.get(this.resourceUrl + `/by-workout-id-and-athlete-id`, params);
+        return this.get(this.resourceUrl + `/by-workout-id-and-athleteEvent-id`, params);
     }
 
     getAthleteWorkout(workoutId: number, athleteEventId: number): Observable<IAthleteWorkout> {

@@ -31,14 +31,19 @@
                         </ul>
                     </p-panel>
                 </div>
-                <div *ngIf="selectedAthlete && selectedAthleteEvent && !selectedWorkout" class="ui-g-12 ui-md-8">
+                <div *ngIf="showAthleteEventForm()" class="ui-g-12 ui-md-8">
                     <p-panel [header]="'Obecné údaje události' | translate">
                        <app-event-general-result [event]="this.event" [athlete]="this.selectedAthlete" [athleteEvent]="selectedAthleteEvent"></app-event-general-result>
                     </p-panel>
                 </div>
-                <div *ngIf="selectedAthlete && selectedAthleteWorkout && selectedWorkout" class="ui-g-12 ui-md-8">
+                <div *ngIf="showAthleteWorkoutForm()" class="ui-g-12 ui-md-8">
                     <p-panel [header]="selectedWorkout.name + ' - ' + ('Obecné údaje' | translate)">
                         <app-workout-general-result [athleteEvent]="selectedAthleteEvent" [workout]="selectedWorkout" [athleteWorkout]="selectedAthleteWorkout"></app-workout-general-result>
+                    </p-panel>
+                </div>
+                <div *ngIf="showAthleteActivityForm()" class="ui-g-12 ui-md-8">
+                    <p-panel [header]="selectedWorkout.name + ' - ' + ('Obecné údaje' | translate)">
+                        <app-activity-general-result [athleteActivity]="selectedAthleteActivity" [athleteWorkout]="selectedAthleteWorkout" [activity]="selectedActivity"></app-activity-general-result>
                     </p-panel>
                 </div>
             </div>

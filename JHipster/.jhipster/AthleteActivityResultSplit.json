@@ -12,6 +12,13 @@
             "otherEntityName": "athleteActivityResult",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "activityResultSplit",
+            "otherEntityName": "activityResultSplit",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20191012201719",

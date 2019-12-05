@@ -54,5 +54,7 @@ public interface AthleteActivityService {
      */
     Page<AthleteActivityDTO> search(String query, Pageable pageable);
 
-    Optional<AthleteActivityDTO> findByActivityIdAndAthleteWorkoutId(Long activityId, Long athleteWorkoutId);
+    AthleteActivityDTO findByActivityIdAndAthleteWorkoutId(Long activityId, Long athleteWorkoutId);
+
+    AthleteActivityDTO saveComplete(AthleteActivityDTO athleteActivityDTO);
 }

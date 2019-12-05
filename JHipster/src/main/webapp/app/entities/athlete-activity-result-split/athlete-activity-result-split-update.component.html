@@ -22,6 +22,19 @@
                         <option [ngValue]="athleteActivityResultOption.id" *ngFor="let athleteActivityResultOption of athleteactivityresults; trackBy: trackAthleteActivityResultById">{{athleteActivityResultOption.id}}</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResultSplit.activityResultSplit" for="field_activityResultSplit">Activity Result Split</label>
+                    <select class="form-control" id="field_activityResultSplit" name="activityResultSplit" [(ngModel)]="athleteActivityResultSplit.activityResultSplitId"  required>
+                        <option *ngIf="!editForm.value.activityResultSplit" [ngValue]="null" selected></option>
+                        <option [ngValue]="activityResultSplitOption.id" *ngFor="let activityResultSplitOption of activityresultsplits; trackBy: trackActivityResultSplitById">{{activityResultSplitOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.activityResultSplit?.dirty && editForm.controls.activityResultSplit?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activityResultSplit?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

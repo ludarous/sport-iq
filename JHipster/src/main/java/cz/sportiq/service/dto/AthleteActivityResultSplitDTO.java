@@ -1,5 +1,6 @@
 package cz.sportiq.service.dto;
 
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,6 +14,10 @@ public class AthleteActivityResultSplitDTO implements Serializable {
     private Float value;
 
     private Long athleteActivityResultId;
+
+    private Long activityResultSplitId;
+
+
 
     public Long getId() {
         return id;
@@ -36,6 +41,14 @@ public class AthleteActivityResultSplitDTO implements Serializable {
 
     public void setAthleteActivityResultId(Long athleteActivityResultId) {
         this.athleteActivityResultId = athleteActivityResultId;
+    }
+
+    public Long getActivityResultSplitId() {
+        return activityResultSplitId;
+    }
+
+    public void setActivityResultSplitId(Long activityResultSplitId) {
+        this.activityResultSplitId = activityResultSplitId;
     }
 
     @Override
@@ -65,6 +78,7 @@ public class AthleteActivityResultSplitDTO implements Serializable {
             "id=" + getId() +
             ", value=" + getValue() +
             ", athleteActivityResult=" + getAthleteActivityResultId() +
+            ", activityResultSplit=" + getActivityResultSplitId() +
             "}";
     }
 }

@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity AthleteActivityResult and its DTO AthleteActivityResultDTO.
  */
-@Mapper(componentModel = "spring", uses = {AthleteActivityMapper.class, ActivityResultMapper.class})
+@Mapper(componentModel = "spring", uses = {AthleteActivityMapper.class, ActivityResultMapper.class, AthleteActivityResultSplitMapper.class})
 public interface AthleteActivityResultMapper extends EntityMapper<AthleteActivityResultDTO, AthleteActivityResult> {
 
     @Mapping(source = "athleteActivity.id", target = "athleteActivityId")
@@ -17,7 +17,6 @@ public interface AthleteActivityResultMapper extends EntityMapper<AthleteActivit
     AthleteActivityResultDTO toDto(AthleteActivityResult athleteActivityResult);
 
     @Mapping(source = "athleteActivityId", target = "athleteActivity")
-    @Mapping(target = "athleteActivityResultSplits", ignore = true)
     @Mapping(source = "activityResultId", target = "activityResult")
     AthleteActivityResult toEntity(AthleteActivityResultDTO athleteActivityResultDTO);
 

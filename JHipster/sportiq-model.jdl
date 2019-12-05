@@ -126,6 +126,7 @@ relationship ManyToOne {
     AthleteWorkout{workout(name) required} to Workout
     AthleteActivity{activity(name) required} to Activity
     AthleteActivityResult{activityResult(name) required} to ActivityResult
+    AthleteActivityResultSplit{activityResultSplit(id) required} to ActivityResultSplit
     Event{address(street)} to Address
     ActivityResult{resultUnit(name)} to Unit
     Activity{targetUnit(name)} to Unit

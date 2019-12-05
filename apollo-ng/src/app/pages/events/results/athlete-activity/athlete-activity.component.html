@@ -1,21 +1,13 @@
-<div class="ui-g" *ngIf="athleteWorkoutForm">
+<div class="ui-g" *ngIf="athleteActivity">
     <div class="ui-g-12">
 
-        <h1 *ngIf="workout">{{workout.name}}</h1>
+        <h1 *ngIf="activity">{{activity.name}}</h1>
         <div class="ui-g">
 
             <div class="ui-g-12">
-                <form class="form-group" *ngIf="athleteWorkoutForm" [formGroup]="athleteWorkoutForm"
-                      (submit)="saveAthleteWorkout()">
-
-                    <div class="ui-g-12 ui-md-4">
-                        <label for="note">{{'Poznámka k události' | translate}}</label>
-                    </div>
-                    <div class="ui-g-12 ui-md-8">
-                        <textarea id="note" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" formControlName="note"></textarea>
-                    </div>
-
-                </form>
+                <ng-container *ngFor="let aar of athleteActivity.athleteActivityResults; let index = index; trackBy: trackByIndex;">
+                    <app-activity-result-general-result [athleteActivityResult]="aar" [activityResult]="getActivityResult(aar)"></app-activity-result-general-result>
+                </ng-container>
             </div>
 
         </div>
@@ -24,8 +16,8 @@
     <div class="ui-g">
         <div class="ui-g-12">
             <button pButton type="button" class="cyan-btn"
-                    [label]="!workout?.id ? ('Vytvořit' | translate) : ('Uložit' | translate)"
-                    (click)="saveAthleteWorkout()">
+                    [label]="!activity?.id ? ('Vytvořit' | translate) : ('Uložit' | translate)"
+                    (click)="saveAthleteActivity()">
             </button>
         </div>
     </div>

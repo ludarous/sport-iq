@@ -1,11 +1,12 @@
 package cz.sportiq.service.impl;
 
+import cz.sportiq.domain.*;
+import cz.sportiq.repository.ActivityRepository;
+import cz.sportiq.repository.ActivityResultRepository;
 import cz.sportiq.service.AthleteActivityService;
-import cz.sportiq.domain.AthleteActivity;
 import cz.sportiq.repository.AthleteActivityRepository;
 import cz.sportiq.repository.search.AthleteActivitySearchRepository;
 import cz.sportiq.service.dto.AthleteActivityDTO;
-import cz.sportiq.service.dto.AthleteWorkoutDTO;
 import cz.sportiq.service.mapper.AthleteActivityMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +35,16 @@ public class AthleteActivityServiceImpl implements AthleteActivityService {
 
     private final AthleteActivitySearchRepository athleteActivitySearchRepository;
 
-    public AthleteActivityServiceImpl(AthleteActivityRepository athleteActivityRepository, AthleteActivityMapper athleteActivityMapper, AthleteActivitySearchRepository athleteActivitySearchRepository) {
+    private final ActivityRepository activityRepository;
+
+    private final ActivityResultRepository activityResultRepository;
+
+    public AthleteActivityServiceImpl(AthleteActivityRepository athleteActivityRepository, AthleteActivityMapper athleteActivityMapper, AthleteActivitySearchRepository athleteActivitySearchRepository, ActivityRepository activityRepository, ActivityResultRepository activityResultRepository) {
         this.athleteActivityRepository = athleteActivityRepository;
         this.athleteActivityMapper = athleteActivityMapper;
         this.athleteActivitySearchRepository = athleteActivitySearchRepository;
+        this.activityRepository = activityRepository;
+        this.activityResultRepository = activityResultRepository;
     }
 
     /**
@@ -113,8 +120,56 @@ public class AthleteActivityServiceImpl implements AthleteActivityService {
     }
 
     @Override
-    public Optional<AthleteActivityDTO> findByActivityIdAndAthleteWorkoutId(Long activityId, Long athleteWorkoutId) {
-        return athleteActivityRepository.findByActivityIdAndAthleteWorkoutId(activityId, athleteWorkoutId)
-            .map(athleteActivityMapper::toDto);
+    public AthleteActivityDTO findByActivityIdAndAthleteWorkoutId(Long activityId, Long athleteWorkoutId) {
+        Optional<AthleteActivity> athleteActivity = athleteActivityRepository.findByActivityIdAndAthleteWorkoutId(activityId, athleteWorkoutId);
+        if(athleteActivity.isPresent()) {
+            return athleteActivityMapper.toDto(athleteActivity.get());
+        } else {
+            AthleteActivityDTO athleteActivityDTO = new AthleteActivityDTO();
+            athleteActivityDTO.setActivityId(activityId);
+            athleteActivityDTO.setAthleteWorkoutId(athleteWorkoutId);
+            return saveComplete(athleteActivityDTO);
+        }
+    }
+
+    /**
+     * Create a complete athleteActivity.
+     *
+     * @param athleteActivityDTO the entity to save
+     * @return the persisted entity
+     */
+    @Override
+    public AthleteActivityDTO saveComplete(AthleteActivityDTO athleteActivityDTO) {
+        log.debug("Request to save AthleteActivity : {}", athleteActivityDTO);
+
+        AthleteActivity athleteActivity = athleteActivityMapper.toEntity(athleteActivityDTO);
+        if(athleteActivityDTO.getId() == null) {
+            Optional<Activity> activityOptional = activityRepository.findOneWithEagerRelationships(athleteActivity.getActivity().getId());
+            if (activityOptional.isPresent()) {
+                Activity activity = activityOptional.get();
+                for (ActivityResult activityResult : activity.getActivityResults()) {
+
+                    AthleteActivityResult athleteActivityResult = new AthleteActivityResult();
+                    athleteActivityResult.setActivityResult(activityResult);
+                    athleteActivityResult.setAthleteActivity(athleteActivity);
+
+                    for(ActivityResultSplit activityResultSplit : activityResult.getResultSplits()) {
+
+                        AthleteActivityResultSplit athleteActivityResultSplit = new AthleteActivityResultSplit();
+                        athleteActivityResultSplit.setActivityResultSplit(activityResultSplit);
+                        athleteActivityResultSplit.setAthleteActivityResult(athleteActivityResult);
+
+                        athleteActivityResult.getAthleteActivityResultSplits().add(athleteActivityResultSplit);
+                    }
+
+                    athleteActivity.getAthleteActivityResults().add(athleteActivityResult);
+                }
+            }
+        }
+
+        athleteActivity = athleteActivityRepository.save(athleteActivity);
+        AthleteActivityDTO result = athleteActivityMapper.toDto(athleteActivity);
+        athleteActivitySearchRepository.save(athleteActivity);
+        return result;
     }
 }

@@ -18,7 +18,8 @@
                 "title": "Athlete Activity Result Split"
             },
             "value": "Value",
-            "athleteActivityResult": "Athlete Activity Result"
+            "athleteActivityResult": "Athlete Activity Result",
+            "activityResultSplit": "Activity Result Split"
         }
     }
 }

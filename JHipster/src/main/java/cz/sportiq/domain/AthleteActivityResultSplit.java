@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
@@ -14,7 +15,7 @@ import java.util.Objects;
  * A AthleteActivityResultSplit.
  */
 @Entity
-@Table(name = "athlete_activity_result_split")
+@Table(name = "athlete_activity_result_split", uniqueConstraints={@UniqueConstraint(columnNames = {"activity_result_split_id", "athlete_activity_result_id"})})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "athleteactivityresultsplit")
 public class AthleteActivityResultSplit implements Serializable {
@@ -32,6 +33,11 @@ public class AthleteActivityResultSplit implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("athleteActivityResultSplits")
     private AthleteActivityResult athleteActivityResult;
+
+    @ManyToOne(optional = false)
+    @NotNull
+    @JsonIgnoreProperties("")
+    private ActivityResultSplit activityResultSplit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -66,6 +72,19 @@ public class AthleteActivityResultSplit implements Serializable {
 
     public void setAthleteActivityResult(AthleteActivityResult athleteActivityResult) {
         this.athleteActivityResult = athleteActivityResult;
+    }
+
+    public ActivityResultSplit getActivityResultSplit() {
+        return activityResultSplit;
+    }
+
+    public AthleteActivityResultSplit activityResultSplit(ActivityResultSplit activityResultSplit) {
+        this.activityResultSplit = activityResultSplit;
+        return this;
+    }
+
+    public void setActivityResultSplit(ActivityResultSplit activityResultSplit) {
+        this.activityResultSplit = activityResultSplit;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

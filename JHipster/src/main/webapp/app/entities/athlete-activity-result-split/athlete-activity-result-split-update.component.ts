@@ -8,6 +8,8 @@ import { IAthleteActivityResultSplit } from 'app/shared/model/athlete-activity-r
 import { AthleteActivityResultSplitService } from './athlete-activity-result-split.service';
 import { IAthleteActivityResult } from 'app/shared/model/athlete-activity-result.model';
 import { AthleteActivityResultService } from 'app/entities/athlete-activity-result';
+import { IActivityResultSplit } from 'app/shared/model/activity-result-split.model';
+import { ActivityResultSplitService } from 'app/entities/activity-result-split';
 
 @Component({
     selector: 'jhi-athlete-activity-result-split-update',
@@ -19,10 +21,13 @@ export class AthleteActivityResultSplitUpdateComponent implements OnInit {
 
     athleteactivityresults: IAthleteActivityResult[];
 
+    activityresultsplits: IActivityResultSplit[];
+
     constructor(
         private jhiAlertService: JhiAlertService,
         private athleteActivityResultSplitService: AthleteActivityResultSplitService,
         private athleteActivityResultService: AthleteActivityResultService,
+        private activityResultSplitService: ActivityResultSplitService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -34,6 +39,12 @@ export class AthleteActivityResultSplitUpdateComponent implements OnInit {
         this.athleteActivityResultService.query().subscribe(
             (res: HttpResponse<IAthleteActivityResult[]>) => {
                 this.athleteactivityresults = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.activityResultSplitService.query().subscribe(
+            (res: HttpResponse<IActivityResultSplit[]>) => {
+                this.activityresultsplits = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -73,6 +84,10 @@ export class AthleteActivityResultSplitUpdateComponent implements OnInit {
     }
 
     trackAthleteActivityResultById(index: number, item: IAthleteActivityResult) {
+        return item.id;
+    }
+
+    trackActivityResultSplitById(index: number, item: IActivityResultSplit) {
         return item.id;
     }
     get athleteActivityResultSplit() {

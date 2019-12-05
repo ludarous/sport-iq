@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -51,7 +52,7 @@ public class AthleteActivityResultSplitResource {
      */
     @PostMapping("/athlete-activity-result-splits")
     @Timed
-    public ResponseEntity<AthleteActivityResultSplitDTO> createAthleteActivityResultSplit(@RequestBody AthleteActivityResultSplitDTO athleteActivityResultSplitDTO) throws URISyntaxException {
+    public ResponseEntity<AthleteActivityResultSplitDTO> createAthleteActivityResultSplit(@Valid @RequestBody AthleteActivityResultSplitDTO athleteActivityResultSplitDTO) throws URISyntaxException {
         log.debug("REST request to save AthleteActivityResultSplit : {}", athleteActivityResultSplitDTO);
         if (athleteActivityResultSplitDTO.getId() != null) {
             throw new BadRequestAlertException("A new athleteActivityResultSplit cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +74,7 @@ public class AthleteActivityResultSplitResource {
      */
     @PutMapping("/athlete-activity-result-splits")
     @Timed
-    public ResponseEntity<AthleteActivityResultSplitDTO> updateAthleteActivityResultSplit(@RequestBody AthleteActivityResultSplitDTO athleteActivityResultSplitDTO) throws URISyntaxException {
+    public ResponseEntity<AthleteActivityResultSplitDTO> updateAthleteActivityResultSplit(@Valid @RequestBody AthleteActivityResultSplitDTO athleteActivityResultSplitDTO) throws URISyntaxException {
         log.debug("REST request to update AthleteActivityResultSplit : {}", athleteActivityResultSplitDTO);
         if (athleteActivityResultSplitDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

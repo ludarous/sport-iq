@@ -154,7 +154,7 @@ public class AthleteWorkoutResource {
      * @param athleteEventId athlete event Id
      * @return the ResponseEntity with status 200 (OK) and the athleteEvent in body
      */
-    @GetMapping("/athlete-workouts/by-workout-id-and-athlete-id")
+    @GetMapping("/athlete-workouts/by-workout-id-and-athleteEvent-id")
     @Timed
     public ResponseEntity<AthleteWorkoutDTO> getAthleteWorkoutByWorkoutIdAndAthleteEventId(@RequestParam Long workoutId, @RequestParam Long athleteEventId) {
         log.debug("REST request to get a page of AthleteWorkouts");
