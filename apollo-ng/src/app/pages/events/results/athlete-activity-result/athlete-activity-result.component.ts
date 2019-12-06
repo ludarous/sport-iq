@@ -32,12 +32,26 @@ export class AthleteActivityResultComponent implements OnInit {
     @Input()
     activityResult: IActivityResult;
 
+    private _showCompareValue: IActivityResult;
+    @Input()
+    get showCompareValue(): IActivityResult {
+        return this._showCompareValue;
+    }
+
+    set showCompareValue(value: IActivityResult) {
+        this._showCompareValue = value;
+    }
+
     ngOnInit() {
         console.log(this.activityResult);
     }
 
     getActivityResultSplit(athleteActivityResultSplit: IAthleteActivityResultSplit): IActivityResultSplit {
         return this.activityResult.resultSplits.find(rs => rs.id === athleteActivityResultSplit.activityResultSplitId);
+    }
+
+    computedDifference(): number {
+        return this.athleteActivityResult.value - this.athleteActivityResult.compareValue;
     }
 
 }

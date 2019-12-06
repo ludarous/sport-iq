@@ -1,4 +1,12 @@
 .splits-column {
     display: flex;
-    flex-direction: column;
+}
+
+.split-inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.split-label {
+    margin-bottom: 5px;
 }

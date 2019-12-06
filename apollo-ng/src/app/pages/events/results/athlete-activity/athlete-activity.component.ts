@@ -23,6 +23,7 @@ import {IAthleteActivityResultSplit} from '../../../../entities/model/athlete-ac
 })
 export class AthleteActivityComponent implements OnInit, OnDestroy {
 
+
     constructor(private athleteService: AthleteService,
                 private athleteActivityService: AthleteActivityService,
                 private activatedRoute: ActivatedRoute,
@@ -65,8 +66,14 @@ export class AthleteActivityComponent implements OnInit, OnDestroy {
         this._athleteActivity = value;
     }
 
-    athleteActivityForm: FormGroup;
+    private _showCompareValue = false;
+    get showCompareValue(): boolean {
+        return this._showCompareValue;
+    }
 
+    set showCompareValue(value: boolean) {
+        this._showCompareValue = value;
+    }
 
     ngOnInit() {
 

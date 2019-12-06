@@ -32,8 +32,25 @@ export class AthleteActivityResultSplitComponent implements OnInit {
     @Input()
     activityResultSplit: IActivityResultSplit;
 
+    private _showCompareValue: IActivityResult;
+    @Input()
+    get showCompareValue(): IActivityResult {
+        return this._showCompareValue;
+    }
+
+    set showCompareValue(value: IActivityResult) {
+        this._showCompareValue = value;
+    }
+
+    @Input()
+    index: number;
+
     ngOnInit() {
 
+    }
+
+    computedDifference(): number {
+        return this.athleteActivityResultSplit.value - this.athleteActivityResultSplit.compareValue;
     }
 
 

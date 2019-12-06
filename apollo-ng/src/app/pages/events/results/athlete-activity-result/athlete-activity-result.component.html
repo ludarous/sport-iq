@@ -1,24 +1,27 @@
 <div class="card">
     <div class="ui-g">
         <div class="ui-g-12 ui-md-4">
-            <label for="activity-result-value">{{activityResult.name}}</label>
+            <label
+                for="activity-result-value">{{activityResult.name + ' ' + '(' + activityResult.resultUnit.abbreviation + ')'}}</label>
         </div>
-        <div class="ui-g-11 ui-md-7">
-            <input id="activity-result-value" class="w-100" type="text" pInputText
+        <div class="ui-g-6 ui-md-3">
+            <input id="activity-result-value" type="text" pInputText
                    [(ngModel)]="athleteActivityResult.value"/>
         </div>
-        <div class="ui-g-1 ui-md-1">
-            <span>{{activityResult.resultUnit.abbreviation}}</span>
+
+        <div *ngIf="showCompareValue" class="ui-g-6 ui-md-3">
+            <input id="activity-result-compareValue" type="text" pInputText
+                   [(ngModel)]="athleteActivityResult.compareValue"/>
+        </div>
+        <div *ngIf="showCompareValue" class="ui-g-3 ui-md-2">
+            <span>{{computedDifference()}}</span>
         </div>
     </div>
-    <div class="ui-g">
-        <div class="ui-g-offset-4 ui-md-6">
-            <div class="ui-g">
-                <ng-container *ngFor="let aars of athleteActivityResult.athleteActivityResultSplits">
-                    <app-activity-result-split-general-result [athleteActivityResultSplit]="aars"
-                                                              [activityResultSplit]="getActivityResultSplit(aars)"></app-activity-result-split-general-result>
-                </ng-container>
-            </div>
-        </div>
-    </div>
+    <app-activity-result-split-general-result
+        *ngFor="let aars of athleteActivityResult.athleteActivityResultSplits; let i = index;"
+        [athleteActivityResultSplit]="aars"
+        [activityResultSplit]="getActivityResultSplit(aars)"
+        [showCompareValue]="showCompareValue"
+        [index]="i + 1">
+    </app-activity-result-split-general-result>
 </div>

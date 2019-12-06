@@ -2,11 +2,12 @@
     <div class="ui-g-12">
 
         <h1 *ngIf="activity">{{activity.name}}</h1>
+        <p-checkbox [(ngModel)]="showCompareValue" binary="true" [label]="'Zadat hodnoty s míčem' | translate"></p-checkbox>
         <div class="ui-g">
 
             <div class="ui-g-12">
                 <ng-container *ngFor="let aar of athleteActivity.athleteActivityResults; let index = index; trackBy: trackByIndex;">
-                    <app-activity-result-general-result [athleteActivityResult]="aar" [activityResult]="getActivityResult(aar)"></app-activity-result-general-result>
+                    <app-activity-result-general-result [athleteActivityResult]="aar" [activityResult]="getActivityResult(aar)" [showCompareValue]="showCompareValue"></app-activity-result-general-result>
                 </ng-container>
             </div>
 

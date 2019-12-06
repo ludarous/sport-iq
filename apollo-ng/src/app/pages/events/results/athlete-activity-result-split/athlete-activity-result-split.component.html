@@ -1,9 +1,16 @@
-<div class="splits-column">
-    <div>
-        <div>{{activityResultSplit.splitValue + ' ' + activityResultSplit.splitUnit.abbreviation}}</div>
+<div class="ui-g">
+    <div class="ui-g-offset-1 ui-g-11 ui-md-3">
+        <label>{{index + ('. mezivýsledek' | translate) + ' - ' + activityResultSplit.splitValue + ' ' + activityResultSplit.splitUnit.abbreviation}}</label>
     </div>
-    <div>
-        <input id="activity-result-split-value" class="w-100" type="text" pInputText [(ngModel)]="athleteActivityResultSplit.value"/>
+    <div class="ui-g-4 ui-md-3">
+        <input id="activity-result-split-value" type="text" pInputText
+               [(ngModel)]="athleteActivityResultSplit.value"/>
+    </div>
+    <div *ngIf="showCompareValue" class="ui-g-4 ui-md-3">
+        <input id="activity-result-split-compareValue" type="text" pInputText
+               [(ngModel)]="athleteActivityResultSplit.compareValue"/>
+    </div>
+    <div *ngIf="showCompareValue" class="ui-g-3 ui-md-2">
+        <span>{{computedDifference()}}</span>
     </div>
 </div>
-
