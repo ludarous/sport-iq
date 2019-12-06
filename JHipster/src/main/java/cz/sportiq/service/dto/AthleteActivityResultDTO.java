@@ -15,6 +15,8 @@ public class AthleteActivityResultDTO implements Serializable {
 
     private Float value;
 
+    private Float compareValue;
+
     private Long athleteActivityId;
 
     private Long activityResultId;
@@ -37,6 +39,14 @@ public class AthleteActivityResultDTO implements Serializable {
 
     public void setValue(Float value) {
         this.value = value;
+    }
+
+    public Float getCompareValue() {
+        return compareValue;
+    }
+
+    public void setCompareValue(Float compareValue) {
+        this.compareValue = compareValue;
     }
 
     public Long getAthleteActivityId() {
@@ -97,10 +107,10 @@ public class AthleteActivityResultDTO implements Serializable {
         return "AthleteActivityResultDTO{" +
             "id=" + getId() +
             ", value=" + getValue() +
+            ", compareValue=" + getCompareValue() +
             ", athleteActivity=" + getAthleteActivityId() +
             ", activityResult=" + getActivityResultId() +
             ", activityResult='" + getActivityResultName() + "'" +
             "}";
     }
-
 }

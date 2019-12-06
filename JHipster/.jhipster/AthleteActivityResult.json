@@ -4,6 +4,10 @@
         {
             "fieldName": "value",
             "fieldType": "Float"
+        },
+        {
+            "fieldName": "compareValue",
+            "fieldType": "Float"
         }
     ],
     "relationships": [

@@ -33,6 +33,9 @@ public class AthleteActivityResult implements Serializable {
     @Column(name = "jhi_value")
     private Float value;
 
+    @Column(name = "compare_value")
+    private Float compareValue;
+
     @ManyToOne
     @JsonIgnoreProperties("athleteActivityResults")
     private AthleteActivity athleteActivity;
@@ -66,6 +69,19 @@ public class AthleteActivityResult implements Serializable {
 
     public void setValue(Float value) {
         this.value = value;
+    }
+
+    public Float getCompareValue() {
+        return compareValue;
+    }
+
+    public AthleteActivityResult compareValue(Float compareValue) {
+        this.compareValue = compareValue;
+        return this;
+    }
+
+    public void setCompareValue(Float compareValue) {
+        this.compareValue = compareValue;
     }
 
     public AthleteActivity getAthleteActivity() {
@@ -145,6 +161,7 @@ public class AthleteActivityResult implements Serializable {
         return "AthleteActivityResult{" +
             "id=" + getId() +
             ", value=" + getValue() +
+            ", compareValue=" + getCompareValue() +
             "}";
     }
 }

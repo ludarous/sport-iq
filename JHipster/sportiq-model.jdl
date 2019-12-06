@@ -63,10 +63,12 @@ entity AthleteActivity {
 
 entity AthleteActivityResult {
 	value Float,
+	compareValue Float
 }
 
 entity AthleteActivityResultSplit {
 	value Float,
+	compareValue Float
 }
 
 entity Athlete {

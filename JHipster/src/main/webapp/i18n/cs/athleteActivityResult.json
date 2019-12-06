@@ -18,6 +18,7 @@
                 "title": "Athlete Activity Result"
             },
             "value": "Value",
+            "compareValue": "Compare Value",
             "athleteActivity": "Athlete Activity",
             "athleteActivityResultSplits": "Athlete Activity Result Splits",
             "activityResult": "Activity Result"

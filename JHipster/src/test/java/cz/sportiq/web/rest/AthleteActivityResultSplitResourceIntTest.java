@@ -52,6 +52,9 @@ public class AthleteActivityResultSplitResourceIntTest {
     private static final Float DEFAULT_VALUE = 1F;
     private static final Float UPDATED_VALUE = 2F;
 
+    private static final Float DEFAULT_COMPARE_VALUE = 1F;
+    private static final Float UPDATED_COMPARE_VALUE = 2F;
+
     @Autowired
     private AthleteActivityResultSplitRepository athleteActivityResultSplitRepository;
 
@@ -104,7 +107,8 @@ public class AthleteActivityResultSplitResourceIntTest {
      */
     public static AthleteActivityResultSplit createEntity(EntityManager em) {
         AthleteActivityResultSplit athleteActivityResultSplit = new AthleteActivityResultSplit()
-            .value(DEFAULT_VALUE);
+            .value(DEFAULT_VALUE)
+            .compareValue(DEFAULT_COMPARE_VALUE);
         // Add required entity
         ActivityResultSplit activityResultSplit = ActivityResultSplitResourceIntTest.createEntity(em);
         em.persist(activityResultSplit);
@@ -135,6 +139,7 @@ public class AthleteActivityResultSplitResourceIntTest {
         assertThat(athleteActivityResultSplitList).hasSize(databaseSizeBeforeCreate + 1);
         AthleteActivityResultSplit testAthleteActivityResultSplit = athleteActivityResultSplitList.get(athleteActivityResultSplitList.size() - 1);
         assertThat(testAthleteActivityResultSplit.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testAthleteActivityResultSplit.getCompareValue()).isEqualTo(DEFAULT_COMPARE_VALUE);
 
         // Validate the AthleteActivityResultSplit in Elasticsearch
         verify(mockAthleteActivityResultSplitSearchRepository, times(1)).save(testAthleteActivityResultSplit);
@@ -174,7 +179,8 @@ public class AthleteActivityResultSplitResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(athleteActivityResultSplit.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())))
+            .andExpect(jsonPath("$.[*].compareValue").value(hasItem(DEFAULT_COMPARE_VALUE.doubleValue())));
     }
     
     @Test
@@ -188,7 +194,8 @@ public class AthleteActivityResultSplitResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(athleteActivityResultSplit.getId().intValue()))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.doubleValue()));
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.doubleValue()))
+            .andExpect(jsonPath("$.compareValue").value(DEFAULT_COMPARE_VALUE.doubleValue()));
     }
 
     @Test
@@ -212,7 +219,8 @@ public class AthleteActivityResultSplitResourceIntTest {
         // Disconnect from session so that the updates on updatedAthleteActivityResultSplit are not directly saved in db
         em.detach(updatedAthleteActivityResultSplit);
         updatedAthleteActivityResultSplit
-            .value(UPDATED_VALUE);
+            .value(UPDATED_VALUE)
+            .compareValue(UPDATED_COMPARE_VALUE);
         AthleteActivityResultSplitDTO athleteActivityResultSplitDTO = athleteActivityResultSplitMapper.toDto(updatedAthleteActivityResultSplit);
 
         restAthleteActivityResultSplitMockMvc.perform(put("/api/athlete-activity-result-splits")
@@ -225,6 +233,7 @@ public class AthleteActivityResultSplitResourceIntTest {
         assertThat(athleteActivityResultSplitList).hasSize(databaseSizeBeforeUpdate);
         AthleteActivityResultSplit testAthleteActivityResultSplit = athleteActivityResultSplitList.get(athleteActivityResultSplitList.size() - 1);
         assertThat(testAthleteActivityResultSplit.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testAthleteActivityResultSplit.getCompareValue()).isEqualTo(UPDATED_COMPARE_VALUE);
 
         // Validate the AthleteActivityResultSplit in Elasticsearch
         verify(mockAthleteActivityResultSplitSearchRepository, times(1)).save(testAthleteActivityResultSplit);
@@ -285,7 +294,8 @@ public class AthleteActivityResultSplitResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(athleteActivityResultSplit.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())))
+            .andExpect(jsonPath("$.[*].compareValue").value(hasItem(DEFAULT_COMPARE_VALUE.doubleValue())));
     }
 
     @Test

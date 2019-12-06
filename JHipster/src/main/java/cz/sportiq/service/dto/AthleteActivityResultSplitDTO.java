@@ -13,11 +13,11 @@ public class AthleteActivityResultSplitDTO implements Serializable {
 
     private Float value;
 
+    private Float compareValue;
+
     private Long athleteActivityResultId;
 
     private Long activityResultSplitId;
-
-
 
     public Long getId() {
         return id;
@@ -33,6 +33,14 @@ public class AthleteActivityResultSplitDTO implements Serializable {
 
     public void setValue(Float value) {
         this.value = value;
+    }
+
+    public Float getCompareValue() {
+        return compareValue;
+    }
+
+    public void setCompareValue(Float compareValue) {
+        this.compareValue = compareValue;
     }
 
     public Long getAthleteActivityResultId() {
@@ -77,6 +85,7 @@ public class AthleteActivityResultSplitDTO implements Serializable {
         return "AthleteActivityResultSplitDTO{" +
             "id=" + getId() +
             ", value=" + getValue() +
+            ", compareValue=" + getCompareValue() +
             ", athleteActivityResult=" + getAthleteActivityResultId() +
             ", activityResultSplit=" + getActivityResultSplitId() +
             "}";

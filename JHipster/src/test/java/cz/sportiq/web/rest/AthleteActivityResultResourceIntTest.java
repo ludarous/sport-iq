@@ -52,6 +52,9 @@ public class AthleteActivityResultResourceIntTest {
     private static final Float DEFAULT_VALUE = 1F;
     private static final Float UPDATED_VALUE = 2F;
 
+    private static final Float DEFAULT_COMPARE_VALUE = 1F;
+    private static final Float UPDATED_COMPARE_VALUE = 2F;
+
     @Autowired
     private AthleteActivityResultRepository athleteActivityResultRepository;
 
@@ -104,7 +107,8 @@ public class AthleteActivityResultResourceIntTest {
      */
     public static AthleteActivityResult createEntity(EntityManager em) {
         AthleteActivityResult athleteActivityResult = new AthleteActivityResult()
-            .value(DEFAULT_VALUE);
+            .value(DEFAULT_VALUE)
+            .compareValue(DEFAULT_COMPARE_VALUE);
         // Add required entity
         ActivityResult activityResult = ActivityResultResourceIntTest.createEntity(em);
         em.persist(activityResult);
@@ -135,6 +139,7 @@ public class AthleteActivityResultResourceIntTest {
         assertThat(athleteActivityResultList).hasSize(databaseSizeBeforeCreate + 1);
         AthleteActivityResult testAthleteActivityResult = athleteActivityResultList.get(athleteActivityResultList.size() - 1);
         assertThat(testAthleteActivityResult.getValue()).isEqualTo(DEFAULT_VALUE);
+        assertThat(testAthleteActivityResult.getCompareValue()).isEqualTo(DEFAULT_COMPARE_VALUE);
 
         // Validate the AthleteActivityResult in Elasticsearch
         verify(mockAthleteActivityResultSearchRepository, times(1)).save(testAthleteActivityResult);
@@ -174,7 +179,8 @@ public class AthleteActivityResultResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(athleteActivityResult.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())))
+            .andExpect(jsonPath("$.[*].compareValue").value(hasItem(DEFAULT_COMPARE_VALUE.doubleValue())));
     }
     
     @Test
@@ -188,7 +194,8 @@ public class AthleteActivityResultResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(athleteActivityResult.getId().intValue()))
-            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.doubleValue()));
+            .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.doubleValue()))
+            .andExpect(jsonPath("$.compareValue").value(DEFAULT_COMPARE_VALUE.doubleValue()));
     }
 
     @Test
@@ -212,7 +219,8 @@ public class AthleteActivityResultResourceIntTest {
         // Disconnect from session so that the updates on updatedAthleteActivityResult are not directly saved in db
         em.detach(updatedAthleteActivityResult);
         updatedAthleteActivityResult
-            .value(UPDATED_VALUE);
+            .value(UPDATED_VALUE)
+            .compareValue(UPDATED_COMPARE_VALUE);
         AthleteActivityResultDTO athleteActivityResultDTO = athleteActivityResultMapper.toDto(updatedAthleteActivityResult);
 
         restAthleteActivityResultMockMvc.perform(put("/api/athlete-activity-results")
@@ -225,6 +233,7 @@ public class AthleteActivityResultResourceIntTest {
         assertThat(athleteActivityResultList).hasSize(databaseSizeBeforeUpdate);
         AthleteActivityResult testAthleteActivityResult = athleteActivityResultList.get(athleteActivityResultList.size() - 1);
         assertThat(testAthleteActivityResult.getValue()).isEqualTo(UPDATED_VALUE);
+        assertThat(testAthleteActivityResult.getCompareValue()).isEqualTo(UPDATED_COMPARE_VALUE);
 
         // Validate the AthleteActivityResult in Elasticsearch
         verify(mockAthleteActivityResultSearchRepository, times(1)).save(testAthleteActivityResult);
@@ -285,7 +294,8 @@ public class AthleteActivityResultResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(athleteActivityResult.getId().intValue())))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())));
+            .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())))
+            .andExpect(jsonPath("$.[*].compareValue").value(hasItem(DEFAULT_COMPARE_VALUE.doubleValue())));
     }
 
     @Test

@@ -31,6 +31,7 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="value"><span jhiTranslate="sportiqApp.athleteActivityResultSplit.value">Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="compareValue"><span jhiTranslate="sportiqApp.athleteActivityResultSplit.compareValue">Compare Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="athleteActivityResultId"><span jhiTranslate="sportiqApp.athleteActivityResultSplit.athleteActivityResult">Athlete Activity Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="activityResultSplitId"><span jhiTranslate="sportiqApp.athleteActivityResultSplit.activityResultSplit">Activity Result Split</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -40,6 +41,7 @@
             <tr *ngFor="let athleteActivityResultSplit of athleteActivityResultSplits ;trackBy: trackId">
                 <td><a [routerLink]="['/athlete-activity-result-split', athleteActivityResultSplit.id, 'view' ]">{{athleteActivityResultSplit.id}}</a></td>
                 <td>{{athleteActivityResultSplit.value}}</td>
+                <td>{{athleteActivityResultSplit.compareValue}}</td>
                 <td>
                     <div *ngIf="athleteActivityResultSplit.athleteActivityResultId">
                         <a [routerLink]="['../athlete-activity-result', athleteActivityResultSplit.athleteActivityResultId , 'view' ]" >{{athleteActivityResultSplit.athleteActivityResultId}}</a>
