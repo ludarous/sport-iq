@@ -158,8 +158,14 @@ public class AthleteWorkoutResource {
     @Timed
     public ResponseEntity<AthleteWorkoutDTO> getAthleteWorkoutByWorkoutIdAndAthleteEventId(@RequestParam Long workoutId, @RequestParam Long athleteEventId) {
         log.debug("REST request to get a page of AthleteWorkouts");
-        Optional<AthleteWorkoutDTO> athleteWorkoutDTO = athleteWorkoutService.findByWorkoutIdAndAthleteEventId(workoutId, athleteEventId);
-        return ResponseUtil.wrapOrNotFound(athleteWorkoutDTO);
+        AthleteWorkoutDTO athleteWorkoutDTO = athleteWorkoutService.findByWorkoutIdAndAthleteEventId(workoutId, athleteEventId);
+        if(athleteWorkoutDTO != null) {
+            return new ResponseEntity<>(athleteWorkoutDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
     }
 
 }

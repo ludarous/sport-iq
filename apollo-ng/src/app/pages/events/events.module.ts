@@ -22,6 +22,7 @@ import {AthleteActivityComponent} from './results/athlete-activity/athlete-activ
 import {AthleteActivityService} from '../../services/rest/athlete-activity.service';
 import {AthleteActivityResultComponent} from './results/athlete-activity-result/athlete-activity-result.component';
 import {AthleteActivityResultSplitComponent} from './results/athlete-activity-result-split/athlete-activity-result-split.component';
+import {EventResultsService} from './results/events-results.service';
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import {AthleteActivityResultSplitComponent} from './results/athlete-activity-re
         AthleteEventService,
         AthleteWorkoutService,
         AthleteActivityService,
+        EventResultsService,
     ],
     exports: [
         EventsComponent,

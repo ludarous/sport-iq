@@ -38,8 +38,8 @@
     <div class="ui-g">
         <div class="ui-g-12">
             <button pButton type="button" class="cyan-btn"
-                    [label]="!event?.id ? ('Vytvořit' | translate) : ('Uložit' | translate)"
-                    (click)="saveAthleteEvent(!!event.id)">
+                    [label]="('Uložit' | translate)"
+                    (click)="saveAthleteEvent()">
             </button>
         </div>
     </div>

@@ -158,7 +158,11 @@ public class AthleteEventResource {
     @Timed
     public ResponseEntity<AthleteEventDTO> getAthleteEventByEventIdAndAthleteId(@RequestParam Long eventId, @RequestParam Long athleteId) {
         log.debug("REST request to get a page of AthleteEvents");
-        Optional<AthleteEventDTO> athleteEventDTO = athleteEventService.findByEventIdAndAthleteId(eventId, athleteId);
-        return ResponseUtil.wrapOrNotFound(athleteEventDTO);
+        AthleteEventDTO athleteEventDTO = athleteEventService.findByEventIdAndAthleteId(eventId, athleteId);
+        if(athleteEventDTO != null) {
+            return new ResponseEntity<>(athleteEventDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

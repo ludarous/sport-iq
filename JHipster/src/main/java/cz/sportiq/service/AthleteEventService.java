@@ -43,7 +43,7 @@ public interface AthleteEventService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<AthleteEventDTO> findByEventIdAndAthleteId(Long eventId, Long athleteId);
+    AthleteEventDTO findByEventIdAndAthleteId(Long eventId, Long athleteId);
 
     /**
      * Delete the "id" athleteEvent.

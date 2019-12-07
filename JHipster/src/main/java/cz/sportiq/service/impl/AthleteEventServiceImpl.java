@@ -85,10 +85,16 @@ public class AthleteEventServiceImpl implements AthleteEventService {
     }
 
     @Override
-    public Optional<AthleteEventDTO> findByEventIdAndAthleteId(Long eventId, Long athleteId) {
-        log.debug("Request to get AthleteEvent : {}", eventId, athleteId);
-        return athleteEventRepository.findByEventIdAndAthleteId(eventId, athleteId)
-            .map(athleteEventMapper::toDto);
+    public AthleteEventDTO findByEventIdAndAthleteId(Long eventId, Long athleteId) {
+        Optional<AthleteEvent> athleteEvent = athleteEventRepository.findByEventIdAndAthleteId(eventId, athleteId);
+        if(athleteEvent.isPresent()) {
+            return athleteEventMapper.toDto(athleteEvent.get());
+        } else {
+            AthleteEventDTO athleteEventDTO = new AthleteEventDTO();
+            athleteEventDTO.setEventId(eventId);
+            athleteEventDTO.setAthleteId(athleteId);
+            return save(athleteEventDTO);
+        }
     }
 
     /**

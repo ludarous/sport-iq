@@ -1,25 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, zip} from 'rxjs';
-import {catchError, flatMap, map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {EventService} from '../../../services/rest/event.service';
-import {Event, IEvent} from '../../../entities/model/event.model';
-import {CalendarUtils} from '../../../modules/core/utils/calendar-utils';
-import {WorkoutService} from '../../../services/rest/workout.service';
-import {AthleteService} from '../../../services/rest/athlete.service';
+import {ActivatedRoute} from '@angular/router';
+import {EventResultsService} from './events-results.service';
+import {IAthlete} from '../../../entities/model/athlete.model';
+import {IEvent} from '../../../entities/model/event.model';
 import {IWorkout} from '../../../entities/model/workout.model';
 import {IActivity} from '../../../entities/model/activity.model';
-import {MenuItem, TreeNode} from 'primeng/api';
-import {IAthlete} from '../../../entities/model/athlete.model';
-import {AthleteEvent, IAthleteEvent} from '../../../entities/model/athlete-event.model';
-import {AthleteEventService} from '../../../services/rest/athlete-event.service';
-import {Location} from '@angular/common';
 import {IAthleteWorkout} from '../../../entities/model/athlete-workout.model';
 import {IAthleteActivity} from '../../../entities/model/athlete-activity.model';
-import {AthleteWorkoutService} from '../../../services/rest/athlete-workout.service';
-import {AthleteActivityService} from '../../../services/rest/athlete-activity.service';
 
 @Component({
     selector: 'app-events-results',
@@ -29,133 +16,70 @@ import {AthleteActivityService} from '../../../services/rest/athlete-activity.se
 })
 export class EventsResultsComponent implements OnInit {
 
-    constructor(private eventService: EventService,
-                private athleteEventService: AthleteEventService,
-                private athleteWorkoutService: AthleteWorkoutService,
-                private athleteActivityService: AthleteActivityService,
-                private workoutService: WorkoutService,
-                private athleteService: AthleteService,
-                private activatedRoute: ActivatedRoute,
-                private router: Router,
-                private location: Location) {
+    constructor(private eventResultsService: EventResultsService,
+                private activatedRoute: ActivatedRoute) {
     }
 
-    eventId: number;
-    event: IEvent;
-    selectedAthleteEvent: IAthleteEvent;
+    get event(): IEvent {
+        return this.eventResultsService.event;
+    }
 
-    selectedWorkout: IWorkout = null;
-    selectedWorkoutId: number;
-    selectedAthleteWorkout: IAthleteWorkout;
+    get selectedAthlete(): IAthlete {
+        return this.eventResultsService.selectedAthlete;
+    }
 
-    selectedActivity: IActivity = null;
-    selectedActivityId: number;
-    selectedAthleteActivity: IAthleteActivity;
+    get selectedAthleteEvent(): IAthlete {
+        return this.eventResultsService.selectedAthleteEvent;
+    }
 
-    selectedAthlete: IAthlete = null;
-    selectedAthleteId: number;
+    get selectedWorkout(): IWorkout {
+        return this.eventResultsService.selectedWorkout;
+    }
 
-    csLocale = CalendarUtils.calendarLocale.cs;
-    enLocale: any;
+    get selectedAthleteWorkout(): IAthleteWorkout {
+        return this.eventResultsService.selectedAthleteWorkout;
+    }
 
-    menuItems: Array<MenuItem> = new Array<MenuItem>();
-    workoutTreeNodes: Array<TreeNode> = new Array<TreeNode>();
-    athletesTreeNodes: Array<TreeNode> = new Array<TreeNode>();
-    selectedWorkoutNode: TreeNode;
-    selectedAthleteNode: TreeNode;
+    get selectedActivity(): IActivity {
+        return this.eventResultsService.selectedActivity;
+    }
+
+    get selectedAthleteActivity(): IAthleteActivity {
+        return this.eventResultsService.selectedAthleteActivity;
+    }
+
+
 
     ngOnInit() {
 
         const params$ = this.activatedRoute.params;
         params$.subscribe((params) => {
-
-            this.eventId = +params.id;
-            this.selectedAthleteId = +params.athleteId;
-            this.selectedWorkoutId = +params.workoutId;
-            this.selectedActivityId = +params.activityId;
-
-            const getEvent$ = this.eventService.getEvent(this.eventId);
-
-            getEvent$.subscribe((event: IEvent) => {
-                this.event = event;
-                if (this.selectedAthleteId) {
-                    const athlete = this.event.athletes.find(a => a.id === this.selectedAthleteId);
-                    this.selectAthlete(athlete);
-                }
-
-                if (this.selectedWorkoutId) {
-                    const workout = this.event.tests.find(w => w.id === this.selectedWorkoutId);
-                    this.selectWorkout(workout);
-                }
-
-                if (this.selectedActivityId && this.selectedWorkout) {
-                    const activity = this.selectedWorkout.activities.find(a => a.id === this.selectedActivityId);
-                    this.selectActivity(activity);
-                }
-            });
-
+            this.eventResultsService.init(+params.id,  +params.athleteId, +params.workoutId, +params.activityId)
         });
     }
 
     selectAthlete(athlete: IAthlete) {
-        if (athlete === null) {
-            this.selectedAthlete = null;
-            this.location.go(`/events/results/${this.eventId}`);
-        } else {
-            this.selectedAthlete = athlete;
-            this.athleteEventService
-                .getAthleteEvent(this.event.id, athlete.id)
-                .subscribe((athleteEvent: IAthleteEvent) => {
-                    this.selectedAthleteEvent = athleteEvent;
-                    this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}`);
-                });
-
-        }
+        this.eventResultsService.selectAthlete(athlete);
     }
 
     selectWorkout(workout: IWorkout) {
-        if (workout === null) {
-            this.selectedWorkout = null;
-            this.selectAthlete(this.selectedAthlete);
-        } else {
-            this.athleteWorkoutService
-                .getAthleteWorkout(workout.id, this.selectedAthleteEvent.id)
-                .subscribe((athleteWorkout: IAthleteWorkout) => {
-                    this.selectedAthleteWorkout = athleteWorkout;
-                    this.selectedWorkout = workout;
-                    this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}`);
-                });
-        }
+        this.eventResultsService.selectWorkout(workout);
     }
 
     selectActivity(activity: IActivity) {
-        if (activity === null) {
-            this.selectedActivity = null;
-            this.selectWorkout(this.selectedWorkout);
-        } else {
-
-            this.athleteActivityService
-                .getAthleteActivity(activity.id, this.selectedAthleteWorkout.id)
-                .subscribe((athleteActivity: IAthleteActivity) => {
-                    this.selectedAthleteActivity = athleteActivity;
-                    this.selectedActivity = activity;
-                    this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}/activity/${this.selectedActivity.id}`);
-                });
-        }
+        this.eventResultsService.selectActivity(activity);
     }
 
+
     showAthleteEventForm(): boolean {
-        return !!this.selectedAthlete &&
-            !!this.selectedAthleteEvent &&
-            !this.showAthleteWorkoutForm() &&
-            !this.showAthleteActivityForm();
+        return this.eventResultsService.showAthleteEventForm();
     }
 
     showAthleteWorkoutForm(): boolean {
-        return !!this.selectedWorkout && !!this.selectedAthleteWorkout && !this.showAthleteActivityForm();
+        return this.eventResultsService.showAthleteWorkoutForm();
     }
 
     showAthleteActivityForm(): boolean {
-        return !!this.selectedActivity && !!this.selectedAthleteActivity;
+        return this.eventResultsService.showAthleteActivityForm();
     }
 }

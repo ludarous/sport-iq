@@ -1,17 +1,16 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {zip} from 'rxjs';
 import {Location} from '@angular/common';
 import {IAthleteEvent} from '../../../../entities/model/athlete-event.model';
 import {IEvent} from '../../../../entities/model/event.model';
 import {IAthlete} from '../../../../entities/model/athlete.model';
 import {EventService} from '../../../../services/rest/event.service';
 import {AthleteService} from '../../../../services/rest/athlete.service';
-import {ToastService} from '../../../../modules/core/services/message.service';
 import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
 import {AthleteEventService} from '../../../../services/rest/athlete-event.service';
+import {EventResultsService} from '../events-results.service';
+import {IAthleteWorkout} from '../../../../entities/model/athlete-workout.model';
 
 @Component({
     selector: 'app-event-general-result',
@@ -19,63 +18,42 @@ import {AthleteEventService} from '../../../../services/rest/athlete-event.servi
     styleUrls: ['./athlete-event.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AthleteEventComponent implements OnInit, OnDestroy {
+export class AthleteEventComponent implements OnInit {
 
-    constructor(private eventService: EventService,
+    constructor(private eventResultsService: EventResultsService,
+                private eventService: EventService,
                 private athleteService: AthleteService,
                 private athleteEventService: AthleteEventService,
                 private activatedRoute: ActivatedRoute,
-                private ToastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
                 private formBuilder: FormBuilder,
                 private router: Router,
                 private location: Location) {
     }
 
-    private _event: IEvent;
-    @Input()
     get event(): IEvent {
-        return this._event;
+        return this.eventResultsService.event;
     }
 
-    set event(value: IEvent) {
-        this._event = value;
-    }
-
-
-    private _athlete: IAthlete
-    @Input()
     get athlete(): IAthlete {
-        return this._athlete;
+        return this.eventResultsService.selectedAthlete;
     }
 
-    set athlete(value: IAthlete) {
-        this._athlete = value;
-    }
-
-
-    private _athleteEvent: IAthleteEvent;
-    @Input()
     get athleteEvent(): IAthleteEvent {
-        return this._athleteEvent;
-    }
-
-    set athleteEvent(value: IAthleteEvent) {
-        this._athleteEvent = value;
+        return this.eventResultsService.selectedAthleteEvent;
     }
 
     athleteEventForm: FormGroup;
 
-
     ngOnInit() {
+
+        this.eventResultsService.selectedAthleteEventChange$.subscribe((athleteEvent: IAthleteEvent) => {
+            this.setAthleteEventForm(this.athleteEvent);
+        });
 
         if (this.athleteEvent) {
             this.setAthleteEventForm(this.athleteEvent);
         }
-    }
-
-    ngOnDestroy(): void {
-        this.saveAthleteEvent();
     }
 
     setAthleteEventForm(athleteEvent: IAthleteEvent) {
@@ -92,23 +70,9 @@ export class AthleteEventComponent implements OnInit, OnDestroy {
 
             const athleteEventToSave = this.athleteEventForm.value as IAthleteEvent;
 
-            let saveAthleteEvent$;
-            if (athleteEventToSave.id) {
-                saveAthleteEvent$ = this.athleteEventService.update(athleteEventToSave);
-            } else {
-                saveAthleteEvent$ = this.athleteEventService.create(athleteEventToSave);
-            }
-
-
-            saveAthleteEvent$.subscribe(
-                (athleteEventResponse: HttpResponse<IAthleteEvent>) => {
-                    this._athleteEvent = athleteEventResponse.body;
-                    this.setAthleteEventForm(this._athleteEvent);
-                    this.ToastService.showSuccess('Událost uložena');
-                },
-                (errorResponse: HttpErrorResponse) => {
-                    this.ToastService.showError('Událost nebyla uložena', errorResponse.error.detail);
-                });
+            this.eventResultsService.saveAthleteEvent(athleteEventToSave).subscribe((athleteEvent: IAthleteEvent) => {
+                this.setAthleteEventForm(athleteEvent);
+            });
         }
     }
 

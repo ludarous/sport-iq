@@ -10,6 +10,7 @@ import {ToastService} from '../../../../modules/core/services/message.service';
 import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
 import {AthleteWorkoutService} from '../../../../services/rest/athlete-workout.service';
 import {IAthleteEvent} from '../../../../entities/model/athlete-event.model';
+import {EventResultsService} from '../events-results.service';
 
 @Component({
     selector: 'app-workout-general-result',
@@ -17,9 +18,10 @@ import {IAthleteEvent} from '../../../../entities/model/athlete-event.model';
     styleUrls: ['./athlete-workout.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AthleteWorkoutComponent implements OnInit, OnDestroy {
+export class AthleteWorkoutComponent implements OnInit {
 
-    constructor(private athleteService: AthleteService,
+    constructor(private eventResultsService: EventResultsService,
+                private athleteService: AthleteService,
                 private athleteWorkoutService: AthleteWorkoutService,
                 private activatedRoute: ActivatedRoute,
                 private toastService: ToastService,
@@ -29,36 +31,16 @@ export class AthleteWorkoutComponent implements OnInit, OnDestroy {
                 private location: Location) {
     }
 
-    private _workout: IWorkout;
-    @Input()
     get workout(): IWorkout {
-        return this._workout;
+        return this.eventResultsService.selectedWorkout;
     }
 
-    set workout(value: IWorkout) {
-        this._workout = value;
-    }
-
-
-    private _athleteEvent: IAthleteEvent
-    @Input()
     get athleteEvent(): IAthleteEvent {
-        return this._athleteEvent;
+        return this.eventResultsService.selectedAthleteEvent;
     }
 
-    set athleteEvent(value: IAthleteEvent) {
-        this._athleteEvent = value;
-    }
-
-
-    private _athleteWorkout: IAthleteWorkout;
-    @Input()
     get athleteWorkout(): IAthleteWorkout {
-        return this._athleteWorkout;
-    }
-
-    set athleteWorkout(value: IAthleteWorkout) {
-        this._athleteWorkout = value;
+        return this.eventResultsService.selectedAthleteWorkout;
     }
 
     athleteWorkoutForm: FormGroup;
@@ -66,14 +48,14 @@ export class AthleteWorkoutComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        this.eventResultsService.selectedAthleteWorkoutChange$.subscribe((athleteWorkout: IAthleteWorkout) => {
+            this.setAthleteWorkoutForm(this.athleteWorkout);
+        });
+
         if (this.athleteWorkout) {
             this.setAthleteWorkoutForm(this.athleteWorkout);
         }
 
-    }
-
-    ngOnDestroy(): void {
-        this.saveAthleteWorkout();
     }
 
     setAthleteWorkoutForm(athleteWorkout: IAthleteWorkout) {
@@ -90,23 +72,9 @@ export class AthleteWorkoutComponent implements OnInit, OnDestroy {
 
             const athleteWorkoutToSave = this.athleteWorkoutForm.value as IAthleteWorkout;
 
-            let saveAthleteWorkout$;
-            if (athleteWorkoutToSave.id) {
-                saveAthleteWorkout$ = this.athleteWorkoutService.update(athleteWorkoutToSave);
-            } else {
-                saveAthleteWorkout$ = this.athleteWorkoutService.create(athleteWorkoutToSave);
-            }
-
-
-            saveAthleteWorkout$.subscribe(
-                (athleteWorkoutResponse: HttpResponse<IAthleteWorkout>) => {
-                    this._athleteWorkout = athleteWorkoutResponse.body;
-                    this.setAthleteWorkoutForm(this._athleteWorkout);
-                    this.toastService.showSuccess('Událost uložena');
-                },
-                (errorResponse: HttpErrorResponse) => {
-                    this.toastService.showError('Událost nebyla uložena', errorResponse.error.detail);
-                });
+            this.eventResultsService.saveAthleteWorkout(athleteWorkoutToSave).subscribe((athleteWorkout: IAthleteWorkout) => {
+                this.setAthleteWorkoutForm(athleteWorkout);
+            });
         }
     }
 

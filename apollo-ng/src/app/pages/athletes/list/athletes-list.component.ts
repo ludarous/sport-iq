@@ -24,7 +24,7 @@ export class AthletesListComponent implements OnInit {
         this.tableCols = [
             {field: 'lastName', header: 'Jméno', map: (v: IAthlete, c) => v.firstName + ' ' + v.lastName},
             {field: 'email', header: 'E-mail'},
-            {field: 'birthDate', header: 'Datum narození', map: (v: IAthlete, c) => v.birthDate.format('DD.MM.YYYY')},
+            {field: 'birthDate', header: 'Datum narození', map: (v: IAthlete, c) => v.birthDate ? v.birthDate.format('DD.MM.YYYY') : ''},
         ];
 
         this.load();

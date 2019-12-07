@@ -112,8 +112,15 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
     }
 
     @Override
-    public Optional<AthleteWorkoutDTO> findByWorkoutIdAndAthleteEventId(Long workoutId, Long athleteEventId) {
-        return athleteWorkoutRepository.findByWorkoutIdAndAthleteEventId(workoutId, athleteEventId)
-            .map(athleteWorkoutMapper::toDto);
+    public AthleteWorkoutDTO findByWorkoutIdAndAthleteEventId(Long workoutId, Long athleteEventId) {
+        Optional<AthleteWorkout> athleteWorkout = athleteWorkoutRepository.findByWorkoutIdAndAthleteEventId(workoutId, athleteEventId);
+        if(athleteWorkout.isPresent()) {
+            return athleteWorkoutMapper.toDto(athleteWorkout.get());
+        } else {
+            AthleteWorkoutDTO athleteWorkoutDTO = new AthleteWorkoutDTO();
+            athleteWorkoutDTO.setWorkoutId(workoutId);
+            athleteWorkoutDTO.setAthleteEventId(athleteEventId);
+            return save(athleteWorkoutDTO);
+        }
     }
 }

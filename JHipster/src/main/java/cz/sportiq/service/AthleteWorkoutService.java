@@ -54,5 +54,5 @@ public interface AthleteWorkoutService {
      */
     Page<AthleteWorkoutDTO> search(String query, Pageable pageable);
 
-    Optional<AthleteWorkoutDTO> findByWorkoutIdAndAthleteEventId(Long workoutId, Long athleteEventId);
+    AthleteWorkoutDTO findByWorkoutIdAndAthleteEventId(Long workoutId, Long athleteEventId);
 }
