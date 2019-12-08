@@ -66,8 +66,8 @@ export class EventsResultsComponent implements OnInit {
         this.eventResultsService.selectWorkout(workout);
     }
 
-    selectActivity(activity: IActivity) {
-        this.eventResultsService.selectActivity(activity);
+    selectActivity(activity: IActivity, workout: IWorkout) {
+        this.eventResultsService.selectActivity(activity, workout: IWorkout);
     }
 
 

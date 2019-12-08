@@ -2,38 +2,39 @@
     <div class="ui-g-12">
         <div class="card h-100">
             <h1 *ngIf="event">{{event.name}}</h1>
-            <h1 *ngIf="!event">{{'Nová událost' | translate}}</h1>
             <div class="ui-g">
+                <!--                <div class="ui-g-12 ui-md-2 list">-->
+                <!--                    <p-panel [header]="'Sportovec' | translate">-->
+                <!--                        <ul>-->
+                <!--                            <li *ngFor="let athlete of event.athletes" (click)="selectAthlete(athlete)" [ngClass]="{'selected' : selectedAthlete === athlete}">-->
+                <!--                                {{athlete.firstName + ' ' + athlete.lastName}}-->
+                <!--                            </li>-->
+                <!--                        </ul>-->
+                <!--                    </p-panel>-->
+                <!--                </div>-->
                 <div class="ui-g-12 ui-md-2 list">
-                    <p-panel [header]="'Sportovec' | translate">
+                    <p-panel>
                         <ul>
-                            <li *ngFor="let athlete of event.athletes" (click)="selectAthlete(athlete)" [ngClass]="{'selected' : selectedAthlete === athlete}">
-                                {{athlete.firstName + ' ' + athlete.lastName}}
-                            </li>
+                            <li [ngClass]="{'selected' : selectedWorkout === null}">{{'Obecné údaje události'}}</li>
                         </ul>
                     </p-panel>
-                </div>
-                <div *ngIf="selectedAthlete" class="ui-g-12 ui-md-2 list">
-                    <p-panel [header]="'Test' | translate">
-                        <ul>
-                            <li (click)="selectWorkout(null)" [ngClass]="{'selected' : selectedWorkout === null}">{{'Obecné údaje události'}}</li>
-                            <li *ngFor="let workout of event.tests" (click)="selectWorkout(workout)" [ngClass]="{'selected' : selectedWorkout === workout}">
-                                {{workout.name}}
-                            </li>
-                        </ul>
-                    </p-panel>
-                    <p-panel *ngIf="selectedAthlete && selectedWorkout" [header]="'Aktivita' | translate">
-                        <ul>
-                            <li (click)="selectActivity(null)" [ngClass]="{'selected' : selectedActivity === null}">{{'Obecné údaje testu'}}</li>
-                            <li *ngFor="let activity of selectedWorkout.activities" (click)="selectActivity(activity)" [ngClass]="{'selected' : selectedActivity === activity}">
-                                {{activity.name}}
-                            </li>
-                        </ul>
-                    </p-panel>
+                    <ng-container *ngFor="let workout of event.tests">
+                        <p-panel [header]="workout.name | translate">
+                            <ul>
+                                <li (click)="selectActivity(null, workout)"
+                                    [ngClass]="{'selected' : selectedActivity === null}">{{'Obecné údaje testu'}}</li>
+                                <li *ngFor="let activity of workout.activities"
+                                    (click)="selectActivity(activity, workout)"
+                                    [ngClass]="{'selected' : selectedActivity === activity}">
+                                    {{activity.name}}
+                                </li>
+                            </ul>
+                        </p-panel>
+                    </ng-container>
                 </div>
                 <div *ngIf="showAthleteEventForm()" class="ui-g-12 ui-md-8">
                     <p-panel [header]="'Obecné údaje události' | translate">
-                       <app-event-general-result></app-event-general-result>
+                        <app-event-general-result></app-event-general-result>
                     </p-panel>
                 </div>
                 <div *ngIf="showAthleteWorkoutForm()" class="ui-g-12 ui-md-8">

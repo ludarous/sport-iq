@@ -125,21 +125,9 @@ export class EventResultsService {
         }
     }
 
-    selectActivity(activity: IActivity) {
-        this.saveAll();
-        if (activity === null) {
-            this.selectedActivity = null;
-        } else {
-
-            this.athleteActivityService
-                .getAthleteActivity(activity.id, this.selectedAthleteWorkout.id)
-                .subscribe((athleteActivity: IAthleteActivity) => {
-                    this.selectedAthleteActivity = athleteActivity;
-                    this.selectedActivity = activity;
-                    this.selectedAthleteActivityChangeSource.next(this.selectedAthleteActivity);
-                    this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}/activity/${this.selectedActivity.id}`);
-                });
-        }
+    selectActivity(activity: IActivity, workout: IWorkout) {
+        this.selectedActivity = activity;
+        this.selectedWorkout = workout;
     }
 
     showAthleteEventForm(): boolean {
