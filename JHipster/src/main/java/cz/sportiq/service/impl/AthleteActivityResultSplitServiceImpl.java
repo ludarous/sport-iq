@@ -1,5 +1,7 @@
 package cz.sportiq.service.impl;
 
+import cz.sportiq.domain.ActivityResultSplit;
+import cz.sportiq.domain.AthleteActivityResult;
 import cz.sportiq.service.AthleteActivityResultSplitService;
 import cz.sportiq.domain.AthleteActivityResultSplit;
 import cz.sportiq.repository.AthleteActivityResultSplitRepository;
@@ -109,5 +111,21 @@ public class AthleteActivityResultSplitServiceImpl implements AthleteActivityRes
         log.debug("Request to search for a page of AthleteActivityResultSplits for query {}", query);
         return athleteActivityResultSplitSearchRepository.search(queryStringQuery(query), pageable)
             .map(athleteActivityResultSplitMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public AthleteActivityResultSplit findOrCreateAthleteActivityResultSplit(ActivityResultSplit activityResultSplit, AthleteActivityResult athleteActivityResult) {
+        AthleteActivityResultSplit athleteActivityResultSplit;
+        Optional<AthleteActivityResultSplit> athleteActivityResultSplitOptional =
+            athleteActivityResultSplitRepository.findByActivityResultSplitIdAndAthleteActivityResultId(activityResultSplit.getId(), athleteActivityResult.getId());
+        if (athleteActivityResultSplitOptional.isPresent()) {
+            athleteActivityResultSplit = athleteActivityResultSplitOptional.get();
+        } else {
+            athleteActivityResultSplit = new AthleteActivityResultSplit();
+            athleteActivityResultSplit.setAthleteActivityResult(athleteActivityResult);
+            athleteActivityResultSplit.setActivityResultSplit(activityResultSplit);
+        }
+        return athleteActivityResultSplitRepository.save(athleteActivityResultSplit);
     }
 }

@@ -15,7 +15,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ToastService} from '../../../modules/core/services/message.service';
 import {IAthleteActivityResult} from '../../../entities/model/athlete-activity-result.model';
 import {IActivityResult} from '../../../entities/model/activity-result.model';
-import {Observable, Subject} from 'rxjs';
+import { Observable, Subject, zip } from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
 @Injectable()
@@ -41,6 +41,8 @@ export class EventResultsService {
 
     eventId: number;
     event: IEvent;
+    allAthleteEvents: Array<IAthleteEvent>;
+
     selectedAthleteEvent: IAthleteEvent;
 
     selectedWorkout: IWorkout = null;
@@ -62,9 +64,12 @@ export class EventResultsService {
         this.selectedActivityId = activityId;
 
         const getEvent$ = this.eventService.getEvent(this.eventId);
+        const getAthleteEvents$ = this.athleteEventService.getAthleteEventsByEventId(this.eventId);
 
-        getEvent$.subscribe((event: IEvent) => {
+        zip(getEvent$, getAthleteEvents$).subscribe(([event, athleteEvents]) => {
             this.event = event;
+            this.allAthleteEvents = athleteEvents.body;
+
             if (this.selectedAthleteId) {
                 const athlete = this.event.athletes.find(a => a.id === this.selectedAthleteId);
                 this.selectAthlete(athlete);

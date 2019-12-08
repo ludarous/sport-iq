@@ -1,9 +1,10 @@
 package cz.sportiq.service.impl;
 
+import cz.sportiq.domain.*;
 import cz.sportiq.service.AthleteActivityResultService;
-import cz.sportiq.domain.AthleteActivityResult;
 import cz.sportiq.repository.AthleteActivityResultRepository;
 import cz.sportiq.repository.search.AthleteActivityResultSearchRepository;
+import cz.sportiq.service.AthleteActivityResultSplitService;
 import cz.sportiq.service.dto.AthleteActivityResultDTO;
 import cz.sportiq.service.mapper.AthleteActivityResultMapper;
 import org.slf4j.Logger;
@@ -33,10 +34,13 @@ public class AthleteActivityResultServiceImpl implements AthleteActivityResultSe
 
     private final AthleteActivityResultSearchRepository athleteActivityResultSearchRepository;
 
-    public AthleteActivityResultServiceImpl(AthleteActivityResultRepository athleteActivityResultRepository, AthleteActivityResultMapper athleteActivityResultMapper, AthleteActivityResultSearchRepository athleteActivityResultSearchRepository) {
+    private final AthleteActivityResultSplitService athleteActivityResultSplitService;
+
+    public AthleteActivityResultServiceImpl(AthleteActivityResultRepository athleteActivityResultRepository, AthleteActivityResultMapper athleteActivityResultMapper, AthleteActivityResultSearchRepository athleteActivityResultSearchRepository, AthleteActivityResultSplitService athleteActivityResultSplitService) {
         this.athleteActivityResultRepository = athleteActivityResultRepository;
         this.athleteActivityResultMapper = athleteActivityResultMapper;
         this.athleteActivityResultSearchRepository = athleteActivityResultSearchRepository;
+        this.athleteActivityResultSplitService = athleteActivityResultSplitService;
     }
 
     /**
@@ -109,5 +113,30 @@ public class AthleteActivityResultServiceImpl implements AthleteActivityResultSe
         log.debug("Request to search for a page of AthleteActivityResults for query {}", query);
         return athleteActivityResultSearchRepository.search(queryStringQuery(query), pageable)
             .map(athleteActivityResultMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public AthleteActivityResult findOrCreateAthleteActivityResult(ActivityResult activityResult, AthleteActivity athleteActivity) {
+
+        AthleteActivityResult athleteActivityResult;
+        Optional<AthleteActivityResult> athleteActivityResultOptional =
+            athleteActivityResultRepository.findByActivityResultIdAndAthleteActivityId(activityResult.getId(), athleteActivity.getId());
+        if (athleteActivityResultOptional.isPresent()) {
+            athleteActivityResult = athleteActivityResultOptional.get();
+        } else {
+            athleteActivityResult = new AthleteActivityResult();
+            athleteActivityResult.setActivityResult(activityResult);
+            athleteActivityResult.setAthleteActivity(athleteActivity);
+        }
+
+        athleteActivityResult = athleteActivityResultRepository.saveAndFlush(athleteActivityResult);
+
+        for(ActivityResultSplit activityResultSplit : activityResult.getResultSplits()) {
+            AthleteActivityResultSplit athleteActivityResultSplit =
+                athleteActivityResultSplitService.findOrCreateAthleteActivityResultSplit(activityResultSplit, athleteActivityResult);
+            athleteActivityResult.addAthleteActivityResultSplits(athleteActivityResultSplit);
+        }
+        return athleteActivityResultRepository.save(athleteActivityResult);
     }
 }

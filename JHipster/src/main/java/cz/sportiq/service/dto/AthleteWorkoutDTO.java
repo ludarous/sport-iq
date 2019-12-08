@@ -2,7 +2,9 @@ package cz.sportiq.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the AthleteWorkout entity.
@@ -18,6 +20,8 @@ public class AthleteWorkoutDTO implements Serializable {
     private Long workoutId;
 
     private String workoutName;
+
+    private Set<AthleteActivityDTO> athleteActivities = new HashSet<AthleteActivityDTO>();
 
     public Long getId() {
         return id;
@@ -59,6 +63,14 @@ public class AthleteWorkoutDTO implements Serializable {
         this.workoutName = workoutName;
     }
 
+    public Set<AthleteActivityDTO> getAthleteActivities() {
+        return athleteActivities;
+    }
+
+    public void setAthleteActivities(Set<AthleteActivityDTO> athleteActivities) {
+        this.athleteActivities = athleteActivities;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -90,4 +102,5 @@ public class AthleteWorkoutDTO implements Serializable {
             ", workout='" + getWorkoutName() + "'" +
             "}";
     }
+
 }

@@ -3,6 +3,7 @@ package cz.sportiq.service.impl;
 import cz.sportiq.domain.*;
 import cz.sportiq.repository.ActivityRepository;
 import cz.sportiq.repository.ActivityResultRepository;
+import cz.sportiq.service.AthleteActivityResultService;
 import cz.sportiq.service.AthleteActivityService;
 import cz.sportiq.repository.AthleteActivityRepository;
 import cz.sportiq.repository.search.AthleteActivitySearchRepository;
@@ -39,12 +40,15 @@ public class AthleteActivityServiceImpl implements AthleteActivityService {
 
     private final ActivityResultRepository activityResultRepository;
 
-    public AthleteActivityServiceImpl(AthleteActivityRepository athleteActivityRepository, AthleteActivityMapper athleteActivityMapper, AthleteActivitySearchRepository athleteActivitySearchRepository, ActivityRepository activityRepository, ActivityResultRepository activityResultRepository) {
+    private final AthleteActivityResultService athleteActivityResultService;
+
+    public AthleteActivityServiceImpl(AthleteActivityRepository athleteActivityRepository, AthleteActivityMapper athleteActivityMapper, AthleteActivitySearchRepository athleteActivitySearchRepository, ActivityRepository activityRepository, ActivityResultRepository activityResultRepository, AthleteActivityResultService athleteActivityResultService) {
         this.athleteActivityRepository = athleteActivityRepository;
         this.athleteActivityMapper = athleteActivityMapper;
         this.athleteActivitySearchRepository = athleteActivitySearchRepository;
         this.activityRepository = activityRepository;
         this.activityResultRepository = activityResultRepository;
+        this.athleteActivityResultService = athleteActivityResultService;
     }
 
     /**
@@ -171,5 +175,29 @@ public class AthleteActivityServiceImpl implements AthleteActivityService {
         AthleteActivityDTO result = athleteActivityMapper.toDto(athleteActivity);
         athleteActivitySearchRepository.save(athleteActivity);
         return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public AthleteActivity findOrCreateAthleteActivity(Activity activity, AthleteWorkout athleteWorkout) {
+
+        AthleteActivity athleteActivity;
+        Optional<AthleteActivity> athleteActivityOptional = athleteActivityRepository.findByActivityIdAndAthleteWorkoutId(activity.getId(), athleteWorkout.getId());
+        if (athleteActivityOptional.isPresent()) {
+            athleteActivity = athleteActivityOptional.get();
+        } else {
+            athleteActivity = new AthleteActivity();
+            athleteActivity.setActivity(activity);
+            athleteActivity.setAthleteWorkout(athleteWorkout);
+        }
+
+        athleteActivity = athleteActivityRepository.saveAndFlush(athleteActivity);
+
+        for(ActivityResult activityResult: activity.getActivityResults()) {
+            AthleteActivityResult athleteActivityResult =
+                athleteActivityResultService.findOrCreateAthleteActivityResult(activityResult, athleteActivity);
+            athleteActivity.addAthleteActivityResults(athleteActivityResult);
+        }
+        return athleteActivityRepository.save(athleteActivity);
     }
 }

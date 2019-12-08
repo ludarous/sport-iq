@@ -1,10 +1,15 @@
 package cz.sportiq.service;
 
+import cz.sportiq.domain.Athlete;
+import cz.sportiq.domain.AthleteEvent;
+import cz.sportiq.domain.Event;
 import cz.sportiq.service.dto.AthleteEventDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -44,6 +49,17 @@ public interface AthleteEventService {
      * @return the entity
      */
     AthleteEventDTO findByEventIdAndAthleteId(Long eventId, Long athleteId);
+
+    /**
+     * Get the "id" athleteEvent.
+     *
+     * @param eventId the id of the event
+     * @return the entity
+     */
+    List<AthleteEventDTO> findAllByEventId(Long eventId);
+
+    @Transactional(readOnly = true)
+    AthleteEvent findOrCreateAthleteEvent(Event event, Athlete athlete);
 
     /**
      * Delete the "id" athleteEvent.

@@ -165,4 +165,22 @@ public class AthleteEventResource {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    /**
+     * GET  /athlete-events/by-event-id : get the athleteEvent by eventId and athleteId
+     *
+     * @param eventId event Id
+     * @return the ResponseEntity with status 200 (OK) and the athleteEvent in body
+     */
+    @GetMapping("/athlete-events/by-event-id")
+    @Timed
+    public ResponseEntity<List<AthleteEventDTO>> getAthleteEventByEventId(@RequestParam Long eventId) {
+        log.debug("REST request to get a page of AthleteEvents");
+        List<AthleteEventDTO> athleteEventDTOs = athleteEventService.findAllByEventId(eventId);
+        if(athleteEventDTOs != null) {
+            return new ResponseEntity<>(athleteEventDTOs, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

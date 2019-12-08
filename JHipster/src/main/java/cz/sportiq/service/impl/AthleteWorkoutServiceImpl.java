@@ -1,11 +1,13 @@
 package cz.sportiq.service.impl;
 
+import cz.sportiq.domain.*;
+import cz.sportiq.service.AthleteActivityService;
 import cz.sportiq.service.AthleteWorkoutService;
-import cz.sportiq.domain.AthleteWorkout;
 import cz.sportiq.repository.AthleteWorkoutRepository;
 import cz.sportiq.repository.search.AthleteWorkoutSearchRepository;
 import cz.sportiq.service.dto.AthleteWorkoutDTO;
 import cz.sportiq.service.mapper.AthleteWorkoutMapper;
+import cz.sportiq.service.mapper.full.AthleteWorkoutFullMapperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,10 +35,13 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
 
     private final AthleteWorkoutSearchRepository athleteWorkoutSearchRepository;
 
-    public AthleteWorkoutServiceImpl(AthleteWorkoutRepository athleteWorkoutRepository, AthleteWorkoutMapper athleteWorkoutMapper, AthleteWorkoutSearchRepository athleteWorkoutSearchRepository) {
+    private final AthleteActivityService athleteActivityService;
+
+    public AthleteWorkoutServiceImpl(AthleteWorkoutRepository athleteWorkoutRepository, AthleteWorkoutMapper athleteWorkoutMapper, AthleteWorkoutSearchRepository athleteWorkoutSearchRepository, AthleteActivityService athleteActivityService) {
         this.athleteWorkoutRepository = athleteWorkoutRepository;
         this.athleteWorkoutMapper = athleteWorkoutMapper;
         this.athleteWorkoutSearchRepository = athleteWorkoutSearchRepository;
+        this.athleteActivityService = athleteActivityService;
     }
 
     /**
@@ -99,7 +104,7 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
     /**
      * Search for the athleteWorkout corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query    the query of the search
      * @param pageable the pagination information
      * @return the list of entities
      */
@@ -114,7 +119,7 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
     @Override
     public AthleteWorkoutDTO findByWorkoutIdAndAthleteEventId(Long workoutId, Long athleteEventId) {
         Optional<AthleteWorkout> athleteWorkout = athleteWorkoutRepository.findByWorkoutIdAndAthleteEventId(workoutId, athleteEventId);
-        if(athleteWorkout.isPresent()) {
+        if (athleteWorkout.isPresent()) {
             return athleteWorkoutMapper.toDto(athleteWorkout.get());
         } else {
             AthleteWorkoutDTO athleteWorkoutDTO = new AthleteWorkoutDTO();
@@ -122,5 +127,30 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
             athleteWorkoutDTO.setAthleteEventId(athleteEventId);
             return save(athleteWorkoutDTO);
         }
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public AthleteWorkout findOrCreateAthleteWorkout(Workout workout, AthleteEvent athleteEvent) {
+
+        AthleteWorkout athleteWorkout;
+        Optional<AthleteWorkout> athleteWorkoutOptional = athleteWorkoutRepository.findByWorkoutIdAndAthleteEventId(workout.getId(), athleteEvent.getId());
+        if (athleteWorkoutOptional.isPresent()) {
+            athleteWorkout = athleteWorkoutOptional.get();
+        } else {
+            athleteWorkout = new AthleteWorkout();
+            athleteWorkout.setWorkout(workout);
+            athleteWorkout.setAthleteEvent(athleteEvent);
+        }
+
+        athleteWorkout = athleteWorkoutRepository.saveAndFlush(athleteWorkout);
+
+        for (Activity activity : workout.getActivities()) {
+            AthleteActivity athleteActivity = athleteActivityService.findOrCreateAthleteActivity(activity, athleteWorkout);
+            athleteWorkout.addAthleteActivities(athleteActivity);
+        }
+
+        return athleteWorkoutRepository.save(athleteWorkout);
     }
 }

@@ -1,9 +1,13 @@
 package cz.sportiq.service;
 
+import cz.sportiq.domain.ActivityResult;
+import cz.sportiq.domain.AthleteActivity;
+import cz.sportiq.domain.AthleteActivityResult;
 import cz.sportiq.service.dto.AthleteActivityResultDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -48,9 +52,12 @@ public interface AthleteActivityResultService {
      * Search for the athleteActivityResult corresponding to the query.
      *
      * @param query the query of the search
-     * 
+     *
      * @param pageable the pagination information
      * @return the list of entities
      */
     Page<AthleteActivityResultDTO> search(String query, Pageable pageable);
+
+    @Transactional(readOnly = true)
+    AthleteActivityResult findOrCreateAthleteActivityResult(ActivityResult activityResult, AthleteActivity athleteActivity);
 }
