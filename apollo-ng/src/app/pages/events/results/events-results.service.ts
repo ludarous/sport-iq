@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {IAthlete} from '../../../entities/model/athlete.model';
 import {IAthleteEvent} from '../../../entities/model/athlete-event.model';
 import {IWorkout} from '../../../entities/model/workout.model';
-import {IAthleteWorkout} from '../../../entities/model/athlete-workout.model';
+import {AthleteWorkout, IAthleteWorkout} from '../../../entities/model/athlete-workout.model';
 import {IActivity} from '../../../entities/model/activity.model';
 import {IAthleteActivity} from '../../../entities/model/athlete-activity.model';
 import {IEvent} from '../../../entities/model/event.model';
@@ -15,7 +15,7 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ToastService} from '../../../modules/core/services/message.service';
 import {IAthleteActivityResult} from '../../../entities/model/athlete-activity-result.model';
 import {IActivityResult} from '../../../entities/model/activity-result.model';
-import { Observable, Subject, zip } from 'rxjs';
+import {Observable, Subject, zip} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 
 @Injectable()
@@ -69,65 +69,51 @@ export class EventResultsService {
         zip(getEvent$, getAthleteEvents$).subscribe(([event, athleteEvents]) => {
             this.event = event;
             this.allAthleteEvents = athleteEvents.body;
-
-            if (this.selectedAthleteId) {
-                const athlete = this.event.athletes.find(a => a.id === this.selectedAthleteId);
-                this.selectAthlete(athlete);
-            }
-
-            if (this.selectedWorkoutId) {
-                const workout = this.event.tests.find(w => w.id === this.selectedWorkoutId);
-                this.selectWorkout(workout);
-            }
-
-            if (this.selectedActivityId && this.selectedWorkout) {
-                const activity = this.selectedWorkout.activities.find(a => a.id === this.selectedActivityId);
-                this.selectActivity(activity);
-            }
         });
     }
 
-    selectAthlete(athlete: IAthlete) {
-        this.saveAll();
-        if (athlete === null) {
-            this.selectedAthlete = null;
-            this.location.go(`/events/results/${this.eventId}`);
-        } else {
-            this.athleteEventService
-                .getAthleteEvent(this.event.id, athlete.id)
-                .subscribe((athleteEvent: IAthleteEvent) => {
-                    this.selectedAthlete = athlete;
-                    this.selectedAthleteEvent = athleteEvent;
-                    this.selectedAthleteEventChangeSource.next(this.selectedAthleteEvent);
-                    this.selectWorkout(this.selectedWorkout);
-
-                    this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}`);
-                });
-
-        }
-    }
-
-    selectWorkout(workout: IWorkout) {
-        this.saveAll();
-        if (workout === null) {
-            this.selectedWorkout = null;
-        } else {
-            this.athleteWorkoutService
-                .getAthleteWorkout(workout.id, this.selectedAthleteEvent.id)
-                .subscribe((athleteWorkout: IAthleteWorkout) => {
-                    this.selectedAthleteWorkout = athleteWorkout;
-                    this.selectedWorkout = workout;
-                    this.selectedAthleteWorkoutChangeSource.next(this.selectedAthleteWorkout);
-                    this.selectActivity(this.selectedActivity);
-
-                    this.location.go(`/events/results/${this.eventId}/athlete/${this.selectedAthlete.id}/workout/${this.selectedWorkout.id}`);
-                });
-        }
-    }
 
     selectActivity(activity: IActivity, workout: IWorkout) {
         this.selectedActivity = activity;
         this.selectedWorkout = workout;
+    }
+
+    getAthlete(athleteId: number): IAthlete {
+        return this.event.athletes.find(a => a.id === athleteId);
+    }
+
+    getAthleteForAthleteWorkout(athleteWorkout: IAthleteWorkout): IAthlete {
+        const athleteEvent = this.getAthleteEvent(athleteWorkout.athleteEventId);
+        return this.getAthlete(athleteEvent.athleteId);
+    }
+
+    getAthleteForAthleteActivity(athleteWorkout: IAthleteWorkout): IAthlete {
+        const athleteEvent = this.getAt(athleteWorkout.athleteEventId);
+        return this.getAthlete(athleteEvent.athleteId);
+    }
+
+    getAthleteEvent(athleteEventId: number): IAthleteEvent {
+        return this.allAthleteEvents.find(ae => ae.id === athleteEventId);
+    }
+
+    getAthleteWorkouts(): Array<IAthleteWorkout> {
+        const selectedAthleteWorkouts = new Array<IAthleteWorkout>();
+        if (this.selectedWorkout) {
+            for (const athleteEvent of this.allAthleteEvents) {
+                selectedAthleteWorkouts.push(athleteEvent.athleteWorkouts.find(aw => aw.workoutId === this.selectedWorkout.id));
+            }
+        }
+        return selectedAthleteWorkouts;
+    }
+
+    getAthleteActivities(): Array<IAthleteActivity> {
+        const selectedAthleteActivities = new Array<IAthleteActivity>();
+        if (this.getAthleteWorkouts().length > 0 && this.selectedActivity) {
+            for (const athleteWorkout of this.getAthleteWorkouts()) {
+                selectedAthleteActivities.push(athleteWorkout.athleteActivities.find(aa => aa.activityId === this.selectedActivity.id));
+            }
+        }
+        return selectedAthleteActivities;
     }
 
     showAthleteEventForm(): boolean {

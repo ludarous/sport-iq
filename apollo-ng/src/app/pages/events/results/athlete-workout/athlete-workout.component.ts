@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -11,6 +11,7 @@ import {EnumTranslatorService} from '../../../../modules/shared-components/servi
 import {AthleteWorkoutService} from '../../../../services/rest/athlete-workout.service';
 import {IAthleteEvent} from '../../../../entities/model/athlete-event.model';
 import {EventResultsService} from '../events-results.service';
+import {IAthlete} from '../../../../entities/model/athlete.model';
 
 @Component({
     selector: 'app-workout-general-result',
@@ -31,17 +32,14 @@ export class AthleteWorkoutComponent implements OnInit {
                 private location: Location) {
     }
 
-    get workout(): IWorkout {
-        return this.eventResultsService.selectedWorkout;
-    }
+    @Input()
+    workout: IWorkout;
 
-    get athleteEvent(): IAthleteEvent {
-        return this.eventResultsService.selectedAthleteEvent;
-    }
+    @Input()
+    athlete: IAthlete;
 
-    get athleteWorkout(): IAthleteWorkout {
-        return this.eventResultsService.selectedAthleteWorkout;
-    }
+    @Input()
+    athleteWorkout: IAthleteWorkout;
 
     athleteWorkoutForm: FormGroup;
 
@@ -65,9 +63,6 @@ export class AthleteWorkoutComponent implements OnInit {
     }
 
     saveAthleteWorkout() {
-        this.athleteWorkoutForm.get('workoutId').setValue(this.workout.id);
-        this.athleteWorkoutForm.get('athleteEventId').setValue(this.athleteEvent.id);
-
         if (this.athleteWorkoutForm.valid) {
 
             const athleteWorkoutToSave = this.athleteWorkoutForm.value as IAthleteWorkout;

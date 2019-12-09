@@ -1,8 +1,7 @@
 <div class="ui-g" *ngIf="athleteEventForm">
     <div class="ui-g-12">
 
-        <h1 *ngIf="event">{{event.name}}</h1>
-        <h1 *ngIf="!event">{{'Nová událost' | translate}}</h1>
+        <h1 *ngIf="athlete">{{athlete.firstName + ' ' + athlete.lastName}}</h1>
         <div class="ui-g">
 
             <div class="ui-g-12">

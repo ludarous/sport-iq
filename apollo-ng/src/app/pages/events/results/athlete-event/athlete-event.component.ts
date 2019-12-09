@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
@@ -31,25 +31,18 @@ export class AthleteEventComponent implements OnInit {
                 private location: Location) {
     }
 
-    get event(): IEvent {
-        return this.eventResultsService.event;
-    }
+    @Input()
+    event: IEvent;
 
-    get athlete(): IAthlete {
-        return this.eventResultsService.selectedAthlete;
-    }
+    @Input()
+    athlete: IAthlete;
 
-    get athleteEvent(): IAthleteEvent {
-        return this.eventResultsService.selectedAthleteEvent;
-    }
+    @Input()
+    athleteEvent: IAthleteEvent;
 
     athleteEventForm: FormGroup;
 
     ngOnInit() {
-
-        this.eventResultsService.selectedAthleteEventChange$.subscribe((athleteEvent: IAthleteEvent) => {
-            this.setAthleteEventForm(this.athleteEvent);
-        });
 
         if (this.athleteEvent) {
             this.setAthleteEventForm(this.athleteEvent);
@@ -63,9 +56,6 @@ export class AthleteEventComponent implements OnInit {
     }
 
     saveAthleteEvent() {
-        this.athleteEventForm.get('eventId').setValue(this.event.id);
-        this.athleteEventForm.get('athleteId').setValue(this.athlete.id);
-
         if (this.athleteEventForm.valid) {
 
             const athleteEventToSave = this.athleteEventForm.value as IAthleteEvent;

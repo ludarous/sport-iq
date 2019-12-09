@@ -7,6 +7,7 @@ import {IWorkout} from '../../../entities/model/workout.model';
 import {IActivity} from '../../../entities/model/activity.model';
 import {IAthleteWorkout} from '../../../entities/model/athlete-workout.model';
 import {IAthleteActivity} from '../../../entities/model/athlete-activity.model';
+import {IAthleteEvent} from '../../../entities/model/athlete-event.model';
 
 @Component({
     selector: 'app-events-results',
@@ -48,6 +49,18 @@ export class EventsResultsComponent implements OnInit {
         return this.eventResultsService.selectedAthleteActivity;
     }
 
+    get athleteEvents(): Array<IAthleteEvent> {
+        return this.eventResultsService.allAthleteEvents;
+    }
+
+    get selectedAthleteWorkouts(): Array<IAthleteWorkout> {
+        return this.eventResultsService.getAthleteWorkouts();
+    }
+
+    get selectedAthleteActivities(): Array<IAthleteActivity> {
+        return this.eventResultsService.getAthleteActivities();
+    }
+
 
 
     ngOnInit() {
@@ -58,6 +71,11 @@ export class EventsResultsComponent implements OnInit {
         });
     }
 
+    getAthlete(athleteId: number) {
+        return this.eventResultsService.getAthlete(athleteId);
+    }
+
+
     selectAthlete(athlete: IAthlete) {
         this.eventResultsService.selectAthlete(athlete);
     }
@@ -67,7 +85,7 @@ export class EventsResultsComponent implements OnInit {
     }
 
     selectActivity(activity: IActivity, workout: IWorkout) {
-        this.eventResultsService.selectActivity(activity, workout: IWorkout);
+        this.eventResultsService.selectActivity(activity, workout);
     }
 
 

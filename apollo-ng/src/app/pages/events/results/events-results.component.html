@@ -3,49 +3,53 @@
         <div class="card h-100">
             <h1 *ngIf="event">{{event.name}}</h1>
             <div class="ui-g">
-                <!--                <div class="ui-g-12 ui-md-2 list">-->
-                <!--                    <p-panel [header]="'Sportovec' | translate">-->
-                <!--                        <ul>-->
-                <!--                            <li *ngFor="let athlete of event.athletes" (click)="selectAthlete(athlete)" [ngClass]="{'selected' : selectedAthlete === athlete}">-->
-                <!--                                {{athlete.firstName + ' ' + athlete.lastName}}-->
-                <!--                            </li>-->
-                <!--                        </ul>-->
-                <!--                    </p-panel>-->
-                <!--                </div>-->
                 <div class="ui-g-12 ui-md-2 list">
                     <p-panel>
                         <ul>
-                            <li [ngClass]="{'selected' : selectedWorkout === null}">{{'Obecné údaje události'}}</li>
+                            <li (click)="selectActivity(null, null)"
+                                [ngClass]="{'selected' : selectedWorkout === null}">{{'Obecné údaje události'}}</li>
                         </ul>
                     </p-panel>
                     <ng-container *ngFor="let workout of event.tests">
                         <p-panel [header]="workout.name | translate">
                             <ul>
                                 <li (click)="selectActivity(null, workout)"
-                                    [ngClass]="{'selected' : selectedActivity === null}">{{'Obecné údaje testu'}}</li>
+                                    [ngClass]="{'selected' : selectedActivity === null && selectedWorkout === workout}">{{'Obecné údaje testu'}}</li>
                                 <li *ngFor="let activity of workout.activities"
                                     (click)="selectActivity(activity, workout)"
-                                    [ngClass]="{'selected' : selectedActivity === activity}">
+                                    [ngClass]="{'selected' : selectedActivity === activity && selectedWorkout === workout}">
                                     {{activity.name}}
                                 </li>
                             </ul>
                         </p-panel>
                     </ng-container>
                 </div>
-                <div *ngIf="showAthleteEventForm()" class="ui-g-12 ui-md-8">
-                    <p-panel [header]="'Obecné údaje události' | translate">
-                        <app-event-general-result></app-event-general-result>
-                    </p-panel>
-                </div>
-                <div *ngIf="showAthleteWorkoutForm()" class="ui-g-12 ui-md-8">
-                    <p-panel [header]="selectedWorkout.name + ' - ' + ('Obecné údaje' | translate)">
-                        <app-workout-general-result></app-workout-general-result>
-                    </p-panel>
-                </div>
-                <div *ngIf="showAthleteActivityForm()" class="ui-g-12 ui-md-8">
-                    <p-panel [header]="selectedActivity.name + ' - ' + ('Výsldky' | translate)">
-                        <app-activity-general-result></app-activity-general-result>
-                    </p-panel>
+                <div class="ui-g-12 ui-md-10">
+                    <ng-container *ngFor="let athleteEvent of athleteEvents">
+                        <app-event-general-result [athleteEvent]="athleteEvent" [event]="event"
+                                                  [athlete]="getAthlete(athleteEvent.athleteId)"></app-event-general-result>
+                    </ng-container>
+
+                    <ng-container *ngFor="let athleteWorkout of selectedAthleteWorkouts">
+                        <app-workout-general-result [athleteWorkout]="athleteWorkout" [athlete]="getAthlete(athleteWorkout.)"></app-workout-general-result>
+                    </ng-container>
+
+
+                    <div *ngIf="showAthleteEventForm()" class="ui-g-12 ui-md-8">
+                        <p-panel [header]="'Obecné údaje události' | translate">
+                            <app-event-general-result></app-event-general-result>
+                        </p-panel>
+                    </div>
+                    <div *ngIf="showAthleteWorkoutForm()" class="ui-g-12 ui-md-8">
+                        <p-panel [header]="selectedWorkout.name + ' - ' + ('Obecné údaje' | translate)">
+                            <app-workout-general-result></app-workout-general-result>
+                        </p-panel>
+                    </div>
+                    <div *ngIf="showAthleteActivityForm()" class="ui-g-12 ui-md-8">
+                        <p-panel [header]="selectedActivity.name + ' - ' + ('Výsldky' | translate)">
+                            <app-activity-general-result></app-activity-general-result>
+                        </p-panel>
+                    </div>
                 </div>
             </div>
         </div>
