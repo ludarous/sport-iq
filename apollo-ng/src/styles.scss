@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/sass/variables";
 
 body {
     display: flex;
@@ -13,6 +14,18 @@ body {
 app-root {
     flex: 1;
     display: flex;
+}
+
+.primary {
+    color: $cyan;
+}
+
+.logo {
+    font-family: 'Ubuntu', sans-serif;
+    font-style: italic;
+    text-transform: none !important;
+    text-decoration: none !important;
+    color: white !important;
 }
 
 .layout-wrapper {
