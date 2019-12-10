@@ -20,23 +20,24 @@ export class AthleteEventsSummaryComponent implements OnInit {
     athlete: IAthlete;
     athleteEvents: Array<IAthleteEvent>;
 
-    dropDownEvents: Array<SelectItem>;
+    dropDownEvents: Array<SelectItem> = new Array<SelectItem>();
 
     ngOnInit() {
 
         this.athleteEventService.getAthleteEventsByAthleteId(this.athlete.id).subscribe((athleteEventsResponse: HttpResponse<Array<IAthleteEvent>>) => {
            this.athleteEvents = athleteEventsResponse.body;
+           for (const athleteEvent of this.athleteEvents) {
+               this.dropDownEvents.push({label: athleteEvent.eventName, value: athleteEvent});
+           }
         });
 
-        this.dropDownEvents = [
-            {
-                label: 'Událost 1',
-                value: new Event()
-            }
-        ];
+        // this.athleteEventService.getAthleteEventSummary(this)
+
     }
 
     eventSelected(event: any) {
-
+        this.athleteEventService.getAthleteEventSummary(event.value.eventId, this.athlete.id).subscribe((response: any) => {
+            console.log(response);
+        });
     }
 }

@@ -18,4 +18,6 @@ public interface AthleteEventRepository extends JpaRepository<AthleteEvent, Long
     Optional<AthleteEvent> findByEventIdAndAthleteId(Long eventId, Long athleteId);
 
     Set<AthleteEvent> findByAthleteId(Long athleteId);
+
+    Set<AthleteEvent> findByEventId(Long eventId);
 }

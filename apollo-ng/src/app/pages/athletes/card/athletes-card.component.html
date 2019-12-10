@@ -32,22 +32,24 @@
                                 <label>{{'Datum narození:' | translate}}</label>
                             </div>
                             <div class="ui-g-12 ui-md-8">
-                                <span>{{athlete.birthDate.format('MM.DD.YYYY')}}</span>
+                                <span>{{athlete.birthDate ? athlete.birthDate.format('MM.DD.YYYY') : ''}}</span>
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="ui-g">
-                <p-tabView class="flex-fill">
-                    <p-tabPanel [header]="'Výsledky' | translate">
-                       <app-athlete-events-summary [athlete]="athlete"></app-athlete-events-summary>
-                    </p-tabPanel>
-                    <p-tabPanel [header]="'Statistiky' | translate">
-                        Content 2
-                    </p-tabPanel>
-                </p-tabView>
+            <div class="card">
+                <div class="ui-g">
+                    <p-tabView class="flex-fill">
+                        <p-tabPanel [header]="'Výsledky' | translate">
+                            <app-athlete-events-summary *ngIf="athlete" [athlete]="athlete"></app-athlete-events-summary>
+                        </p-tabPanel>
+                        <p-tabPanel [header]="'Statistiky' | translate">
+                            Content 2
+                        </p-tabPanel>
+                    </p-tabView>
+                </div>
             </div>
         </div>
     </div>

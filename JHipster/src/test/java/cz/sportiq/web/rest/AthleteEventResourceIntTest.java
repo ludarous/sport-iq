@@ -8,6 +8,7 @@ import cz.sportiq.repository.AthleteEventRepository;
 import cz.sportiq.repository.search.AthleteEventSearchRepository;
 import cz.sportiq.service.AthleteEventService;
 import cz.sportiq.service.dto.AthleteEventDTO;
+import cz.sportiq.service.impl.custom.SummaryService;
 import cz.sportiq.service.mapper.AthleteEventMapper;
 import cz.sportiq.web.rest.errors.ExceptionTranslator;
 
@@ -63,7 +64,7 @@ public class AthleteEventResourceIntTest {
 
     @Autowired
     private AthleteEventMapper athleteEventMapper;
-    
+
     @Autowired
     private AthleteEventService athleteEventService;
 
@@ -87,6 +88,9 @@ public class AthleteEventResourceIntTest {
     @Autowired
     private EntityManager em;
 
+    @Autowired
+    private SummaryService summaryService;
+
     private MockMvc restAthleteEventMockMvc;
 
     private AthleteEvent athleteEvent;
@@ -94,7 +98,7 @@ public class AthleteEventResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final AthleteEventResource athleteEventResource = new AthleteEventResource(athleteEventService);
+        final AthleteEventResource athleteEventResource = new AthleteEventResource(athleteEventService, summaryService);
         this.restAthleteEventMockMvc = MockMvcBuilders.standaloneSetup(athleteEventResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -188,7 +192,7 @@ public class AthleteEventResourceIntTest {
             .andExpect(jsonPath("$.[*].actualHeightInCm").value(hasItem(DEFAULT_ACTUAL_HEIGHT_IN_CM.doubleValue())))
             .andExpect(jsonPath("$.[*].actualWeightInKg").value(hasItem(DEFAULT_ACTUAL_WEIGHT_IN_KG.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getAthleteEvent() throws Exception {

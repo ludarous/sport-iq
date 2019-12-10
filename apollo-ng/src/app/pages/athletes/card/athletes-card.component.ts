@@ -9,6 +9,7 @@ import {EnumTranslatorService} from '../../../modules/shared-components/services
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {MenuItem} from 'primeng/api';
+import {AthleteEventService} from '../../../services/rest/athlete-event.service';
 
 @Component({
     selector: 'app-activity-categories-edit',
@@ -19,6 +20,7 @@ import {MenuItem} from 'primeng/api';
 export class AthletesCardComponent implements OnInit {
 
     constructor(private athleteService: AthleteService,
+                private athleteEventService: AthleteEventService,
                 private activatedRoute: ActivatedRoute,
                 private toastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
@@ -27,7 +29,7 @@ export class AthletesCardComponent implements OnInit {
     }
 
     athleteId: number;
-    athlete: IAthlete = new Athlete();
+    athlete: IAthlete;
 
     cardMenuItems: Array<MenuItem>;
 
@@ -45,22 +47,22 @@ export class AthletesCardComponent implements OnInit {
             }
         ];
 
-        this.athlete.firstName = 'Luděk';
-        this.athlete.lastName = 'Rous';
-        this.athlete.birthDate = moment('01.11.1985', 'MM.DD.YYYY');
-        this.athlete.sex = Sex.MALE;
-        this.athlete.email = 'rousludek@gmail.com';
-        this.athlete.nationality = 'CZ';
-        // const params$ = this.activatedRoute.params;
-        // params$.subscribe((params) => {
-        //     this.athleteId = +params.id;
-        //     const getAthlete$ = this.athleteService.getAthlete(this.athleteId);
-        //
-        //     getAthlete$.subscribe((athlete: IAthlete) => {
-        //         this.athlete = athlete;
-        //     });
-        //
-        // });
+        // this.athlete.firstName = 'Luděk';
+        // this.athlete.lastName = 'Rous';
+        // this.athlete.birthDate = moment('01.11.1985', 'MM.DD.YYYY');
+        // this.athlete.sex = Sex.MALE;
+        // this.athlete.email = 'rousludek@gmail.com';
+        // this.athlete.nationality = 'CZ';
+        const params$ = this.activatedRoute.params;
+        params$.subscribe((params) => {
+            this.athleteId = +params.id;
+            const getAthlete$ = this.athleteService.getAthlete(this.athleteId);
+
+            getAthlete$.subscribe((athlete: IAthlete) => {
+                this.athlete = athlete;
+            });
+
+        });
     }
 
 }

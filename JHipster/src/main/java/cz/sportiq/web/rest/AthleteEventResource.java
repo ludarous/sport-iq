@@ -2,6 +2,8 @@ package cz.sportiq.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import cz.sportiq.service.AthleteEventService;
+import cz.sportiq.service.dto.custom.AthleteEventSummaryDTO;
+import cz.sportiq.service.impl.custom.SummaryService;
 import cz.sportiq.web.rest.errors.BadRequestAlertException;
 import cz.sportiq.web.rest.util.HeaderUtil;
 import cz.sportiq.web.rest.util.PaginationUtil;
@@ -22,9 +24,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing AthleteEvent.
@@ -39,8 +38,11 @@ public class AthleteEventResource {
 
     private final AthleteEventService athleteEventService;
 
-    public AthleteEventResource(AthleteEventService athleteEventService) {
+    private final SummaryService summaryService;
+
+    public AthleteEventResource(AthleteEventService athleteEventService, SummaryService summaryService) {
         this.athleteEventService = athleteEventService;
+        this.summaryService = summaryService;
     }
 
     /**
@@ -197,6 +199,24 @@ public class AthleteEventResource {
         List<AthleteEventDTO> athleteEventDTOs = athleteEventService.findAllByAthleteId(athleteId);
         if(athleteEventDTOs != null) {
             return new ResponseEntity<>(athleteEventDTOs, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * GET  /athlete-events/summary : get the athleteEvent by athleteId
+     *
+     * @param athleteId athlete Id
+     * @return the ResponseEntity with status 200 (OK) and the athleteEvent in body
+     */
+    @GetMapping("/athlete-events/summary")
+    @Timed
+    public ResponseEntity<AthleteEventSummaryDTO> getAthleteEventByAthleteId(@RequestParam Long eventId, @RequestParam Long athleteId) {
+        log.debug("REST request to get a page of AthleteEvents");
+        AthleteEventSummaryDTO athleteEventSummaryDTO = summaryService.getAthleteEventSummary(eventId, athleteId);
+        if(athleteEventSummaryDTO != null) {
+            return new ResponseEntity<>(athleteEventSummaryDTO, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
