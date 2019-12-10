@@ -1,36 +1,31 @@
-<div class="ui-g" *ngIf="athleteEventForm">
-    <div class="ui-g-12">
+<p-panel *ngIf="athleteEvent && athlete" [header]="getHeader()" [styleClass]="'result-panel'">
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <form class="form-group" *ngIf="athleteEventForm" [formGroup]="athleteEventForm"
+                  (submit)="saveAthleteEvent()">
+                <div class="ui-g-12 ui-md-4">
+                    <label for="height-in-cm">{{'Výška v cm' | translate}}</label>
+                </div>
+                <div class="ui-g-12 ui-md-8">
+                    <input id="height-in-cm" class="w-100" type="text" pInputText formControlName="actualHeightInCm"/>
+                </div>
 
-        <h1 *ngIf="athlete">{{athlete.firstName + ' ' + athlete.lastName}}</h1>
-        <div class="ui-g">
+                <div class="ui-g-12 ui-md-4">
+                    <label for="weight-in-kg">{{'Váha v kg' | translate}}</label>
+                </div>
+                <div class="ui-g-12 ui-md-8">
+                    <input id="weight-in-kg" class="w-100" type="text" pInputText formControlName="actualWeightInKg"/>
+                </div>
 
-            <div class="ui-g-12">
-                <form class="form-group" *ngIf="athleteEventForm" [formGroup]="athleteEventForm"
-                      (submit)="saveAthleteEvent()">
-                    <div class="ui-g-12 ui-md-4">
-                        <label for="height-in-cm">{{'Výška v cm' | translate}}</label>
-                    </div>
-                    <div class="ui-g-12 ui-md-8">
-                        <input id="height-in-cm" class="w-100" type="text" pInputText formControlName="actualHeightInCm"/>
-                    </div>
+                <div class="ui-g-12 ui-md-4">
+                    <label for="note">{{'Poznámka k události' | translate}}</label>
+                </div>
+                <div class="ui-g-12 ui-md-8">
+                    <textarea id="note" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize"
+                              formControlName="note"></textarea>
+                </div>
 
-                    <div class="ui-g-12 ui-md-4">
-                        <label for="weight-in-kg">{{'Váha v kg' | translate}}</label>
-                    </div>
-                    <div class="ui-g-12 ui-md-8">
-                        <input id="weight-in-kg" class="w-100" type="text" pInputText formControlName="actualWeightInKg"/>
-                    </div>
-
-                    <div class="ui-g-12 ui-md-4">
-                        <label for="note">{{'Poznámka k události' | translate}}</label>
-                    </div>
-                    <div class="ui-g-12 ui-md-8">
-                        <textarea id="note" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" formControlName="note"></textarea>
-                    </div>
-
-                </form>
-            </div>
-
+            </form>
         </div>
     </div>
 
@@ -42,5 +37,4 @@
             </button>
         </div>
     </div>
-
-</div>
+</p-panel>

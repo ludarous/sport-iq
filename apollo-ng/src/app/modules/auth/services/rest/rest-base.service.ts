@@ -19,7 +19,7 @@ export class CrudBaseService<T> {
         this.mappers = mappers;
         this.http = injector.get(HttpClient);
         this.translateService = injector.get(TranslateService);
-        this.ToastService = injector.get(ToastService);
+        this.toastService = injector.get(ToastService);
         this.authService = injector.get(AuthService);
         this.router = injector.get(Router);
     }
@@ -29,7 +29,7 @@ export class CrudBaseService<T> {
 
     protected http: HttpClient;
     protected translateService: TranslateService;
-    protected ToastService: ToastService;
+    protected toastService: ToastService;
     protected authService: AuthService;
     protected router: Router;
 
@@ -144,14 +144,14 @@ export class CrudBaseService<T> {
         if (error.status === 401) {
             this.authService.updateUser().subscribe(
                 (user: IUser) => {
-                    this.ToastService.showError(
+                    this.toastService.showError(
                         this.translateService.instant('Přístup zamítnut.'),
                         this.translateService.instant('Je nám líto, ale na tuto stránku nemáte oprávněný přístup.')
                     );
                 },
                 (accountError: HttpErrorResponse) => {
                     if (accountError.status === 401) {
-                        this.ToastService.showWarn(
+                        this.toastService.showWarn(
                             this.translateService.instant('Přihlášení vypršelo'),
                             this.translateService.instant('Je nám líto, ale přihlášení k aplikaci vypršelo. Prosím, přihlaste se znovu.')
                         );
@@ -160,7 +160,7 @@ export class CrudBaseService<T> {
                 }
             );
         } else if (error.status === 500) {
-            this.ToastService.showError(
+            this.toastService.showError(
                 this.translateService.instant('Chyba'),
                 this.translateService.instant('Nastala chyba na serveru')
             );

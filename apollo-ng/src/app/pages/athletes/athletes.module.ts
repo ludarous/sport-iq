@@ -8,16 +8,18 @@ import {AthletesListComponent} from './list/athletes-list.component';
 import {AthletesEditComponent} from './edit/athletes-edit.component';
 import {AthletesComponent} from './athletes.component';
 import {PrimeNgComponentsModule} from '../../shared/prime-ng-components.module';
-import {ToastService} from '../../modules/core/services/message.service';
-import {WorkoutService} from '../../services/rest/workout.service';
-import {ActivityService} from '../../services/rest/activity.service';
 import {AthleteService} from '../../services/rest/athlete.service';
+import {AthletesCardComponent} from './card/athletes-card.component';
+import { AthleteEventsSummaryComponent } from './card/athlete-events-summary/athlete-events-summary.component';
+import {AthleteEventService} from '../../services/rest/athlete-event.service';
 
 @NgModule({
     declarations: [
         AthletesComponent,
         AthletesListComponent,
         AthletesEditComponent,
+        AthletesCardComponent,
+        AthleteEventsSummaryComponent,
     ],
     imports: [
         CommonModule,
@@ -29,6 +31,7 @@ import {AthleteService} from '../../services/rest/athlete.service';
     ],
     providers: [
         AthleteService,
+        AthleteEventService,
     ],
     exports: [
         AthletesComponent,

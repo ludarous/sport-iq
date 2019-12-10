@@ -19,7 +19,7 @@ export class ActivityCategoriesListComponent implements OnInit {
     categoriesNodes: Array<TreeNode>;
 
     constructor(private activityCategoryService: ActivityCategoryService,
-                private ToastService: ToastService) {
+                private toastService: ToastService) {
     }
 
     ngOnInit() {
@@ -76,7 +76,7 @@ export class ActivityCategoriesListComponent implements OnInit {
             this.activityCategoryService.remove(category.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.ToastService.showError('Kategorii se nepodařilo smazat', errorResponse.message);
+                this.toastService.showError('Kategorii se nepodařilo smazat', errorResponse.message);
             });
         }
 

@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 
 /**
@@ -15,4 +16,6 @@ import java.util.Optional;
 public interface AthleteEventRepository extends JpaRepository<AthleteEvent, Long> {
 
     Optional<AthleteEvent> findByEventIdAndAthleteId(Long eventId, Long athleteId);
+
+    Set<AthleteEvent> findByAthleteId(Long athleteId);
 }

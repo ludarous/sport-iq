@@ -26,7 +26,7 @@ export class AthletesEditComponent implements OnInit {
 
     constructor(private athleteService: AthleteService,
                 private activatedRoute: ActivatedRoute,
-                private ToastService: ToastService,
+                private toastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
                 private formBuilder: FormBuilder,
                 private router: Router) {
@@ -85,11 +85,11 @@ export class AthletesEditComponent implements OnInit {
                 (athleteResponse: HttpResponse<IAthlete>) => {
                     this.athlete = athleteResponse.body;
                     this.setAthleteForm(this.athlete);
-                    this.ToastService.showSuccess('Sportovec uložen');
+                    this.toastService.showSuccess('Sportovec uložen');
                     this.router.navigate(['/athletes/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.ToastService.showError('Sportovec nebyl uložen', errorResponse.error.detail);
+                    this.toastService.showError('Sportovec nebyl uložen', errorResponse.error.detail);
                 });
         }
     }

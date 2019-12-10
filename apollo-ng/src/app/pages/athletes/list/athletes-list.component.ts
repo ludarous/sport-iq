@@ -16,7 +16,7 @@ export class AthletesListComponent implements OnInit {
     athletes: Array<IAthlete>;
 
     constructor(private athletesService: AthleteService,
-                private ToastService: ToastService) {
+                private toastService: ToastService) {
     }
 
     ngOnInit() {
@@ -48,7 +48,7 @@ export class AthletesListComponent implements OnInit {
             this.athletesService.remove(athlete.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.ToastService.showError('Sportovce se nepodařilo smazat', errorResponse.message);
+                this.toastService.showError('Sportovce se nepodařilo smazat', errorResponse.message);
             });
         }
 

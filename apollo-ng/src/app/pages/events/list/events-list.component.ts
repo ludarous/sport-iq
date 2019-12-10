@@ -15,7 +15,7 @@ export class EventsListComponent implements OnInit {
     events: Array<IEvent>;
 
     constructor(private eventsService: EventService,
-                private ToastService: ToastService) {
+                private toastService: ToastService) {
     }
 
     ngOnInit() {
@@ -47,7 +47,7 @@ export class EventsListComponent implements OnInit {
             this.eventsService.remove(event.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.ToastService.showError('Událost se nepodařilo smazat', errorResponse.message);
+                this.toastService.showError('Událost se nepodařilo smazat', errorResponse.message);
             });
         }
 

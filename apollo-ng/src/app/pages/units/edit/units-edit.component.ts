@@ -20,7 +20,7 @@ export class UnitsEditComponent implements OnInit {
 
     constructor(private unitService: UnitService,
                 private activatedRoute: ActivatedRoute,
-                private ToastService: ToastService,
+                private toastService: ToastService,
                 private router: Router) {
     }
 
@@ -72,11 +72,11 @@ export class UnitsEditComponent implements OnInit {
                 (unitResponse: HttpResponse<IUnit>) => {
                     this.unit = unitResponse.body;
                     this.setUnitForm(this.unit);
-                    this.ToastService.showSuccess('Jednotka uložena');
+                    this.toastService.showSuccess('Jednotka uložena');
                     this.router.navigate(['/units/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.ToastService.showError('Jednota nebyla uložena', errorResponse.error.detail);
+                    this.toastService.showError('Jednota nebyla uložena', errorResponse.error.detail);
                 });
         }
     }

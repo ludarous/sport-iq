@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IAthlete} from '../../../entities/model/athlete.model';
-import {IAthleteEvent} from '../../../entities/model/athlete-event.model';
+import {AthleteEvent, IAthleteEvent} from '../../../entities/model/athlete-event.model';
 import {IWorkout} from '../../../entities/model/workout.model';
 import {AthleteWorkout, IAthleteWorkout} from '../../../entities/model/athlete-workout.model';
 import {IActivity} from '../../../entities/model/activity.model';
@@ -43,25 +43,19 @@ export class EventResultsService {
     event: IEvent;
     allAthleteEvents: Array<IAthleteEvent>;
 
-    selectedAthleteEvent: IAthleteEvent;
-
     selectedWorkout: IWorkout = null;
-    selectedWorkoutId: number;
-    selectedAthleteWorkout: IAthleteWorkout;
-
     selectedActivity: IActivity = null;
-    selectedActivityId: number;
-    selectedAthleteActivity: IAthleteActivity;
 
-    selectedAthlete: IAthlete = null;
-    selectedAthleteId: number;
+    athleteEventAthleteMap: Map<IAthleteEvent, IAthlete> = new Map<IAthleteEvent, IAthlete>();
+    athleteWorkoutAthleteMap: Map<IAthleteWorkout, IAthlete> = new Map<IAthleteWorkout, IAthlete>();
+    athleteActivityAthleteMap: Map<IAthleteActivity, IAthlete> = new Map<IAthleteActivity, IAthlete>();
+
+    athleteWorkoutWorkoutMap: Map<IAthleteWorkout, IWorkout> = new Map<IAthleteWorkout, IWorkout>();
+    athleteActivityActivityMap: Map<IAthleteActivity, IActivity> = new Map<IAthleteActivity, IActivity>();
 
     init(eventId: number, athleteId?: number, workoutId?: number, activityId?: number) {
 
         this.eventId = eventId;
-        this.selectedAthleteId = athleteId;
-        this.selectedWorkoutId = workoutId;
-        this.selectedActivityId = activityId;
 
         const getEvent$ = this.eventService.getEvent(this.eventId);
         const getAthleteEvents$ = this.athleteEventService.getAthleteEventsByEventId(this.eventId);
@@ -69,7 +63,27 @@ export class EventResultsService {
         zip(getEvent$, getAthleteEvents$).subscribe(([event, athleteEvents]) => {
             this.event = event;
             this.allAthleteEvents = athleteEvents.body;
+            this.setMaps();
         });
+    }
+
+    setMaps() {
+        for (const athleteEvent of this.allAthleteEvents) {
+            const athlete = this.event.athletes.find(a => a.id === athleteEvent.athleteId);
+            this.athleteEventAthleteMap.set(athleteEvent, athlete);
+
+            for (const athleteWorkout of athleteEvent.athleteWorkouts) {
+                const workout = this.event.tests.find(w => w.id === athleteWorkout.workoutId);
+                this.athleteWorkoutAthleteMap.set(athleteWorkout, athlete);
+                this.athleteWorkoutWorkoutMap.set(athleteWorkout, workout);
+
+                for (const athleteActivity of athleteWorkout.athleteActivities) {
+                    const activity = workout.activities.find(a => a.id === athleteActivity.activityId);
+                    this.athleteActivityAthleteMap.set(athleteActivity, athlete);
+                    this.athleteActivityActivityMap.set(athleteActivity, activity);
+                }
+            }
+        }
     }
 
 
@@ -78,22 +92,16 @@ export class EventResultsService {
         this.selectedWorkout = workout;
     }
 
-    getAthlete(athleteId: number): IAthlete {
-        return this.event.athletes.find(a => a.id === athleteId);
+    getAthleteForAthleteEvent(athleteEvent: IAthleteEvent): IAthlete {
+        return this.athleteEventAthleteMap.get(athleteEvent);
     }
 
     getAthleteForAthleteWorkout(athleteWorkout: IAthleteWorkout): IAthlete {
-        const athleteEvent = this.getAthleteEvent(athleteWorkout.athleteEventId);
-        return this.getAthlete(athleteEvent.athleteId);
+        return this.athleteWorkoutAthleteMap.get(athleteWorkout);
     }
 
-    getAthleteForAthleteActivity(athleteWorkout: IAthleteWorkout): IAthlete {
-        const athleteEvent = this.getAt(athleteWorkout.athleteEventId);
-        return this.getAthlete(athleteEvent.athleteId);
-    }
-
-    getAthleteEvent(athleteEventId: number): IAthleteEvent {
-        return this.allAthleteEvents.find(ae => ae.id === athleteEventId);
+    getAthleteForAthleteActivity(athleteActivity: IAthleteActivity): IAthlete {
+        return this.athleteActivityAthleteMap.get(athleteActivity);
     }
 
     getAthleteWorkouts(): Array<IAthleteWorkout> {
@@ -116,42 +124,14 @@ export class EventResultsService {
         return selectedAthleteActivities;
     }
 
-    showAthleteEventForm(): boolean {
-        return !!this.selectedAthlete &&
-            !!this.selectedAthleteEvent &&
-            !this.showAthleteWorkoutForm() &&
-            !this.showAthleteActivityForm();
-    }
-
-    showAthleteWorkoutForm(): boolean {
-        return !!this.selectedWorkout && !!this.selectedAthleteEvent && !!this.selectedAthleteWorkout && !this.showAthleteActivityForm();
-    }
-
-    showAthleteActivityForm(): boolean {
-        return !!this.selectedActivity && !!this.selectedAthleteActivity && !!this.selectedAthleteWorkout;
-    }
 
     getActivityResult(athleteActivityResult: IAthleteActivityResult): IActivityResult {
         const activityResult = this.selectedActivity.activityResults.find(ar => ar.id === athleteActivityResult.activityResultId);
         return activityResult;
     }
 
-    saveAll() {
-        if (this.selectedAthleteEvent) {
-            this.saveAthleteEvent(this.selectedAthleteEvent).subscribe();
-        }
 
-        if (this.selectedAthleteWorkout) {
-            this.saveAthleteWorkout(this.selectedAthleteWorkout).subscribe();
-        }
-
-        if (this.selectedActivity) {
-            this.saveAthleteActivity();
-        }
-    }
-
-    saveAthleteActivity(): Observable<IAthleteActivity> {
-        const athleteActivityToSave = this.selectedAthleteActivity;
+    saveAthleteActivity(athleteActivityToSave: IAthleteActivity): Observable<IAthleteActivity> {
 
         let saveAthleteActivity$;
         if (athleteActivityToSave.id) {
@@ -162,8 +142,8 @@ export class EventResultsService {
 
         return saveAthleteActivity$.pipe(map(
             (athleteActivityResponse: HttpResponse<IAthleteActivity>) => {
-                this.selectedAthleteActivity = athleteActivityResponse.body;
                 this.toastService.showSuccess('Výsledky aktivity uloženy');
+                return athleteActivityResponse.body;
             }),
             catchError((errorResponse: HttpErrorResponse, caught) => {
                 this.toastService.showError('Výsledky aktivity nebyly uložena', errorResponse.error.detail);
@@ -183,7 +163,7 @@ export class EventResultsService {
         return saveAthleteWorkout$.pipe(map
             ((athleteWorkoutResponse: HttpResponse<IAthleteWorkout>) => {
                 this.toastService.showSuccess('Obecné informace k testu uloženy');
-                return athleteWorkoutResponse;
+                return athleteWorkoutResponse.body;
             }),
             catchError((errorResponse: HttpErrorResponse, caught) => {
                 this.toastService.showError('Obecné informace k testu uloženy', errorResponse.error.detail);
@@ -203,7 +183,7 @@ export class EventResultsService {
         return saveAthleteEvent$.pipe(map(
             (athleteEventResponse: HttpResponse<IAthleteEvent>) => {
                 this.toastService.showSuccess('Událost uložena');
-                return athleteEventResponse;
+                return athleteEventResponse.body;
             }),
             catchError((errorResponse: HttpErrorResponse, caught) => {
                 this.toastService.showError('Událost nebyla uložena', errorResponse.error.detail);

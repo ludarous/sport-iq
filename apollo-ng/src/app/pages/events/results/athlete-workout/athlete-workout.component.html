@@ -1,33 +1,26 @@
-<div class="ui-g" *ngIf="athleteWorkoutForm">
-    <div class="ui-g-12">
-
-        <h1 *ngIf="workout">{{workout.name}}</h1>
-        <div class="ui-g">
-
-            <div class="ui-g-12">
-                <form class="form-group" *ngIf="athleteWorkoutForm" [formGroup]="athleteWorkoutForm"
-                      (submit)="saveAthleteWorkout()">
-
-                    <div class="ui-g-12 ui-md-4">
-                        <label for="note">{{'Poznámka k události' | translate}}</label>
-                    </div>
-                    <div class="ui-g-12 ui-md-8">
-                        <textarea id="note" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize" formControlName="note"></textarea>
-                    </div>
-
-                </form>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="ui-g">
+<p-panel *ngIf="athlete" [header]="getHeader()" [styleClass]="'result-panel'">
+    <div class="ui-g" *ngIf="athleteWorkoutForm">
         <div class="ui-g-12">
-            <button pButton type="button" class="cyan-btn"
-                    [label]="('Uložit' | translate)"
-                    (click)="saveAthleteWorkout()">
-            </button>
+            <form class="form-group" *ngIf="athleteWorkoutForm" [formGroup]="athleteWorkoutForm"
+                  (submit)="saveAthleteWorkout()">
+
+                <div class="ui-g-12 ui-md-4">
+                    <label for="note">{{'Poznámka k události' | translate}}</label>
+                </div>
+                <div class="ui-g-12 ui-md-8">
+                    <textarea id="note" [rows]="3" [cols]="30" pInputTextarea autoResize="autoResize"
+                              formControlName="note"></textarea>
+                </div>
+            </form>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <button pButton type="button" class="cyan-btn"
+                        [label]="('Uložit' | translate)"
+                        (click)="saveAthleteWorkout()">
+                </button>
+            </div>
         </div>
     </div>
-
-</div>
+</p-panel>

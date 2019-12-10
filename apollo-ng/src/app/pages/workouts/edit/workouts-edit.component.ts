@@ -22,7 +22,7 @@ export class WorkoutsEditComponent implements OnInit {
     constructor(private workoutService: WorkoutService,
                 private activityService: ActivityService,
                 private activatedRoute: ActivatedRoute,
-                private ToastService: ToastService,
+                private toastService: ToastService,
                 private formBuilder: FormBuilder,
                 private router: Router) {
     }
@@ -80,11 +80,11 @@ export class WorkoutsEditComponent implements OnInit {
                 (workoutResponse: HttpResponse<IWorkout>) => {
                     this.workout = workoutResponse.body;
                     this.setWorkoutForm(this.workout);
-                    this.ToastService.showSuccess('Test uložen');
+                    this.toastService.showSuccess('Test uložen');
                     this.router.navigate(['/workouts/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.ToastService.showError('Test nebyl uložen', errorResponse.error.detail);
+                    this.toastService.showError('Test nebyl uložen', errorResponse.error.detail);
                 });
         }
     }

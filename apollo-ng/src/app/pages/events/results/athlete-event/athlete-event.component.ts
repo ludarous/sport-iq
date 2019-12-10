@@ -40,6 +40,9 @@ export class AthleteEventComponent implements OnInit {
     @Input()
     athleteEvent: IAthleteEvent;
 
+    @Input()
+    athleteOrder: number;
+
     athleteEventForm: FormGroup;
 
     ngOnInit() {
@@ -47,6 +50,10 @@ export class AthleteEventComponent implements OnInit {
         if (this.athleteEvent) {
             this.setAthleteEventForm(this.athleteEvent);
         }
+    }
+
+    getHeader() {
+        return (this.athleteOrder ? (this.athleteOrder + '. ') : '') +  this.athlete.firstName + ' ' + this.athlete.lastName;
     }
 
     setAthleteEventForm(athleteEvent: IAthleteEvent) {

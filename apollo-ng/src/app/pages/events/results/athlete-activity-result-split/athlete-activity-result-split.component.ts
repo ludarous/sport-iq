@@ -14,6 +14,7 @@ import {IActivityResult} from '../../../../entities/model/activity-result.model'
 import {IActivityResultSplit} from '../../../../entities/model/activity-result-split.model';
 import {IAthleteActivityResult} from '../../../../entities/model/athlete-activity-result.model';
 import {IAthleteActivityResultSplit} from '../../../../entities/model/athlete-activity-result-split.model';
+import {ActivityResultSettings} from '../athlete-activity/athlete-activity.component';
 
 @Component({
     selector: 'app-activity-result-split-general-result',
@@ -32,25 +33,43 @@ export class AthleteActivityResultSplitComponent implements OnInit {
     @Input()
     activityResultSplit: IActivityResultSplit;
 
-    private _showCompareValue: IActivityResult;
+    private _activityResultSettings = new ActivityResultSettings();
     @Input()
-    get showCompareValue(): IActivityResult {
-        return this._showCompareValue;
+    get activityResultSettings(): ActivityResultSettings {
+        return this._activityResultSettings;
     }
 
-    set showCompareValue(value: IActivityResult) {
-        this._showCompareValue = value;
+    set activityResultSettings(value: ActivityResultSettings) {
+        this._activityResultSettings = value;
     }
 
     @Input()
     index: number;
 
     ngOnInit() {
+        if (this.athleteActivityResultSplit.compareValue) {
+            this.activityResultSettings.showCompareValue = true;
+        }
+    }
 
+    fix(value: number): string {
+        return value.toFixed(2);
     }
 
     computedDifference(): number {
-        return this.athleteActivityResultSplit.value - this.athleteActivityResultSplit.compareValue;
+        if (this.athleteActivityResultSplit.value && this.athleteActivityResultSplit.compareValue) {
+            return (this.athleteActivityResultSplit.value - this.athleteActivityResultSplit.compareValue);
+        }
+        return null;
+    }
+
+    computedDifferenceInPercents(): number {
+        if (this.athleteActivityResultSplit.value && this.athleteActivityResultSplit.compareValue) {
+            const result = (this.computedDifference() / this.athleteActivityResultSplit.value) * 100;
+            return result;
+        }
+
+        return null;
     }
 
 

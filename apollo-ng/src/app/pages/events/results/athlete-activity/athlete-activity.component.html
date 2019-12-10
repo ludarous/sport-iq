@@ -1,26 +1,30 @@
-<div class="ui-g" *ngIf="athleteActivity">
-    <div class="ui-g-12">
-
-        <h1 *ngIf="activity">{{activity.name}}</h1>
-        <p-checkbox [(ngModel)]="showCompareValue" binary="true" [label]="'Zadat hodnoty s míčem' | translate"></p-checkbox>
-        <div class="ui-g">
-
-            <div class="ui-g-12">
-                <ng-container *ngFor="let aar of athleteActivity.athleteActivityResults; let index = index; trackBy: trackByIndex;">
-                    <app-activity-result-general-result [athleteActivityResult]="aar" [activityResult]="getActivityResult(aar)" [showCompareValue]="showCompareValue"></app-activity-result-general-result>
-                </ng-container>
-            </div>
-
+<p-panel *ngIf="athleteActivity && athlete" [header]="getHeader()" [styleClass]="'result-panel'">
+    <p-checkbox [(ngModel)]="activityResultSettings.showCompareValue" binary="true" [label]="'Zadat hodnoty s míčem' | translate"></p-checkbox>
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-4">
+            <label>{{'Poznámka' | translate}}</label>
+        </div>
+        <div class="ui-g-12 ui-md-8">
+            <textarea [rows]="3" [(ngModel)]="athleteActivity.note" class="w-100" pInputTextarea autoResize="autoResize"></textarea>
+        </div>
+    </div>
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <ng-container
+                *ngFor="let aar of athleteActivity.athleteActivityResults; let index = index; trackBy: trackByIndex;">
+                <app-activity-result-general-result [athleteActivityResult]="aar"
+                                                    [activityResult]="getActivityResult(aar)"
+                                                    [activityResultSettings]="activityResultSettings"></app-activity-result-general-result>
+            </ng-container>
         </div>
     </div>
 
     <div class="ui-g">
         <div class="ui-g-12">
             <button pButton type="button" class="cyan-btn"
-                    [label]="!activity?.id ? ('Vytvořit' | translate) : ('Uložit' | translate)"
+                    [label]="('Uložit' | translate)"
                     (click)="saveAthleteActivity()">
             </button>
         </div>
     </div>
-
-</div>
+</p-panel>

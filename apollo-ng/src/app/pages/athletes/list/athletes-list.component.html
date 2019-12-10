@@ -22,6 +22,7 @@
                         </td>
                         <td class="table-action-column">
                             <button class="ui-button-danger" type="button" icon="fa fa-trash" pButton (click)="delete($event, item)"></button>
+                            <button class="ui-button-primary" type="button" icon="fa fa-id-card-o" pButton [routerLink]="['/users/card', item.id]"></button>
                         </td>
                     </tr>
                 </ng-template>

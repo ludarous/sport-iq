@@ -77,4 +77,6 @@ public interface AthleteEventService {
      * @return the list of entities
      */
     Page<AthleteEventDTO> search(String query, Pageable pageable);
+
+    List<AthleteEventDTO> findAllByAthleteId(Long athleteId);
 }

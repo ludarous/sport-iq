@@ -48,6 +48,8 @@ export interface IAthlete {
     nationality?: string;
     sex?: Sex;
     addressId?: number;
+
+    name: string;
 }
 
 export class Athlete implements IAthlete {
@@ -61,6 +63,10 @@ export class Athlete implements IAthlete {
         public sex?: Sex,
         public addressId?: number
     ) {}
+
+    get name(): string {
+        return this.firstName + ' ' + this.lastName;
+    }
 
     static parseItemEnums(athlete: IAthlete): IAthlete {
         if (athlete) {

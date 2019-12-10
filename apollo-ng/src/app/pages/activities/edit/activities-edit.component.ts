@@ -35,7 +35,7 @@ export class ActivitiesEditComponent implements OnInit {
                 private activitiesPagesService: ActivitiesPagesService,
                 private unitService: UnitService,
                 private activatedRoute: ActivatedRoute,
-                private ToastService: ToastService,
+                private toastService: ToastService,
                 private formBuilder: FormBuilder,
                 private rxFormBuilder: RxFormBuilder,
                 private router: Router,
@@ -114,7 +114,7 @@ export class ActivitiesEditComponent implements OnInit {
                 this.activity = activityResponse.body;
                 this.activityId = this.activity.id;
                 this.setActivityForm(this.activity);
-                this.ToastService.showSuccess('Aktivita uložena');
+                this.toastService.showSuccess('Aktivita uložena');
                 if (goBack) {
                     this.router.navigate(['/activities/list']);
                 } else {
@@ -122,7 +122,7 @@ export class ActivitiesEditComponent implements OnInit {
                 }
             },
             (errorResponse: HttpErrorResponse) => {
-                this.ToastService.showError('Aktivita nebyla uložena', errorResponse.error.detail);
+                this.toastService.showError('Aktivita nebyla uložena', errorResponse.error.detail);
             });
     }
 

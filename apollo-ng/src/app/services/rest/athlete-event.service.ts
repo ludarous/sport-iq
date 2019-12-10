@@ -24,6 +24,11 @@ export class AthleteEventService extends CrudBaseService<IEvent> {
         return this.get(this.resourceUrl + `/by-event-id`, params);
     }
 
+    getAthleteEventsByAthleteId(athleteId: number): Observable<HttpResponse<Array<IAthleteEvent>>> {
+        const params = {athleteId};
+        return this.get(this.resourceUrl + `/by-athlete-id`, params);
+    }
+
     getAthleteEvent(eventId: number, athleteId: number): Observable<IAthleteEvent> {
         if (eventId && athleteId) {
             return this.getAthleteEventByEventIdAndAthleteId(eventId, athleteId)

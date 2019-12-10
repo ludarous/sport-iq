@@ -16,7 +16,7 @@ export class WorkoutsListComponent implements OnInit {
     workouts: Array<IWorkout>;
 
     constructor(private workoutsService: WorkoutService,
-                private ToastService: ToastService) {
+                private toastService: ToastService) {
     }
 
     ngOnInit() {
@@ -48,7 +48,7 @@ export class WorkoutsListComponent implements OnInit {
             this.workoutsService.remove(workout.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.ToastService.showError('Test se nepodařilo smazat', errorResponse.message);
+                this.toastService.showError('Test se nepodařilo smazat', errorResponse.message);
             });
         }
 

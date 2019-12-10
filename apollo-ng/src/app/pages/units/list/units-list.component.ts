@@ -17,7 +17,7 @@ export class UnitsListComponent implements OnInit {
     units: Array<IUnit>;
 
     constructor(private unitsService: UnitService,
-                private ToastService: ToastService) {
+                private toastService: ToastService) {
     }
 
     ngOnInit() {
@@ -49,7 +49,7 @@ export class UnitsListComponent implements OnInit {
             this.unitsService.remove(unit.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.ToastService.showError('Kategorii se nepodařilo smazat', errorResponse.message);
+                this.toastService.showError('Kategorii se nepodařilo smazat', errorResponse.message);
             });
         }
 

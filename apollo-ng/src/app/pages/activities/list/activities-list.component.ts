@@ -15,7 +15,7 @@ export class ActivitiesListComponent implements OnInit {
     activities: Array<IActivity>;
 
     constructor(private activityService: ActivityService,
-                private ToastService: ToastService) {
+                private toastService: ToastService) {
     }
 
     ngOnInit() {
@@ -47,7 +47,7 @@ export class ActivitiesListComponent implements OnInit {
             this.activityService.remove(activity.id).subscribe(() => {
                 this.load();
             }, (errorResponse: HttpErrorResponse) => {
-                this.ToastService.showError('Aktivitu se nepodařilo smazat', errorResponse.message);
+                this.toastService.showError('Aktivitu se nepodařilo smazat', errorResponse.message);
             });
         }
 

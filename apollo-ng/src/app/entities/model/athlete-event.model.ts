@@ -6,6 +6,7 @@ export interface IAthleteEvent {
     actualHeightInCm?: number;
     actualWeightInKg?: number;
     eventId?: number;
+    eventName?: string;
     athleteWorkouts?: IAthleteWorkout[];
     athleteId?: number;
 }
@@ -17,6 +18,7 @@ export class AthleteEvent implements IAthleteEvent {
         public actualHeightInCm?: number,
         public actualWeightInKg?: number,
         public eventId?: number,
+        public eventName?: string,
         public athleteWorkouts?: IAthleteWorkout[],
         public athleteId?: number
     ) {}

@@ -14,4 +14,5 @@ export class AthleteActivityResultSplit implements IAthleteActivityResultSplit {
         public athleteActivityResultId?: number,
         public activityResultSplitId?: number
     ) {}
+
 }

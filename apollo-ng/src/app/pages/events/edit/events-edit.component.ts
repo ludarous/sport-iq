@@ -27,7 +27,7 @@ export class EventsEditComponent implements OnInit {
                 private workoutService: WorkoutService,
                 private athleteService: AthleteService,
                 private activatedRoute: ActivatedRoute,
-                private ToastService: ToastService,
+                private toastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
                 private formBuilder: FormBuilder,
                 private router: Router,
@@ -108,7 +108,7 @@ export class EventsEditComponent implements OnInit {
                 (eventResponse: HttpResponse<IEvent>) => {
                     this.event = eventResponse.body;
                     this.setEventForm(this.event);
-                    this.ToastService.showSuccess('Událost uložena');
+                    this.toastService.showSuccess('Událost uložena');
 
                     if (goBack) {
                         this.router.navigate(['/events/list']);
@@ -117,7 +117,7 @@ export class EventsEditComponent implements OnInit {
                     }
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.ToastService.showError('Událost nebyla uložena', errorResponse.error.detail);
+                    this.toastService.showError('Událost nebyla uložena', errorResponse.error.detail);
                 });
         }
     }

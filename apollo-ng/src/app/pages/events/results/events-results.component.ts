@@ -25,29 +25,15 @@ export class EventsResultsComponent implements OnInit {
         return this.eventResultsService.event;
     }
 
-    get selectedAthlete(): IAthlete {
-        return this.eventResultsService.selectedAthlete;
-    }
-
-    get selectedAthleteEvent(): IAthlete {
-        return this.eventResultsService.selectedAthleteEvent;
-    }
-
     get selectedWorkout(): IWorkout {
         return this.eventResultsService.selectedWorkout;
     }
 
-    get selectedAthleteWorkout(): IAthleteWorkout {
-        return this.eventResultsService.selectedAthleteWorkout;
-    }
 
     get selectedActivity(): IActivity {
         return this.eventResultsService.selectedActivity;
     }
 
-    get selectedAthleteActivity(): IAthleteActivity {
-        return this.eventResultsService.selectedAthleteActivity;
-    }
 
     get athleteEvents(): Array<IAthleteEvent> {
         return this.eventResultsService.allAthleteEvents;
@@ -67,37 +53,24 @@ export class EventsResultsComponent implements OnInit {
 
         const params$ = this.activatedRoute.params;
         params$.subscribe((params) => {
-            this.eventResultsService.init(+params.id,  +params.athleteId, +params.workoutId, +params.activityId)
+            this.eventResultsService.init(+params.id,  +params.athleteId, +params.workoutId, +params.activityId);
         });
     }
 
-    getAthlete(athleteId: number) {
-        return this.eventResultsService.getAthlete(athleteId);
+    getAthleteForAthleteEvent(athleteEvent: IAthleteEvent): IAthlete {
+        return this.eventResultsService.athleteEventAthleteMap.get(athleteEvent);
     }
 
-
-    selectAthlete(athlete: IAthlete) {
-        this.eventResultsService.selectAthlete(athlete);
+    getAthleteForAthleteWorkout(athleteWorkout: IAthleteWorkout): IAthlete {
+        return this.eventResultsService.athleteWorkoutAthleteMap.get(athleteWorkout);
     }
 
-    selectWorkout(workout: IWorkout) {
-        this.eventResultsService.selectWorkout(workout);
+    getAthleteForAthleteActivity(athleteActivity: IAthleteActivity): IAthlete {
+        return this.eventResultsService.athleteActivityAthleteMap.get(athleteActivity);
     }
 
     selectActivity(activity: IActivity, workout: IWorkout) {
         this.eventResultsService.selectActivity(activity, workout);
     }
 
-
-    showAthleteEventForm(): boolean {
-        return this.eventResultsService.showAthleteEventForm();
-    }
-
-    showAthleteWorkoutForm(): boolean {
-        return this.eventResultsService.showAthleteWorkoutForm();
-    }
-
-    showAthleteActivityForm(): boolean {
-        return this.eventResultsService.showAthleteActivityForm();
-    }
 }

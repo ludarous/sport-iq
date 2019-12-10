@@ -20,7 +20,7 @@ export class ActivityCategoriesEditComponent implements OnInit {
 
     constructor(private activityCategoryService: ActivityCategoryService,
                 private activatedRoute: ActivatedRoute,
-                private ToastService: ToastService,
+                private toastService: ToastService,
                 private router: Router) {
     }
 
@@ -98,11 +98,11 @@ export class ActivityCategoriesEditComponent implements OnInit {
                 (categoryResponse: HttpResponse<IActivityCategory>) => {
                     this.category = categoryResponse.body;
                     this.setCategoryForm(this.category);
-                    this.ToastService.showSuccess('Kategorie uložena');
+                    this.toastService.showSuccess('Kategorie uložena');
                     this.router.navigate(['/activity-categories/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.ToastService.showError('Kategorie nebyla uložena', errorResponse.error.detail);
+                    this.toastService.showError('Kategorie nebyla uložena', errorResponse.error.detail);
                 });
         }
     }

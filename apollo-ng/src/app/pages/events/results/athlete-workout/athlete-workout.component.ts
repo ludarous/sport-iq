@@ -41,6 +41,9 @@ export class AthleteWorkoutComponent implements OnInit {
     @Input()
     athleteWorkout: IAthleteWorkout;
 
+    @Input()
+    athleteOrder: number;
+
     athleteWorkoutForm: FormGroup;
 
 
@@ -54,6 +57,10 @@ export class AthleteWorkoutComponent implements OnInit {
             this.setAthleteWorkoutForm(this.athleteWorkout);
         }
 
+    }
+
+    getHeader() {
+        return (this.athleteOrder ? (this.athleteOrder + '. ') : '') +  this.athlete.firstName + ' ' + this.athlete.lastName;
     }
 
     setAthleteWorkoutForm(athleteWorkout: IAthleteWorkout) {

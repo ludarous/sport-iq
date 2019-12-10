@@ -23,7 +23,7 @@ export class ActivityResultsEditComponent implements OnInit {
 
     constructor(private activityResultService: ActivityResultService,
                 private activityResultSplitService: ActivityResultSplitService,
-                private ToastService: ToastService,
+                private toastService: ToastService,
                 private formBuilder: FormBuilder,
                 private enumTranslateService: EnumTranslatorService,
                 public ref: DynamicDialogRef,
@@ -80,13 +80,13 @@ export class ActivityResultsEditComponent implements OnInit {
             saveActivityResult$.subscribe(
                 (activityResultResponse: HttpResponse<IActivityResult>) => {
                     this.activityResult = activityResultResponse.body;
-                    this.ToastService.showSuccess('Jednotka uložena');
+                    this.toastService.showSuccess('Jednotka uložena');
                     if (close) {
                         this.ref.close(activityResultResponse.body);
                     }
                 },
                 (errorResponse: HttpErrorResponse) => {
-                    this.ToastService.showError('Jednota nebyla uložena', errorResponse.error.detail);
+                    this.toastService.showError('Jednota nebyla uložena', errorResponse.error.detail);
                 });
         }
     }

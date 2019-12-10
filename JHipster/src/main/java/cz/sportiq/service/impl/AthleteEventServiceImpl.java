@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -188,5 +189,17 @@ public class AthleteEventServiceImpl implements AthleteEventService {
         log.debug("Request to search for a page of AthleteEvents for query {}", query);
         return athleteEventSearchRepository.search(queryStringQuery(query), pageable)
             .map(athleteEventMapper::toDto);
+    }
+
+    @Override
+    public List<AthleteEventDTO> findAllByAthleteId(Long athleteId) {
+        Optional<Athlete> athleteOptional = athleteRepository.findById(athleteId);
+        if (!athleteOptional.isPresent()) {
+            log.warn("Cannot find athlete with id {} when try to find all event's athleteEvents", athleteId);
+            return null;
+        }
+
+        List<AthleteEvent> athleteEvents = this.athleteEventRepository.findByAthleteId(athleteId).stream().collect(Collectors.toList());
+        return this.athleteEventMapper.toDto(athleteEvents);
     }
 }

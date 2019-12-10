@@ -19,7 +19,7 @@ import { ActivitiesPagesService } from '../../activities-pages.service';
 export class ActivityResultsListComponent implements OnInit {
 
     constructor(private activityResultService: ActivityResultService,
-                private ToastService: ToastService,
+                private toastService: ToastService,
                 private enumTranslateService: EnumTranslatorService,
                 private activitiesPagesService: ActivitiesPagesService,
                 public dialogService: DialogService) {
@@ -58,7 +58,7 @@ export class ActivityResultsListComponent implements OnInit {
             this.activityResultService.remove(activityResult.id).subscribe(() => {
                 this.resultDelete.emit(activityResult);
             }, (errorResponse: HttpErrorResponse) => {
-                this.ToastService.showError('Aktivitu se nepodařilo smazat', errorResponse.message);
+                this.toastService.showError('Aktivitu se nepodařilo smazat', errorResponse.message);
             });
         }
 
