@@ -3084,3 +3084,18 @@ body .ui-terminal input {
 }
 
 /* Add your customizations of the theme here */
+/* Add your customizations of layout here */
+body .layout-wrapper .topbar {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+}
+body .layout-wrapper .topbar .topbar-search input {
+  background: black;
+}
+
+body .layout-wrapper .topbar {
+  background-color: black;
+}
+
+/*# sourceMappingURL=theme-yellow-light.css.map */

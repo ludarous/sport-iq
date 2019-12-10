@@ -1,1 +1,10 @@
 /* Add your customizations of the theme here */
+@import "layout_styles";
+
+body {
+    .layout-wrapper {
+        .topbar {
+            background-color: black;
+        }
+    }
+}
