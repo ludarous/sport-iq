@@ -5,6 +5,7 @@ import {DropdownItem, SelectItem} from 'primeng/primeng';
 import {AthleteEventService} from '../../../../services/rest/athlete-event.service';
 import {HttpResponse} from '@angular/common/http';
 import {IAthleteEvent} from '../../../../entities/model/athlete-event.model';
+import {AthleteEventSummary} from '../../../../entities/summaries/athlete-event-summary';
 
 @Component({
     selector: 'app-athlete-events-summary',
@@ -22,6 +23,8 @@ export class AthleteEventsSummaryComponent implements OnInit {
 
     dropDownEvents: Array<SelectItem> = new Array<SelectItem>();
 
+    athleteEventSummary: AthleteEventSummary;
+
     ngOnInit() {
 
         this.athleteEventService.getAthleteEventsByAthleteId(this.athlete.id).subscribe((athleteEventsResponse: HttpResponse<Array<IAthleteEvent>>) => {
@@ -36,8 +39,8 @@ export class AthleteEventsSummaryComponent implements OnInit {
     }
 
     eventSelected(event: any) {
-        this.athleteEventService.getAthleteEventSummary(event.value.eventId, this.athlete.id).subscribe((response: any) => {
-            console.log(response);
+        this.athleteEventService.getAthleteEventSummary(event.value.eventId, this.athlete.id).subscribe((response: HttpResponse<AthleteEventSummary>) => {
+            this.athleteEventSummary = response.body;
         });
     }
 }

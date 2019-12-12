@@ -6,12 +6,12 @@ public class StatsDTO {
     private Float bestValue;
     private Float worstValue;
     private Float averageValue;
-    private Float rank;
 
     private Float bestCompareValue;
     private Float worstCompareValue;
     private Float averageCompareValue;
-    private Float compareValueRank;
+
+    private AthleteStatsDTO athleteStats;
 
     public Float getBestValue() {
         return bestValue;
@@ -35,14 +35,6 @@ public class StatsDTO {
 
     public void setAverageValue(Float averageValue) {
         this.averageValue = averageValue;
-    }
-
-    public Float getRank() {
-        return rank;
-    }
-
-    public void setRank(Float rank) {
-        this.rank = rank;
     }
 
     public Float getBestCompareValue() {
@@ -69,11 +61,19 @@ public class StatsDTO {
         this.averageCompareValue = averageCompareValue;
     }
 
-    public Float getCompareValueRank() {
-        return compareValueRank;
+    public Integer getTotalCount() {
+        return totalCount;
     }
 
-    public void setCompareValueRank(Float compareValueRank) {
-        this.compareValueRank = compareValueRank;
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public AthleteStatsDTO getAthleteStats() {
+        return athleteStats;
+    }
+
+    public void setAthleteStats(AthleteStatsDTO athleteStats) {
+        this.athleteStats = athleteStats;
     }
 }

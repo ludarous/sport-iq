@@ -26,5 +26,5 @@ public interface AthleteActivityResultSplitRepository extends JpaRepository<Athl
         "join athleteActivity.athleteWorkout athleteWorkout " +
         "join athleteWorkout.athleteEvent athleteEvent " +
         "where athleteActivityResultSplit.activityResultSplit.id = :activityResultSplitId and athleteEvent.event.id = :eventId")
-    List<ActivityResultSplit> findActivityResultSplitsByEventId(@Param("activityResultSplitId") Long activityResultSplitId, @Param("eventId") Long eventId);
+    List<AthleteActivityResultSplit> findActivityResultSplitsByEventId(@Param("activityResultSplitId") Long activityResultSplitId, @Param("eventId") Long eventId);
 }

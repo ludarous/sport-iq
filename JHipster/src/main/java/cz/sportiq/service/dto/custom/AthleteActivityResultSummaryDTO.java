@@ -3,6 +3,7 @@ package cz.sportiq.service.dto.custom;
 import cz.sportiq.service.dto.ActivityResultDTO;
 import cz.sportiq.service.dto.AthleteActivityResultDTO;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class AthleteActivityResultSummaryDTO {
@@ -10,9 +11,10 @@ public class AthleteActivityResultSummaryDTO {
     private AthleteActivityResultDTO athleteActivityResult;
     private ActivityResultDTO activityResult;
 
-    private Set<AthleteActivityResultSplitSummaryDTO> resultSplitSummaries;
+    private Set<AthleteActivityResultSplitSummaryDTO> resultSplitSummaries = new HashSet<AthleteActivityResultSplitSummaryDTO>();
 
     private StatsDTO stats;
+
 
     public AthleteActivityResultDTO getAthleteActivityResult() {
         return athleteActivityResult;

@@ -1,17 +1,21 @@
 package cz.sportiq.service.impl.custom;
 
 import cz.sportiq.domain.*;
+import cz.sportiq.domain.enumeration.ResultType;
 import cz.sportiq.repository.*;
 import cz.sportiq.service.dto.custom.*;
 import cz.sportiq.service.impl.ActivityResultServiceImpl;
 import cz.sportiq.service.mapper.*;
+import cz.sportiq.service.utils.StatsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -156,6 +160,9 @@ public class SummaryService {
             athleteActivityResultSummary.getResultSplitSummaries().add(getAthleteActivityResultSplitResultSummary(activityResultSplit, athleteAthleteActivityResultOptional.get(), athleteId));
         }
 
+        StatsDTO stats = getStatsForActivityResult(activityResult, athleteActivity, athleteId);
+        athleteActivityResultSummary.setStats(stats);
+
         return athleteActivityResultSummary;
     }
 
@@ -172,14 +179,117 @@ public class SummaryService {
         athleteActivityResultSplitSummary.setActivityResultSplit(activityResultSplitMapper.toDto(activityResultSplit));
         athleteActivityResultSplitSummary.setAthleteActivityResultSplit(athleteActivityResultSplitMapper.toDto(athleteAthleteActivityResultSplitOptional.get()));
 
-        StatsDTO stats = getStatsForActivityResultSplit(activityResultSplit, athleteActivityResult);
+        StatsDTO stats = getStatsForActivityResultSplit(activityResultSplit, athleteActivityResult, athleteId);
+        athleteActivityResultSplitSummary.setStats(stats);
 
         return athleteActivityResultSplitSummary;
     }
 
-    StatsDTO getStatsForActivityResultSplit(ActivityResultSplit activityResultSplit, AthleteActivityResult athleteActivityResult) {
+    StatsDTO getStatsForActivityResultSplit(ActivityResultSplit activityResultSplit, AthleteActivityResult athleteActivityResult, Long athleteId) {
+
+        StatsDTO stats = new StatsDTO();
+
         Event event = athleteActivityResult.getAthleteActivity().getAthleteWorkout().getAthleteEvent().getEvent();
-        List<ActivityResultSplit> activityResultSplitsForEvent = athleteActivityResultSplitRepository.findActivityResultSplitsByEventId(activityResultSplit.getId(), event.getId());
-        return new StatsDTO();
+        List<AthleteActivityResultSplit> activityResultSplitsForEvent = athleteActivityResultSplitRepository.findActivityResultSplitsByEventId(activityResultSplit.getId(), event.getId());
+        Optional<AthleteActivityResultSplit> athleteActivityResultSplitOptional = activityResultSplitsForEvent.stream().filter(ars -> ars.getAthleteActivityResult().getId().longValue() == athleteActivityResult.getId()).findFirst();
+
+        List<Float> values = activityResultSplitsForEvent.stream().map(ars -> ars.getValue()).filter(v -> v != null).collect(Collectors.toList());
+        boolean hasValues = !values.isEmpty();
+        List<Float> compareValues = activityResultSplitsForEvent.stream().map(ars -> ars.getCompareValue()).filter(v -> v != null).collect(Collectors.toList());
+        boolean hasCompareValues = !compareValues.isEmpty();
+
+        ResultType resultType = activityResultSplit.getActivityResult().getResultType();
+
+        stats.setTotalCount(activityResultSplitsForEvent.size());
+
+        if(resultType.equals(ResultType.LESS_IS_BETTER)) {
+            stats.setBestValue(StatsUtil.min(values));
+            stats.setWorstValue(StatsUtil.max(values));
+            stats.setAverageValue(StatsUtil.average(values));
+        } else {
+            stats.setBestValue(StatsUtil.max(values));
+            stats.setWorstValue(StatsUtil.min(values));
+            stats.setAverageValue(StatsUtil.average(values));
+        }
+
+        if(resultType.equals(ResultType.LESS_IS_BETTER)) {
+            stats.setBestCompareValue(StatsUtil.min(compareValues));
+            stats.setWorstCompareValue(StatsUtil.max(compareValues));
+            stats.setAverageCompareValue(StatsUtil.average(compareValues));
+        } else {
+            stats.setBestCompareValue(StatsUtil.max(compareValues));
+            stats.setWorstCompareValue(StatsUtil.min(compareValues));
+            stats.setAverageCompareValue(StatsUtil.average(compareValues));
+        }
+
+        if(athleteActivityResultSplitOptional.isPresent()) {
+            AthleteStatsDTO athleteStats = new AthleteStatsDTO();
+
+            if(hasValues) {
+                athleteStats.setValueRank(StatsUtil.rankAthleteActivityValue((List<ResultValueable>) (List<?>) activityResultSplitsForEvent, athleteActivityResultSplitOptional.get(), ResultValueable::getValue, resultType));
+                athleteStats.setValueRankInPercents(StatsUtil.getRankInPercents(athleteStats.getValueRank(), stats.getTotalCount()));
+            }
+
+            if(hasCompareValues) {
+                athleteStats.setCompareValueRank(StatsUtil.rankAthleteActivityValue((List<ResultValueable>) (List<?>) activityResultSplitsForEvent, athleteActivityResultSplitOptional.get(), ResultValueable::getCompareValue, resultType));
+                athleteStats.setCompareValueRankInPercents(StatsUtil.getRankInPercents(athleteStats.getCompareValueRank(), stats.getTotalCount()));
+            }
+            stats.setAthleteStats(athleteStats);
+        }
+
+        return stats;
+    }
+
+    StatsDTO getStatsForActivityResult(ActivityResult activityResult, AthleteActivity athleteActivity, Long athleteId) {
+        Event event = athleteActivity.getAthleteWorkout().getAthleteEvent().getEvent();
+        List<AthleteActivityResult> activityResultsForEvent = athleteActivityResultRepository.findActivityResultsByEventId(activityResult.getId(), event.getId());
+        Optional<AthleteActivityResult> athleteActivityResultOptional = activityResultsForEvent.stream().filter(ars -> ars.getAthleteActivity().getId().longValue() == athleteActivity.getId()).findFirst();
+
+
+        List<Float> values = activityResultsForEvent.stream().map(ars -> ars.getValue()).filter(v -> v != null).collect(Collectors.toList());
+        boolean hasValues = !values.isEmpty();
+        List<Float> compareValues = activityResultsForEvent.stream().map(ars -> ars.getCompareValue()).filter(v -> v != null).collect(Collectors.toList());
+        boolean hasCompareValues = !compareValues.isEmpty();
+
+        StatsDTO stats = new StatsDTO();
+
+        ResultType resultType = activityResult.getResultType();
+        stats.setTotalCount(activityResultsForEvent.size());
+
+        if(resultType.equals(ResultType.LESS_IS_BETTER)) {
+            stats.setBestValue(StatsUtil.min(values));
+            stats.setWorstValue(StatsUtil.max(values));
+            stats.setAverageValue(StatsUtil.average(values));
+        } else {
+            stats.setBestValue(StatsUtil.max(values));
+            stats.setWorstValue(StatsUtil.min(values));
+            stats.setAverageValue(StatsUtil.average(values));
+        }
+
+        if(resultType.equals(ResultType.LESS_IS_BETTER)) {
+            stats.setBestCompareValue(StatsUtil.min(compareValues));
+            stats.setWorstCompareValue(StatsUtil.max(compareValues));
+            stats.setAverageCompareValue(StatsUtil.average(compareValues));
+        } else {
+            stats.setBestCompareValue(StatsUtil.max(compareValues));
+            stats.setWorstCompareValue(StatsUtil.min(compareValues));
+            stats.setAverageCompareValue(StatsUtil.average(compareValues));
+        }
+
+        if(athleteActivityResultOptional.isPresent()) {
+            AthleteStatsDTO athleteStats = new AthleteStatsDTO();
+            if(hasValues) {
+                athleteStats.setValueRank(StatsUtil.rankAthleteActivityValue((List<ResultValueable>)(List<?>) activityResultsForEvent, athleteActivityResultOptional.get(), ResultValueable::getValue, resultType));
+                athleteStats.setValueRankInPercents(StatsUtil.getRankInPercents(athleteStats.getValueRank(), stats.getTotalCount()));
+            }
+
+            if(hasCompareValues) {
+                athleteStats.setCompareValueRank(StatsUtil.rankAthleteActivityValue((List<ResultValueable>) (List<?>) activityResultsForEvent, athleteActivityResultOptional.get(), ResultValueable::getCompareValue, resultType));
+                athleteStats.setCompareValueRankInPercents(StatsUtil.getRankInPercents(athleteStats.getCompareValueRank(), stats.getTotalCount()));
+            }
+            stats.setAthleteStats(athleteStats);
+        }
+
+        return stats;
     }
 }

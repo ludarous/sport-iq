@@ -3,13 +3,14 @@ package cz.sportiq.service.dto.custom;
 import cz.sportiq.service.dto.AthleteWorkoutDTO;
 import cz.sportiq.service.dto.WorkoutDTO;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class AthleteWorkoutSummaryDTO {
     private AthleteWorkoutDTO athleteWorkout;
     private WorkoutDTO workout;
 
-    private Set<AthleteActivitySummaryDTO> activitySummaries;
+    private Set<AthleteActivitySummaryDTO> activitySummaries = new HashSet<AthleteActivitySummaryDTO>();
 
     public AthleteWorkoutDTO getAthleteWorkout() {
         return athleteWorkout;

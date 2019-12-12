@@ -18,7 +18,7 @@ import java.util.Objects;
 @Table(name = "athlete_activity_result_split", uniqueConstraints={@UniqueConstraint(columnNames = {"activity_result_split_id", "athlete_activity_result_id"})})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "athleteactivityresultsplit")
-public class AthleteActivityResultSplit implements Serializable {
+public class AthleteActivityResultSplit implements Serializable, ResultValueable  {
 
     private static final long serialVersionUID = 1L;
 

@@ -5,13 +5,14 @@ import cz.sportiq.service.dto.AthleteWorkoutDTO;
 import cz.sportiq.service.dto.EventDTO;
 import cz.sportiq.service.dto.WorkoutDTO;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class AthleteEventSummaryDTO {
     private AthleteEventDTO athleteEvent;
     private EventDTO event;
 
-    private Set<AthleteWorkoutSummaryDTO> workoutSummaries;
+    private Set<AthleteWorkoutSummaryDTO> workoutSummaries = new HashSet<AthleteWorkoutSummaryDTO>();
 
     public AthleteEventDTO getAthleteEvent() {
         return athleteEvent;
