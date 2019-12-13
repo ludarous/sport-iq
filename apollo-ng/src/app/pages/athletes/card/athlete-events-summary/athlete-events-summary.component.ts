@@ -21,6 +21,8 @@ export class AthleteEventsSummaryComponent implements OnInit {
     athlete: IAthlete;
     athleteEvents: Array<IAthleteEvent>;
 
+    selectedAthleteEvent: IAthleteEvent;
+
     dropDownEvents: Array<SelectItem> = new Array<SelectItem>();
 
     athleteEventSummary: AthleteEventSummary;
@@ -40,6 +42,13 @@ export class AthleteEventsSummaryComponent implements OnInit {
 
     eventSelected(event: any) {
         this.athleteEventService.getAthleteEventSummary(event.value.eventId, this.athlete.id).subscribe((response: HttpResponse<AthleteEventSummary>) => {
+            this.athleteEventSummary = response.body;
+        });
+    }
+
+    selectAthleteEvent(athleteEvent: IAthleteEvent) {
+        this.selectedAthleteEvent = athleteEvent;
+        this.athleteEventService.getAthleteEventSummary(athleteEvent.eventId, this.athlete.id).subscribe((response: HttpResponse<AthleteEventSummary>) => {
             this.athleteEventSummary = response.body;
         });
     }

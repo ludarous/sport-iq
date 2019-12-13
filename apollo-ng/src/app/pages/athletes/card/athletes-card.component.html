@@ -18,7 +18,7 @@
                                 <label>{{'Jméno:' | translate}}</label>
                             </div>
                             <div class="ui-g-12 ui-md-8">
-                                <span>{{athlete.name}}</span>
+                                <span>{{athlete.firstName + ' ' + athlete.lastName}}</span>
                             </div>
 
                             <div class="ui-g-12 ui-md-4">
@@ -41,14 +41,17 @@
             </div>
             <div class="card">
                 <div class="ui-g">
-                    <p-tabView class="flex-fill">
-                        <p-tabPanel [header]="'Výsledky' | translate">
-                            <app-athlete-events-summary *ngIf="athlete" [athlete]="athlete"></app-athlete-events-summary>
-                        </p-tabPanel>
-                        <p-tabPanel [header]="'Statistiky' | translate">
-                            Content 2
-                        </p-tabPanel>
-                    </p-tabView>
+                    <div class="ui-g-12">
+                        <app-athlete-events-summary *ngIf="athlete" [athlete]="athlete"></app-athlete-events-summary>
+                    </div>
+                    <!--                    <p-tabView class="flex-fill">-->
+                    <!--                        <p-tabPanel [header]="'Výsledky' | translate">-->
+                    <!--                            <app-athlete-events-summary *ngIf="athlete" [athlete]="athlete"></app-athlete-events-summary>-->
+                    <!--                        </p-tabPanel>-->
+                    <!--                        <p-tabPanel [header]="'Statistiky' | translate">-->
+                    <!--                            Content 2-->
+                    <!--                        </p-tabPanel>-->
+                    <!--                    </p-tabView>-->
                 </div>
             </div>
         </div>

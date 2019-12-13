@@ -12,6 +12,9 @@ import {AthleteService} from '../../services/rest/athlete.service';
 import {AthletesCardComponent} from './card/athletes-card.component';
 import { AthleteEventsSummaryComponent } from './card/athlete-events-summary/athlete-events-summary.component';
 import {AthleteEventService} from '../../services/rest/athlete-event.service';
+import { AthleteWorkoutSummaryComponent } from './card/athlete-workout-summary/athlete-workout-summary.component';
+import { AthleteActivitySummaryComponent } from './card/athlete-activity-summary/athlete-activity-summary.component';
+import { AthleteActivityResultSummaryComponent } from './card/athlete-activity-result-summary/athlete-activity-result-summary.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +23,9 @@ import {AthleteEventService} from '../../services/rest/athlete-event.service';
         AthletesEditComponent,
         AthletesCardComponent,
         AthleteEventsSummaryComponent,
+        AthleteWorkoutSummaryComponent,
+        AthleteActivitySummaryComponent,
+        AthleteActivityResultSummaryComponent,
     ],
     imports: [
         CommonModule,
