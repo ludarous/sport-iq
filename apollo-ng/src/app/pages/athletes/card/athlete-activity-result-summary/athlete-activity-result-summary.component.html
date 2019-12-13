@@ -1,11 +1,30 @@
 <div class="card">
     <h3 *ngIf="activityResultSummary.activityResult">{{activityResultSummary.activityResult.name}}</h3>
     <div class="ui-g">
-        <ng-container *ngIf="activityResultSummary.athleteActivityResult.value || activityResultSummary.athleteActivityResult.compareValue">
+        <div class="ui-g-12">
+            <ngx-charts-number-card
+                class="chart-container"
+                (legendLabelClick)="onLegendLabelClick($event)"
+                [scheme]="colorScheme"
+                cardColor="cyan"
+                emptyColor="#1e222e"
+                [results]="cardsData"
+                [animations]="true"
+                (select)="selectCard($event)"
+                (activate)="activateCard($event)"
+                (deactivate)="deactivateCard($event)"
+                [valueFormatting]="valueFormat"
+                style="fill: white"
+            ></ngx-charts-number-card>
+        </div>
+    </div>
+    <div class="ui-g">
+        <ng-container
+            *ngIf="activityResultSummary.athleteActivityResult.value || activityResultSummary.athleteActivityResult.compareValue">
             <p-table [value]="statsTableItems">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>
+                        <th *ngIf="showResultLabelHeader()">
 
                         </th>
                         <th>
@@ -29,12 +48,12 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
-                    <tr >
-                        <td>
+                    <tr>
+                        <td *ngIf="showResultLabelHeader()">
                             {{item.label}}
                         </td>
                         <td class="result-value">
-                           {{(item.value | number: '1.2-2') + ' ' + unit}}
+                            {{(item.value | number: '1.2-2') + ' ' + unit}}
                         </td>
                         <td>
                             {{item.bestValue ? ((item.bestValue | number: '1.2-2') + ' ' + unit) : ''}}
@@ -51,6 +70,72 @@
                         <td>
                             {{item.rankInPercents | number: '1.2-2'}}
                         </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-container>
+    </div>
+    <br/>
+    <div class="ui-g">
+        <ng-container *ngIf="splitStatsTableItems">
+            <p-table [value]="splitStatsTableItems">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th *ngIf="showSplitResultSplitLabelHeader()">
+                            {{'Mezivýsledek' | translate}}
+                        </th>
+                        <th *ngIf="showSplitResultLabelHeader()">
+
+                        </th>
+                        <th>
+                            {{'Výsledek' | translate}}
+                        </th>
+                        <th>
+                            {{'Nejlepší výsledek' | translate}}
+                        </th>
+                        <th>
+                            {{'Nejhorší výsledek' | translate}}
+                        </th>
+                        <th>
+                            {{'Průměr' | translate}}
+                        </th>
+                        <th>
+                            {{'Pořadí' | translate}}
+                        </th>
+                        <th>
+                            {{'Pořadí v %' | translate}}
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr *ngIf="item !== null">
+                        <td *ngIf="showSplitResultSplitLabelHeader()">
+                            {{item.splitLabel}}
+                        </td>
+                        <td *ngIf="showSplitResultLabelHeader()">
+                            {{item.label}}
+                        </td>
+                        <td class="result-value">
+                            {{(item.value | number: '1.2-2') + ' ' + unit}}
+                        </td>
+                        <td>
+                            {{item.bestValue ? ((item.bestValue | number: '1.2-2') + ' ' + unit) : ''}}
+                        </td>
+                        <td>
+                            {{item.worstValue ? ((item.worstValue | number: '1.2-2') + ' ' + unit) : ''}}
+                        </td>
+                        <td>
+                            {{(item.averageValue | number: '1.2-2') + ' ' + unit}}
+                        </td>
+                        <td>
+                            {{item.rank | number: '1.0'}}
+                        </td>
+                        <td>
+                            {{item.rankInPercents | number: '1.2-2'}}
+                        </td>
+                    </tr>
+                    <tr *ngIf="item === null" class="delimiter-row">
+
                     </tr>
                 </ng-template>
             </p-table>

@@ -15,6 +15,7 @@ import {AthleteEventService} from '../../services/rest/athlete-event.service';
 import { AthleteWorkoutSummaryComponent } from './card/athlete-workout-summary/athlete-workout-summary.component';
 import { AthleteActivitySummaryComponent } from './card/athlete-activity-summary/athlete-activity-summary.component';
 import { AthleteActivityResultSummaryComponent } from './card/athlete-activity-result-summary/athlete-activity-result-summary.component';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AthleteActivityResultSummaryComponent } from './card/athlete-activity-r
         AthletesRoutingModule,
         TranslateModule,
         PrimeNgComponentsModule,
+        NgxChartsModule,
     ],
     providers: [
         AthleteService,

@@ -1,4 +1,5 @@
 import {AthleteStats} from './athlete-stats';
+import {AthleteActivityResultSummary} from './athlete-activity-result-summary';
 
 export interface Stats {
     totalCount?: number;
@@ -22,8 +23,16 @@ export class StatsTableItem {
     averageValue: number;
     rank: number;
     rankInPercents: number;
+    splitLabel: string;
 
-    constructor(label: string = null, value: number = null, bestValue: number = null, worstValue: number = null, averageValue: number = null, rank: number = null, rankInPercents: number = null) {
+    constructor(label: string = null,
+                value: number = null,
+                bestValue: number = null,
+                worstValue: number = null,
+                averageValue: number = null,
+                rank: number = null,
+                rankInPercents: number = null,
+                splitLabel: string = null) {
         this.label = label;
         this.value = value;
         this.bestValue = bestValue;
@@ -31,7 +40,9 @@ export class StatsTableItem {
         this.averageValue = averageValue;
         this.rank = rank;
         this.rankInPercents = rankInPercents;
+        this.splitLabel = splitLabel;
     }
+
 
     static createStatsTableItems(value: number, compareValue: number, stats: Stats): Array<StatsTableItem> {
         const statsTableItems = new Array();
@@ -70,5 +81,70 @@ export class StatsTableItem {
 
         return statsTableItems;
 
+    }
+
+
+
+    static createResultsStatsTableItems(athleteActivityResultSummary: AthleteActivityResultSummary): Array<StatsTableItem> {
+        return StatsTableItem.createStatsTableItems(
+            athleteActivityResultSummary.athleteActivityResult.value,
+            athleteActivityResultSummary.athleteActivityResult.compareValue,
+            athleteActivityResultSummary.stats);
+    }
+
+    static createSplitStatsTableItems(athleteActivityResultSummary: AthleteActivityResultSummary): Array<StatsTableItem> {
+        if (athleteActivityResultSummary.resultSplitSummaries && athleteActivityResultSummary.resultSplitSummaries.length > 0) {
+            const statsTableItems = new Array();
+            let i = 1;
+            for (const resultSplitSummary of athleteActivityResultSummary.resultSplitSummaries) {
+
+                let valueSplitTableItem = null;
+                let compareValueSplitTableItem = null;
+                let diffValueSplitTableItem = null;
+
+                const setLabel = resultSplitSummary.athleteActivityResultSplit.value &&
+                    resultSplitSummary.athleteActivityResultSplit.compareValue;
+
+                if (resultSplitSummary.athleteActivityResultSplit.value) {
+                    valueSplitTableItem = new StatsTableItem(
+                        setLabel ? 'Bez míče' : null,
+                        resultSplitSummary.athleteActivityResultSplit.value,
+                        resultSplitSummary.stats.bestValue,
+                        resultSplitSummary.stats.worstValue,
+                        resultSplitSummary.stats.averageValue,
+                        resultSplitSummary.stats.athleteStats.valueRank,
+                        resultSplitSummary.stats.athleteStats.valueRankInPercents,
+                        i + '. ' + resultSplitSummary.activityResultSplit.splitUnit.name);
+                    statsTableItems.push(valueSplitTableItem);
+                }
+
+                if (resultSplitSummary.athleteActivityResultSplit.compareValue) {
+                    compareValueSplitTableItem = new StatsTableItem(
+                        setLabel ? 'S míčem' : null,
+                        resultSplitSummary.athleteActivityResultSplit.compareValue,
+                        resultSplitSummary.stats.bestCompareValue,
+                        resultSplitSummary.stats.worstCompareValue,
+                        resultSplitSummary.stats.averageCompareValue,
+                        resultSplitSummary.stats.athleteStats.compareValueRank,
+                        resultSplitSummary.stats.athleteStats.compareValueRankInPercents,
+                        resultSplitSummary.athleteActivityResultSplit.value ? null : (i + '. ' + resultSplitSummary.activityResultSplit.splitUnit.name));
+
+                    statsTableItems.push(compareValueSplitTableItem);
+                }
+
+                if (resultSplitSummary.athleteActivityResultSplit.compareValue && resultSplitSummary.athleteActivityResultSplit.value) {
+                    diffValueSplitTableItem = new StatsTableItem(
+                        setLabel ? 'Rozdíl' : null,
+                        resultSplitSummary.athleteActivityResultSplit.value - resultSplitSummary.athleteActivityResultSplit.compareValue,
+                        resultSplitSummary.stats.averageValue - resultSplitSummary.stats.averageCompareValue,);
+                    statsTableItems.push(diffValueSplitTableItem);
+                }
+
+                i++;
+                statsTableItems.push(null);
+            }
+            return statsTableItems;
+        }
+        return null;
     }
 }

@@ -189,3 +189,13 @@ app-root {
 .list ul li:last-child {
     border: 0;
 }
+
+@media print {
+    body {
+        overflow: visible;
+    }
+
+    app-athlete-activity-summary {
+        page-break-begore: always;
+    }
+}
