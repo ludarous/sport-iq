@@ -16,6 +16,7 @@ import { AthleteWorkoutSummaryComponent } from './card/athlete-workout-summary/a
 import { AthleteActivitySummaryComponent } from './card/athlete-activity-summary/athlete-activity-summary.component';
 import { AthleteActivityResultSummaryComponent } from './card/athlete-activity-result-summary/athlete-activity-result-summary.component';
 
+
 @NgModule({
     declarations: [
         AthletesComponent,

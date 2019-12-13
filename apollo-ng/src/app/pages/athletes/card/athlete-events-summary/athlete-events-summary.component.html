@@ -1,18 +1,21 @@
 <!--<p-dropdown [options]="dropDownEvents" class="w-100" (onChange)="eventSelected($event)"></p-dropdown>-->
 <div class="ui-g">
     <div class="ui-g-12 ui-md-2 list">
-        <p-panel [header]="'Události' | translate">
-            <ul>
-                <li *ngFor="let athleteEvent of athleteEvents"
-                    (click)="selectAthleteEvent(athleteEvent)"
-                    [ngClass]="{'selected' : selectedAthleteEvent === athleteEvent}">
-                    {{athleteEvent.eventName}}
-                </li>
-            </ul>
-        </p-panel>
+        <div class="card">
+            <p-panel [header]="'Události' | translate">
+                <ul>
+                    <li *ngFor="let athleteEvent of athleteEvents"
+                        (click)="selectAthleteEvent(athleteEvent)"
+                        [ngClass]="{'selected' : selectedAthleteEvent === athleteEvent}">
+                        {{athleteEvent.eventName}}
+                    </li>
+                </ul>
+            </p-panel>
+        </div>
     </div>
     <div *ngIf="athleteEventSummary" class="ui-g-12 ui-md-10 list">
-        <h1 class="text-center" *ngIf="athleteEventSummary.event">{{athleteEventSummary.event.name + (' - výsledky' | translate)}}</h1>
+        <h1 class="text-center"
+            *ngIf="athleteEventSummary.event">{{athleteEventSummary.event.name + (' - výsledky' | translate)}}</h1>
         <div class="card">
             <div class="ui-g">
                 <ng-container *ngIf="athleteEventSummary.athleteEvent.actualWeightInKg">
@@ -43,8 +46,10 @@
                 </ng-container>
             </div>
         </div>
-        <ng-container *ngFor="let workoutSummary of athleteEventSummary.workoutSummaries">
-            <app-athlete-workout-summary [workoutSummary]="workoutSummary"></app-athlete-workout-summary>
-        </ng-container>
+        <div class="card">
+            <ng-container *ngFor="let workoutSummary of athleteEventSummary.workoutSummaries">
+                <app-athlete-workout-summary [workoutSummary]="workoutSummary"></app-athlete-workout-summary>
+            </ng-container>
+        </div>
     </div>
 </div>

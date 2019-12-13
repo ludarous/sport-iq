@@ -1,6 +1,6 @@
 <div *ngIf="athlete" class="ui-g flex-fill">
     <div class="ui-g-12">
-        <div class="card">
+        <div>
             <!--            <h1 *ngIf="athlete">{{athlete.firstName + ' ' + athlete.lastName}}</h1>-->
             <h1>{{athlete.name}}</h1>
             <div class="ui-g">
@@ -11,7 +11,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui-g-6 ui-md-6 ui-sm-12">
+                <div class="ui-g-9 ui-md-11 ui-sm-12">
                     <div class="card player-card">
                         <div class="ui-g">
                             <div class="ui-g-12 ui-md-4">
@@ -39,21 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="ui-g">
-                    <div class="ui-g-12">
-                        <app-athlete-events-summary *ngIf="athlete" [athlete]="athlete"></app-athlete-events-summary>
-                    </div>
-                    <!--                    <p-tabView class="flex-fill">-->
-                    <!--                        <p-tabPanel [header]="'Výsledky' | translate">-->
-                    <!--                            <app-athlete-events-summary *ngIf="athlete" [athlete]="athlete"></app-athlete-events-summary>-->
-                    <!--                        </p-tabPanel>-->
-                    <!--                        <p-tabPanel [header]="'Statistiky' | translate">-->
-                    <!--                            Content 2-->
-                    <!--                        </p-tabPanel>-->
-                    <!--                    </p-tabView>-->
-                </div>
-            </div>
+            <app-athlete-events-summary *ngIf="athlete" [athlete]="athlete"></app-athlete-events-summary>
         </div>
     </div>
 </div>

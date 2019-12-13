@@ -2521,3 +2521,13 @@ h2 {
 }
 
 /* Add your customizations of layout here */
+body .layout-wrapper .topbar {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+}
+body .layout-wrapper .topbar .topbar-search input {
+  background: black;
+}
+
+/*# sourceMappingURL=layout-blue-dark.css.map */
