@@ -44,17 +44,17 @@ app-root {
 .layout-content-container {
     flex: 1;
     display: flex;
-    & > *:not(router-outlet){
+
+    & > *:not(router-outlet) {
         flex: 1;
         display: flex;
 
-        & > *:not(router-outlet){
+        & > *:not(router-outlet) {
             flex: 1;
             display: flex;
         }
     }
 }
-
 
 
 .btn {
@@ -63,6 +63,7 @@ app-root {
 
 .btn-panel {
     padding: 10px 0px;
+
     button:not(:first-child) {
         margin-left: 10px;
     }
@@ -119,21 +120,31 @@ app-root {
     margin-right: 10px;
 }
 
+.bold-label {
+    label {
+        font-weight: bold;
+    }
+}
+
 /*--------------------- LIST -------------------------- */
 .list {
     overflow: hidden;
 }
+
 .list .ui-panel {
     margin-bottom: 15px;
 }
+
 .list .ui-panel .ui-panel-content {
     padding: 0px !important;
 }
+
 .list ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
+
 .list ul li {
     border-bottom: 1px solid black;
     padding: 10px 15px;
@@ -161,41 +172,139 @@ app-root {
         color: black;
     }
 }
+
 .list ul li img {
     float: left;
     margin-right: 8px;
 }
+
 .list ul li .contact-info {
     float: left;
 }
+
 .list ul li .contact-info .name {
     display: block;
     margin-top: 4px;
     font-size: 14px;
 }
+
 .list ul li .contact-info .location {
     margin-top: 4px;
     display: block;
     font-size: 12px;
     color: #7a7a7a;
 }
+
 .list ul li .contact-actions {
     float: right;
     padding-top: 12px;
 }
+
 .list ul li .contact-actions button:last-child {
     margin-left: 6px;
 }
+
 .list ul li:last-child {
     border: 0;
 }
 
+.print-only {
+    display: none;
+}
+
+.chart {
+    text {
+        fill: white !important;
+    }
+}
+
 @media print {
-    body {
-        overflow: visible;
+
+    .print-only {
+        display: initial;
     }
 
-    app-athlete-activity-summary {
-        page-break-begore: always;
+    .chart-container {
+        max-width: 8.5in !important;
+    }
+
+    .chart {
+
+        text {
+            fill: black !important;
+        }
+    }
+
+
+
+    body {
+        background-color: white;
+
+        .card {
+            padding: 0px;
+            box-shadow: none;
+            background-color: white;
+        }
+
+        color: black;
+
+        .ui-table .ui-table-thead {
+            & > tr > th {
+                background: lightgray;
+                color: black;
+            }
+        }
+
+
+        .ui-table .ui-table-tbody {
+            & > tr {
+                background: white;
+
+                & > th {
+                    background: lightgray;
+                    color: black;
+                }
+            }
+
+            & > tr:nth-child(even) {
+                background: #f3f3f3;
+            }
+
+        }
+    }
+
+    .layout-content {
+        padding-top: 0 !important;
+        margin-left: 0px !important;
+    }
+
+    .layout-content-container {
+        padding: 0 !important;
+    }
+
+    app-topbar, app-breadcrumb, app-footer, .layout-menu-container, .print-no {
+        display: none;
+    }
+
+    .athlete-activity-summary {
+        page-break-before: always;
+        page-break-after: auto;
+    }
+
+
+    .athlete-activity-result-summary {
+        page-break-inside: avoid;
+    }
+
+    table {
+        page-break-inside: avoid;
+    }
+
+    .athlete-avatar {
+        display: none;
+    }
+
+    .athlete-info {
+        width: 100%;
     }
 }

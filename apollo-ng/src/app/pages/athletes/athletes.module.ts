@@ -16,6 +16,8 @@ import { AthleteWorkoutSummaryComponent } from './card/athlete-workout-summary/a
 import { AthleteActivitySummaryComponent } from './card/athlete-activity-summary/athlete-activity-summary.component';
 import { AthleteActivityResultSummaryComponent } from './card/athlete-activity-result-summary/athlete-activity-result-summary.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { AthleteInfoComponent } from './card/athlete-info/athlete-info.component';
+import {VcSharedComponentsModule} from '../../modules/shared-components/vc-shared-components.module';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
         AthleteWorkoutSummaryComponent,
         AthleteActivitySummaryComponent,
         AthleteActivityResultSummaryComponent,
+        AthleteInfoComponent,
     ],
     imports: [
         CommonModule,
@@ -37,6 +40,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
         TranslateModule,
         PrimeNgComponentsModule,
         NgxChartsModule,
+        VcSharedComponentsModule,
     ],
     providers: [
         AthleteService,

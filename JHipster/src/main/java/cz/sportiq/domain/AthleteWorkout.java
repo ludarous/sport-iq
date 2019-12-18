@@ -30,7 +30,7 @@ public class AthleteWorkout implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "note")
+    @Column(name = "note", length = 65535)
     private String note;
 
     @ManyToOne

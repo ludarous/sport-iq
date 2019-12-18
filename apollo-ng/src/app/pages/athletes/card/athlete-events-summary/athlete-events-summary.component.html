@@ -1,6 +1,9 @@
 <!--<p-dropdown [options]="dropDownEvents" class="w-100" (onChange)="eventSelected($event)"></p-dropdown>-->
+<div class="ui-g print-only">
+    <div class="logo print-logo">Sport<span class="primary">iq</span></div>
+</div>
 <div class="ui-g">
-    <div class="ui-g-12 ui-md-2 list">
+    <div class="ui-g-12 ui-md-2 list print-no">
         <div class="card">
             <p-panel [header]="'Události' | translate">
                 <ul>
@@ -14,33 +17,40 @@
         </div>
     </div>
     <div *ngIf="athleteEventSummary" class="ui-g-12 ui-md-10 list">
-        <h1 class="text-center"
-            *ngIf="athleteEventSummary.event">{{athleteEventSummary.event.name + (' - výsledky' | translate)}}</h1>
-        <div class="card">
+        <div *ngIf="athleteEventSummary.event" class="event-summary-heading">
+            <h1 class="text-center">{{athleteEventSummary.event.name}}</h1>
+            <h2 class="text-center">{{athleteEventSummary.event.date | datex:'DD.MM.YYYY'}}</h2>
+        </div>
+        <div class="card bold-label">
+            <div class="ui-g print-only">
+                <app-athlete-info [athlete]="athlete"></app-athlete-info>
+                <hr/>
+                <br/>
+            </div>
             <div class="ui-g">
                 <ng-container *ngIf="athleteEventSummary.athleteEvent.actualWeightInKg">
-                    <div class="ui-g-12 ui-md-4">
+                    <div class="ui-g-4 ui-md-4">
                         <label>{{'Váha sportovce v době události' | translate}}</label>
                     </div>
-                    <div class="ui-g-12 ui-md-8">
+                    <div class="ui-g-8 ui-md-8">
                         <span>{{athleteEventSummary.athleteEvent.actualWeightInKg + ' kg'}}</span>
                     </div>
                 </ng-container>
 
-                <ng-container *ngIf="athleteEventSummary.athleteEvent.actualWeightInKg">
-                    <div class="ui-g-12 ui-md-4">
+                <ng-container *ngIf="athleteEventSummary.athleteEvent.actualHeightInCm">
+                    <div class="ui-g-4 ui-md-4">
                         <label>{{'Výška sportovce v době události' | translate}}</label>
                     </div>
-                    <div class="ui-g-12 ui-md-8">
-                        <span>{{athleteEventSummary.athleteEvent.actualWeightInKg + ' cm'}}</span>
+                    <div class="ui-g-8 ui-md-8">
+                        <span>{{athleteEventSummary.athleteEvent.actualHeightInCm + ' cm'}}</span>
                     </div>
                 </ng-container>
 
                 <ng-container *ngIf="athleteEventSummary.athleteEvent.note">
-                    <div class="ui-g-12 ui-md-4">
+                    <div class="ui-g-4 ui-md-4">
                         <label>{{'Poznámka' | translate}}</label>
                     </div>
-                    <div class="ui-g-12 ui-md-8">
+                    <div class="ui-g-8 ui-md-8">
                         <span>{{athleteEventSummary.athleteEvent.note}}</span>
                     </div>
                 </ng-container>

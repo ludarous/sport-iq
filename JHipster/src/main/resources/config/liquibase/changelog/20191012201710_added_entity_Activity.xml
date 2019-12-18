@@ -25,11 +25,11 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="description" type="varchar(255)">
+            <column name="description" type="varchar(65535)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="help" type="varchar(255)">
+            <column name="help" type="varchar(65535)">
                 <constraints nullable="true" />
             </column>
 
@@ -51,7 +51,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
         <createTable tableName="activity_categories">
             <column name="categories_id" type="bigint">
                 <constraints nullable="false"/>
@@ -62,7 +62,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="activities_id, categories_id" tableName="activity_categories"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

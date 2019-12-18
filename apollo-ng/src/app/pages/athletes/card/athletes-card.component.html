@@ -3,41 +3,8 @@
         <div>
             <!--            <h1 *ngIf="athlete">{{athlete.firstName + ' ' + athlete.lastName}}</h1>-->
             <h1>{{athlete.name}}</h1>
-            <div class="ui-g">
-                <div class="ui-g-3 ui-md-1 ui-sm-3">
-                    <div class="card">
-                        <div class="avatar-img">
-                            <img src="./assets/img/athlete-svgrepo-com.svg"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="ui-g-9 ui-md-11 ui-sm-12">
-                    <div class="card player-card">
-                        <div class="ui-g">
-                            <div class="ui-g-12 ui-md-4">
-                                <label>{{'Jméno:' | translate}}</label>
-                            </div>
-                            <div class="ui-g-12 ui-md-8">
-                                <span>{{athlete.firstName + ' ' + athlete.lastName}}</span>
-                            </div>
-
-                            <div class="ui-g-12 ui-md-4">
-                                <label>{{'e-mail:' | translate}}</label>
-                            </div>
-                            <div class="ui-g-12 ui-md-8">
-                                <span>{{athlete.email}}</span>
-                            </div>
-
-                            <div class="ui-g-12 ui-md-4">
-                                <label>{{'Datum narození:' | translate}}</label>
-                            </div>
-                            <div class="ui-g-12 ui-md-8">
-                                <span>{{athlete.birthDate ? athlete.birthDate.format('MM.DD.YYYY') : ''}}</span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+            <div class="ui-g print-no">
+                <app-athlete-info [athlete]="athlete"></app-athlete-info>
             </div>
             <app-athlete-events-summary *ngIf="athlete" [athlete]="athlete"></app-athlete-events-summary>
         </div>

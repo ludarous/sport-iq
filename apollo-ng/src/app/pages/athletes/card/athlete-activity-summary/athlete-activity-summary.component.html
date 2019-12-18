@@ -1,5 +1,8 @@
-<div class="card">
+<div class="card athlete-activity-summary bold-label">
     <h3 class="text-center" *ngIf="activitySummary.activity">{{activitySummary.activity.name}}</h3>
+    <div class="ui-g">
+        <div class="ui-g-12">{{activitySummary.activity.description}}</div>
+    </div>
     <div class="ui-g">
         <ng-container *ngIf="activitySummary.athleteActivity.note">
             <div class="ui-g-12 ui-md-4">

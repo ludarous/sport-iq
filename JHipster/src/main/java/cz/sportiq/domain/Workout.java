@@ -32,7 +32,7 @@ public class Workout implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 65535)
     private String description;
 
     @ManyToMany

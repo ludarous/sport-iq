@@ -1,15 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
-import {IAthleteActivity} from '../../../../entities/model/athlete-activity.model';
-import {IActivity} from '../../../../entities/model/activity.model';
-import {AthleteService} from '../../../../services/rest/athlete.service';
-import {ToastService} from '../../../../modules/core/services/message.service';
-import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
-import {IAthleteWorkout} from '../../../../entities/model/athlete-workout.model';
-import {AthleteActivityService} from '../../../../services/rest/athlete-activity.service';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {IActivityResult} from '../../../../entities/model/activity-result.model';
 import {IActivityResultSplit} from '../../../../entities/model/activity-result-split.model';
 import {IAthleteActivityResult} from '../../../../entities/model/athlete-activity-result.model';
@@ -83,7 +72,10 @@ export class AthleteActivityResultComponent implements OnInit {
     }
 
     fix(value: number): string {
-        return value.toFixed(2);
+        if (value) {
+            return value.toFixed(2);
+        }
+        return '';
     }
 
     computedDifference(): number {

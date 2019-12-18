@@ -30,7 +30,7 @@ public class AthleteEvent implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "note")
+    @Column(name = "note", length = 65535)
     private String note;
 
     @Column(name = "actual_height_in_cm")

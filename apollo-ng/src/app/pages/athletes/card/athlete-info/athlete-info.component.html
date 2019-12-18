@@ -1,0 +1,34 @@
+<div class="ui-g-3 ui-md-1 ui-sm-3 athlete-avatar">
+    <div class="card">
+        <div class="avatar-img">
+            <img src="./assets/img/athlete-svgrepo-com.svg"/>
+        </div>
+    </div>
+</div>
+<div class="ui-g-9 ui-md-11 ui-sm-12 athlete-info">
+    <div class="card player-card">
+        <div class="ui-g">
+            <div class="ui-g-4 ui-md-4">
+                <label>{{'Jméno:' | translate}}</label>
+            </div>
+            <div class="ui-g-8 ui-md-8">
+                <span>{{athlete.firstName + ' ' + athlete.lastName}}</span>
+            </div>
+
+            <div class="ui-g-4 ui-md-4">
+                <label>{{'e-mail:' | translate}}</label>
+            </div>
+            <div class="ui-g-8 ui-md-8">
+                <span>{{athlete.email}}</span>
+            </div>
+
+            <div class="ui-g-4 ui-md-4">
+                <label>{{'Datum narození:' | translate}}</label>
+            </div>
+            <div class="ui-g-8 ui-md-8">
+                <span>{{athlete.birthDate ? athlete.birthDate.format('MM.DD.YYYY') : ''}}</span>
+            </div>
+
+        </div>
+    </div>
+</div>

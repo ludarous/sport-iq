@@ -1,7 +1,31 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AthleteActivityResultSummary} from '../../../../entities/summaries/athlete-activity-result-summary';
 import {StatsTableItem} from '../../../../entities/summaries/stats';
-import {colorSets} from '@swimlane/ngx-charts';
+import * as shape from 'd3-shape';
+import * as d3Array from 'd3-array';
+import {ResultType} from '../../../../entities/model/activity-result.model';
+import {ActivityResultSplit} from '../../../../entities/model/activity-result-split.model';
+import {colorSets} from '@swimlane/ngx-charts/release/utils';
+
+export class SplitResultChartData {
+    name: string;
+    series: any[];
+
+    constructor(name: string) {
+        this.name = name;
+        this.series = [];
+    }
+}
+
+export class SplitResultChartSettings {
+    yScaleMin: number;
+    yScaleMax: number;
+
+    constructor(yScaleMin: number, yScaleMax: number) {
+        this.yScaleMin = yScaleMin;
+        this.yScaleMax = yScaleMax;
+    }
+}
 
 @Component({
     selector: 'app-athlete-activity-result-summary',
@@ -10,11 +34,43 @@ import {colorSets} from '@swimlane/ngx-charts';
 })
 export class AthleteActivityResultSummaryComponent implements OnInit {
 
+    readonly SCALE_CONSTANT = 1.2;
+
     constructor() {
     }
 
+    curves = {
+        Basis: shape.curveBasis,
+        'Basis Closed': shape.curveBasisClosed,
+        Bundle: shape.curveBundle.beta(1),
+        Cardinal: shape.curveCardinal,
+        'Cardinal Closed': shape.curveCardinalClosed,
+        'Catmull Rom': shape.curveCatmullRom,
+        'Catmull Rom Closed': shape.curveCatmullRomClosed,
+        Linear: shape.curveLinear,
+        'Linear Closed': shape.curveLinearClosed,
+        'Monotone X': shape.curveMonotoneX,
+        'Monotone Y': shape.curveMonotoneY,
+        Natural: shape.curveNatural,
+        Step: shape.curveStep,
+        'Step After': shape.curveStepAfter,
+        'Step Before': shape.curveStepBefore,
+        default: shape.curveLinear
+    };
+
+    private _activityResultSummary: AthleteActivityResultSummary;
     @Input()
-    activityResultSummary: AthleteActivityResultSummary;
+    get activityResultSummary(): AthleteActivityResultSummary {
+        return this._activityResultSummary;
+    }
+
+    set activityResultSummary(value: AthleteActivityResultSummary) {
+        if (value) {
+            value.resultSplitSummaries = ActivityResultSplit.sortSummariesByActivityResultSplitValue(value.resultSplitSummaries);
+            this._activityResultSummary = value;
+        }
+    }
+
 
     statsTableItems: Array<StatsTableItem>;
     splitStatsTableItems: Array<StatsTableItem>;
@@ -23,32 +79,96 @@ export class AthleteActivityResultSummaryComponent implements OnInit {
 
     cardsData: any;
 
+    splitResultsChartData = new Array<SplitResultChartData>();
+
+    splitResultsChartSettings: SplitResultChartSettings;
+
     get unit(): string {
-        return this.activityResultSummary.activityResult.resultUnit.abbreviation;
+        return this._activityResultSummary.activityResult.resultUnit.abbreviation;
     }
 
     ngOnInit() {
-        this.colorScheme = colorSets.find(s => s.name === 'aqua');
-        this.statsTableItems = StatsTableItem.createResultsStatsTableItems(this.activityResultSummary);
-        this.splitStatsTableItems = StatsTableItem.createSplitStatsTableItems(this.activityResultSummary);
+        this.colorScheme = colorSets.find(s => s.name === 'cool');
+        this.statsTableItems = StatsTableItem.createResultsStatsTableItems(this._activityResultSummary);
+        this.splitStatsTableItems = StatsTableItem.createSplitStatsTableItems(this._activityResultSummary);
         this.cardsData = [
             {
                 name: 'Výsledek',
-                value: this.activityResultSummary.athleteActivityResult.value,
+                value: this._activityResultSummary.athleteActivityResult.value,
                 extra: {
-                    unit: this.activityResultSummary.activityResult.resultUnit.abbreviation,
+                    unit: this._activityResultSummary.activityResult.resultUnit.abbreviation,
                 }
             },
             {
                 name: 'Výsledek v %',
-                value: this.activityResultSummary.stats.athleteStats.valueRankInPercents,
+                value: this._activityResultSummary.stats.athleteStats.valueRankInPercents,
                 extra: {
                     unit: '%',
                 }
             }
         ];
+        this.setSplitResultsChartData(this._activityResultSummary);
 
     }
+
+    setSplitResultsChartData(activityResultSummary: AthleteActivityResultSummary) {
+        const valueSplitResults = new SplitResultChartData(activityResultSummary.activityResult.name);
+        const compareValueSplitResults = new SplitResultChartData(activityResultSummary.activityResult.name);
+        this.splitResultsChartData = [];
+
+        let yMinScale = Number.MAX_VALUE;
+        let yMaxScale = 0;
+
+        for (const resultSplitSummary of activityResultSummary.resultSplitSummaries) {
+            if (resultSplitSummary.athleteActivityResultSplit.value) {
+                valueSplitResults.series.push({
+                    value: resultSplitSummary.athleteActivityResultSplit.value,
+                    name: resultSplitSummary.activityResultSplit.splitValue + '. ' + resultSplitSummary.activityResultSplit.splitUnit.name
+                });
+            }
+
+            if (resultSplitSummary.athleteActivityResultSplit.compareValue) {
+                compareValueSplitResults.series.push({
+                    value: resultSplitSummary.athleteActivityResultSplit.compareValue,
+                    name: resultSplitSummary.activityResultSplit.splitValue + '. ' + resultSplitSummary.activityResultSplit.splitUnit.name
+                });
+            }
+
+            const currentMinValues = [];
+            if (resultSplitSummary.stats.worstValue) {
+                currentMinValues.push(resultSplitSummary.stats.worstValue);
+            }
+
+            if (resultSplitSummary.stats.worstCompareValue) {
+                currentMinValues.push(resultSplitSummary.stats.worstCompareValue);
+            }
+            const currentMinValue = Math.min(...currentMinValues);
+            if (yMinScale > currentMinValue) {
+                yMinScale = currentMinValue;
+            }
+
+            const currentMaxValues = [];
+            currentMaxValues.push(resultSplitSummary.stats.bestValue);
+            currentMaxValues.push(resultSplitSummary.stats.bestCompareValue);
+
+            const currentMaxValue = Math.max(...currentMaxValues);
+            if (yMaxScale < currentMaxValue) {
+                yMaxScale = currentMaxValue;
+            }
+        }
+
+
+        this.splitResultsChartData.push(valueSplitResults);
+        this.splitResultsChartData.push(compareValueSplitResults);
+
+
+        if (ResultType.MORE_IS_BETTER.equals(this._activityResultSummary.activityResult.resultType)) {
+            this.splitResultsChartSettings = new SplitResultChartSettings(yMinScale / this.SCALE_CONSTANT, yMaxScale * this.SCALE_CONSTANT);
+        } else {
+            this.splitResultsChartSettings = new SplitResultChartSettings(yMaxScale / this.SCALE_CONSTANT, yMinScale * this.SCALE_CONSTANT);
+        }
+    }
+
 
     showResultLabelHeader(): boolean {
         if (this.statsTableItems) {
@@ -93,5 +213,8 @@ export class AthleteActivityResultSummaryComponent implements OnInit {
     }
 
 
+    select($event: any) {
+
+    }
 }
 

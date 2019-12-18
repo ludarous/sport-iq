@@ -1,6 +1,7 @@
 import {ActivityResult, IActivityResult} from './activity-result.model';
 import {ActivityCategory, IActivityCategory} from './activity-category.model';
 import {numeric, required} from '@rxweb/reactive-form-validators';
+import {AthleteActivitySummary} from '../summaries/athlete-activity-summary';
 
 export interface IActivity {
     id?: number;
@@ -42,5 +43,16 @@ export class Activity implements IActivity {
             }
         }
         return activity;
+    }
+
+    static sortActivitySummariesByActivityId(items: Array<AthleteActivitySummary>, order = 1) {
+        if (items) {
+            const comparer = (o1: AthleteActivitySummary, o2: AthleteActivitySummary) => {
+                const itemOrderResult = o1.activity.id - o2.activity.id;
+                return itemOrderResult * order;
+            };
+            return items.sort(comparer);
+        }
+        return items;
     }
 }

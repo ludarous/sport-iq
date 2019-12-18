@@ -34,10 +34,10 @@ public class Activity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 65535)
     private String description;
 
-    @Column(name = "help")
+    @Column(name = "help", length = 65535)
     private String help;
 
     @Column(name = "min_age")

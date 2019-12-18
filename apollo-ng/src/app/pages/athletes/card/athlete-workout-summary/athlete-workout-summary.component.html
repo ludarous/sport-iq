@@ -1,5 +1,9 @@
 <h2 class="text-center" *ngIf="workoutSummary.workout">{{workoutSummary.workout.name}}</h2>
-<div *ngIf="workoutSummary.athleteWorkout.note" class="card">
+<br/>
+<div class="ui-g">
+    <div class="ui-g-12">{{workoutSummary.workout.description}}</div>
+</div>
+<div *ngIf="workoutSummary.athleteWorkout.note" class="card bold-label">
     <div class="ui-g">
         <ng-container *ngIf="workoutSummary.athleteWorkout.note">
             <div class="ui-g-12 ui-md-4">

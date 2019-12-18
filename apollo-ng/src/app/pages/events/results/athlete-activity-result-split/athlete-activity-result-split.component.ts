@@ -53,7 +53,10 @@ export class AthleteActivityResultSplitComponent implements OnInit {
     }
 
     fix(value: number): string {
-        return value.toFixed(2);
+        if (value) {
+            return value.toFixed(2);
+        }
+        return '';
     }
 
     computedDifference(): number {

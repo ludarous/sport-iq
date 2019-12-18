@@ -25,13 +25,13 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="description" type="varchar(255)">
+            <column name="description" type="varchar(65535)">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
         <createTable tableName="workout_activities">
             <column name="activities_id" type="bigint">
                 <constraints nullable="false"/>
@@ -42,7 +42,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="workouts_id, activities_id" tableName="workout_activities"/>
-        
+
         <createTable tableName="workout_categories">
             <column name="categories_id" type="bigint">
                 <constraints nullable="false"/>
@@ -53,7 +53,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="workouts_id, categories_id" tableName="workout_categories"/>
-        
+
         <createTable tableName="workout_sports">
             <column name="sports_id" type="bigint">
                 <constraints nullable="false"/>
@@ -64,7 +64,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="workouts_id, sports_id" tableName="workout_sports"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

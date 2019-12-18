@@ -34,6 +34,10 @@ export class AthleteEventsSummaryComponent implements OnInit {
            for (const athleteEvent of this.athleteEvents) {
                this.dropDownEvents.push({label: athleteEvent.eventName, value: athleteEvent});
            }
+
+           if (this.athleteEvents.length === 1) {
+               this.selectAthleteEvent(this.athleteEvents[0]);
+           }
         });
 
         // this.athleteEventService.getAthleteEventSummary(this)
