@@ -12,7 +12,7 @@ import {AthleteWorkoutService} from '../../../services/rest/athlete-workout.serv
 import {Location} from '@angular/common';
 import {AthleteActivityService} from '../../../services/rest/athlete-activity.service';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {ToastService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../../modules/core/services/message.service';
 import {IAthleteActivityResult} from '../../../entities/model/athlete-activity-result.model';
 import {IActivityResult} from '../../../entities/model/activity-result.model';
 import {Observable, Subject, zip} from 'rxjs';

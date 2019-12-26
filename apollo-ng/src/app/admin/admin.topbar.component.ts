@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminComponent } from './admin.component';
-import {AuthService} from './modules/auth/services/auth.service';
-import {IUser} from './modules/entities/user';
+import {AuthService} from '../modules/auth/services/auth.service';
+import {IUser} from '../modules/entities/user';
 
 @Component({
     selector: 'app-topbar',

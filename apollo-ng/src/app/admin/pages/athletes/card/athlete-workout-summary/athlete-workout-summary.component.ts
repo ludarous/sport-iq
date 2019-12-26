@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AthleteWorkoutSummary} from '../../../../entities/summaries/athlete-workout-summary';
-import {ArrayUtils} from '../../../../modules/core/utils/array.utils';
+import {ArrayUtils} from '../../../../../modules/core/utils/array.utils';
 import {Activity} from '../../../../entities/model/activity.model';
 
 @Component({

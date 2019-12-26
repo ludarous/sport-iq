@@ -4,17 +4,17 @@ import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {ToastService} from '../../../modules/core/services/message.service';
+import {RxjsUtils} from '../../../../modules/core/utils/rxjs.utils';
+import {ToastService} from '../../../../modules/core/services/message.service';
 import {AthleteService} from '../../../services/rest/athlete.service';
 import {IAthlete, Athlete, Sex} from '../../../entities/model/athlete.model';
 import {IActivity} from '../../../entities/model/activity.model';
 import {ActivityService} from '../../../services/rest/activity.service';
-import {CalendarUtils} from '../../../modules/core/utils/calendar-utils';
+import {CalendarUtils} from '../../../../modules/core/utils/calendar-utils';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import {SelectItem} from 'primeng/api';
-import {EnumTranslatorService} from '../../../modules/shared-components/services/enum-translator.service';
+import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
 
 @Component({
     selector: 'app-activity-categories-edit',

@@ -2,7 +2,7 @@ import {Injectable, Injector} from '@angular/core';
 import {IUser, User} from '../../../entities/user';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {CrudBaseService} from './rest-base.service';
-import {environment} from '../../../../../../environments/environment';
+import {environment} from '../../../../../environments/environment';
 import {Observable} from 'rxjs';
 
 

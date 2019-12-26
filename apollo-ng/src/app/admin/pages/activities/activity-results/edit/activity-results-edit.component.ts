@@ -5,12 +5,12 @@ import {IUnit, Unit} from '../../../../entities/model/unit.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {ActivityResultService} from '../../../../services/rest/activity-result.service';
-import {ToastService} from '../../../../modules/core/services/message.service';
+import {ToastService} from '../../../../../modules/core/services/message.service';
 import {DynamicDialogConfig, DynamicDialogRef, SelectItem} from 'primeng/api';
-import {PrimengUtils} from '../../../../modules/core/utils/primeng.utils';
-import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
+import {PrimengUtils} from '../../../../../modules/core/utils/primeng.utils';
+import {EnumTranslatorService} from '../../../../../modules/shared-components/services/enum-translator.service';
 import {ActivityResultSplit, IActivityResultSplit} from '../../../../entities/model/activity-result-split.model';
-import {ArrayUtils} from '../../../../modules/core/utils/array.utils';
+import {ArrayUtils} from '../../../../../modules/core/utils/array.utils';
 import {ActivityResultSplitService} from '../../../../services/rest/activity-result-split.service';
 
 @Component({

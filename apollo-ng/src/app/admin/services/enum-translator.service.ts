@@ -1,6 +1,6 @@
 import {TranslateService} from '@ngx-translate/core';
 import {Injectable} from '@angular/core';
-import {EnumTranslatorService} from '../modules/shared-components/services/enum-translator.service';
+import {EnumTranslatorService} from '../../modules/shared-components/services/enum-translator.service';
 import {ResultType} from '../entities/model/activity-result.model';
 import {Sex} from '../entities/model/athlete.model';
 

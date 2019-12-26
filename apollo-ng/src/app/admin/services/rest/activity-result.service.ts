@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {CrudBaseService} from '../../modules/auth/services/rest/rest-base.service';
+import {CrudBaseService} from '../../../modules/auth/services/rest/rest-base.service';
 import {environment} from '../../../../environments/environment';
 import {ActivityResult, IActivityResult} from '../../entities/model/activity-result.model';
 

@@ -3,7 +3,7 @@ import {TreeNode} from 'primeng/api';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {IActivityCategory} from '../../../entities/model/activity-category.model';
 import {ActivityCategoryService} from '../../../services/rest/activity-category.service';
-import {ToastService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../../modules/core/services/message.service';
 
 @Component({
     selector: 'app-activity-categories-list',

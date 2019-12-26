@@ -7,7 +7,7 @@ import {IEvent} from '../../../../entities/model/event.model';
 import {IAthlete} from '../../../../entities/model/athlete.model';
 import {EventService} from '../../../../services/rest/event.service';
 import {AthleteService} from '../../../../services/rest/athlete.service';
-import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
+import {EnumTranslatorService} from '../../../../../modules/shared-components/services/enum-translator.service';
 import {AthleteEventService} from '../../../../services/rest/athlete-event.service';
 import {EventResultsService} from '../events-results.service';
 import {IAthleteWorkout} from '../../../../entities/model/athlete-workout.model';

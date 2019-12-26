@@ -8,7 +8,7 @@ import {EventsListComponent} from './list/events-list.component';
 import {EventsEditComponent} from './edit/events-edit.component';
 import {EventsComponent} from './events.component';
 import {PrimeNgComponentsModule} from '../../shared/prime-ng-components.module';
-import {ToastService} from '../../modules/core/services/message.service';
+import {ToastService} from '../../../modules/core/services/message.service';
 import {EventService} from '../../services/rest/event.service';
 import {WorkoutService} from '../../services/rest/workout.service';
 import {Athlete} from '../../entities/model/athlete.model';

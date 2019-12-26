@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {CrudBaseService} from '../../modules/auth/services/rest/rest-base.service';
+import {CrudBaseService} from '../../../modules/auth/services/rest/rest-base.service';
 import {IActivityCategory} from '../../entities/model/activity-category.model';
 
 @Injectable()

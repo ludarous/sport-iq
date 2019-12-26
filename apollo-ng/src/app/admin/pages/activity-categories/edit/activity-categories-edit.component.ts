@@ -7,8 +7,8 @@ import {map} from 'rxjs/operators';
 import {TreeNode} from 'primeng/api';
 import {ActivityCategory, IActivityCategory} from '../../../entities/model/activity-category.model';
 import {ActivityCategoryService} from '../../../services/rest/activity-category.service';
-import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {ToastService} from '../../../modules/core/services/message.service';
+import {RxjsUtils} from '../../../../modules/core/utils/rxjs.utils';
+import {ToastService} from '../../../../modules/core/services/message.service';
 
 @Component({
     selector: 'app-activity-categories-edit',

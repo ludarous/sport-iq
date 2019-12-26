@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthOAuth2Module } from './admin/modules/auth/oauth2/auth.oauth2.module';
+import { AuthOAuth2Module } from './modules/auth/oauth2/auth.oauth2.module';
 import { environment } from '../environments/environment';
 import { AuthoritiesEnum } from './admin/entities/authorities';
-import { EnumTranslationsModule } from './admin/modules/shared-components/enum-translations.module';
+import { EnumTranslationsModule } from './modules/shared-components/enum-translations.module';
 import { EnumTranslatorServiceImpl } from './admin/services/enum-translator.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { CoreModule } from './admin/modules/core/core.module';
+import { CoreModule } from './modules/core/core.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { ProtractorBrowser } from 'protractor';

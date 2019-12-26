@@ -1,5 +1,6 @@
 import {AfterViewChecked, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-menu',
@@ -44,6 +45,10 @@ export class MenuComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    //this.setToggleNav();
+    this.setToggleNav();
   }
+
+    login() {
+        location.href = environment.backendUrl + '/login';
+    }
 }

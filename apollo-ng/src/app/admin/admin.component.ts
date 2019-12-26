@@ -1,6 +1,6 @@
 import {Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import {ScrollPanel} from 'primeng/primeng';
-import {AuthService} from './modules/auth/services/auth.service';
+import {AuthService} from '../modules/auth/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

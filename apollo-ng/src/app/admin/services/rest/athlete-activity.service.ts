@@ -1,11 +1,11 @@
 import {Injectable, Injector} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {CrudBaseService} from '../../modules/auth/services/rest/rest-base.service';
+import {CrudBaseService} from '../../../modules/auth/services/rest/rest-base.service';
 import {Event} from '../../entities/model/event.model';
 import {Observable} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
-import {RxjsUtils} from '../../modules/core/utils/rxjs.utils';
+import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
 import {AthleteWorkout, IAthleteWorkout} from '../../entities/model/athlete-workout.model';
 import { AthleteActivity, IAthleteActivity } from '../../entities/model/athlete-activity.model';
 import { Activity } from '../../entities/model/activity.model';

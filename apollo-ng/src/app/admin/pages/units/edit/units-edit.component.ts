@@ -5,8 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {TreeNode} from 'primeng/api';
-import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
-import {ToastService} from '../../../modules/core/services/message.service';
+import {RxjsUtils} from '../../../../modules/core/utils/rxjs.utils';
+import {ToastService} from '../../../../modules/core/services/message.service';
 import {UnitService} from '../../../services/rest/unit.service';
 import {IUnit, Unit} from '../../../entities/model/unit.model';
 

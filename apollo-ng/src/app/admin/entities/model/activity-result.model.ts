@@ -1,6 +1,6 @@
 import {IActivityResultSplit} from './activity-result-split.model';
 import {IUnit} from './unit.model';
-import {EnumWrapper} from '../../modules/entities/enum-wrapper';
+import {EnumWrapper} from '../../../modules/entities/enum-wrapper';
 import {IActivity} from './activity.model';
 
 export enum ResultTypeEnum {

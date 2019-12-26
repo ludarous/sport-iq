@@ -1,4 +1,4 @@
-import {AuthoritiesBase} from '../modules/entities/enums/authorities-base';
+import {AuthoritiesBase} from '../../modules/entities/enums/authorities-base';
 
 export enum AuthoritiesEnum {
   ROLE_ADMIN,

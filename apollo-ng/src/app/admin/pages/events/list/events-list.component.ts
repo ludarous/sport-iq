@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {ToastService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../../modules/core/services/message.service';
 import {IEvent} from '../../../entities/model/event.model';
 import {EventService} from '../../../services/rest/event.service';
 

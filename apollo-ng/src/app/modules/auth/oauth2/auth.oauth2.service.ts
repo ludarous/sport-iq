@@ -4,7 +4,7 @@ import {AuthUtils} from '../../core/utils/auth.utils';
 import {IUser, User} from '../../entities/user';
 import {ModuleConfig} from '../../config';
 import {AuthoritiesBase} from '../../entities/enums/authorities-base';
-import {environment} from '../../../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {RxjsUtils} from '../../core/utils/rxjs.utils';

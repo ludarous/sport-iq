@@ -1,11 +1,11 @@
 import {Injectable, Injector} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {CrudBaseService} from '../../modules/auth/services/rest/rest-base.service';
+import {CrudBaseService} from '../../../modules/auth/services/rest/rest-base.service';
 import {Event, IEvent} from '../../entities/model/event.model';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {HttpResponse} from '@angular/common/http';
-import {RxjsUtils} from '../../modules/core/utils/rxjs.utils';
+import {RxjsUtils} from '../../../modules/core/utils/rxjs.utils';
 
 @Injectable()
 export class EventService extends CrudBaseService<IEvent> {

@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MenuItem } from 'primeng/primeng';
 import { AdminComponent } from './admin.component';
-import { AuthService } from './modules/auth/services/auth.service';
-import { AuthUtils } from './modules/core/utils/auth.utils';
+import { AuthService } from '../modules/auth/services/auth.service';
+import { AuthUtils } from '../modules/core/utils/auth.utils';
 import { Authorities } from './entities/authorities';
 import { environment } from '../../environments/environment';
 

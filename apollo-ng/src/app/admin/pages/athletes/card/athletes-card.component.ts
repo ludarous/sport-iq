@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ToastService} from '../../../modules/core/services/message.service';
+import {ToastService} from '../../../../modules/core/services/message.service';
 import {AthleteService} from '../../../services/rest/athlete.service';
 import {Athlete, IAthlete, Sex} from '../../../entities/model/athlete.model';
-import {CalendarUtils} from '../../../modules/core/utils/calendar-utils';
-import {EnumTranslatorService} from '../../../modules/shared-components/services/enum-translator.service';
+import {CalendarUtils} from '../../../../modules/core/utils/calendar-utils';
+import {EnumTranslatorService} from '../../../../modules/shared-components/services/enum-translator.service';
 import {Moment} from 'moment';
 import * as moment from 'moment';
 import {MenuItem} from 'primeng/api';

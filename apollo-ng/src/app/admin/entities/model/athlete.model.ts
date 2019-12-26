@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import * as moment from 'moment';
-import {EnumWrapper} from '../../modules/entities/enum-wrapper';
+import {EnumWrapper} from '../../../modules/entities/enum-wrapper';
 import {ResultTypeEnum} from './activity-result.model';
 
 export enum SexEnum {
