@@ -6,7 +6,7 @@ import cz.sportiq.service.dto.ActivityCategoryDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity ActivityCategory and its DTO ActivityCategoryDTO.
+ * Mapper for the entity {@link ActivityCategory} and its DTO {@link ActivityCategoryDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface ActivityCategoryMapper extends EntityMapper<ActivityCategoryDTO, ActivityCategory> {

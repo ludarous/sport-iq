@@ -1,6 +1,4 @@
 package cz.sportiq.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,11 +6,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 /**
  * A ActivityCategory.
@@ -20,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "activity_category")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "activitycategory")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "activitycategory")
 public class ActivityCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +25,7 @@ public class ActivityCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @NotNull
@@ -42,7 +40,7 @@ public class ActivityCategory implements Serializable {
     private Set<ActivityCategory> childActivityCategories = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("childActivityCategories")
+    @JsonIgnoreProperties("activityCategories")
     private ActivityCategory parentActivityCategory;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -124,19 +122,15 @@ public class ActivityCategory implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ActivityCategory)) {
             return false;
         }
-        ActivityCategory activityCategory = (ActivityCategory) o;
-        if (activityCategory.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), activityCategory.getId());
+        return id != null && id.equals(((ActivityCategory) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

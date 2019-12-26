@@ -4,21 +4,21 @@ import { ActivatedRoute } from '@angular/router';
 import { ISport } from 'app/shared/model/sport.model';
 
 @Component({
-    selector: 'jhi-sport-detail',
-    templateUrl: './sport-detail.component.html'
+  selector: 'jhi-sport-detail',
+  templateUrl: './sport-detail.component.html'
 })
 export class SportDetailComponent implements OnInit {
-    sport: ISport;
+  sport: ISport;
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.activatedRoute.data.subscribe(({ sport }) => {
-            this.sport = sport;
-        });
-    }
+  ngOnInit() {
+    this.activatedRoute.data.subscribe(({ sport }) => {
+      this.sport = sport;
+    });
+  }
 
-    previousState() {
-        window.history.back();
-    }
+  previousState() {
+    window.history.back();
+  }
 }

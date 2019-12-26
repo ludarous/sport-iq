@@ -1,34 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SportiqSharedModule } from 'app/shared';
-import {
+import { SportiqSharedModule } from 'app/shared/shared.module';
+import { ActivityResultComponent } from './activity-result.component';
+import { ActivityResultDetailComponent } from './activity-result-detail.component';
+import { ActivityResultUpdateComponent } from './activity-result-update.component';
+import { ActivityResultDeleteDialogComponent } from './activity-result-delete-dialog.component';
+import { activityResultRoute } from './activity-result.route';
+
+@NgModule({
+  imports: [SportiqSharedModule, RouterModule.forChild(activityResultRoute)],
+  declarations: [
     ActivityResultComponent,
     ActivityResultDetailComponent,
     ActivityResultUpdateComponent,
-    ActivityResultDeletePopupComponent,
-    ActivityResultDeleteDialogComponent,
-    activityResultRoute,
-    activityResultPopupRoute
-} from './';
-
-const ENTITY_STATES = [...activityResultRoute, ...activityResultPopupRoute];
-
-@NgModule({
-    imports: [SportiqSharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [
-        ActivityResultComponent,
-        ActivityResultDetailComponent,
-        ActivityResultUpdateComponent,
-        ActivityResultDeleteDialogComponent,
-        ActivityResultDeletePopupComponent
-    ],
-    entryComponents: [
-        ActivityResultComponent,
-        ActivityResultUpdateComponent,
-        ActivityResultDeleteDialogComponent,
-        ActivityResultDeletePopupComponent
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    ActivityResultDeleteDialogComponent
+  ],
+  entryComponents: [ActivityResultDeleteDialogComponent]
 })
 export class SportiqActivityResultModule {}

@@ -63,10 +63,10 @@ export class Principal {
 
         // retrieve the userIdentity data from the server, update the identity object, and then resolve.
         return this.account
-            .get()
+            .fetch()
             .toPromise()
             .then(response => {
-                const account = response.body;
+                const account = response;
                 if (account) {
                     this.userIdentity = account;
                     this.authenticated = true;

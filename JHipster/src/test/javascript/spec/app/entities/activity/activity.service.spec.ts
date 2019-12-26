@@ -1,95 +1,118 @@
-/* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { take, map } from 'rxjs/operators';
 import { ActivityService } from 'app/entities/activity/activity.service';
-import { Activity } from 'app/shared/model/activity.model';
-import { SERVER_API_URL } from 'app/app.constants';
+import { IActivity, Activity } from 'app/shared/model/activity.model';
 
 describe('Service Tests', () => {
-    describe('Activity Service', () => {
-        let injector: TestBed;
-        let service: ActivityService;
-        let httpMock: HttpTestingController;
+  describe('Activity Service', () => {
+    let injector: TestBed;
+    let service: ActivityService;
+    let httpMock: HttpTestingController;
+    let elemDefault: IActivity;
+    let expectedResult;
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule]
+      });
+      expectedResult = {};
+      injector = getTestBed();
+      service = injector.get(ActivityService);
+      httpMock = injector.get(HttpTestingController);
 
-        beforeEach(() => {
-            TestBed.configureTestingModule({
-                imports: [HttpClientTestingModule]
-            });
-            injector = getTestBed();
-            service = injector.get(ActivityService);
-            httpMock = injector.get(HttpTestingController);
-        });
-
-        describe('Service methods', () => {
-            it('should call correct URL', () => {
-                service.find(123).subscribe(() => {});
-
-                const req = httpMock.expectOne({ method: 'GET' });
-
-                const resourceUrl = SERVER_API_URL + 'api/activities';
-                expect(req.request.url).toEqual(resourceUrl + '/' + 123);
-            });
-
-            it('should create a Activity', () => {
-                service.create(new Activity(null)).subscribe(received => {
-                    expect(received.body.id).toEqual(null);
-                });
-
-                const req = httpMock.expectOne({ method: 'POST' });
-                req.flush({ id: null });
-            });
-
-            it('should update a Activity', () => {
-                service.update(new Activity(123)).subscribe(received => {
-                    expect(received.body.id).toEqual(123);
-                });
-
-                const req = httpMock.expectOne({ method: 'PUT' });
-                req.flush({ id: 123 });
-            });
-
-            it('should return a Activity', () => {
-                service.find(123).subscribe(received => {
-                    expect(received.body.id).toEqual(123);
-                });
-
-                const req = httpMock.expectOne({ method: 'GET' });
-                req.flush({ id: 123 });
-            });
-
-            it('should return a list of Activity', () => {
-                service.query(null).subscribe(received => {
-                    expect(received.body[0].id).toEqual(123);
-                });
-
-                const req = httpMock.expectOne({ method: 'GET' });
-                req.flush([new Activity(123)]);
-            });
-
-            it('should delete a Activity', () => {
-                service.delete(123).subscribe(received => {
-                    expect(received.url).toContain('/' + 123);
-                });
-
-                const req = httpMock.expectOne({ method: 'DELETE' });
-                req.flush(null);
-            });
-
-            it('should propagate not found response', () => {
-                service.find(123).subscribe(null, (_error: any) => {
-                    expect(_error.status).toEqual(404);
-                });
-
-                const req = httpMock.expectOne({ method: 'GET' });
-                req.flush('Invalid request parameters', {
-                    status: 404,
-                    statusText: 'Bad Request'
-                });
-            });
-        });
-
-        afterEach(() => {
-            httpMock.verify();
-        });
+      elemDefault = new Activity(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 0);
     });
+
+    describe('Service methods', () => {
+      it('should find an element', () => {
+        const returnedFromService = Object.assign({}, elemDefault);
+        service
+          .find(123)
+          .pipe(take(1))
+          .subscribe(resp => (expectedResult = resp));
+
+        const req = httpMock.expectOne({ method: 'GET' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject({ body: elemDefault });
+      });
+
+      it('should create a Activity', () => {
+        const returnedFromService = Object.assign(
+          {
+            id: 0
+          },
+          elemDefault
+        );
+        const expected = Object.assign({}, returnedFromService);
+        service
+          .create(new Activity(null))
+          .pipe(take(1))
+          .subscribe(resp => (expectedResult = resp));
+        const req = httpMock.expectOne({ method: 'POST' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject({ body: expected });
+      });
+
+      it('should update a Activity', () => {
+        const returnedFromService = Object.assign(
+          {
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            help: 'BBBBBB',
+            minAge: 1,
+            maxAge: 1,
+            targetValue: 1
+          },
+          elemDefault
+        );
+
+        const expected = Object.assign({}, returnedFromService);
+        service
+          .update(expected)
+          .pipe(take(1))
+          .subscribe(resp => (expectedResult = resp));
+        const req = httpMock.expectOne({ method: 'PUT' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject({ body: expected });
+      });
+
+      it('should return a list of Activity', () => {
+        const returnedFromService = Object.assign(
+          {
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            help: 'BBBBBB',
+            minAge: 1,
+            maxAge: 1,
+            targetValue: 1
+          },
+          elemDefault
+        );
+        const expected = Object.assign({}, returnedFromService);
+        service
+          .query(expected)
+          .pipe(
+            take(1),
+            map(resp => resp.body)
+          )
+          .subscribe(body => (expectedResult = body));
+        const req = httpMock.expectOne({ method: 'GET' });
+        req.flush([returnedFromService]);
+        httpMock.verify();
+        expect(expectedResult).toContainEqual(expected);
+      });
+
+      it('should delete a Activity', () => {
+        service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+
+        const req = httpMock.expectOne({ method: 'DELETE' });
+        req.flush({ status: 200 });
+        expect(expectedResult);
+      });
+    });
+
+    afterEach(() => {
+      httpMock.verify();
+    });
+  });
 });

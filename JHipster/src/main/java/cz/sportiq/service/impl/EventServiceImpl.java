@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing Event.
+ * Service Implementation for managing {@link Event}.
  */
 @Service
 @Transactional
@@ -42,8 +42,8 @@ public class EventServiceImpl implements EventService {
     /**
      * Save a event.
      *
-     * @param eventDTO the entity to save
-     * @return the persisted entity
+     * @param eventDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public EventDTO save(EventDTO eventDTO) {
@@ -58,8 +58,8 @@ public class EventServiceImpl implements EventService {
     /**
      * Get all the events.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -70,9 +70,9 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     * Get all the Event with eager load of many-to-many relationships.
+     * Get all the events with eager load of many-to-many relationships.
      *
-     * @return the list of entities
+     * @return the list of entities.
      */
     public Page<EventDTO> findAllWithEagerRelationships(Pageable pageable) {
         return eventRepository.findAllWithEagerRelationships(pageable).map(eventMapper::toDto);
@@ -82,8 +82,8 @@ public class EventServiceImpl implements EventService {
     /**
      * Get one event by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -96,7 +96,7 @@ public class EventServiceImpl implements EventService {
     /**
      * Delete the event by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -108,9 +108,9 @@ public class EventServiceImpl implements EventService {
     /**
      * Search for the event corresponding to the query.
      *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing AthleteActivityResultSplit.
+ * Service Implementation for managing {@link AthleteActivityResultSplit}.
  */
 @Service
 @Transactional
@@ -44,8 +44,8 @@ public class AthleteActivityResultSplitServiceImpl implements AthleteActivityRes
     /**
      * Save a athleteActivityResultSplit.
      *
-     * @param athleteActivityResultSplitDTO the entity to save
-     * @return the persisted entity
+     * @param athleteActivityResultSplitDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public AthleteActivityResultSplitDTO save(AthleteActivityResultSplitDTO athleteActivityResultSplitDTO) {
@@ -60,8 +60,8 @@ public class AthleteActivityResultSplitServiceImpl implements AthleteActivityRes
     /**
      * Get all the athleteActivityResultSplits.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -75,8 +75,8 @@ public class AthleteActivityResultSplitServiceImpl implements AthleteActivityRes
     /**
      * Get one athleteActivityResultSplit by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -89,7 +89,7 @@ public class AthleteActivityResultSplitServiceImpl implements AthleteActivityRes
     /**
      * Delete the athleteActivityResultSplit by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -101,9 +101,9 @@ public class AthleteActivityResultSplitServiceImpl implements AthleteActivityRes
     /**
      * Search for the athleteActivityResultSplit corresponding to the query.
      *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

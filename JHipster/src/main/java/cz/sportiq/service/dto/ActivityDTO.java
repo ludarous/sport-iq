@@ -1,5 +1,4 @@
 package cz.sportiq.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,7 +6,7 @@ import java.util.Set;
 import java.util.Objects;
 
 /**
- * A DTO for the Activity entity.
+ * A DTO for the {@link cz.sportiq.domain.Activity} entity.
  */
 public class ActivityDTO implements Serializable {
 
@@ -153,5 +152,4 @@ public class ActivityDTO implements Serializable {
             ", targetUnit='" + getTargetUnitName() + "'" +
             "}";
     }
-
 }

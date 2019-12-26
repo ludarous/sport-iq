@@ -4,21 +4,21 @@ import { ActivatedRoute } from '@angular/router';
 import { IUnit } from 'app/shared/model/unit.model';
 
 @Component({
-    selector: 'jhi-unit-detail',
-    templateUrl: './unit-detail.component.html'
+  selector: 'jhi-unit-detail',
+  templateUrl: './unit-detail.component.html'
 })
 export class UnitDetailComponent implements OnInit {
-    unit: IUnit;
+  unit: IUnit;
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.activatedRoute.data.subscribe(({ unit }) => {
-            this.unit = unit;
-        });
-    }
+  ngOnInit() {
+    this.activatedRoute.data.subscribe(({ unit }) => {
+      this.unit = unit;
+    });
+  }
 
-    previousState() {
-        window.history.back();
-    }
+  previousState() {
+    window.history.back();
+  }
 }

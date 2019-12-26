@@ -1,29 +1,16 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SportiqSharedModule } from 'app/shared';
-import {
-    WorkoutComponent,
-    WorkoutDetailComponent,
-    WorkoutUpdateComponent,
-    WorkoutDeletePopupComponent,
-    WorkoutDeleteDialogComponent,
-    workoutRoute,
-    workoutPopupRoute
-} from './';
-
-const ENTITY_STATES = [...workoutRoute, ...workoutPopupRoute];
+import { SportiqSharedModule } from 'app/shared/shared.module';
+import { WorkoutComponent } from './workout.component';
+import { WorkoutDetailComponent } from './workout-detail.component';
+import { WorkoutUpdateComponent } from './workout-update.component';
+import { WorkoutDeleteDialogComponent } from './workout-delete-dialog.component';
+import { workoutRoute } from './workout.route';
 
 @NgModule({
-    imports: [SportiqSharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [
-        WorkoutComponent,
-        WorkoutDetailComponent,
-        WorkoutUpdateComponent,
-        WorkoutDeleteDialogComponent,
-        WorkoutDeletePopupComponent
-    ],
-    entryComponents: [WorkoutComponent, WorkoutUpdateComponent, WorkoutDeleteDialogComponent, WorkoutDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [SportiqSharedModule, RouterModule.forChild(workoutRoute)],
+  declarations: [WorkoutComponent, WorkoutDetailComponent, WorkoutUpdateComponent, WorkoutDeleteDialogComponent],
+  entryComponents: [WorkoutDeleteDialogComponent]
 })
 export class SportiqWorkoutModule {}

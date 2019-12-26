@@ -1,4 +1,4 @@
-export const backendUrl = 'http://localhost:9090';
+export const backendUrl = 'http://backend.sportiq.cz';
 
 export const environment = {
     production: true,

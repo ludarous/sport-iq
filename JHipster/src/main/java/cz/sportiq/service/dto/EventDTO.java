@@ -1,5 +1,4 @@
 package cz.sportiq.service.dto;
-
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -8,7 +7,7 @@ import java.util.Set;
 import java.util.Objects;
 
 /**
- * A DTO for the Event entity.
+ * A DTO for the {@link cz.sportiq.domain.Event} entity.
  */
 public class EventDTO implements Serializable {
 
@@ -18,6 +17,7 @@ public class EventDTO implements Serializable {
     private String name;
 
     private ZonedDateTime date;
+
 
     private Long addressId;
 

@@ -1,95 +1,135 @@
-/* tslint:disable max-line-length */
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { take, map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { AthleteActivityService } from 'app/entities/athlete-activity/athlete-activity.service';
-import { AthleteActivity } from 'app/shared/model/athlete-activity.model';
-import { SERVER_API_URL } from 'app/app.constants';
+import { IAthleteActivity, AthleteActivity } from 'app/shared/model/athlete-activity.model';
 
 describe('Service Tests', () => {
-    describe('AthleteActivity Service', () => {
-        let injector: TestBed;
-        let service: AthleteActivityService;
-        let httpMock: HttpTestingController;
+  describe('AthleteActivity Service', () => {
+    let injector: TestBed;
+    let service: AthleteActivityService;
+    let httpMock: HttpTestingController;
+    let elemDefault: IAthleteActivity;
+    let expectedResult;
+    let currentDate: moment.Moment;
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule]
+      });
+      expectedResult = {};
+      injector = getTestBed();
+      service = injector.get(AthleteActivityService);
+      httpMock = injector.get(HttpTestingController);
+      currentDate = moment();
 
-        beforeEach(() => {
-            TestBed.configureTestingModule({
-                imports: [HttpClientTestingModule]
-            });
-            injector = getTestBed();
-            service = injector.get(AthleteActivityService);
-            httpMock = injector.get(HttpTestingController);
-        });
-
-        describe('Service methods', () => {
-            it('should call correct URL', () => {
-                service.find(123).subscribe(() => {});
-
-                const req = httpMock.expectOne({ method: 'GET' });
-
-                const resourceUrl = SERVER_API_URL + 'api/athlete-activities';
-                expect(req.request.url).toEqual(resourceUrl + '/' + 123);
-            });
-
-            it('should create a AthleteActivity', () => {
-                service.create(new AthleteActivity(null)).subscribe(received => {
-                    expect(received.body.id).toEqual(null);
-                });
-
-                const req = httpMock.expectOne({ method: 'POST' });
-                req.flush({ id: null });
-            });
-
-            it('should update a AthleteActivity', () => {
-                service.update(new AthleteActivity(123)).subscribe(received => {
-                    expect(received.body.id).toEqual(123);
-                });
-
-                const req = httpMock.expectOne({ method: 'PUT' });
-                req.flush({ id: 123 });
-            });
-
-            it('should return a AthleteActivity', () => {
-                service.find(123).subscribe(received => {
-                    expect(received.body.id).toEqual(123);
-                });
-
-                const req = httpMock.expectOne({ method: 'GET' });
-                req.flush({ id: 123 });
-            });
-
-            it('should return a list of AthleteActivity', () => {
-                service.query(null).subscribe(received => {
-                    expect(received.body[0].id).toEqual(123);
-                });
-
-                const req = httpMock.expectOne({ method: 'GET' });
-                req.flush([new AthleteActivity(123)]);
-            });
-
-            it('should delete a AthleteActivity', () => {
-                service.delete(123).subscribe(received => {
-                    expect(received.url).toContain('/' + 123);
-                });
-
-                const req = httpMock.expectOne({ method: 'DELETE' });
-                req.flush(null);
-            });
-
-            it('should propagate not found response', () => {
-                service.find(123).subscribe(null, (_error: any) => {
-                    expect(_error.status).toEqual(404);
-                });
-
-                const req = httpMock.expectOne({ method: 'GET' });
-                req.flush('Invalid request parameters', {
-                    status: 404,
-                    statusText: 'Bad Request'
-                });
-            });
-        });
-
-        afterEach(() => {
-            httpMock.verify();
-        });
+      elemDefault = new AthleteActivity(0, 'AAAAAAA', currentDate);
     });
+
+    describe('Service methods', () => {
+      it('should find an element', () => {
+        const returnedFromService = Object.assign(
+          {
+            date: currentDate.format(DATE_TIME_FORMAT)
+          },
+          elemDefault
+        );
+        service
+          .find(123)
+          .pipe(take(1))
+          .subscribe(resp => (expectedResult = resp));
+
+        const req = httpMock.expectOne({ method: 'GET' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject({ body: elemDefault });
+      });
+
+      it('should create a AthleteActivity', () => {
+        const returnedFromService = Object.assign(
+          {
+            id: 0,
+            date: currentDate.format(DATE_TIME_FORMAT)
+          },
+          elemDefault
+        );
+        const expected = Object.assign(
+          {
+            date: currentDate
+          },
+          returnedFromService
+        );
+        service
+          .create(new AthleteActivity(null))
+          .pipe(take(1))
+          .subscribe(resp => (expectedResult = resp));
+        const req = httpMock.expectOne({ method: 'POST' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject({ body: expected });
+      });
+
+      it('should update a AthleteActivity', () => {
+        const returnedFromService = Object.assign(
+          {
+            note: 'BBBBBB',
+            date: currentDate.format(DATE_TIME_FORMAT)
+          },
+          elemDefault
+        );
+
+        const expected = Object.assign(
+          {
+            date: currentDate
+          },
+          returnedFromService
+        );
+        service
+          .update(expected)
+          .pipe(take(1))
+          .subscribe(resp => (expectedResult = resp));
+        const req = httpMock.expectOne({ method: 'PUT' });
+        req.flush(returnedFromService);
+        expect(expectedResult).toMatchObject({ body: expected });
+      });
+
+      it('should return a list of AthleteActivity', () => {
+        const returnedFromService = Object.assign(
+          {
+            note: 'BBBBBB',
+            date: currentDate.format(DATE_TIME_FORMAT)
+          },
+          elemDefault
+        );
+        const expected = Object.assign(
+          {
+            date: currentDate
+          },
+          returnedFromService
+        );
+        service
+          .query(expected)
+          .pipe(
+            take(1),
+            map(resp => resp.body)
+          )
+          .subscribe(body => (expectedResult = body));
+        const req = httpMock.expectOne({ method: 'GET' });
+        req.flush([returnedFromService]);
+        httpMock.verify();
+        expect(expectedResult).toContainEqual(expected);
+      });
+
+      it('should delete a AthleteActivity', () => {
+        service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+
+        const req = httpMock.expectOne({ method: 'DELETE' });
+        req.flush({ status: 200 });
+        expect(expectedResult);
+      });
+    });
+
+    afterEach(() => {
+      httpMock.verify();
+    });
+  });
 });

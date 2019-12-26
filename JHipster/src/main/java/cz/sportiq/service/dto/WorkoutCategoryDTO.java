@@ -1,11 +1,10 @@
 package cz.sportiq.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the WorkoutCategory entity.
+ * A DTO for the {@link cz.sportiq.domain.WorkoutCategory} entity.
  */
 public class WorkoutCategoryDTO implements Serializable {
 
@@ -15,6 +14,7 @@ public class WorkoutCategoryDTO implements Serializable {
     private String name;
 
     private String description;
+
 
     public Long getId() {
         return id;

@@ -1,27 +1,27 @@
-
 {
-    "sportiqApp": {
-        "athleteActivityResult" : {
-            "home": {
-                "title": "Athlete Activity Results",
-                "createLabel": "Vytvořit Athlete Activity Result",
-                "createOrEditLabel": "Vytvořit nebo upravit Athlete Activity Result",
-                "search": "Vyhledat Athlete Activity Result"
-            },
-            "created": "Byl vytvořen potomek entity Athlete Activity Result s identifikátorem {{ param }}",
-            "updated": "Potomek entity Athlete Activity Result s identifikátorem {{ param }} byl upravený.",
-            "deleted": "Potomek entity Athlete Activity Result s identifikátorem {{ param }} bol smazaný.",
-            "delete": {
-                "question": "Jste si jisti, že chcete smazat Athlete Activity Result {{ id }}?"
-            },
-            "detail": {
-                "title": "Athlete Activity Result"
-            },
-            "value": "Value",
-            "compareValue": "Compare Value",
-            "athleteActivity": "Athlete Activity",
-            "athleteActivityResultSplits": "Athlete Activity Result Splits",
-            "activityResult": "Activity Result"
-        }
+  "sportiqApp": {
+    "athleteActivityResult": {
+      "home": {
+        "title": "Athlete Activity Results",
+        "createLabel": "Vytvořit Athlete Activity Result",
+        "createOrEditLabel": "Vytvořit nebo upravit Athlete Activity Result",
+        "search": "Vyhledat Athlete Activity Result",
+        "notFound": "No Athlete Activity Results found"
+      },
+      "created": "Byl vytvořen potomek entity Athlete Activity Result s identifikátorem {{ param }}",
+      "updated": "Potomek entity Athlete Activity Result s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Athlete Activity Result s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Athlete Activity Result {{ id }}?"
+      },
+      "detail": {
+        "title": "Athlete Activity Result"
+      },
+      "value": "Value",
+      "compareValue": "Compare Value",
+      "athleteActivity": "Athlete Activity",
+      "athleteActivityResultSplits": "Athlete Activity Result Splits",
+      "activityResult": "Activity Result"
     }
+  }
 }

@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing Workout.
+ * Service Implementation for managing {@link Workout}.
  */
 @Service
 @Transactional
@@ -42,8 +42,8 @@ public class WorkoutServiceImpl implements WorkoutService {
     /**
      * Save a workout.
      *
-     * @param workoutDTO the entity to save
-     * @return the persisted entity
+     * @param workoutDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public WorkoutDTO save(WorkoutDTO workoutDTO) {
@@ -58,8 +58,8 @@ public class WorkoutServiceImpl implements WorkoutService {
     /**
      * Get all the workouts.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -70,9 +70,9 @@ public class WorkoutServiceImpl implements WorkoutService {
     }
 
     /**
-     * Get all the Workout with eager load of many-to-many relationships.
+     * Get all the workouts with eager load of many-to-many relationships.
      *
-     * @return the list of entities
+     * @return the list of entities.
      */
     public Page<WorkoutDTO> findAllWithEagerRelationships(Pageable pageable) {
         return workoutRepository.findAllWithEagerRelationships(pageable).map(workoutMapper::toDto);
@@ -82,8 +82,8 @@ public class WorkoutServiceImpl implements WorkoutService {
     /**
      * Get one workout by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -96,7 +96,7 @@ public class WorkoutServiceImpl implements WorkoutService {
     /**
      * Delete the workout by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -108,9 +108,9 @@ public class WorkoutServiceImpl implements WorkoutService {
     /**
      * Search for the workout corresponding to the query.
      *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

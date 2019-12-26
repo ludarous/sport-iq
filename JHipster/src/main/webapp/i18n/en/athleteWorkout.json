@@ -1,26 +1,26 @@
-
 {
-    "sportiqApp": {
-        "athleteWorkout" : {
-            "home": {
-                "title": "Athlete Workouts",
-                "createLabel": "Create a new Athlete Workout",
-                "createOrEditLabel": "Create or edit a Athlete Workout",
-                "search": "Search for Athlete Workout"
-            },
-            "created": "A new Athlete Workout is created with identifier {{ param }}",
-            "updated": "A Athlete Workout is updated with identifier {{ param }}",
-            "deleted": "A Athlete Workout is deleted with identifier {{ param }}",
-            "delete": {
-                "question": "Are you sure you want to delete Athlete Workout {{ id }}?"
-            },
-            "detail": {
-                "title": "Athlete Workout"
-            },
-            "note": "Note",
-            "athleteEvent": "Athlete Event",
-            "athleteActivities": "Athlete Activities",
-            "workout": "Workout"
-        }
+  "sportiqApp": {
+    "athleteWorkout": {
+      "home": {
+        "title": "Athlete Workouts",
+        "createLabel": "Create a new Athlete Workout",
+        "createOrEditLabel": "Create or edit a Athlete Workout",
+        "search": "Search for Athlete Workout",
+        "notFound": "No Athlete Workouts found"
+      },
+      "created": "A new Athlete Workout is created with identifier {{ param }}",
+      "updated": "A Athlete Workout is updated with identifier {{ param }}",
+      "deleted": "A Athlete Workout is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Athlete Workout {{ id }}?"
+      },
+      "detail": {
+        "title": "Athlete Workout"
+      },
+      "note": "Note",
+      "athleteEvent": "Athlete Event",
+      "athleteActivities": "Athlete Activities",
+      "workout": "Workout"
     }
+  }
 }

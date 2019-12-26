@@ -1,5 +1,6 @@
 # sportiq
-This application was generated using JHipster 5.3.4, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.3.4](https://www.jhipster.tech/documentation-archive/v5.3.4).
+
+This application was generated using JHipster 6.5.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.5.1](https://www.jhipster.tech/documentation-archive/v6.5.1).
 
 ## Development
 
@@ -40,68 +41,67 @@ docker-compose -f src/main/docker/keycloak.yml up
 The security settings in `src/main/resources/application.yml` are configured for this image.
 
 ```yaml
-security:
-    basic:
-        enabled: false
+spring:
+  ...
+  security:
     oauth2:
-        client:
-            accessTokenUri: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/token
-            userAuthorizationUri: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/auth
-            clientId: web_app
-            clientSecret: web_app
-            scope: openid profile email
-        resource:
-            userInfoUri: http://localhost:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
+      client:
+        provider:
+          oidc:
+            issuer-uri: http://localhost:9080/auth/realms/jhipster
+        registration:
+          oidc:
+            client-id: web_app
+            client-secret: web_app
 ```
 
 ### Okta
 
-If you'd like to use Okta instead of Keycloak, you'll need to change a few things. First, you'll need to create a free developer account at <https://developer.okta.com/signup/>. After doing so, you'll get your own Okta domain, that has a name like `https://dev-123456.oktapreview.com`.
+If you'd like to use Okta instead of Keycloak, you'll need to change a few things. First, you'll need to create a free developer account at <https://developer.okta.com/signup/>. After doing so, you'll get your own Okta domain, that has a name like `https://dev-123456.okta.com`.
 
 Modify `src/main/resources/application.yml` to use your Okta settings.
 
 ```yaml
-security:
-    basic:
-        enabled: false
+spring:
+  ...
+  security:
     oauth2:
-        client:
-            accessTokenUri: https://{yourOktaDomain}.com/oauth2/default/v1/token
-            userAuthorizationUri: https://{yourOktaDomain}.com/oauth2/default/v1/authorize
-            clientId: {clientId}
-            clientSecret: {clientSecret}
-            scope: openid profile email
-        resource:
-            userInfoUri: https://{yourOktaDomain}.com/oauth2/default/v1/userinfo
+      client:
+        provider:
+          oidc:
+            issuer-uri: https://{yourOktaDomain}/oauth2/default
+        registration:
+          oidc:
+            client-id: {clientId}
+            client-secret: {clientSecret}
+security:
 ```
 
-Create an OIDC App in Okta to get a `{clientId}` and `{clientSecret}`. To do this, log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click the **Next** button. Give the app a name you’ll remember, specify `http://localhost:8080` as a Base URI, and `http://localhost:8080/login` as a Login Redirect URI. Click **Done** and copy the client ID and secret into your `application.yml` file.
+Create an OIDC App in Okta to get a `{clientId}` and `{clientSecret}`. To do this, log in to your Okta Developer account and navigate to **Applications** > **Add Application**. Click **Web** and click the **Next** button. Give the app a name you’ll remember, specify `http://localhost:8080` as a Base URI, and `http://localhost:8080/login/oauth2/code/oidc` as a Login Redirect URI. Click **Done**, then Edit and add `http://localhost:8080` as a Logout redirect URI. Copy and paste the client ID and secret into your `application.yml` file.
 
-> **TIP:** If you want to use the [Ionic Module for JHipster](https://www.npmjs.com/package/generator-jhipster-ionic), you'll need to add `http://localhost:8100` as a **Login redirect URI** as well.
+Create a `ROLE_ADMIN` and `ROLE_USER` group and add users into them. Modify e2e tests to use this account when running integration tests. You'll need to change credentials in `src/test/javascript/e2e/account/account.spec.ts` and `src/test/javascript/e2e/admin/administration.spec.ts`.
 
-Create a `ROLE_ADMIN` and `ROLE_USER` group and add users into them. Create a user (e.g., "admin@jhipster.org" with password "Java is hip in 2017!"). Modify e2e tests to use this account when running integration tests. You'll need to change credentials in `src/test/javascript/e2e/account/account.spec.ts` and `src/test/javascript/e2e/admin/administration.spec.ts`.
-
-Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "roles", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
+Navigate to **API** > **Authorization Servers**, click the **Authorization Servers** tab and edit the default one. Click the **Claims** tab and **Add Claim**. Name it "groups", and include it in the ID Token. Set the value type to "Groups" and set the filter to be a Regex of `.*`.
 
 After making these changes, you should be good to go! If you have any issues, please post them to [Stack Overflow](https://stackoverflow.com/questions/tagged/jhipster). Make sure to tag your question with "jhipster" and "okta".
 
-### Service workers
+### PWA Support
 
-Service workers are commented by default, to enable them please uncomment the following code.
+JHipster ships with PWA (Progressive Web App) support, and it's disabled by default. One of the main components of a PWA is a service worker.
 
-* The service worker registering script in index.html
+The service worker initialization code is commented out by default. To enable it, uncomment the following code in `src/main/webapp/index.html`:
 
 ```html
 <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-        .register('./service-worker.js')
-        .then(function() { console.log('Service Worker Registered'); });
-    }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js').then(function() {
+      console.log('Service Worker Registered');
+    });
+  }
 </script>
 ```
 
-Note: workbox creates the respective service worker and dynamically generate the `service-worker.js`
+Note: [Workbox](https://developers.google.com/web/tools/workbox/) powers JHipster's service worker. It dynamically generates the `service-worker.js` file.
 
 ### Managing dependencies
 
@@ -115,19 +115,22 @@ To benefit from TypeScript type definitions from [DefinitelyTyped][] repository 
 
 Then you would import the JS and CSS files specified in library's installation instructions so that [Webpack][] knows about them:
 Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
-~~~
-import 'leaflet/dist/leaflet.js';
-~~~
 
-Edit [src/main/webapp/content/css/vendor.css](src/main/webapp/content/css/vendor.css) file:
-~~~
+```
+import 'leaflet/dist/leaflet.js';
+```
+
+Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/vendor.scss) file:
+
+```
 @import '~leaflet/dist/leaflet.css';
-~~~
-Note: there are still few other things remaining to do for Leaflet that we won't detail here.
+```
+
+Note: There are still a few other things remaining to do for Leaflet that we won't detail here.
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
-### Using angular-cli
+### Using Angular CLI
 
 You can also use [Angular CLI][] to generate some custom client code.
 
@@ -141,35 +144,40 @@ will generate few files:
     create src/main/webapp/app/my-component/my-component.component.ts
     update src/main/webapp/app/app.module.ts
 
-
 ## Building for production
 
-To optimize the sportiq application for production, run:
+### Packaging as jar
 
-    ./mvnw -Pprod clean package
+To build the final jar and optimize the sportiq application for production, run:
+
+    ./mvnw -Pprod clean verify
 
 This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
 To ensure everything worked, run:
 
-    java -jar target/*.war
+    java -jar target/*.jar
 
 Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
 
+### Packaging as war
+
+To package your application as a war in order to deploy it to an application server, run:
+
+    ./mvnw -Pprod,war clean verify
+
 ## Testing
 
 To launch your application's tests, run:
 
-    ./mvnw clean test
+    ./mvnw verify
 
 ### Client tests
 
 Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
 
     npm test
-
-
 
 For more information, refer to the [Running tests page][].
 
@@ -181,11 +189,21 @@ Sonar is used to analyse code quality. You can start a local Sonar server (acces
 docker-compose -f src/main/docker/sonar.yml up -d
 ```
 
+You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
+
 Then, run a Sonar analysis:
 
 ```
-./mvnw -Pprod clean test sonar:sonar
+./mvnw -Pprod clean verify sonar:sonar
 ```
+
+If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
+
+```
+./mvnw initialize sonar:sonar
+```
+
+or
 
 For more information, refer to the [Code quality page][].
 
@@ -204,7 +222,7 @@ To stop it and remove the container, run:
 You can also fully dockerize your application and all the services that it depends on.
 To achieve this, first build a docker image of your app by running:
 
-    ./mvnw verify -Pprod dockerfile:build dockerfile:tag@version dockerfile:tag@commit
+    ./mvnw -Pprod verify jib:dockerBuild
 
 Then run:
 
@@ -216,24 +234,21 @@ For more information refer to [Using Docker and Docker-Compose][], this page als
 
 To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
 
-[JHipster Homepage and latest documentation]: https://www.jhipster.tech
-[JHipster 5.3.4 archive]: https://www.jhipster.tech/documentation-archive/v5.3.4
-
-[Using JHipster in development]: https://www.jhipster.tech/documentation-archive/v5.3.4/development/
-[Using Docker and Docker-Compose]: https://www.jhipster.tech/documentation-archive/v5.3.4/docker-compose
-[Using JHipster in production]: https://www.jhipster.tech/documentation-archive/v5.3.4/production/
-[Running tests page]: https://www.jhipster.tech/documentation-archive/v5.3.4/running-tests/
-[Code quality page]: https://www.jhipster.tech/documentation-archive/v5.3.4/code-quality/
-[Setting up Continuous Integration]: https://www.jhipster.tech/documentation-archive/v5.3.4/setting-up-ci/
-
-
-[Node.js]: https://nodejs.org/
-[Yarn]: https://yarnpkg.org/
-[Webpack]: https://webpack.github.io/
-[Angular CLI]: https://cli.angular.io/
-[BrowserSync]: http://www.browsersync.io/
-[Jest]: https://facebook.github.io/jest/
-[Jasmine]: http://jasmine.github.io/2.0/introduction.html
-[Protractor]: https://angular.github.io/protractor/
-[Leaflet]: http://leafletjs.com/
-[DefinitelyTyped]: http://definitelytyped.org/
+[jhipster homepage and latest documentation]: https://www.jhipster.tech
+[jhipster 6.5.1 archive]: https://www.jhipster.tech/documentation-archive/v6.5.1
+[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.5.1/development/
+[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.5.1/docker-compose
+[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.5.1/production/
+[running tests page]: https://www.jhipster.tech/documentation-archive/v6.5.1/running-tests/
+[code quality page]: https://www.jhipster.tech/documentation-archive/v6.5.1/code-quality/
+[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.5.1/setting-up-ci/
+[node.js]: https://nodejs.org/
+[yarn]: https://yarnpkg.org/
+[webpack]: https://webpack.github.io/
+[angular cli]: https://cli.angular.io/
+[browsersync]: https://www.browsersync.io/
+[jest]: https://facebook.github.io/jest/
+[jasmine]: https://jasmine.github.io/2.0/introduction.html
+[protractor]: https://angular.github.io/protractor/
+[leaflet]: https://leafletjs.com/
+[definitelytyped]: https://definitelytyped.org/

@@ -1,34 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SportiqSharedModule } from 'app/shared';
-import {
+import { SportiqSharedModule } from 'app/shared/shared.module';
+import { ActivityCategoryComponent } from './activity-category.component';
+import { ActivityCategoryDetailComponent } from './activity-category-detail.component';
+import { ActivityCategoryUpdateComponent } from './activity-category-update.component';
+import { ActivityCategoryDeleteDialogComponent } from './activity-category-delete-dialog.component';
+import { activityCategoryRoute } from './activity-category.route';
+
+@NgModule({
+  imports: [SportiqSharedModule, RouterModule.forChild(activityCategoryRoute)],
+  declarations: [
     ActivityCategoryComponent,
     ActivityCategoryDetailComponent,
     ActivityCategoryUpdateComponent,
-    ActivityCategoryDeletePopupComponent,
-    ActivityCategoryDeleteDialogComponent,
-    activityCategoryRoute,
-    activityCategoryPopupRoute
-} from './';
-
-const ENTITY_STATES = [...activityCategoryRoute, ...activityCategoryPopupRoute];
-
-@NgModule({
-    imports: [SportiqSharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [
-        ActivityCategoryComponent,
-        ActivityCategoryDetailComponent,
-        ActivityCategoryUpdateComponent,
-        ActivityCategoryDeleteDialogComponent,
-        ActivityCategoryDeletePopupComponent
-    ],
-    entryComponents: [
-        ActivityCategoryComponent,
-        ActivityCategoryUpdateComponent,
-        ActivityCategoryDeleteDialogComponent,
-        ActivityCategoryDeletePopupComponent
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    ActivityCategoryDeleteDialogComponent
+  ],
+  entryComponents: [ActivityCategoryDeleteDialogComponent]
 })
 export class SportiqActivityCategoryModule {}

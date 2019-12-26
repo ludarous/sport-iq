@@ -4,21 +4,21 @@ import { ActivatedRoute } from '@angular/router';
 import { IActivity } from 'app/shared/model/activity.model';
 
 @Component({
-    selector: 'jhi-activity-detail',
-    templateUrl: './activity-detail.component.html'
+  selector: 'jhi-activity-detail',
+  templateUrl: './activity-detail.component.html'
 })
 export class ActivityDetailComponent implements OnInit {
-    activity: IActivity;
+  activity: IActivity;
 
-    constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute) {}
 
-    ngOnInit() {
-        this.activatedRoute.data.subscribe(({ activity }) => {
-            this.activity = activity;
-        });
-    }
+  ngOnInit() {
+    this.activatedRoute.data.subscribe(({ activity }) => {
+      this.activity = activity;
+    });
+  }
 
-    previousState() {
-        window.history.back();
-    }
+  previousState() {
+    window.history.back();
+  }
 }

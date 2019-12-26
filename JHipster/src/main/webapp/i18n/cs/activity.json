@@ -1,31 +1,31 @@
-
 {
-    "sportiqApp": {
-        "activity" : {
-            "home": {
-                "title": "Activities",
-                "createLabel": "Vytvořit Activity",
-                "createOrEditLabel": "Vytvořit nebo upravit Activity",
-                "search": "Vyhledat Activity"
-            },
-            "created": "Byl vytvořen potomek entity Activity s identifikátorem {{ param }}",
-            "updated": "Potomek entity Activity s identifikátorem {{ param }} byl upravený.",
-            "deleted": "Potomek entity Activity s identifikátorem {{ param }} bol smazaný.",
-            "delete": {
-                "question": "Jste si jisti, že chcete smazat Activity {{ id }}?"
-            },
-            "detail": {
-                "title": "Activity"
-            },
-            "name": "Name",
-            "description": "Description",
-            "help": "Help",
-            "minAge": "Min Age",
-            "maxAge": "Max Age",
-            "targetValue": "Target Value",
-            "activityResults": "Activity Results",
-            "targetUnit": "Target Unit",
-            "categories": "Categories"
-        }
+  "sportiqApp": {
+    "activity": {
+      "home": {
+        "title": "Activities",
+        "createLabel": "Vytvořit Activity",
+        "createOrEditLabel": "Vytvořit nebo upravit Activity",
+        "search": "Vyhledat Activity",
+        "notFound": "No Activities found"
+      },
+      "created": "Byl vytvořen potomek entity Activity s identifikátorem {{ param }}",
+      "updated": "Potomek entity Activity s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Activity s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Activity {{ id }}?"
+      },
+      "detail": {
+        "title": "Activity"
+      },
+      "name": "Name",
+      "description": "Description",
+      "help": "Help",
+      "minAge": "Min Age",
+      "maxAge": "Max Age",
+      "targetValue": "Target Value",
+      "activityResults": "Activity Results",
+      "targetUnit": "Target Unit",
+      "categories": "Categories"
     }
+  }
 }

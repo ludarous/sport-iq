@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing Sport.
+ * Service Interface for managing {@link cz.sportiq.domain.Sport}.
  */
 public interface SportService {
 
     /**
      * Save a sport.
      *
-     * @param sportDTO the entity to save
-     * @return the persisted entity
+     * @param sportDTO the entity to save.
+     * @return the persisted entity.
      */
     SportDTO save(SportDTO sportDTO);
 
     /**
      * Get all the sports.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<SportDTO> findAll(Pageable pageable);
 
@@ -32,25 +32,25 @@ public interface SportService {
     /**
      * Get the "id" sport.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<SportDTO> findOne(Long id);
 
     /**
      * Delete the "id" sport.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 
     /**
      * Search for the sport corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query the query of the search.
      * 
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<SportDTO> search(String query, Pageable pageable);
 }

@@ -1,6 +1,4 @@
 package cz.sportiq.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,11 +6,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 /**
  * A AthleteEvent.
@@ -20,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "athlete_event", uniqueConstraints={@UniqueConstraint(columnNames = {"event_id", "athlete_id"})})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "athleteevent")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "athleteevent")
 public class AthleteEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +25,7 @@ public class AthleteEvent implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "note", length = 65535)
@@ -49,7 +47,7 @@ public class AthleteEvent implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("athleteEvents")
     private Athlete athlete;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -157,19 +155,15 @@ public class AthleteEvent implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AthleteEvent)) {
             return false;
         }
-        AthleteEvent athleteEvent = (AthleteEvent) o;
-        if (athleteEvent.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), athleteEvent.getId());
+        return id != null && id.equals(((AthleteEvent) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

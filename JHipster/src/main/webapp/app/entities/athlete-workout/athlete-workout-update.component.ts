@@ -1,97 +1,115 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
-
-import { IAthleteWorkout } from 'app/shared/model/athlete-workout.model';
+import { IAthleteWorkout, AthleteWorkout } from 'app/shared/model/athlete-workout.model';
 import { AthleteWorkoutService } from './athlete-workout.service';
 import { IAthleteEvent } from 'app/shared/model/athlete-event.model';
-import { AthleteEventService } from 'app/entities/athlete-event';
+import { AthleteEventService } from 'app/entities/athlete-event/athlete-event.service';
 import { IWorkout } from 'app/shared/model/workout.model';
-import { WorkoutService } from 'app/entities/workout';
+import { WorkoutService } from 'app/entities/workout/workout.service';
 
 @Component({
-    selector: 'jhi-athlete-workout-update',
-    templateUrl: './athlete-workout-update.component.html'
+  selector: 'jhi-athlete-workout-update',
+  templateUrl: './athlete-workout-update.component.html'
 })
 export class AthleteWorkoutUpdateComponent implements OnInit {
-    private _athleteWorkout: IAthleteWorkout;
-    isSaving: boolean;
+  isSaving: boolean;
 
-    athleteevents: IAthleteEvent[];
+  athleteevents: IAthleteEvent[];
 
-    workouts: IWorkout[];
+  workouts: IWorkout[];
 
-    constructor(
-        private jhiAlertService: JhiAlertService,
-        private athleteWorkoutService: AthleteWorkoutService,
-        private athleteEventService: AthleteEventService,
-        private workoutService: WorkoutService,
-        private activatedRoute: ActivatedRoute
-    ) {}
+  editForm = this.fb.group({
+    id: [],
+    note: [],
+    athleteEventId: [],
+    workoutId: [null, Validators.required]
+  });
 
-    ngOnInit() {
-        this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ athleteWorkout }) => {
-            this.athleteWorkout = athleteWorkout;
-        });
-        this.athleteEventService.query().subscribe(
-            (res: HttpResponse<IAthleteEvent[]>) => {
-                this.athleteevents = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.workoutService.query().subscribe(
-            (res: HttpResponse<IWorkout[]>) => {
-                this.workouts = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+  constructor(
+    protected jhiAlertService: JhiAlertService,
+    protected athleteWorkoutService: AthleteWorkoutService,
+    protected athleteEventService: AthleteEventService,
+    protected workoutService: WorkoutService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this.isSaving = false;
+    this.activatedRoute.data.subscribe(({ athleteWorkout }) => {
+      this.updateForm(athleteWorkout);
+    });
+    this.athleteEventService
+      .query()
+      .subscribe(
+        (res: HttpResponse<IAthleteEvent[]>) => (this.athleteevents = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+    this.workoutService
+      .query()
+      .subscribe((res: HttpResponse<IWorkout[]>) => (this.workouts = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  updateForm(athleteWorkout: IAthleteWorkout) {
+    this.editForm.patchValue({
+      id: athleteWorkout.id,
+      note: athleteWorkout.note,
+      athleteEventId: athleteWorkout.athleteEventId,
+      workoutId: athleteWorkout.workoutId
+    });
+  }
+
+  previousState() {
+    window.history.back();
+  }
+
+  save() {
+    this.isSaving = true;
+    const athleteWorkout = this.createFromForm();
+    if (athleteWorkout.id !== undefined) {
+      this.subscribeToSaveResponse(this.athleteWorkoutService.update(athleteWorkout));
+    } else {
+      this.subscribeToSaveResponse(this.athleteWorkoutService.create(athleteWorkout));
     }
+  }
 
-    previousState() {
-        window.history.back();
-    }
+  private createFromForm(): IAthleteWorkout {
+    return {
+      ...new AthleteWorkout(),
+      id: this.editForm.get(['id']).value,
+      note: this.editForm.get(['note']).value,
+      athleteEventId: this.editForm.get(['athleteEventId']).value,
+      workoutId: this.editForm.get(['workoutId']).value
+    };
+  }
 
-    save() {
-        this.isSaving = true;
-        if (this.athleteWorkout.id !== undefined) {
-            this.subscribeToSaveResponse(this.athleteWorkoutService.update(this.athleteWorkout));
-        } else {
-            this.subscribeToSaveResponse(this.athleteWorkoutService.create(this.athleteWorkout));
-        }
-    }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAthleteWorkout>>) {
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
+  }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IAthleteWorkout>>) {
-        result.subscribe((res: HttpResponse<IAthleteWorkout>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
-    }
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
 
-    private onSaveSuccess() {
-        this.isSaving = false;
-        this.previousState();
-    }
+  protected onSaveError() {
+    this.isSaving = false;
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
 
-    private onSaveError() {
-        this.isSaving = false;
-    }
+  trackAthleteEventById(index: number, item: IAthleteEvent) {
+    return item.id;
+  }
 
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackAthleteEventById(index: number, item: IAthleteEvent) {
-        return item.id;
-    }
-
-    trackWorkoutById(index: number, item: IWorkout) {
-        return item.id;
-    }
-    get athleteWorkout() {
-        return this._athleteWorkout;
-    }
-
-    set athleteWorkout(athleteWorkout: IAthleteWorkout) {
-        this._athleteWorkout = athleteWorkout;
-    }
+  trackWorkoutById(index: number, item: IWorkout) {
+    return item.id;
+  }
 }

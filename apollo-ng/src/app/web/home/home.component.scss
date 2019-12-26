@@ -1,0 +1,62 @@
+@import 'src/assets/sass/variables';
+
+.home-logo {
+  font-size: 80px !important;
+}
+
+.main-logo {
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-logo .caption {
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 15;
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.main-logo .caption h1 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #fff;
+  font-weight: 700;
+  font-size: 100px;
+  margin-bottom: 30px;
+}
+
+.main-logo .caption p {
+  color: #fff;
+  font-size: 30px;
+  text-transform: uppercase;
+  padding-bottom: 40px;
+}
+
+.learn-more {
+  background: transparent;
+  margin-top: 40px;
+  color: $cyan;
+  padding: 13px 20px;
+  font-size: 14px;
+  -webkit-transition: all 0.5s ease-in-out 0s;
+  -moz-transition: all 0.5s ease-in-out 0s;
+  -o-transition: all 0.5s ease-in-out 0s;
+  transition: all 0.5s ease-in-out 0s;
+}
+
+.learn-more:hover {
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.learn-more {
+  border: 2px solid $cyan;
+}
+.learn-more:hover {
+  background: $cyan;
+}

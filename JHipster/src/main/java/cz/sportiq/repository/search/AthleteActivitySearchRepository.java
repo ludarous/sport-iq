@@ -1,10 +1,9 @@
 package cz.sportiq.repository.search;
-
 import cz.sportiq.domain.AthleteActivity;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
- * Spring Data Elasticsearch repository for the AthleteActivity entity.
+ * Spring Data Elasticsearch repository for the {@link AthleteActivity} entity.
  */
 public interface AthleteActivitySearchRepository extends ElasticsearchRepository<AthleteActivity, Long> {
 }

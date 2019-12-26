@@ -1,5 +1,4 @@
 package cz.sportiq.repository;
-
 import cz.sportiq.domain.Address;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;

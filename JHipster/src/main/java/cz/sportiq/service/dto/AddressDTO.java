@@ -1,11 +1,10 @@
 package cz.sportiq.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the Address entity.
+ * A DTO for the {@link cz.sportiq.domain.Address} entity.
  */
 public class AddressDTO implements Serializable {
 
@@ -22,6 +21,7 @@ public class AddressDTO implements Serializable {
 
     @NotNull
     private String zipCode;
+
 
     public Long getId() {
         return id;

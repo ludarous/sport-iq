@@ -1,0 +1,11 @@
+@import "src/app/web/web.component";
+@import "src/assets/sass/variables";
+
+.nav-tabs .nav-link.active {
+  background-color: black;
+  color: $cyan;
+}
+
+.nav-tabs .nav-link:not(.active):hover {
+  border-color: transparent;
+}

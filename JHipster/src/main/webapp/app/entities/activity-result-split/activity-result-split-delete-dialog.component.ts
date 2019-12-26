@@ -1,72 +1,34 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
 
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { IActivityResultSplit } from 'app/shared/model/activity-result-split.model';
 import { ActivityResultSplitService } from './activity-result-split.service';
 
 @Component({
-    selector: 'jhi-activity-result-split-delete-dialog',
-    templateUrl: './activity-result-split-delete-dialog.component.html'
+  templateUrl: './activity-result-split-delete-dialog.component.html'
 })
 export class ActivityResultSplitDeleteDialogComponent {
-    activityResultSplit: IActivityResultSplit;
+  activityResultSplit: IActivityResultSplit;
 
-    constructor(
-        private activityResultSplitService: ActivityResultSplitService,
-        public activeModal: NgbActiveModal,
-        private eventManager: JhiEventManager
-    ) {}
+  constructor(
+    protected activityResultSplitService: ActivityResultSplitService,
+    public activeModal: NgbActiveModal,
+    protected eventManager: JhiEventManager
+  ) {}
 
-    clear() {
-        this.activeModal.dismiss('cancel');
-    }
+  clear() {
+    this.activeModal.dismiss('cancel');
+  }
 
-    confirmDelete(id: number) {
-        this.activityResultSplitService.delete(id).subscribe(response => {
-            this.eventManager.broadcast({
-                name: 'activityResultSplitListModification',
-                content: 'Deleted an activityResultSplit'
-            });
-            this.activeModal.dismiss(true);
-        });
-    }
-}
-
-@Component({
-    selector: 'jhi-activity-result-split-delete-popup',
-    template: ''
-})
-export class ActivityResultSplitDeletePopupComponent implements OnInit, OnDestroy {
-    private ngbModalRef: NgbModalRef;
-
-    constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
-
-    ngOnInit() {
-        this.activatedRoute.data.subscribe(({ activityResultSplit }) => {
-            setTimeout(() => {
-                this.ngbModalRef = this.modalService.open(ActivityResultSplitDeleteDialogComponent as Component, {
-                    size: 'lg',
-                    backdrop: 'static'
-                });
-                this.ngbModalRef.componentInstance.activityResultSplit = activityResultSplit;
-                this.ngbModalRef.result.then(
-                    result => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
-                        this.ngbModalRef = null;
-                    },
-                    reason => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
-                        this.ngbModalRef = null;
-                    }
-                );
-            }, 0);
-        });
-    }
-
-    ngOnDestroy() {
-        this.ngbModalRef = null;
-    }
+  confirmDelete(id: number) {
+    this.activityResultSplitService.delete(id).subscribe(() => {
+      this.eventManager.broadcast({
+        name: 'activityResultSplitListModification',
+        content: 'Deleted an activityResultSplit'
+      });
+      this.activeModal.dismiss(true);
+    });
+  }
 }

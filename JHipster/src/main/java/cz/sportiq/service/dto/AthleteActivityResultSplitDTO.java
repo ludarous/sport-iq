@@ -1,11 +1,10 @@
 package cz.sportiq.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the AthleteActivityResultSplit entity.
+ * A DTO for the {@link cz.sportiq.domain.AthleteActivityResultSplit} entity.
  */
 public class AthleteActivityResultSplitDTO implements Serializable {
 
@@ -14,6 +13,7 @@ public class AthleteActivityResultSplitDTO implements Serializable {
     private Float value;
 
     private Float compareValue;
+
 
     private Long athleteActivityResultId;
 

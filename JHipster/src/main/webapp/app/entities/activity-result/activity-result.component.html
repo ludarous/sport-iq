@@ -4,10 +4,11 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-activity-result" [routerLink]="['/activity-result/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="sportiqApp.activityResult.home.createLabel">
-            Create new Activity Result
+            Create a new Activity Result
             </span>
         </button>
     </h2>
+    <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
     <div class="row">
         <div class="col-sm-12">
@@ -25,17 +26,20 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="activityResults">
-        <table class="table table-striped">
+    <div class="alert alert-warning" *ngIf="activityResults?.length === 0">
+        <span jhiTranslate="sportiqApp.activityResult.home.notFound">No activityResults found</span>
+    </div>
+    <div class="table-responsive" *ngIf="activityResults?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="name"><span jhiTranslate="sportiqApp.activityResult.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="resultType"><span jhiTranslate="sportiqApp.activityResult.resultType">Result Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="ratingWeight"><span jhiTranslate="sportiqApp.activityResult.ratingWeight">Rating Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="activityId"><span jhiTranslate="sportiqApp.activityResult.activity">Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="resultUnitName"><span jhiTranslate="sportiqApp.activityResult.resultUnit">Result Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="name"><span jhiTranslate="sportiqApp.activityResult.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="resultType"><span jhiTranslate="sportiqApp.activityResult.resultType">Result Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="ratingWeight"><span jhiTranslate="sportiqApp.activityResult.ratingWeight">Rating Weight</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="activityId"><span jhiTranslate="sportiqApp.activityResult.activity">Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="resultUnitName"><span jhiTranslate="sportiqApp.activityResult.resultUnit">Result Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -46,16 +50,16 @@
                 <td>{{activityResult.ratingWeight}}</td>
                 <td>
                     <div *ngIf="activityResult.activityId">
-                        <a [routerLink]="['../activity', activityResult.activityId , 'view' ]" >{{activityResult.activityId}}</a>
+                        <a [routerLink]="['/activity', activityResult.activityId , 'view' ]" >{{activityResult.activityId}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="activityResult.resultUnitId">
-                        <a [routerLink]="['../unit', activityResult.resultUnitId , 'view' ]" >{{activityResult.resultUnitName}}</a>
+                        <a [routerLink]="['/unit', activityResult.resultUnitId , 'view' ]" >{{activityResult.resultUnitName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
+                    <div class="btn-group">
                         <button type="submit"
                                 [routerLink]="['/activity-result', activityResult.id, 'view' ]"
                                 class="btn btn-info btn-sm">
@@ -68,10 +72,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'activity-result/'+ activityResult.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
+                        <button type="submit" (click)="delete(activityResult)"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
@@ -82,9 +83,9 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="activityResults && activityResults.length">
+    <div [hidden]="activityResults?.length === 0">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>

@@ -13,23 +13,23 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing AthleteEvent.
+ * Service Interface for managing {@link cz.sportiq.domain.AthleteEvent}.
  */
 public interface AthleteEventService {
 
     /**
      * Save a athleteEvent.
      *
-     * @param athleteEventDTO the entity to save
-     * @return the persisted entity
+     * @param athleteEventDTO the entity to save.
+     * @return the persisted entity.
      */
     AthleteEventDTO save(AthleteEventDTO athleteEventDTO);
 
     /**
      * Get all the athleteEvents.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<AthleteEventDTO> findAll(Pageable pageable);
 
@@ -37,15 +37,15 @@ public interface AthleteEventService {
     /**
      * Get the "id" athleteEvent.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<AthleteEventDTO> findOne(Long id);
 
     /**
      * Get the "id" athleteEvent.
      *
-     * @param id the id of the entity
+     * @param eventId the id of the entity
      * @return the entity
      */
     AthleteEventDTO findByEventIdAndAthleteId(Long eventId, Long athleteId);
@@ -64,17 +64,17 @@ public interface AthleteEventService {
     /**
      * Delete the "id" athleteEvent.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 
     /**
      * Search for the athleteEvent corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query the query of the search.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<AthleteEventDTO> search(String query, Pageable pageable);
 

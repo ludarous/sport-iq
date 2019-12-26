@@ -1,5 +1,4 @@
 package cz.sportiq.service.dto;
-
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -8,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * A DTO for the AthleteActivity entity.
+ * A DTO for the {@link cz.sportiq.domain.AthleteActivity} entity.
  */
 public class AthleteActivityDTO implements Serializable {
 
@@ -80,7 +79,7 @@ public class AthleteActivityDTO implements Serializable {
         this.athleteActivityResults = athleteActivityResults;
     }
 
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -113,5 +112,4 @@ public class AthleteActivityDTO implements Serializable {
             ", activity='" + getActivityName() + "'" +
             "}";
     }
-
 }

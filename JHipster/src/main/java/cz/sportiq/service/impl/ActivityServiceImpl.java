@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing Activity.
+ * Service Implementation for managing {@link Activity}.
  */
 @Service
 @Transactional
@@ -42,8 +42,8 @@ public class ActivityServiceImpl implements ActivityService {
     /**
      * Save a activity.
      *
-     * @param activityDTO the entity to save
-     * @return the persisted entity
+     * @param activityDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public ActivityDTO save(ActivityDTO activityDTO) {
@@ -58,8 +58,8 @@ public class ActivityServiceImpl implements ActivityService {
     /**
      * Get all the activities.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -70,9 +70,9 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     /**
-     * Get all the Activity with eager load of many-to-many relationships.
+     * Get all the activities with eager load of many-to-many relationships.
      *
-     * @return the list of entities
+     * @return the list of entities.
      */
     public Page<ActivityDTO> findAllWithEagerRelationships(Pageable pageable) {
         return activityRepository.findAllWithEagerRelationships(pageable).map(activityMapper::toDto);
@@ -82,8 +82,8 @@ public class ActivityServiceImpl implements ActivityService {
     /**
      * Get one activity by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -96,7 +96,7 @@ public class ActivityServiceImpl implements ActivityService {
     /**
      * Delete the activity by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -108,9 +108,9 @@ public class ActivityServiceImpl implements ActivityService {
     /**
      * Search for the activity corresponding to the query.
      *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

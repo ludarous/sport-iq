@@ -1,6 +1,4 @@
 package cz.sportiq.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,12 +6,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 /**
  * A Event.
@@ -21,7 +18,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "event")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "event")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "event")
 public class Event implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,13 +26,14 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "jhi_date")
+    @Column(name = "date")
     private ZonedDateTime date;
 
     @OneToMany(mappedBy = "event")
@@ -43,20 +41,20 @@ public class Event implements Serializable {
     private Set<AthleteEvent> athleteEvents = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("events")
     private Address address;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "event_tests",
-               joinColumns = @JoinColumn(name = "events_id", referencedColumnName = "id"),
+               joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "tests_id", referencedColumnName = "id"))
     private Set<Workout> tests = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "event_athletes",
-               joinColumns = @JoinColumn(name = "events_id", referencedColumnName = "id"),
+               joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "athletes_id", referencedColumnName = "id"))
     private Set<Athlete> athletes = new HashSet<>();
 
@@ -185,19 +183,15 @@ public class Event implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Event)) {
             return false;
         }
-        Event event = (Event) o;
-        if (event.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), event.getId());
+        return id != null && id.equals(((Event) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

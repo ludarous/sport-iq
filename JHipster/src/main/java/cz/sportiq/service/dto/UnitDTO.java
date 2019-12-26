@@ -1,10 +1,9 @@
 package cz.sportiq.service.dto;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the Unit entity.
+ * A DTO for the {@link cz.sportiq.domain.Unit} entity.
  */
 public class UnitDTO implements Serializable {
 
@@ -13,6 +12,7 @@ public class UnitDTO implements Serializable {
     private String name;
 
     private String abbreviation;
+
 
     public Long getId() {
         return id;

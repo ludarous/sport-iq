@@ -1,5 +1,4 @@
 package cz.sportiq.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,8 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A AthleteActivityResultSplit.
@@ -25,9 +24,10 @@ public class AthleteActivityResultSplit implements Serializable, ResultValueable
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
-    @Column(name = "jhi_value")
+    @Column(name = "value")
     private Float value;
 
     @Column(name = "compare_value")
@@ -39,7 +39,7 @@ public class AthleteActivityResultSplit implements Serializable, ResultValueable
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("athleteActivityResultSplits")
     private ActivityResultSplit activityResultSplit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -109,19 +109,15 @@ public class AthleteActivityResultSplit implements Serializable, ResultValueable
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AthleteActivityResultSplit)) {
             return false;
         }
-        AthleteActivityResultSplit athleteActivityResultSplit = (AthleteActivityResultSplit) o;
-        if (athleteActivityResultSplit.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), athleteActivityResultSplit.getId());
+        return id != null && id.equals(((AthleteActivityResultSplit) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

@@ -6,7 +6,7 @@ import cz.sportiq.service.dto.SportDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity Sport and its DTO SportDTO.
+ * Mapper for the entity {@link Sport} and its DTO {@link SportDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
 public interface SportMapper extends EntityMapper<SportDTO, Sport> {

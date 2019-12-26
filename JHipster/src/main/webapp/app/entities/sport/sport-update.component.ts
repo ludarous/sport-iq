@@ -1,58 +1,73 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { ISport } from 'app/shared/model/sport.model';
+import { ISport, Sport } from 'app/shared/model/sport.model';
 import { SportService } from './sport.service';
 
 @Component({
-    selector: 'jhi-sport-update',
-    templateUrl: './sport-update.component.html'
+  selector: 'jhi-sport-update',
+  templateUrl: './sport-update.component.html'
 })
 export class SportUpdateComponent implements OnInit {
-    private _sport: ISport;
-    isSaving: boolean;
+  isSaving: boolean;
 
-    constructor(private sportService: SportService, private activatedRoute: ActivatedRoute) {}
+  editForm = this.fb.group({
+    id: [],
+    name: [null, [Validators.required]]
+  });
 
-    ngOnInit() {
-        this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ sport }) => {
-            this.sport = sport;
-        });
-    }
+  constructor(protected sportService: SportService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
-    previousState() {
-        window.history.back();
-    }
+  ngOnInit() {
+    this.isSaving = false;
+    this.activatedRoute.data.subscribe(({ sport }) => {
+      this.updateForm(sport);
+    });
+  }
 
-    save() {
-        this.isSaving = true;
-        if (this.sport.id !== undefined) {
-            this.subscribeToSaveResponse(this.sportService.update(this.sport));
-        } else {
-            this.subscribeToSaveResponse(this.sportService.create(this.sport));
-        }
-    }
+  updateForm(sport: ISport) {
+    this.editForm.patchValue({
+      id: sport.id,
+      name: sport.name
+    });
+  }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<ISport>>) {
-        result.subscribe((res: HttpResponse<ISport>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
-    }
+  previousState() {
+    window.history.back();
+  }
 
-    private onSaveSuccess() {
-        this.isSaving = false;
-        this.previousState();
+  save() {
+    this.isSaving = true;
+    const sport = this.createFromForm();
+    if (sport.id !== undefined) {
+      this.subscribeToSaveResponse(this.sportService.update(sport));
+    } else {
+      this.subscribeToSaveResponse(this.sportService.create(sport));
     }
+  }
 
-    private onSaveError() {
-        this.isSaving = false;
-    }
-    get sport() {
-        return this._sport;
-    }
+  private createFromForm(): ISport {
+    return {
+      ...new Sport(),
+      id: this.editForm.get(['id']).value,
+      name: this.editForm.get(['name']).value
+    };
+  }
 
-    set sport(sport: ISport) {
-        this._sport = sport;
-    }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ISport>>) {
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
+  }
+
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
 }

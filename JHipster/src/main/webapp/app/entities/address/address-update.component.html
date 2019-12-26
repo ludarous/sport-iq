@@ -1,21 +1,21 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-address-heading" jhiTranslate="sportiqApp.address.home.createOrEditLabel">Create or edit a Address</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!address.id">
+                <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="address.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.address.country" for="field_country">Country</label>
                     <input type="text" class="form-control" name="country" id="field_country"
-                        [(ngModel)]="address.country" required/>
-                    <div [hidden]="!(editForm.controls.country?.dirty && editForm.controls.country?.invalid)">
+                           formControlName="country"/>
+                    <div *ngIf="editForm.get('country').invalid && (editForm.get('country').dirty || editForm.get('country').touched)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.country?.errors?.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('country').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -23,10 +23,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.address.city" for="field_city">City</label>
                     <input type="text" class="form-control" name="city" id="field_city"
-                        [(ngModel)]="address.city" required/>
-                    <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
+                           formControlName="city"/>
+                    <div *ngIf="editForm.get('city').invalid && (editForm.get('city').dirty || editForm.get('city').touched)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.city?.errors?.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('city').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -34,10 +34,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.address.street" for="field_street">Street</label>
                     <input type="text" class="form-control" name="street" id="field_street"
-                        [(ngModel)]="address.street" required/>
-                    <div [hidden]="!(editForm.controls.street?.dirty && editForm.controls.street?.invalid)">
+                           formControlName="street"/>
+                    <div *ngIf="editForm.get('street').invalid && (editForm.get('street').dirty || editForm.get('street').touched)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.street?.errors?.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('street').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -45,10 +45,10 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.address.zipCode" for="field_zipCode">Zip Code</label>
                     <input type="text" class="form-control" name="zipCode" id="field_zipCode"
-                        [(ngModel)]="address.zipCode" required/>
-                    <div [hidden]="!(editForm.controls.zipCode?.dirty && editForm.controls.zipCode?.invalid)">
+                           formControlName="zipCode"/>
+                    <div *ngIf="editForm.get('zipCode').invalid && (editForm.get('zipCode').dirty || editForm.get('zipCode').touched)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.zipCode?.errors?.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('zipCode').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -59,7 +59,7 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

@@ -1,11 +1,9 @@
 package cz.sportiq.repository;
-
 import cz.sportiq.domain.AthleteActivity;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.stream.DoubleStream;
 
 
 /**

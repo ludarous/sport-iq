@@ -1,14 +1,12 @@
 package cz.sportiq.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A WorkoutCategory.
@@ -16,7 +14,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "workout_category")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "workoutcategory")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "workoutcategory")
 public class WorkoutCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,6 +22,7 @@ public class WorkoutCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @NotNull
@@ -74,19 +73,15 @@ public class WorkoutCategory implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof WorkoutCategory)) {
             return false;
         }
-        WorkoutCategory workoutCategory = (WorkoutCategory) o;
-        if (workoutCategory.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), workoutCategory.getId());
+        return id != null && id.equals(((WorkoutCategory) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

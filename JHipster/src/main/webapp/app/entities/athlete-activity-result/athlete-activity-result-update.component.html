@@ -1,42 +1,42 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-athlete-activity-result-heading" jhiTranslate="sportiqApp.athleteActivityResult.home.createOrEditLabel">Create or edit a Athlete Activity Result</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!athleteActivityResult.id">
+                <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="athleteActivityResult.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResult.value" for="field_value">Value</label>
                     <input type="number" class="form-control" name="value" id="field_value"
-                        [(ngModel)]="athleteActivityResult.value" />
+                           formControlName="value"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResult.compareValue" for="field_compareValue">Compare Value</label>
                     <input type="number" class="form-control" name="compareValue" id="field_compareValue"
-                        [(ngModel)]="athleteActivityResult.compareValue" />
+                           formControlName="compareValue"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResult.athleteActivity" for="field_athleteActivity">Athlete Activity</label>
-                    <select class="form-control" id="field_athleteActivity" name="athleteActivity" [(ngModel)]="athleteActivityResult.athleteActivityId" >
+                    <select class="form-control" id="field_athleteActivity" name="athleteActivity" formControlName="athleteActivityId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="athleteActivityOption.id" *ngFor="let athleteActivityOption of athleteactivities; trackBy: trackAthleteActivityById">{{athleteActivityOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResult.activityResult" for="field_activityResult">Activity Result</label>
-                    <select class="form-control" id="field_activityResult" name="activityResult" [(ngModel)]="athleteActivityResult.activityResultId"  required>
-                        <option *ngIf="!editForm.value.activityResult" [ngValue]="null" selected></option>
+                    <select class="form-control" id="field_activityResult" name="activityResult" formControlName="activityResultId">
+                        <option *ngIf="!editForm.get('activityResultId').value" [ngValue]="null" selected></option>
                         <option [ngValue]="activityResultOption.id" *ngFor="let activityResultOption of activityresults; trackBy: trackActivityResultById">{{activityResultOption.name}}</option>
                     </select>
                 </div>
-                <div [hidden]="!(editForm.controls.activityResult?.dirty && editForm.controls.activityResult?.invalid)">
+                <div *ngIf="editForm.get('activityResultId').invalid && (editForm.get('activityResultId').dirty || editForm.get('activityResultId').touched)">
                     <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.activityResult?.errors?.required" jhiTranslate="entity.validation.required">
+                           *ngIf="editForm.get('activityResultId').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
                 </div>
@@ -45,7 +45,7 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

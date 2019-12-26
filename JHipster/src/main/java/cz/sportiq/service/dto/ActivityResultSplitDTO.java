@@ -1,10 +1,9 @@
 package cz.sportiq.service.dto;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the ActivityResultSplit entity.
+ * A DTO for the {@link cz.sportiq.domain.ActivityResultSplit} entity.
  */
 public class ActivityResultSplitDTO implements Serializable {
 
@@ -77,5 +76,4 @@ public class ActivityResultSplitDTO implements Serializable {
             ", activityResult=" + getActivityResultId() +
             "}";
     }
-
 }

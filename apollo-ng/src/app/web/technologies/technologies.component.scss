@@ -1,0 +1,45 @@
+@import "src/app/web/web.component";
+
+.partners {
+  /*background: none no-repeat scroll 0 0 #4d4d4d;*/
+  /*padding: 40px 2% 80px;*/
+  background-image: url('~src/assets/img/hockey-np.jpg');
+}
+
+.technologies {
+  padding: 60px 2% 80px;
+}
+
+.wrapper-block-partners {
+  padding: 60px 2% 100px;
+}
+
+.used-by {
+  background-color: rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  font-size: 80px;
+  line-height: 200px;
+  cursor: pointer;
+  margin: 20px;
+  padding: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.used-by img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: unset;
+}
+
+.wrapper-why-us {
+  padding: 40px 0;
+}

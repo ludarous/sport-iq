@@ -1,6 +1,4 @@
 package cz.sportiq.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,11 +6,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 /**
  * A AthleteActivityResult.
@@ -20,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "athlete_activity_result", uniqueConstraints={@UniqueConstraint(columnNames = {"activity_result_id", "athlete_activity_id"})})
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "athleteactivityresult")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "athleteactivityresult")
 public class AthleteActivityResult implements Serializable, ResultValueable {
 
     private static final long serialVersionUID = 1L;
@@ -28,9 +25,10 @@ public class AthleteActivityResult implements Serializable, ResultValueable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
-    @Column(name = "jhi_value")
+    @Column(name = "value")
     private Float value;
 
     @Column(name = "compare_value")
@@ -46,7 +44,7 @@ public class AthleteActivityResult implements Serializable, ResultValueable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("athleteActivityResults")
     private ActivityResult activityResult;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -141,19 +139,15 @@ public class AthleteActivityResult implements Serializable, ResultValueable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AthleteActivityResult)) {
             return false;
         }
-        AthleteActivityResult athleteActivityResult = (AthleteActivityResult) o;
-        if (athleteActivityResult.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), athleteActivityResult.getId());
+        return id != null && id.equals(((AthleteActivityResult) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

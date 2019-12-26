@@ -1,0 +1,39 @@
+<div id="navigation">
+  <div class="navbar-wrapper scroll-fixed-navbar">
+    <nav class="navbar navbar-inverse navbar-expand-lg navbar-dark">
+      <div class="container">
+        <div class="row flex-fill">
+          <a class="navbar-brand" href="#home">
+            <div class="logo navbar-logo">Sport<span class="accent">iq</span></div>
+          </a>
+          <div class="d-flex align-items-center justify-content-end" [ngClass]="{'flex-fill' : toggleButtonVisible}">
+            <button #toggleButton class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse navbar-list" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto main-nav-list">
+              <li class="nav-item">
+                <a class="nav-link" href="#aboutSportIQ">{{'menu.about' | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#tests">{{'menu.tests' | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#technology">{{'menu.technology' | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contacts">{{'menu.contact' | translate}}</a>
+              </li>
+            </ul>
+            <div class="language-selector">
+              <span *ngIf="getSelectedLang() !== 'cs'" (click)="setLang('cs')" class="pointer">Čeština</span>
+              <span *ngIf="getSelectedLang() !== 'en'" (click)="setLang('en')" class="pointer">English</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

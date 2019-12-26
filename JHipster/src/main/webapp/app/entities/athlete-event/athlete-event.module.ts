@@ -1,34 +1,16 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SportiqSharedModule } from 'app/shared';
-import {
-    AthleteEventComponent,
-    AthleteEventDetailComponent,
-    AthleteEventUpdateComponent,
-    AthleteEventDeletePopupComponent,
-    AthleteEventDeleteDialogComponent,
-    athleteEventRoute,
-    athleteEventPopupRoute
-} from './';
-
-const ENTITY_STATES = [...athleteEventRoute, ...athleteEventPopupRoute];
+import { SportiqSharedModule } from 'app/shared/shared.module';
+import { AthleteEventComponent } from './athlete-event.component';
+import { AthleteEventDetailComponent } from './athlete-event-detail.component';
+import { AthleteEventUpdateComponent } from './athlete-event-update.component';
+import { AthleteEventDeleteDialogComponent } from './athlete-event-delete-dialog.component';
+import { athleteEventRoute } from './athlete-event.route';
 
 @NgModule({
-    imports: [SportiqSharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [
-        AthleteEventComponent,
-        AthleteEventDetailComponent,
-        AthleteEventUpdateComponent,
-        AthleteEventDeleteDialogComponent,
-        AthleteEventDeletePopupComponent
-    ],
-    entryComponents: [
-        AthleteEventComponent,
-        AthleteEventUpdateComponent,
-        AthleteEventDeleteDialogComponent,
-        AthleteEventDeletePopupComponent
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [SportiqSharedModule, RouterModule.forChild(athleteEventRoute)],
+  declarations: [AthleteEventComponent, AthleteEventDetailComponent, AthleteEventUpdateComponent, AthleteEventDeleteDialogComponent],
+  entryComponents: [AthleteEventDeleteDialogComponent]
 })
 export class SportiqAthleteEventModule {}

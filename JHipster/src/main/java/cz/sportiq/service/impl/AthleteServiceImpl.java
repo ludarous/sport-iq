@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing Athlete.
+ * Service Implementation for managing {@link Athlete}.
  */
 @Service
 @Transactional
@@ -42,8 +42,8 @@ public class AthleteServiceImpl implements AthleteService {
     /**
      * Save a athlete.
      *
-     * @param athleteDTO the entity to save
-     * @return the persisted entity
+     * @param athleteDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public AthleteDTO save(AthleteDTO athleteDTO) {
@@ -58,8 +58,8 @@ public class AthleteServiceImpl implements AthleteService {
     /**
      * Get all the athletes.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -73,8 +73,8 @@ public class AthleteServiceImpl implements AthleteService {
     /**
      * Get one athlete by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -87,7 +87,7 @@ public class AthleteServiceImpl implements AthleteService {
     /**
      * Delete the athlete by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -99,9 +99,9 @@ public class AthleteServiceImpl implements AthleteService {
     /**
      * Search for the athlete corresponding to the query.
      *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

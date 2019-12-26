@@ -17,21 +17,22 @@ const ENV = 'development';
 module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'eval-source-map',
     devServer: {
-        contentBase: './target/www',
+        contentBase: './target/classes/static/',
         proxy: [{
             context: [
-                /* jhipster-needle-add-entity-to-webpack - JHipster will add entity api paths here */
                 '/api',
+                '/services',
                 '/management',
                 '/swagger-resources',
                 '/v2/api-docs',
                 '/h2-console',
+                '/oauth2',
+                '/login',
                 '/auth'
             ],
-            target: `http${options.tls ? 's' : ''}://127.0.0.1:8080`,
+            target: `http${options.tls ? 's' : ''}://localhost:8080`,
             secure: false,
-            changeOrigin: options.tls,
-            headers: { host: 'localhost:9000' }
+            changeOrigin: options.tls
         },{
             context: [
                 '/websocket'
@@ -42,7 +43,9 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         stats: options.stats,
         watchOptions: {
             ignored: /node_modules/
-        }
+        },
+        https: options.tls,
+        historyApiFallback: true
     },
     entry: {
         polyfills: './src/main/webapp/app/polyfills',
@@ -50,16 +53,16 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         main: './src/main/webapp/app/app.main'
     },
     output: {
-        path: utils.root('target/www'),
+        path: utils.root('target/classes/static/'),
         filename: 'app/[name].bundle.js',
         chunkFilename: 'app/[id].chunk.js'
     },
     module: {
         rules: [{
-            test: /\.ts$/,
+            test: /\.(j|t)s$/,
             enforce: 'pre',
-            loader: 'tslint-loader',
-            exclude: ['node_modules', new RegExp('reflect-metadata\\' + path.sep + 'Reflect\\.ts')]
+            loader: 'eslint-loader',
+            exclude: /node_modules/
         },
         {
             test: /\.ts$/,
@@ -74,7 +77,9 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
                 {
                     loader: 'thread-loader',
                     options: {
-                        // there should be 1 cpu for the fork-ts-checker-webpack-plugin
+                        // There should be 1 cpu for the fork-ts-checker-webpack-plugin.
+                        // The value may need to be adjusted (e.g. to 1) in some CI environments,
+                        // as cpus() may report more cores than what are available to the build.
                         workers: require('os').cpus().length - 1
                     }
                 },
@@ -84,10 +89,9 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
                         transpileOnly: true,
                         happyPackMode: true
                     }
-                },
-                'angular-router-loader'
+                }
             ],
-            exclude: ['node_modules']
+            exclude: /(node_modules)/
         },
         {
             test: /\.scss$/,
@@ -103,20 +107,11 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
                 loader: 'sass-loader',
                 options: { implementation: sass }
             }]
-        },
-        {
-            test: /\.css$/,
-            use: ['to-string-loader', 'css-loader'],
-            exclude: /(vendor\.css|global\.css)/
-        },
-        {
-            test: /(vendor\.css|global\.css)/,
-            use: ['style-loader', 'css-loader']
         }]
     },
-    stats: process.env.DISABLE_WEBPACK_LOGS ? 'none' : options.stats,
+    stats: process.env.JHI_DISABLE_WEBPACK_LOGS ? 'none' : options.stats,
     plugins: [
-        process.env.DISABLE_WEBPACK_LOGS
+        process.env.JHI_DISABLE_WEBPACK_LOGS
             ? null
             : new SimpleProgressWebpackPlugin({
                 format: options.stats === 'minimal' ? 'compact' : 'expanded'
@@ -124,11 +119,15 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         new FriendlyErrorsWebpackPlugin(),
         new ForkTsCheckerWebpackPlugin(),
         new BrowserSyncPlugin({
+            https: options.tls,
             host: 'localhost',
             port: 9000,
             proxy: {
-                target: 'http://localhost:9060',
-                ws: true
+                target: `http${options.tls ? 's' : ''}://localhost:9060`,
+                ws: true,
+                proxyOptions: {
+                    changeOrigin: false  //pass the Host header to the backend unchanged  https://github.com/Browsersync/browser-sync/issues/430
+                }
             },
             socket: {
                 clients: {
@@ -140,7 +139,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         }),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)/,
-            path.resolve(__dirname, './src/main/webapp')
+            path.resolve(__dirname, './src/main/webapp/')
         ),
         new writeFilePlugin(),
         new webpack.WatchIgnorePlugin([

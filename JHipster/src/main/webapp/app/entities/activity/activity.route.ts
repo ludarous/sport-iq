@@ -1,95 +1,78 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
-import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
+import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
+import { JhiResolvePagingParams } from 'ng-jhipster';
+import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Activity } from 'app/shared/model/activity.model';
 import { ActivityService } from './activity.service';
 import { ActivityComponent } from './activity.component';
 import { ActivityDetailComponent } from './activity-detail.component';
 import { ActivityUpdateComponent } from './activity-update.component';
-import { ActivityDeletePopupComponent } from './activity-delete-dialog.component';
 import { IActivity } from 'app/shared/model/activity.model';
 
 @Injectable({ providedIn: 'root' })
 export class ActivityResolve implements Resolve<IActivity> {
-    constructor(private service: ActivityService) {}
+  constructor(private service: ActivityService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const id = route.params['id'] ? route.params['id'] : null;
-        if (id) {
-            return this.service.find(id).pipe(map((activity: HttpResponse<Activity>) => activity.body));
-        }
-        return of(new Activity());
+  resolve(route: ActivatedRouteSnapshot): Observable<IActivity> {
+    const id = route.params['id'];
+    if (id) {
+      return this.service.find(id).pipe(map((activity: HttpResponse<Activity>) => activity.body));
     }
+    return of(new Activity());
+  }
 }
 
 export const activityRoute: Routes = [
-    {
-        path: 'activity',
-        component: ActivityComponent,
-        resolve: {
-            pagingParams: JhiResolvePagingParams
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
-            pageTitle: 'sportiqApp.activity.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+  {
+    path: '',
+    component: ActivityComponent,
+    resolve: {
+      pagingParams: JhiResolvePagingParams
     },
-    {
-        path: 'activity/:id/view',
-        component: ActivityDetailComponent,
-        resolve: {
-            activity: ActivityResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'sportiqApp.activity.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+    data: {
+      authorities: ['ROLE_USER'],
+      defaultSort: 'id,asc',
+      pageTitle: 'sportiqApp.activity.home.title'
     },
-    {
-        path: 'activity/new',
-        component: ActivityUpdateComponent,
-        resolve: {
-            activity: ActivityResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'sportiqApp.activity.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/view',
+    component: ActivityDetailComponent,
+    resolve: {
+      activity: ActivityResolve
     },
-    {
-        path: 'activity/:id/edit',
-        component: ActivityUpdateComponent,
-        resolve: {
-            activity: ActivityResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'sportiqApp.activity.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    }
-];
-
-export const activityPopupRoute: Routes = [
-    {
-        path: 'activity/:id/delete',
-        component: ActivityDeletePopupComponent,
-        resolve: {
-            activity: ActivityResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'sportiqApp.activity.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    }
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'sportiqApp.activity.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'new',
+    component: ActivityUpdateComponent,
+    resolve: {
+      activity: ActivityResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'sportiqApp.activity.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/edit',
+    component: ActivityUpdateComponent,
+    resolve: {
+      activity: ActivityResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'sportiqApp.activity.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  }
 ];

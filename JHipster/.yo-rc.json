@@ -4,7 +4,7 @@
       "packageName": "cz.sportiq",
       "nativeLanguage": "cs"
     },
-    "jhipsterVersion": "5.3.4",
+    "jhipsterVersion": "6.5.1",
     "applicationType": "monolith",
     "baseName": "sportiq",
     "packageName": "cz.sportiq",
@@ -32,6 +32,12 @@
     "languages": [
       "cs",
       "en"
-    ]
+    ],
+    "embeddableLaunchScript": false,
+    "clientTheme": "none",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "blueprints": []
   }
 }

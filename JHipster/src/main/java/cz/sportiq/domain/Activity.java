@@ -1,6 +1,4 @@
 package cz.sportiq.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -8,11 +6,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 /**
  * A Activity.
@@ -20,7 +17,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "activity")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "activity")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "activity")
 public class Activity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,6 +25,7 @@ public class Activity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @NotNull
@@ -54,13 +52,13 @@ public class Activity implements Serializable {
     private Set<ActivityResult> activityResults = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("activities")
     private Unit targetUnit;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "activity_categories",
-               joinColumns = @JoinColumn(name = "activities_id", referencedColumnName = "id"),
+               joinColumns = @JoinColumn(name = "activity_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private Set<ActivityCategory> categories = new HashSet<>();
 
@@ -218,19 +216,15 @@ public class Activity implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Activity)) {
             return false;
         }
-        Activity activity = (Activity) o;
-        if (activity.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), activity.getId());
+        return id != null && id.equals(((Activity) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

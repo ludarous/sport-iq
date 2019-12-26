@@ -2,7 +2,7 @@
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
     <!--
         Added the constraints for entity Activity.
     -->
@@ -14,11 +14,12 @@
                                  referencedColumnNames="id"
                                  referencedTableName="unit"/>
 
-        <addForeignKeyConstraint baseColumnNames="activities_id"
+        <addForeignKeyConstraint baseColumnNames="activity_id"
                                  baseTableName="activity_categories"
-                                 constraintName="fk_activity_categories_activities_id"
+                                 constraintName="fk_activity_categories_activity_id"
                                  referencedColumnNames="id"
                                  referencedTableName="activity"/>
+
         <addForeignKeyConstraint baseColumnNames="categories_id"
                                  baseTableName="activity_categories"
                                  constraintName="fk_activity_categories_categories_id"

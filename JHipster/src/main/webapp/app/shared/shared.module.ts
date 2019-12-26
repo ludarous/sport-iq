@@ -1,14 +1,13 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-
-import { NgbDateMomentAdapter } from './util/datepicker-adapter';
-import { SportiqSharedLibsModule, SportiqSharedCommonModule, HasAnyAuthorityDirective } from './';
+import { NgModule } from '@angular/core';
+import { SportiqSharedLibsModule } from './shared-libs.module';
+import { FindLanguageFromKeyPipe } from './language/find-language-from-key.pipe';
+import { JhiAlertComponent } from './alert/alert.component';
+import { JhiAlertErrorComponent } from './alert/alert-error.component';
+import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 
 @NgModule({
-    imports: [SportiqSharedLibsModule, SportiqSharedCommonModule],
-    declarations: [HasAnyAuthorityDirective],
-    providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
-    exports: [SportiqSharedCommonModule, HasAnyAuthorityDirective],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [SportiqSharedLibsModule],
+  declarations: [FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent, HasAnyAuthorityDirective],
+  exports: [SportiqSharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent, HasAnyAuthorityDirective]
 })
 export class SportiqSharedModule {}

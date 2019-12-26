@@ -1,0 +1,19 @@
+@import "src/assets/sass/variables";
+
+.contacts {
+  padding: 60px 2% 120px;
+}
+
+.wrapper-contacts {
+  padding-top: 40px;
+}
+
+
+.contact_form #contact-form {
+  padding-top: 50px;
+}
+
+.wrapper-contacts i {
+  font-size: 40px;
+  color: $cyan;
+}

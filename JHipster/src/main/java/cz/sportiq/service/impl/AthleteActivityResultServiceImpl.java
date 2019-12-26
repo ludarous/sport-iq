@@ -20,7 +20,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing AthleteActivityResult.
+ * Service Implementation for managing {@link AthleteActivityResult}.
  */
 @Service
 @Transactional
@@ -62,8 +62,8 @@ public class AthleteActivityResultServiceImpl implements AthleteActivityResultSe
     /**
      * Get all the athleteActivityResults.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -77,8 +77,8 @@ public class AthleteActivityResultServiceImpl implements AthleteActivityResultSe
     /**
      * Get one athleteActivityResult by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -91,7 +91,7 @@ public class AthleteActivityResultServiceImpl implements AthleteActivityResultSe
     /**
      * Delete the athleteActivityResult by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -103,9 +103,9 @@ public class AthleteActivityResultServiceImpl implements AthleteActivityResultSe
     /**
      * Search for the athleteActivityResult corresponding to the query.
      *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

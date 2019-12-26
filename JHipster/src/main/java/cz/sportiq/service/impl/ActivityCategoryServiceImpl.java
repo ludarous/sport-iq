@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing ActivityCategory.
+ * Service Implementation for managing {@link ActivityCategory}.
  */
 @Service
 @Transactional
@@ -42,8 +42,8 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
     /**
      * Save a activityCategory.
      *
-     * @param activityCategoryDTO the entity to save
-     * @return the persisted entity
+     * @param activityCategoryDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public ActivityCategoryDTO save(ActivityCategoryDTO activityCategoryDTO) {
@@ -58,8 +58,8 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
     /**
      * Get all the activityCategories.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -73,8 +73,8 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
     /**
      * Get one activityCategory by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -87,7 +87,7 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
     /**
      * Delete the activityCategory by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -99,9 +99,9 @@ public class ActivityCategoryServiceImpl implements ActivityCategoryService {
     /**
      * Search for the activityCategory corresponding to the query.
      *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

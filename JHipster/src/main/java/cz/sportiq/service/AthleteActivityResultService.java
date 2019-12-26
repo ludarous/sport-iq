@@ -12,23 +12,23 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 /**
- * Service Interface for managing AthleteActivityResult.
+ * Service Interface for managing {@link cz.sportiq.domain.AthleteActivityResult}.
  */
 public interface AthleteActivityResultService {
 
     /**
      * Save a athleteActivityResult.
      *
-     * @param athleteActivityResultDTO the entity to save
-     * @return the persisted entity
+     * @param athleteActivityResultDTO the entity to save.
+     * @return the persisted entity.
      */
     AthleteActivityResultDTO save(AthleteActivityResultDTO athleteActivityResultDTO);
 
     /**
      * Get all the athleteActivityResults.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<AthleteActivityResultDTO> findAll(Pageable pageable);
 
@@ -36,25 +36,25 @@ public interface AthleteActivityResultService {
     /**
      * Get the "id" athleteActivityResult.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<AthleteActivityResultDTO> findOne(Long id);
 
     /**
      * Delete the "id" athleteActivityResult.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 
     /**
      * Search for the athleteActivityResult corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query the query of the search.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<AthleteActivityResultDTO> search(String query, Pageable pageable);
 

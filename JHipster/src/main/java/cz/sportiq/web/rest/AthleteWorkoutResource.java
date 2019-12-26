@@ -1,18 +1,21 @@
 package cz.sportiq.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
 import cz.sportiq.service.AthleteWorkoutService;
 import cz.sportiq.web.rest.errors.BadRequestAlertException;
-import cz.sportiq.web.rest.util.HeaderUtil;
-import cz.sportiq.web.rest.util.PaginationUtil;
 import cz.sportiq.service.dto.AthleteWorkoutDTO;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +30,7 @@ import java.util.stream.StreamSupport;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * REST controller for managing AthleteWorkout.
+ * REST controller for managing {@link cz.sportiq.domain.AthleteWorkout}.
  */
 @RestController
 @RequestMapping("/api")
@@ -37,6 +40,9 @@ public class AthleteWorkoutResource {
 
     private static final String ENTITY_NAME = "athleteWorkout";
 
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
+
     private final AthleteWorkoutService athleteWorkoutService;
 
     public AthleteWorkoutResource(AthleteWorkoutService athleteWorkoutService) {
@@ -44,14 +50,13 @@ public class AthleteWorkoutResource {
     }
 
     /**
-     * POST  /athlete-workouts : Create a new athleteWorkout.
+     * {@code POST  /athlete-workouts} : Create a new athleteWorkout.
      *
-     * @param athleteWorkoutDTO the athleteWorkoutDTO to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new athleteWorkoutDTO, or with status 400 (Bad Request) if the athleteWorkout has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param athleteWorkoutDTO the athleteWorkoutDTO to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new athleteWorkoutDTO, or with status {@code 400 (Bad Request)} if the athleteWorkout has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/athlete-workouts")
-    @Timed
     public ResponseEntity<AthleteWorkoutDTO> createAthleteWorkout(@Valid @RequestBody AthleteWorkoutDTO athleteWorkoutDTO) throws URISyntaxException {
         log.debug("REST request to save AthleteWorkout : {}", athleteWorkoutDTO);
         if (athleteWorkoutDTO.getId() != null) {
@@ -59,21 +64,20 @@ public class AthleteWorkoutResource {
         }
         AthleteWorkoutDTO result = athleteWorkoutService.save(athleteWorkoutDTO);
         return ResponseEntity.created(new URI("/api/athlete-workouts/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
     /**
-     * PUT  /athlete-workouts : Updates an existing athleteWorkout.
+     * {@code PUT  /athlete-workouts} : Updates an existing athleteWorkout.
      *
-     * @param athleteWorkoutDTO the athleteWorkoutDTO to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated athleteWorkoutDTO,
-     * or with status 400 (Bad Request) if the athleteWorkoutDTO is not valid,
-     * or with status 500 (Internal Server Error) if the athleteWorkoutDTO couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param athleteWorkoutDTO the athleteWorkoutDTO to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated athleteWorkoutDTO,
+     * or with status {@code 400 (Bad Request)} if the athleteWorkoutDTO is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the athleteWorkoutDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/athlete-workouts")
-    @Timed
     public ResponseEntity<AthleteWorkoutDTO> updateAthleteWorkout(@Valid @RequestBody AthleteWorkoutDTO athleteWorkoutDTO) throws URISyntaxException {
         log.debug("REST request to update AthleteWorkout : {}", athleteWorkoutDTO);
         if (athleteWorkoutDTO.getId() == null) {
@@ -81,33 +85,33 @@ public class AthleteWorkoutResource {
         }
         AthleteWorkoutDTO result = athleteWorkoutService.save(athleteWorkoutDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, athleteWorkoutDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, athleteWorkoutDTO.getId().toString()))
             .body(result);
     }
 
     /**
-     * GET  /athlete-workouts : get all the athleteWorkouts.
+     * {@code GET  /athlete-workouts} : get all the athleteWorkouts.
      *
-     * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of athleteWorkouts in body
+
+     * @param pageable the pagination information.
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of athleteWorkouts in body.
      */
     @GetMapping("/athlete-workouts")
-    @Timed
     public ResponseEntity<List<AthleteWorkoutDTO>> getAllAthleteWorkouts(Pageable pageable) {
         log.debug("REST request to get a page of AthleteWorkouts");
         Page<AthleteWorkoutDTO> page = athleteWorkoutService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/athlete-workouts");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
-     * GET  /athlete-workouts/:id : get the "id" athleteWorkout.
+     * {@code GET  /athlete-workouts/:id} : get the "id" athleteWorkout.
      *
-     * @param id the id of the athleteWorkoutDTO to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the athleteWorkoutDTO, or with status 404 (Not Found)
+     * @param id the id of the athleteWorkoutDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the athleteWorkoutDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/athlete-workouts/{id}")
-    @Timed
     public ResponseEntity<AthleteWorkoutDTO> getAthleteWorkout(@PathVariable Long id) {
         log.debug("REST request to get AthleteWorkout : {}", id);
         Optional<AthleteWorkoutDTO> athleteWorkoutDTO = athleteWorkoutService.findOne(id);
@@ -115,34 +119,32 @@ public class AthleteWorkoutResource {
     }
 
     /**
-     * DELETE  /athlete-workouts/:id : delete the "id" athleteWorkout.
+     * {@code DELETE  /athlete-workouts/:id} : delete the "id" athleteWorkout.
      *
-     * @param id the id of the athleteWorkoutDTO to delete
-     * @return the ResponseEntity with status 200 (OK)
+     * @param id the id of the athleteWorkoutDTO to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/athlete-workouts/{id}")
-    @Timed
     public ResponseEntity<Void> deleteAthleteWorkout(@PathVariable Long id) {
         log.debug("REST request to delete AthleteWorkout : {}", id);
         athleteWorkoutService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
     /**
-     * SEARCH  /_search/athlete-workouts?query=:query : search for the athleteWorkout corresponding
+     * {@code SEARCH  /_search/athlete-workouts?query=:query} : search for the athleteWorkout corresponding
      * to the query.
      *
-     * @param query the query of the athleteWorkout search
-     * @param pageable the pagination information
-     * @return the result of the search
+     * @param query the query of the athleteWorkout search.
+     * @param pageable the pagination information.
+     * @return the result of the search.
      */
     @GetMapping("/_search/athlete-workouts")
-    @Timed
     public ResponseEntity<List<AthleteWorkoutDTO>> searchAthleteWorkouts(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of AthleteWorkouts for query {}", query);
         Page<AthleteWorkoutDTO> page = athleteWorkoutService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/athlete-workouts");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /*--------------------------------- CUSTOM ENDPOINTS -----------------------------------------------*/

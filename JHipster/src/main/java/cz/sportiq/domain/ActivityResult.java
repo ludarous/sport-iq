@@ -1,17 +1,14 @@
 package cz.sportiq.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 import cz.sportiq.domain.enumeration.ResultType;
 
@@ -21,7 +18,7 @@ import cz.sportiq.domain.enumeration.ResultType;
 @Entity
 @Table(name = "activity_result")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "activityresult")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "activityresult")
 public class ActivityResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,6 +26,7 @@ public class ActivityResult implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "name")
@@ -50,7 +48,7 @@ public class ActivityResult implements Serializable {
     private Set<ActivityResultSplit> resultSplits = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("activityResults")
     private Unit resultUnit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -158,19 +156,15 @@ public class ActivityResult implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ActivityResult)) {
             return false;
         }
-        ActivityResult activityResult = (ActivityResult) o;
-        if (activityResult.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), activityResult.getId());
+        return id != null && id.equals(((ActivityResult) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

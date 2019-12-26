@@ -1,34 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SportiqSharedModule } from 'app/shared';
-import {
+import { SportiqSharedModule } from 'app/shared/shared.module';
+import { AthleteActivityResultSplitComponent } from './athlete-activity-result-split.component';
+import { AthleteActivityResultSplitDetailComponent } from './athlete-activity-result-split-detail.component';
+import { AthleteActivityResultSplitUpdateComponent } from './athlete-activity-result-split-update.component';
+import { AthleteActivityResultSplitDeleteDialogComponent } from './athlete-activity-result-split-delete-dialog.component';
+import { athleteActivityResultSplitRoute } from './athlete-activity-result-split.route';
+
+@NgModule({
+  imports: [SportiqSharedModule, RouterModule.forChild(athleteActivityResultSplitRoute)],
+  declarations: [
     AthleteActivityResultSplitComponent,
     AthleteActivityResultSplitDetailComponent,
     AthleteActivityResultSplitUpdateComponent,
-    AthleteActivityResultSplitDeletePopupComponent,
-    AthleteActivityResultSplitDeleteDialogComponent,
-    athleteActivityResultSplitRoute,
-    athleteActivityResultSplitPopupRoute
-} from './';
-
-const ENTITY_STATES = [...athleteActivityResultSplitRoute, ...athleteActivityResultSplitPopupRoute];
-
-@NgModule({
-    imports: [SportiqSharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [
-        AthleteActivityResultSplitComponent,
-        AthleteActivityResultSplitDetailComponent,
-        AthleteActivityResultSplitUpdateComponent,
-        AthleteActivityResultSplitDeleteDialogComponent,
-        AthleteActivityResultSplitDeletePopupComponent
-    ],
-    entryComponents: [
-        AthleteActivityResultSplitComponent,
-        AthleteActivityResultSplitUpdateComponent,
-        AthleteActivityResultSplitDeleteDialogComponent,
-        AthleteActivityResultSplitDeletePopupComponent
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    AthleteActivityResultSplitDeleteDialogComponent
+  ],
+  entryComponents: [AthleteActivityResultSplitDeleteDialogComponent]
 })
 export class SportiqAthleteActivityResultSplitModule {}

@@ -6,9 +6,9 @@ import cz.sportiq.service.dto.AthleteActivityResultDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity AthleteActivityResult and its DTO AthleteActivityResultDTO.
+ * Mapper for the entity {@link AthleteActivityResult} and its DTO {@link AthleteActivityResultDTO}.
  */
-@Mapper(componentModel = "spring", uses = {AthleteActivityMapper.class, ActivityResultMapper.class, AthleteActivityResultSplitMapper.class})
+@Mapper(componentModel = "spring", uses = {AthleteActivityMapper.class, ActivityResultMapper.class})
 public interface AthleteActivityResultMapper extends EntityMapper<AthleteActivityResultDTO, AthleteActivityResult> {
 
     @Mapping(source = "athleteActivity.id", target = "athleteActivityId")
@@ -17,6 +17,7 @@ public interface AthleteActivityResultMapper extends EntityMapper<AthleteActivit
     AthleteActivityResultDTO toDto(AthleteActivityResult athleteActivityResult);
 
     @Mapping(source = "athleteActivityId", target = "athleteActivity")
+    @Mapping(target = "removeAthleteActivityResultSplits", ignore = true)
     @Mapping(source = "activityResultId", target = "activityResult")
     AthleteActivityResult toEntity(AthleteActivityResultDTO athleteActivityResultDTO);
 

@@ -1,5 +1,4 @@
 package cz.sportiq.repository;
-
 import cz.sportiq.domain.Workout;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +12,6 @@ import java.util.Optional;
 /**
  * Spring Data  repository for the Workout entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface WorkoutRepository extends JpaRepository<Workout, Long> {
 
@@ -21,7 +19,7 @@ public interface WorkoutRepository extends JpaRepository<Workout, Long> {
         countQuery = "select count(distinct workout) from Workout workout")
     Page<Workout> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct workout from Workout workout left join fetch workout.activities left join fetch workout.categories left join fetch workout.sports")
+    @Query("select distinct workout from Workout workout left join fetch workout.activities left join fetch workout.categories left join fetch workout.sports")
     List<Workout> findAllWithEagerRelationships();
 
     @Query("select workout from Workout workout left join fetch workout.activities left join fetch workout.categories left join fetch workout.sports where workout.id =:id")

@@ -1,5 +1,4 @@
 package cz.sportiq.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,7 +6,7 @@ import java.util.Set;
 import java.util.Objects;
 
 /**
- * A DTO for the Workout entity.
+ * A DTO for the {@link cz.sportiq.domain.Workout} entity.
  */
 public class WorkoutDTO implements Serializable {
 
@@ -17,6 +16,7 @@ public class WorkoutDTO implements Serializable {
     private String name;
 
     private String description;
+
 
     private Set<ActivityDTO> activities = new HashSet<>();
 

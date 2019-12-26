@@ -1,13 +1,11 @@
 package cz.sportiq.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A Unit.
@@ -15,7 +13,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "unit")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "unit")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "unit")
 public class Unit implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,6 +21,7 @@ public class Unit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "name")
@@ -72,19 +71,15 @@ public class Unit implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Unit)) {
             return false;
         }
-        Unit unit = (Unit) o;
-        if (unit.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), unit.getId());
+        return id != null && id.equals(((Unit) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

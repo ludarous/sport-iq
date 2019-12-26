@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing AthleteEvent.
+ * Service Implementation for managing {@link AthleteEvent}.
  */
 @Service
 @Transactional
@@ -77,8 +77,8 @@ public class AthleteEventServiceImpl implements AthleteEventService {
     /**
      * Get all the athleteEvents.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -92,8 +92,8 @@ public class AthleteEventServiceImpl implements AthleteEventService {
     /**
      * Get one athleteEvent by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -179,9 +179,9 @@ public class AthleteEventServiceImpl implements AthleteEventService {
     /**
      * Search for the athleteEvent corresponding to the query.
      *
-     * @param query    the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

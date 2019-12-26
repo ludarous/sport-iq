@@ -1,16 +1,14 @@
 package cz.sportiq.domain;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Objects;
 
 /**
  * A Workout.
@@ -18,7 +16,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "workout")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "workout")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "workout")
 public class Workout implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,6 +24,7 @@ public class Workout implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @NotNull
@@ -38,21 +37,21 @@ public class Workout implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "workout_activities",
-               joinColumns = @JoinColumn(name = "workouts_id", referencedColumnName = "id"),
+               joinColumns = @JoinColumn(name = "workout_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "activities_id", referencedColumnName = "id"))
     private Set<Activity> activities = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "workout_categories",
-               joinColumns = @JoinColumn(name = "workouts_id", referencedColumnName = "id"),
+               joinColumns = @JoinColumn(name = "workout_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private Set<WorkoutCategory> categories = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "workout_sports",
-               joinColumns = @JoinColumn(name = "workouts_id", referencedColumnName = "id"),
+               joinColumns = @JoinColumn(name = "workout_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "sports_id", referencedColumnName = "id"))
     private Set<Sport> sports = new HashSet<>();
 
@@ -166,19 +165,15 @@ public class Workout implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Workout)) {
             return false;
         }
-        Workout workout = (Workout) o;
-        if (workout.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), workout.getId());
+        return id != null && id.equals(((Workout) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

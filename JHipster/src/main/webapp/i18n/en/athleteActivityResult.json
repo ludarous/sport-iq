@@ -1,27 +1,27 @@
-
 {
-    "sportiqApp": {
-        "athleteActivityResult" : {
-            "home": {
-                "title": "Athlete Activity Results",
-                "createLabel": "Create a new Athlete Activity Result",
-                "createOrEditLabel": "Create or edit a Athlete Activity Result",
-                "search": "Search for Athlete Activity Result"
-            },
-            "created": "A new Athlete Activity Result is created with identifier {{ param }}",
-            "updated": "A Athlete Activity Result is updated with identifier {{ param }}",
-            "deleted": "A Athlete Activity Result is deleted with identifier {{ param }}",
-            "delete": {
-                "question": "Are you sure you want to delete Athlete Activity Result {{ id }}?"
-            },
-            "detail": {
-                "title": "Athlete Activity Result"
-            },
-            "value": "Value",
-            "compareValue": "Compare Value",
-            "athleteActivity": "Athlete Activity",
-            "athleteActivityResultSplits": "Athlete Activity Result Splits",
-            "activityResult": "Activity Result"
-        }
+  "sportiqApp": {
+    "athleteActivityResult": {
+      "home": {
+        "title": "Athlete Activity Results",
+        "createLabel": "Create a new Athlete Activity Result",
+        "createOrEditLabel": "Create or edit a Athlete Activity Result",
+        "search": "Search for Athlete Activity Result",
+        "notFound": "No Athlete Activity Results found"
+      },
+      "created": "A new Athlete Activity Result is created with identifier {{ param }}",
+      "updated": "A Athlete Activity Result is updated with identifier {{ param }}",
+      "deleted": "A Athlete Activity Result is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Athlete Activity Result {{ id }}?"
+      },
+      "detail": {
+        "title": "Athlete Activity Result"
+      },
+      "value": "Value",
+      "compareValue": "Compare Value",
+      "athleteActivity": "Athlete Activity",
+      "athleteActivityResultSplits": "Athlete Activity Result Splits",
+      "activityResult": "Activity Result"
     }
+  }
 }

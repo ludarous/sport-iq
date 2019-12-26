@@ -7,7 +7,6 @@ import cz.sportiq.repository.AthleteWorkoutRepository;
 import cz.sportiq.repository.search.AthleteWorkoutSearchRepository;
 import cz.sportiq.service.dto.AthleteWorkoutDTO;
 import cz.sportiq.service.mapper.AthleteWorkoutMapper;
-import cz.sportiq.service.mapper.full.AthleteWorkoutFullMapperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +20,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing AthleteWorkout.
+ * Service Implementation for managing {@link AthleteWorkout}.
  */
 @Service
 @Transactional
@@ -63,8 +62,8 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
     /**
      * Get all the athleteWorkouts.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -78,8 +77,8 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
     /**
      * Get one athleteWorkout by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -92,7 +91,7 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
     /**
      * Delete the athleteWorkout by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -104,9 +103,9 @@ public class AthleteWorkoutServiceImpl implements AthleteWorkoutService {
     /**
      * Search for the athleteWorkout corresponding to the query.
      *
-     * @param query    the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

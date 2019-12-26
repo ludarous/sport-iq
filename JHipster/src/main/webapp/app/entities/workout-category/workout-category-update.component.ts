@@ -1,58 +1,80 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { IWorkoutCategory } from 'app/shared/model/workout-category.model';
+import { IWorkoutCategory, WorkoutCategory } from 'app/shared/model/workout-category.model';
 import { WorkoutCategoryService } from './workout-category.service';
 
 @Component({
-    selector: 'jhi-workout-category-update',
-    templateUrl: './workout-category-update.component.html'
+  selector: 'jhi-workout-category-update',
+  templateUrl: './workout-category-update.component.html'
 })
 export class WorkoutCategoryUpdateComponent implements OnInit {
-    private _workoutCategory: IWorkoutCategory;
-    isSaving: boolean;
+  isSaving: boolean;
 
-    constructor(private workoutCategoryService: WorkoutCategoryService, private activatedRoute: ActivatedRoute) {}
+  editForm = this.fb.group({
+    id: [],
+    name: [null, [Validators.required]],
+    description: []
+  });
 
-    ngOnInit() {
-        this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ workoutCategory }) => {
-            this.workoutCategory = workoutCategory;
-        });
-    }
+  constructor(
+    protected workoutCategoryService: WorkoutCategoryService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
-    previousState() {
-        window.history.back();
-    }
+  ngOnInit() {
+    this.isSaving = false;
+    this.activatedRoute.data.subscribe(({ workoutCategory }) => {
+      this.updateForm(workoutCategory);
+    });
+  }
 
-    save() {
-        this.isSaving = true;
-        if (this.workoutCategory.id !== undefined) {
-            this.subscribeToSaveResponse(this.workoutCategoryService.update(this.workoutCategory));
-        } else {
-            this.subscribeToSaveResponse(this.workoutCategoryService.create(this.workoutCategory));
-        }
-    }
+  updateForm(workoutCategory: IWorkoutCategory) {
+    this.editForm.patchValue({
+      id: workoutCategory.id,
+      name: workoutCategory.name,
+      description: workoutCategory.description
+    });
+  }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IWorkoutCategory>>) {
-        result.subscribe((res: HttpResponse<IWorkoutCategory>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
-    }
+  previousState() {
+    window.history.back();
+  }
 
-    private onSaveSuccess() {
-        this.isSaving = false;
-        this.previousState();
+  save() {
+    this.isSaving = true;
+    const workoutCategory = this.createFromForm();
+    if (workoutCategory.id !== undefined) {
+      this.subscribeToSaveResponse(this.workoutCategoryService.update(workoutCategory));
+    } else {
+      this.subscribeToSaveResponse(this.workoutCategoryService.create(workoutCategory));
     }
+  }
 
-    private onSaveError() {
-        this.isSaving = false;
-    }
-    get workoutCategory() {
-        return this._workoutCategory;
-    }
+  private createFromForm(): IWorkoutCategory {
+    return {
+      ...new WorkoutCategory(),
+      id: this.editForm.get(['id']).value,
+      name: this.editForm.get(['name']).value,
+      description: this.editForm.get(['description']).value
+    };
+  }
 
-    set workoutCategory(workoutCategory: IWorkoutCategory) {
-        this._workoutCategory = workoutCategory;
-    }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IWorkoutCategory>>) {
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
+  }
+
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
 }

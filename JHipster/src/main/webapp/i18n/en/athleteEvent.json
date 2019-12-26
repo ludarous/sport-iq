@@ -1,28 +1,28 @@
-
 {
-    "sportiqApp": {
-        "athleteEvent" : {
-            "home": {
-                "title": "Athlete Events",
-                "createLabel": "Create a new Athlete Event",
-                "createOrEditLabel": "Create or edit a Athlete Event",
-                "search": "Search for Athlete Event"
-            },
-            "created": "A new Athlete Event is created with identifier {{ param }}",
-            "updated": "A Athlete Event is updated with identifier {{ param }}",
-            "deleted": "A Athlete Event is deleted with identifier {{ param }}",
-            "delete": {
-                "question": "Are you sure you want to delete Athlete Event {{ id }}?"
-            },
-            "detail": {
-                "title": "Athlete Event"
-            },
-            "note": "Note",
-            "actualHeightInCm": "Actual Height In Cm",
-            "actualWeightInKg": "Actual Weight In Kg",
-            "event": "Event",
-            "athleteWorkouts": "Athlete Workouts",
-            "athlete": "Athlete"
-        }
+  "sportiqApp": {
+    "athleteEvent": {
+      "home": {
+        "title": "Athlete Events",
+        "createLabel": "Create a new Athlete Event",
+        "createOrEditLabel": "Create or edit a Athlete Event",
+        "search": "Search for Athlete Event",
+        "notFound": "No Athlete Events found"
+      },
+      "created": "A new Athlete Event is created with identifier {{ param }}",
+      "updated": "A Athlete Event is updated with identifier {{ param }}",
+      "deleted": "A Athlete Event is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Athlete Event {{ id }}?"
+      },
+      "detail": {
+        "title": "Athlete Event"
+      },
+      "note": "Note",
+      "actualHeightInCm": "Actual Height In Cm",
+      "actualWeightInKg": "Actual Weight In Kg",
+      "event": "Event",
+      "athleteWorkouts": "Athlete Workouts",
+      "athlete": "Athlete"
     }
+  }
 }

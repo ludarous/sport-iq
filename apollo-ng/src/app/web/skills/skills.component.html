@@ -1,0 +1,10 @@
+<ngb-carousel (slide)="onSlide($event)">
+  <ng-template ngbSlide>
+    <app-skill-slide [backgroundUrl]="'assets/images/basketball-np.jpg'"
+                     [countToSettings]="countToSettingsSprint"></app-skill-slide>
+  </ng-template>
+  <ng-template ngbSlide>
+    <app-skill-slide [backgroundUrl]="'assets/images/football-3-np.jpg'"
+                     [countToSettings]="countToSettingsArsenal"></app-skill-slide>
+  </ng-template>
+</ngb-carousel>

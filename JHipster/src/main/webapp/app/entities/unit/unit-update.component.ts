@@ -1,58 +1,76 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { IUnit } from 'app/shared/model/unit.model';
+import { IUnit, Unit } from 'app/shared/model/unit.model';
 import { UnitService } from './unit.service';
 
 @Component({
-    selector: 'jhi-unit-update',
-    templateUrl: './unit-update.component.html'
+  selector: 'jhi-unit-update',
+  templateUrl: './unit-update.component.html'
 })
 export class UnitUpdateComponent implements OnInit {
-    private _unit: IUnit;
-    isSaving: boolean;
+  isSaving: boolean;
 
-    constructor(private unitService: UnitService, private activatedRoute: ActivatedRoute) {}
+  editForm = this.fb.group({
+    id: [],
+    name: [],
+    abbreviation: []
+  });
 
-    ngOnInit() {
-        this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ unit }) => {
-            this.unit = unit;
-        });
-    }
+  constructor(protected unitService: UnitService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
-    previousState() {
-        window.history.back();
-    }
+  ngOnInit() {
+    this.isSaving = false;
+    this.activatedRoute.data.subscribe(({ unit }) => {
+      this.updateForm(unit);
+    });
+  }
 
-    save() {
-        this.isSaving = true;
-        if (this.unit.id !== undefined) {
-            this.subscribeToSaveResponse(this.unitService.update(this.unit));
-        } else {
-            this.subscribeToSaveResponse(this.unitService.create(this.unit));
-        }
-    }
+  updateForm(unit: IUnit) {
+    this.editForm.patchValue({
+      id: unit.id,
+      name: unit.name,
+      abbreviation: unit.abbreviation
+    });
+  }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IUnit>>) {
-        result.subscribe((res: HttpResponse<IUnit>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
-    }
+  previousState() {
+    window.history.back();
+  }
 
-    private onSaveSuccess() {
-        this.isSaving = false;
-        this.previousState();
+  save() {
+    this.isSaving = true;
+    const unit = this.createFromForm();
+    if (unit.id !== undefined) {
+      this.subscribeToSaveResponse(this.unitService.update(unit));
+    } else {
+      this.subscribeToSaveResponse(this.unitService.create(unit));
     }
+  }
 
-    private onSaveError() {
-        this.isSaving = false;
-    }
-    get unit() {
-        return this._unit;
-    }
+  private createFromForm(): IUnit {
+    return {
+      ...new Unit(),
+      id: this.editForm.get(['id']).value,
+      name: this.editForm.get(['name']).value,
+      abbreviation: this.editForm.get(['abbreviation']).value
+    };
+  }
 
-    set unit(unit: IUnit) {
-        this._unit = unit;
-    }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IUnit>>) {
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
+  }
+
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
 }

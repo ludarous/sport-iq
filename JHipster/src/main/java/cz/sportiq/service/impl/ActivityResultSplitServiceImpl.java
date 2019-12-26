@@ -19,7 +19,7 @@ import java.util.Optional;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing ActivityResultSplit.
+ * Service Implementation for managing {@link ActivityResultSplit}.
  */
 @Service
 @Transactional
@@ -42,8 +42,8 @@ public class ActivityResultSplitServiceImpl implements ActivityResultSplitServic
     /**
      * Save a activityResultSplit.
      *
-     * @param activityResultSplitDTO the entity to save
-     * @return the persisted entity
+     * @param activityResultSplitDTO the entity to save.
+     * @return the persisted entity.
      */
     @Override
     public ActivityResultSplitDTO save(ActivityResultSplitDTO activityResultSplitDTO) {
@@ -58,8 +58,8 @@ public class ActivityResultSplitServiceImpl implements ActivityResultSplitServic
     /**
      * Get all the activityResultSplits.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
@@ -73,8 +73,8 @@ public class ActivityResultSplitServiceImpl implements ActivityResultSplitServic
     /**
      * Get one activityResultSplit by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     @Override
     @Transactional(readOnly = true)
@@ -87,7 +87,7 @@ public class ActivityResultSplitServiceImpl implements ActivityResultSplitServic
     /**
      * Delete the activityResultSplit by id.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     @Override
     public void delete(Long id) {
@@ -99,9 +99,9 @@ public class ActivityResultSplitServiceImpl implements ActivityResultSplitServic
     /**
      * Search for the activityResultSplit corresponding to the query.
      *
-     * @param query the query of the search
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param query the query of the search.
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)

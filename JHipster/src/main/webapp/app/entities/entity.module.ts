@@ -1,47 +1,79 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
-import { SportiqEventModule } from './event/event.module';
-import { SportiqWorkoutModule } from './workout/workout.module';
-import { SportiqActivityModule } from './activity/activity.module';
-import { SportiqActivityResultModule } from './activity-result/activity-result.module';
-import { SportiqActivityResultSplitModule } from './activity-result-split/activity-result-split.module';
-import { SportiqWorkoutCategoryModule } from './workout-category/workout-category.module';
-import { SportiqActivityCategoryModule } from './activity-category/activity-category.module';
-import { SportiqAthleteEventModule } from './athlete-event/athlete-event.module';
-import { SportiqAthleteWorkoutModule } from './athlete-workout/athlete-workout.module';
-import { SportiqAthleteActivityModule } from './athlete-activity/athlete-activity.module';
-import { SportiqAthleteActivityResultModule } from './athlete-activity-result/athlete-activity-result.module';
-import { SportiqAthleteActivityResultSplitModule } from './athlete-activity-result-split/athlete-activity-result-split.module';
-import { SportiqAthleteModule } from './athlete/athlete.module';
-import { SportiqAddressModule } from './address/address.module';
-import { SportiqSportModule } from './sport/sport.module';
-import { SportiqUnitModule } from './unit/unit.module';
-/* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-    // prettier-ignore
-    imports: [
-        SportiqEventModule,
-        SportiqWorkoutModule,
-        SportiqActivityModule,
-        SportiqActivityResultModule,
-        SportiqActivityResultSplitModule,
-        SportiqWorkoutCategoryModule,
-        SportiqActivityCategoryModule,
-        SportiqAthleteEventModule,
-        SportiqAthleteWorkoutModule,
-        SportiqAthleteActivityModule,
-        SportiqAthleteActivityResultModule,
-        SportiqAthleteActivityResultSplitModule,
-        SportiqAthleteModule,
-        SportiqAddressModule,
-        SportiqSportModule,
-        SportiqUnitModule,
-        /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
-    ],
-    declarations: [],
-    entryComponents: [],
-    providers: [],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [
+    RouterModule.forChild([
+      {
+        path: 'event',
+        loadChildren: () => import('./event/event.module').then(m => m.SportiqEventModule)
+      },
+      {
+        path: 'workout',
+        loadChildren: () => import('./workout/workout.module').then(m => m.SportiqWorkoutModule)
+      },
+      {
+        path: 'activity',
+        loadChildren: () => import('./activity/activity.module').then(m => m.SportiqActivityModule)
+      },
+      {
+        path: 'activity-result',
+        loadChildren: () => import('./activity-result/activity-result.module').then(m => m.SportiqActivityResultModule)
+      },
+      {
+        path: 'activity-result-split',
+        loadChildren: () => import('./activity-result-split/activity-result-split.module').then(m => m.SportiqActivityResultSplitModule)
+      },
+      {
+        path: 'workout-category',
+        loadChildren: () => import('./workout-category/workout-category.module').then(m => m.SportiqWorkoutCategoryModule)
+      },
+      {
+        path: 'activity-category',
+        loadChildren: () => import('./activity-category/activity-category.module').then(m => m.SportiqActivityCategoryModule)
+      },
+      {
+        path: 'athlete-event',
+        loadChildren: () => import('./athlete-event/athlete-event.module').then(m => m.SportiqAthleteEventModule)
+      },
+      {
+        path: 'athlete-workout',
+        loadChildren: () => import('./athlete-workout/athlete-workout.module').then(m => m.SportiqAthleteWorkoutModule)
+      },
+      {
+        path: 'athlete-activity',
+        loadChildren: () => import('./athlete-activity/athlete-activity.module').then(m => m.SportiqAthleteActivityModule)
+      },
+      {
+        path: 'athlete-activity-result',
+        loadChildren: () =>
+          import('./athlete-activity-result/athlete-activity-result.module').then(m => m.SportiqAthleteActivityResultModule)
+      },
+      {
+        path: 'athlete-activity-result-split',
+        loadChildren: () =>
+          import('./athlete-activity-result-split/athlete-activity-result-split.module').then(
+            m => m.SportiqAthleteActivityResultSplitModule
+          )
+      },
+      {
+        path: 'athlete',
+        loadChildren: () => import('./athlete/athlete.module').then(m => m.SportiqAthleteModule)
+      },
+      {
+        path: 'address',
+        loadChildren: () => import('./address/address.module').then(m => m.SportiqAddressModule)
+      },
+      {
+        path: 'sport',
+        loadChildren: () => import('./sport/sport.module').then(m => m.SportiqSportModule)
+      },
+      {
+        path: 'unit',
+        loadChildren: () => import('./unit/unit.module').then(m => m.SportiqUnitModule)
+      }
+      /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
+    ])
+  ]
 })
 export class SportiqEntityModule {}

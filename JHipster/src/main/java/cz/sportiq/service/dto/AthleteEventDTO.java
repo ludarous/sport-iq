@@ -1,5 +1,4 @@
 package cz.sportiq.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * A DTO for the AthleteEvent entity.
+ * A DTO for the {@link cz.sportiq.domain.AthleteEvent} entity.
  */
 public class AthleteEventDTO implements Serializable {
 
@@ -119,5 +118,4 @@ public class AthleteEventDTO implements Serializable {
             ", athlete=" + getAthleteId() +
             "}";
     }
-
 }

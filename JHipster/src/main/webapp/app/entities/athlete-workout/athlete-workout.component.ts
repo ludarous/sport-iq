@@ -1,170 +1,159 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IAthleteWorkout } from 'app/shared/model/athlete-workout.model';
-import { Principal } from 'app/core';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { AthleteWorkoutService } from './athlete-workout.service';
+import { AthleteWorkoutDeleteDialogComponent } from './athlete-workout-delete-dialog.component';
 
 @Component({
-    selector: 'jhi-athlete-workout',
-    templateUrl: './athlete-workout.component.html'
+  selector: 'jhi-athlete-workout',
+  templateUrl: './athlete-workout.component.html'
 })
 export class AthleteWorkoutComponent implements OnInit, OnDestroy {
-    currentAccount: any;
-    athleteWorkouts: IAthleteWorkout[];
-    error: any;
-    success: any;
-    eventSubscriber: Subscription;
-    currentSearch: string;
-    routeData: any;
-    links: any;
-    totalItems: any;
-    queryCount: any;
-    itemsPerPage: any;
-    page: any;
-    predicate: any;
-    previousPage: any;
-    reverse: any;
+  athleteWorkouts: IAthleteWorkout[];
+  error: any;
+  success: any;
+  eventSubscriber: Subscription;
+  currentSearch: string;
+  routeData: any;
+  links: any;
+  totalItems: any;
+  itemsPerPage: any;
+  page: any;
+  predicate: any;
+  previousPage: any;
+  reverse: any;
 
-    constructor(
-        private athleteWorkoutService: AthleteWorkoutService,
-        private parseLinks: JhiParseLinks,
-        private jhiAlertService: JhiAlertService,
-        private principal: Principal,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private eventManager: JhiEventManager
-    ) {
-        this.itemsPerPage = ITEMS_PER_PAGE;
-        this.routeData = this.activatedRoute.data.subscribe(data => {
-            this.page = data.pagingParams.page;
-            this.previousPage = data.pagingParams.page;
-            this.reverse = data.pagingParams.ascending;
-            this.predicate = data.pagingParams.predicate;
-        });
-        this.currentSearch =
-            this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search']
-                ? this.activatedRoute.snapshot.params['search']
-                : '';
-    }
+  constructor(
+    protected athleteWorkoutService: AthleteWorkoutService,
+    protected parseLinks: JhiParseLinks,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal
+  ) {
+    this.itemsPerPage = ITEMS_PER_PAGE;
+    this.routeData = this.activatedRoute.data.subscribe(data => {
+      this.page = data.pagingParams.page;
+      this.previousPage = data.pagingParams.page;
+      this.reverse = data.pagingParams.ascending;
+      this.predicate = data.pagingParams.predicate;
+    });
+    this.currentSearch =
+      this.activatedRoute.snapshot && this.activatedRoute.snapshot.queryParams['search']
+        ? this.activatedRoute.snapshot.queryParams['search']
+        : '';
+  }
 
-    loadAll() {
-        if (this.currentSearch) {
-            this.athleteWorkoutService
-                .search({
-                    page: this.page - 1,
-                    query: this.currentSearch,
-                    size: this.itemsPerPage,
-                    sort: this.sort()
-                })
-                .subscribe(
-                    (res: HttpResponse<IAthleteWorkout[]>) => this.paginateAthleteWorkouts(res.body, res.headers),
-                    (res: HttpErrorResponse) => this.onError(res.message)
-                );
-            return;
-        }
-        this.athleteWorkoutService
-            .query({
-                page: this.page - 1,
-                size: this.itemsPerPage,
-                sort: this.sort()
-            })
-            .subscribe(
-                (res: HttpResponse<IAthleteWorkout[]>) => this.paginateAthleteWorkouts(res.body, res.headers),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+  loadAll() {
+    if (this.currentSearch) {
+      this.athleteWorkoutService
+        .search({
+          page: this.page - 1,
+          query: this.currentSearch,
+          size: this.itemsPerPage,
+          sort: this.sort()
+        })
+        .subscribe((res: HttpResponse<IAthleteWorkout[]>) => this.paginateAthleteWorkouts(res.body, res.headers));
+      return;
     }
+    this.athleteWorkoutService
+      .query({
+        page: this.page - 1,
+        size: this.itemsPerPage,
+        sort: this.sort()
+      })
+      .subscribe((res: HttpResponse<IAthleteWorkout[]>) => this.paginateAthleteWorkouts(res.body, res.headers));
+  }
 
-    loadPage(page: number) {
-        if (page !== this.previousPage) {
-            this.previousPage = page;
-            this.transition();
-        }
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.transition();
     }
+  }
 
-    transition() {
-        this.router.navigate(['/athlete-workout'], {
-            queryParams: {
-                page: this.page,
-                size: this.itemsPerPage,
-                search: this.currentSearch,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        });
-        this.loadAll();
-    }
+  transition() {
+    this.router.navigate(['/athlete-workout'], {
+      queryParams: {
+        page: this.page,
+        size: this.itemsPerPage,
+        search: this.currentSearch,
+        sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+      }
+    });
+    this.loadAll();
+  }
 
-    clear() {
-        this.page = 0;
-        this.currentSearch = '';
-        this.router.navigate([
-            '/athlete-workout',
-            {
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
-    }
+  clear() {
+    this.page = 0;
+    this.currentSearch = '';
+    this.router.navigate([
+      '/athlete-workout',
+      {
+        page: this.page,
+        sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+      }
+    ]);
+    this.loadAll();
+  }
 
-    search(query) {
-        if (!query) {
-            return this.clear();
-        }
-        this.page = 0;
-        this.currentSearch = query;
-        this.router.navigate([
-            '/athlete-workout',
-            {
-                search: this.currentSearch,
-                page: this.page,
-                sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
-            }
-        ]);
-        this.loadAll();
+  search(query) {
+    if (!query) {
+      return this.clear();
     }
+    this.page = 0;
+    this.currentSearch = query;
+    this.router.navigate([
+      '/athlete-workout',
+      {
+        search: this.currentSearch,
+        page: this.page,
+        sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
+      }
+    ]);
+    this.loadAll();
+  }
 
-    ngOnInit() {
-        this.loadAll();
-        this.principal.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInAthleteWorkouts();
-    }
+  ngOnInit() {
+    this.loadAll();
+    this.registerChangeInAthleteWorkouts();
+  }
 
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
+  ngOnDestroy() {
+    this.eventManager.destroy(this.eventSubscriber);
+  }
 
-    trackId(index: number, item: IAthleteWorkout) {
-        return item.id;
-    }
+  trackId(index: number, item: IAthleteWorkout) {
+    return item.id;
+  }
 
-    registerChangeInAthleteWorkouts() {
-        this.eventSubscriber = this.eventManager.subscribe('athleteWorkoutListModification', response => this.loadAll());
-    }
+  registerChangeInAthleteWorkouts() {
+    this.eventSubscriber = this.eventManager.subscribe('athleteWorkoutListModification', () => this.loadAll());
+  }
 
-    sort() {
-        const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
-        if (this.predicate !== 'id') {
-            result.push('id');
-        }
-        return result;
-    }
+  delete(athleteWorkout: IAthleteWorkout) {
+    const modalRef = this.modalService.open(AthleteWorkoutDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.athleteWorkout = athleteWorkout;
+  }
 
-    private paginateAthleteWorkouts(data: IAthleteWorkout[], headers: HttpHeaders) {
-        this.links = this.parseLinks.parse(headers.get('link'));
-        this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
-        this.queryCount = this.totalItems;
-        this.athleteWorkouts = data;
+  sort() {
+    const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];
+    if (this.predicate !== 'id') {
+      result.push('id');
     }
+    return result;
+  }
 
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
+  protected paginateAthleteWorkouts(data: IAthleteWorkout[], headers: HttpHeaders) {
+    this.links = this.parseLinks.parse(headers.get('link'));
+    this.totalItems = parseInt(headers.get('X-Total-Count'), 10);
+    this.athleteWorkouts = data;
+  }
 }

@@ -1,95 +1,78 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil, JhiResolvePagingParams } from 'ng-jhipster';
-import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
+import { Resolve, ActivatedRouteSnapshot, Routes } from '@angular/router';
+import { JhiResolvePagingParams } from 'ng-jhipster';
+import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Sport } from 'app/shared/model/sport.model';
 import { SportService } from './sport.service';
 import { SportComponent } from './sport.component';
 import { SportDetailComponent } from './sport-detail.component';
 import { SportUpdateComponent } from './sport-update.component';
-import { SportDeletePopupComponent } from './sport-delete-dialog.component';
 import { ISport } from 'app/shared/model/sport.model';
 
 @Injectable({ providedIn: 'root' })
 export class SportResolve implements Resolve<ISport> {
-    constructor(private service: SportService) {}
+  constructor(private service: SportService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const id = route.params['id'] ? route.params['id'] : null;
-        if (id) {
-            return this.service.find(id).pipe(map((sport: HttpResponse<Sport>) => sport.body));
-        }
-        return of(new Sport());
+  resolve(route: ActivatedRouteSnapshot): Observable<ISport> {
+    const id = route.params['id'];
+    if (id) {
+      return this.service.find(id).pipe(map((sport: HttpResponse<Sport>) => sport.body));
     }
+    return of(new Sport());
+  }
 }
 
 export const sportRoute: Routes = [
-    {
-        path: 'sport',
-        component: SportComponent,
-        resolve: {
-            pagingParams: JhiResolvePagingParams
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            defaultSort: 'id,asc',
-            pageTitle: 'sportiqApp.sport.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+  {
+    path: '',
+    component: SportComponent,
+    resolve: {
+      pagingParams: JhiResolvePagingParams
     },
-    {
-        path: 'sport/:id/view',
-        component: SportDetailComponent,
-        resolve: {
-            sport: SportResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'sportiqApp.sport.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+    data: {
+      authorities: ['ROLE_USER'],
+      defaultSort: 'id,asc',
+      pageTitle: 'sportiqApp.sport.home.title'
     },
-    {
-        path: 'sport/new',
-        component: SportUpdateComponent,
-        resolve: {
-            sport: SportResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'sportiqApp.sport.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/view',
+    component: SportDetailComponent,
+    resolve: {
+      sport: SportResolve
     },
-    {
-        path: 'sport/:id/edit',
-        component: SportUpdateComponent,
-        resolve: {
-            sport: SportResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'sportiqApp.sport.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    }
-];
-
-export const sportPopupRoute: Routes = [
-    {
-        path: 'sport/:id/delete',
-        component: SportDeletePopupComponent,
-        resolve: {
-            sport: SportResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'sportiqApp.sport.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    }
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'sportiqApp.sport.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'new',
+    component: SportUpdateComponent,
+    resolve: {
+      sport: SportResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'sportiqApp.sport.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: ':id/edit',
+    component: SportUpdateComponent,
+    resolve: {
+      sport: SportResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'sportiqApp.sport.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  }
 ];

@@ -1,0 +1,138 @@
+/* You can add global styles to this file, and also import other style files */
+@import "variables";
+@import "~animate.css/animate.css";
+
+:host{
+    font-family: 'Open Sans', sans-serif;
+    background: #222222;
+    color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke: rgba(255, 255, 255, 0.01) 0.1px;
+    -webkit-text-stroke-width: 0.1px;
+}
+
+.section-container {
+  padding: 60px 2% 80px;
+  //min-height: calc(100vh - 95px)
+}
+
+
+*:focus {
+    outline: none;
+}
+.logo {
+
+    font-family: 'Ubuntu', sans-serif;
+    font-style: italic;
+    text-transform: none !important;
+    text-decoration: none !important;
+    color: white !important;
+}
+
+a:link, a:visited, a:hover, a:focus{
+    text-decoration: none;
+    color: $cyan;
+}
+
+.accent {
+    color: $cyan;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.section-title h1 span{
+    background-color: $cyan;
+}
+
+.section-title {
+    margin-bottom: 50px;
+    flex: 1;
+}
+
+.section-title h1 span {
+    color: #fff;
+    padding: 0 10px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.section-title h3 {
+    font-size: 24px;
+    padding-top: 20px;
+    text-transform: uppercase;
+}
+
+.element-title h1 {
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.element-title h3 {
+    font-size: 20px;
+    /*text-transform: capitalize;*/
+}
+
+.carousel-indicators li {
+    background-color: $cyan;
+}
+
+.overlay {
+    background: url('~src/assets/img/pattern.png');
+}
+
+.parallax {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* To Top */
+a.scroll-up {
+    background: none repeat scroll 0 0 $cyan;
+}
+a.scroll-up i {
+    color: #fff;
+}
+
+a.scroll-up:hover i {
+    color: $cyan;
+}
+
+a.scroll-up:hover {
+    color: $cyan;
+    border-color: $cyan;
+}
+
+a.scroll-up {
+    border-radius: 3px;
+    border: 2px solid transparent;
+    bottom: 10px;
+    display: none;
+    padding: 5px 10px;
+    position: fixed;
+    right: 10px;
+    text-align: center;
+    -webkit-transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+    transition: all 0.5s ease 0s;
+}
+
+a.scroll-up i {
+    color: #fff;
+}
+
+a.scroll-up:hover {
+    background: transparent;
+}
+/* End To Top */

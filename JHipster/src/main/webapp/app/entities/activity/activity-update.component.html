@@ -1,21 +1,21 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-activity-heading" jhiTranslate="sportiqApp.activity.home.createOrEditLabel">Create or edit a Activity</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!activity.id">
+                <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                        [(ngModel)]="activity.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activity.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
-                        [(ngModel)]="activity.name" required/>
-                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>
@@ -23,40 +23,40 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activity.description" for="field_description">Description</label>
                     <input type="text" class="form-control" name="description" id="field_description"
-                        [(ngModel)]="activity.description" />
+                           formControlName="description"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activity.help" for="field_help">Help</label>
                     <input type="text" class="form-control" name="help" id="field_help"
-                        [(ngModel)]="activity.help" />
+                           formControlName="help"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activity.minAge" for="field_minAge">Min Age</label>
                     <input type="number" class="form-control" name="minAge" id="field_minAge"
-                        [(ngModel)]="activity.minAge" />
+                           formControlName="minAge"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activity.maxAge" for="field_maxAge">Max Age</label>
                     <input type="number" class="form-control" name="maxAge" id="field_maxAge"
-                        [(ngModel)]="activity.maxAge" />
+                           formControlName="maxAge"/>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activity.targetValue" for="field_targetValue">Target Value</label>
                     <input type="number" class="form-control" name="targetValue" id="field_targetValue"
-                        [(ngModel)]="activity.targetValue" />
+                           formControlName="targetValue"/>
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activity.targetUnit" for="field_targetUnit">Target Unit</label>
-                    <select class="form-control" id="field_targetUnit" name="targetUnit" [(ngModel)]="activity.targetUnitId" >
+                    <select class="form-control" id="field_targetUnit" name="targetUnit" formControlName="targetUnitId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="unitOption.id" *ngFor="let unitOption of units; trackBy: trackUnitById">{{unitOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="sportiqApp.activity.categories" for="field_categories">Categories</label>
-                    <select class="form-control" id="field_categories" multiple name="categories" [(ngModel)]="activity.categories">
-                        <option [ngValue]="getSelected(activity.categories, activityCategoryOption)" *ngFor="let activityCategoryOption of activitycategories; trackBy: trackActivityCategoryById">{{activityCategoryOption.name}}</option>
+                    <select class="form-control" id="field_categories" multiple name="categories" formControlName="categories">
+                        <option [ngValue]="getSelected(editForm.get('categories').value, activityCategoryOption)" *ngFor="let activityCategoryOption of activitycategories; trackBy: trackActivityCategoryById">{{activityCategoryOption.name}}</option>
                     </select>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

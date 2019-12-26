@@ -5,10 +5,11 @@ import java.time.Duration;
 import org.ehcache.config.builders.*;
 import org.ehcache.jsr107.Eh107Configuration;
 
-import io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory;
+import org.hibernate.cache.jcache.ConfigSettings;
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
 
@@ -19,9 +20,7 @@ public class CacheConfiguration {
     private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
     public CacheConfiguration(JHipsterProperties jHipsterProperties) {
-        BeanClassLoaderAwareJCacheRegionFactory.setBeanClassLoader(this.getClass().getClassLoader());
-        JHipsterProperties.Cache.Ehcache ehcache =
-            jHipsterProperties.getCache().getEhcache();
+        JHipsterProperties.Cache.Ehcache ehcache = jHipsterProperties.getCache().getEhcache();
 
         jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
             CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class,
@@ -31,44 +30,58 @@ public class CacheConfiguration {
     }
 
     @Bean
+    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(javax.cache.CacheManager cacheManager) {
+        return hibernateProperties -> hibernateProperties.put(ConfigSettings.CACHE_MANAGER, cacheManager);
+    }
+
+    @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
-            cm.createCache(cz.sportiq.repository.UserRepository.USERS_BY_LOGIN_CACHE, jcacheConfiguration);
-            cm.createCache(cz.sportiq.repository.UserRepository.USERS_BY_EMAIL_CACHE, jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.User.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Authority.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.User.class.getName() + ".authorities", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Event.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Event.class.getName() + ".athleteEvents", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Event.class.getName() + ".tests", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Workout.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Workout.class.getName() + ".activities", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Workout.class.getName() + ".categories", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Workout.class.getName() + ".sports", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Activity.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Activity.class.getName() + ".activityResults", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Activity.class.getName() + ".categories", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.ActivityResult.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.ActivityResult.class.getName() + ".resultSplits", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.ActivityResultSplit.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.WorkoutCategory.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.ActivityCategory.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteEvent.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteEvent.class.getName() + ".athleteWorkouts", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteWorkout.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteWorkout.class.getName() + ".athleteActivities", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteActivity.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteActivity.class.getName() + ".athleteActivityResults", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteActivityResult.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteActivityResult.class.getName() + ".athleteActivityResultSplits", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.AthleteActivityResultSplit.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Athlete.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Address.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Sport.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Unit.class.getName(), jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.ActivityCategory.class.getName() + ".childActivityCategories", jcacheConfiguration);
-            cm.createCache(cz.sportiq.domain.Event.class.getName() + ".athletes", jcacheConfiguration);
+            createCache(cm, cz.sportiq.repository.UserRepository.USERS_BY_LOGIN_CACHE);
+            createCache(cm, cz.sportiq.repository.UserRepository.USERS_BY_EMAIL_CACHE);
+            createCache(cm, cz.sportiq.domain.User.class.getName());
+            createCache(cm, cz.sportiq.domain.Authority.class.getName());
+            createCache(cm, cz.sportiq.domain.User.class.getName() + ".authorities");
+            createCache(cm, cz.sportiq.domain.Event.class.getName());
+            createCache(cm, cz.sportiq.domain.Event.class.getName() + ".athleteEvents");
+            createCache(cm, cz.sportiq.domain.Event.class.getName() + ".tests");
+            createCache(cm, cz.sportiq.domain.Event.class.getName() + ".athletes");
+            createCache(cm, cz.sportiq.domain.Workout.class.getName());
+            createCache(cm, cz.sportiq.domain.Workout.class.getName() + ".activities");
+            createCache(cm, cz.sportiq.domain.Workout.class.getName() + ".categories");
+            createCache(cm, cz.sportiq.domain.Workout.class.getName() + ".sports");
+            createCache(cm, cz.sportiq.domain.Activity.class.getName());
+            createCache(cm, cz.sportiq.domain.Activity.class.getName() + ".activityResults");
+            createCache(cm, cz.sportiq.domain.Activity.class.getName() + ".categories");
+            createCache(cm, cz.sportiq.domain.ActivityResult.class.getName());
+            createCache(cm, cz.sportiq.domain.ActivityResult.class.getName() + ".resultSplits");
+            createCache(cm, cz.sportiq.domain.ActivityResultSplit.class.getName());
+            createCache(cm, cz.sportiq.domain.WorkoutCategory.class.getName());
+            createCache(cm, cz.sportiq.domain.ActivityCategory.class.getName());
+            createCache(cm, cz.sportiq.domain.ActivityCategory.class.getName() + ".childActivityCategories");
+            createCache(cm, cz.sportiq.domain.AthleteEvent.class.getName());
+            createCache(cm, cz.sportiq.domain.AthleteEvent.class.getName() + ".athleteWorkouts");
+            createCache(cm, cz.sportiq.domain.AthleteWorkout.class.getName());
+            createCache(cm, cz.sportiq.domain.AthleteWorkout.class.getName() + ".athleteActivities");
+            createCache(cm, cz.sportiq.domain.AthleteActivity.class.getName());
+            createCache(cm, cz.sportiq.domain.AthleteActivity.class.getName() + ".athleteActivityResults");
+            createCache(cm, cz.sportiq.domain.AthleteActivityResult.class.getName());
+            createCache(cm, cz.sportiq.domain.AthleteActivityResult.class.getName() + ".athleteActivityResultSplits");
+            createCache(cm, cz.sportiq.domain.AthleteActivityResultSplit.class.getName());
+            createCache(cm, cz.sportiq.domain.Athlete.class.getName());
+            createCache(cm, cz.sportiq.domain.Address.class.getName());
+            createCache(cm, cz.sportiq.domain.Sport.class.getName());
+            createCache(cm, cz.sportiq.domain.Unit.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
+
+    private void createCache(javax.cache.CacheManager cm, String cacheName) {
+        javax.cache.Cache<Object, Object> cache = cm.getCache(cacheName);
+        if (cache != null) {
+            cm.destroyCache(cacheName);
+        }
+        cm.createCache(cacheName, jcacheConfiguration);
+    }
+
 }

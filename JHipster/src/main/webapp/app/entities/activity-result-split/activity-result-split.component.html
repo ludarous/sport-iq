@@ -4,10 +4,11 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-activity-result-split" [routerLink]="['/activity-result-split/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span class="hidden-sm-down"  jhiTranslate="sportiqApp.activityResultSplit.home.createLabel">
-            Create new Activity Result Split
+            Create a new Activity Result Split
             </span>
         </button>
     </h2>
+    <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
     <div class="row">
         <div class="col-sm-12">
@@ -25,15 +26,18 @@
         </div>
     </div>
     <br/>
-    <div class="table-responsive" *ngIf="activityResultSplits">
-        <table class="table table-striped">
+    <div class="alert alert-warning" *ngIf="activityResultSplits?.length === 0">
+        <span jhiTranslate="sportiqApp.activityResultSplit.home.notFound">No activityResultSplits found</span>
+    </div>
+    <div class="table-responsive" *ngIf="activityResultSplits?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="splitValue"><span jhiTranslate="sportiqApp.activityResultSplit.splitValue">Split Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="activityResultId"><span jhiTranslate="sportiqApp.activityResultSplit.activityResult">Activity Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="splitUnitName"><span jhiTranslate="sportiqApp.activityResultSplit.splitUnit">Split Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th></th>
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="splitValue"><span jhiTranslate="sportiqApp.activityResultSplit.splitValue">Split Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="activityResultId"><span jhiTranslate="sportiqApp.activityResultSplit.activityResult">Activity Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="splitUnitName"><span jhiTranslate="sportiqApp.activityResultSplit.splitUnit">Split Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -42,16 +46,16 @@
                 <td>{{activityResultSplit.splitValue}}</td>
                 <td>
                     <div *ngIf="activityResultSplit.activityResultId">
-                        <a [routerLink]="['../activity-result', activityResultSplit.activityResultId , 'view' ]" >{{activityResultSplit.activityResultId}}</a>
+                        <a [routerLink]="['/activity-result', activityResultSplit.activityResultId , 'view' ]" >{{activityResultSplit.activityResultId}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="activityResultSplit.splitUnitId">
-                        <a [routerLink]="['../unit', activityResultSplit.splitUnitId , 'view' ]" >{{activityResultSplit.splitUnitName}}</a>
+                        <a [routerLink]="['/unit', activityResultSplit.splitUnitId , 'view' ]" >{{activityResultSplit.splitUnitName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
+                    <div class="btn-group">
                         <button type="submit"
                                 [routerLink]="['/activity-result-split', activityResultSplit.id, 'view' ]"
                                 class="btn btn-info btn-sm">
@@ -64,10 +68,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'activity-result-split/'+ activityResultSplit.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
+                        <button type="submit" (click)="delete(activityResultSplit)"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
@@ -78,9 +79,9 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="activityResultSplits && activityResultSplits.length">
+    <div [hidden]="activityResultSplits?.length === 0">
         <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
         <div class="row justify-content-center">
             <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>

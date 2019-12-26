@@ -1,34 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SportiqSharedModule } from 'app/shared';
-import {
+import { SportiqSharedModule } from 'app/shared/shared.module';
+import { AthleteActivityResultComponent } from './athlete-activity-result.component';
+import { AthleteActivityResultDetailComponent } from './athlete-activity-result-detail.component';
+import { AthleteActivityResultUpdateComponent } from './athlete-activity-result-update.component';
+import { AthleteActivityResultDeleteDialogComponent } from './athlete-activity-result-delete-dialog.component';
+import { athleteActivityResultRoute } from './athlete-activity-result.route';
+
+@NgModule({
+  imports: [SportiqSharedModule, RouterModule.forChild(athleteActivityResultRoute)],
+  declarations: [
     AthleteActivityResultComponent,
     AthleteActivityResultDetailComponent,
     AthleteActivityResultUpdateComponent,
-    AthleteActivityResultDeletePopupComponent,
-    AthleteActivityResultDeleteDialogComponent,
-    athleteActivityResultRoute,
-    athleteActivityResultPopupRoute
-} from './';
-
-const ENTITY_STATES = [...athleteActivityResultRoute, ...athleteActivityResultPopupRoute];
-
-@NgModule({
-    imports: [SportiqSharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [
-        AthleteActivityResultComponent,
-        AthleteActivityResultDetailComponent,
-        AthleteActivityResultUpdateComponent,
-        AthleteActivityResultDeleteDialogComponent,
-        AthleteActivityResultDeletePopupComponent
-    ],
-    entryComponents: [
-        AthleteActivityResultComponent,
-        AthleteActivityResultUpdateComponent,
-        AthleteActivityResultDeleteDialogComponent,
-        AthleteActivityResultDeletePopupComponent
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    AthleteActivityResultDeleteDialogComponent
+  ],
+  entryComponents: [AthleteActivityResultDeleteDialogComponent]
 })
 export class SportiqAthleteActivityResultModule {}

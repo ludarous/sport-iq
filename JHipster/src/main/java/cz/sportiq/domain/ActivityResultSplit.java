@@ -1,14 +1,12 @@
 package cz.sportiq.domain;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A ActivityResultSplit.
@@ -16,7 +14,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "activity_result_split")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "activityresultsplit")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "activityresultsplit")
 public class ActivityResultSplit implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,17 +22,18 @@ public class ActivityResultSplit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
+    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Column(name = "split_value")
     private Float splitValue;
 
     @ManyToOne
-    @JsonIgnoreProperties("resultSplits")
+    @JsonIgnoreProperties("activityResultSplits")
     private ActivityResult activityResult;
 
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties("activityResultSplits")
     private Unit splitUnit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -91,19 +90,15 @@ public class ActivityResultSplit implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof ActivityResultSplit)) {
             return false;
         }
-        ActivityResultSplit activityResultSplit = (ActivityResultSplit) o;
-        if (activityResultSplit.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), activityResultSplit.getId());
+        return id != null && id.equals(((ActivityResultSplit) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
     @Override

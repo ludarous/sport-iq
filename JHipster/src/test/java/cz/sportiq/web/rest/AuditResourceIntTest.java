@@ -62,14 +62,14 @@ public class AuditResourceIntTest {
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
-        AuditEventService auditEventService =
-            new AuditEventService(auditEventRepository, auditEventConverter);
-        AuditResource auditResource = new AuditResource(auditEventService);
-        this.restAuditMockMvc = MockMvcBuilders.standaloneSetup(auditResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setConversionService(formattingConversionService)
-            .setMessageConverters(jacksonMessageConverter).build();
+//        MockitoAnnotations.initMocks(this);
+//        AuditEventService auditEventService =
+//            new AuditEventService(auditEventRepository, auditEventConverter);
+//        AuditResource auditResource = new AuditResource(auditEventService);
+//        this.restAuditMockMvc = MockMvcBuilders.standaloneSetup(auditResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setConversionService(formattingConversionService)
+//            .setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before

@@ -6,7 +6,7 @@ import cz.sportiq.service.dto.AthleteEventDTO;
 import org.mapstruct.*;
 
 /**
- * Mapper for the entity AthleteEvent and its DTO AthleteEventDTO.
+ * Mapper for the entity {@link AthleteEvent} and its DTO {@link AthleteEventDTO}.
  */
 @Mapper(componentModel = "spring", uses = {EventMapper.class, AthleteMapper.class})
 public interface AthleteEventMapper extends EntityMapper<AthleteEventDTO, AthleteEvent> {
@@ -18,6 +18,7 @@ public interface AthleteEventMapper extends EntityMapper<AthleteEventDTO, Athlet
 
     @Mapping(source = "eventId", target = "event")
     @Mapping(target = "athleteWorkouts", ignore = true)
+    @Mapping(target = "removeAthleteWorkouts", ignore = true)
     @Mapping(source = "athleteId", target = "athlete")
     AthleteEvent toEntity(AthleteEventDTO athleteEventDTO);
 

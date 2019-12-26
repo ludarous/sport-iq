@@ -1,5 +1,4 @@
 package cz.sportiq.service.dto;
-
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -7,7 +6,7 @@ import java.util.Objects;
 import cz.sportiq.domain.enumeration.Sex;
 
 /**
- * A DTO for the Athlete entity.
+ * A DTO for the {@link cz.sportiq.domain.Athlete} entity.
  */
 public class AthleteDTO implements Serializable {
 
@@ -27,6 +26,7 @@ public class AthleteDTO implements Serializable {
     private String nationality;
 
     private Sex sex;
+
 
     private Long addressId;
 

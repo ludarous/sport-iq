@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <p id="jhi-delete-athleteActivity-heading" jhiTranslate="sportiqApp.athleteActivity.delete.question" translateValues="{id: '{{athleteActivity.id}}'}">Are you sure you want to delete this Athlete Activity?</p>
+        <p id="jhi-delete-athleteActivity-heading" jhiTranslate="sportiqApp.athleteActivity.delete.question" [translateValues]="{id: athleteActivity.id}">Are you sure you want to delete this Athlete Activity?</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

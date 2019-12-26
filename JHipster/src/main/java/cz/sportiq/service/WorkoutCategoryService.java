@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 /**
- * Service Interface for managing WorkoutCategory.
+ * Service Interface for managing {@link cz.sportiq.domain.WorkoutCategory}.
  */
 public interface WorkoutCategoryService {
 
     /**
      * Save a workoutCategory.
      *
-     * @param workoutCategoryDTO the entity to save
-     * @return the persisted entity
+     * @param workoutCategoryDTO the entity to save.
+     * @return the persisted entity.
      */
     WorkoutCategoryDTO save(WorkoutCategoryDTO workoutCategoryDTO);
 
     /**
      * Get all the workoutCategories.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<WorkoutCategoryDTO> findAll(Pageable pageable);
 
@@ -32,25 +32,25 @@ public interface WorkoutCategoryService {
     /**
      * Get the "id" workoutCategory.
      *
-     * @param id the id of the entity
-     * @return the entity
+     * @param id the id of the entity.
+     * @return the entity.
      */
     Optional<WorkoutCategoryDTO> findOne(Long id);
 
     /**
      * Delete the "id" workoutCategory.
      *
-     * @param id the id of the entity
+     * @param id the id of the entity.
      */
     void delete(Long id);
 
     /**
      * Search for the workoutCategory corresponding to the query.
      *
-     * @param query the query of the search
+     * @param query the query of the search.
      * 
-     * @param pageable the pagination information
-     * @return the list of entities
+     * @param pageable the pagination information.
+     * @return the list of entities.
      */
     Page<WorkoutCategoryDTO> search(String query, Pageable pageable);
 }
