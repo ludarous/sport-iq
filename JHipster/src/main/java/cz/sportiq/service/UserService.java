@@ -201,14 +201,20 @@ public class UserService {
             throw new IllegalArgumentException("AuthenticationToken is not OAuth2 or JWT!");
         }
         User user = getUser(attributes);
-        user.setAuthorities(authToken.getAuthorities().stream()
+        Set<Authority> grantedAuthorities = authToken.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
             .map(authority -> {
                 Authority auth = new Authority();
                 auth.setName(authority);
                 return auth;
             })
-            .collect(Collectors.toSet()));
+            .collect(Collectors.toSet());
+
+        for(Authority authority : grantedAuthorities) {
+            if(!user.getAuthorities().contains(authority)) {
+                user.getAuthorities().add(authority);
+            }
+        }
         return new UserDTO(syncUserWithIdP(attributes, user));
     }
 
@@ -258,6 +264,16 @@ public class UserService {
         if (details.get("picture") != null) {
             user.setImageUrl((String) details.get("picture"));
         }
+
+        if (details.get("authorities") != null) {
+            List<String> authorities = (List<String>) details.get("authorities");
+            for(String authorityStr : authorities) {
+                Authority authority = new Authority();
+                authority.setName(authorityStr);
+                user.getAuthorities().add(authority);
+            }
+        }
+
         user.setActivated(true);
         return user;
     }
