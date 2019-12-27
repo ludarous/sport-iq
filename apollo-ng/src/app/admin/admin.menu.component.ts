@@ -39,22 +39,22 @@ export class AdminMenuComponent implements OnInit {
                     label: 'Admin', icon: 'fa fa-fw fa-lock',
                     items: [
                         {
-                            label: 'Aktivity', icon: 'fa fa-fw fa-wheelchair-alt', routerLink: ['/activities']
+                            label: 'Aktivity', icon: 'fa fa-fw fa-wheelchair-alt', routerLink: ['/admin/activities']
                         },
                         {
-                            label: 'Testy', icon: 'fa fa-fw fa-list', routerLink: ['/workouts']
+                            label: 'Testy', icon: 'fa fa-fw fa-list', routerLink: ['/admin/workouts']
                         },
                         {
-                            label: 'Události', icon: 'fa fa-fw fa-calendar', routerLink: ['/events']
+                            label: 'Události', icon: 'fa fa-fw fa-calendar', routerLink: ['/admin/events']
                         },
                         {
-                            label: 'Sportovci', icon: 'fa fa-fw fa-users', routerLink: ['/athletes']
+                            label: 'Sportovci', icon: 'fa fa-fw fa-users', routerLink: ['/admin/athletes']
                         },
                         {
-                            label: 'Kategorie aktivit', routerLink: ['/activity-categories']
+                            label: 'Kategorie aktivit', routerLink: ['/admin/activity-categories']
                         },
                         {
-                            label: 'Jednotky', routerLink: ['/units']
+                            label: 'Jednotky', routerLink: ['/admin/units']
                         },
                     ]
                 },

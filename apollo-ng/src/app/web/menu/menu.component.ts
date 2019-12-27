@@ -1,6 +1,9 @@
 import {AfterViewChecked, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import { environment } from '../../../environments/environment';
+import { AuthUtils } from '../../modules/core/utils/auth.utils';
+import { IUser } from '../../modules/entities/user';
+import { AuthService } from '../../modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +12,8 @@ import { environment } from '../../../environments/environment';
 })
 export class MenuComponent implements OnInit, AfterViewChecked {
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              private authService: AuthService) {
 
   }
 
@@ -27,13 +31,40 @@ export class MenuComponent implements OnInit, AfterViewChecked {
   }
 
   toggleButtonVisible: boolean;
+  currentUser: IUser;
+
+  get userFullName(): string {
+      if (this.currentUser) {
+          return  this.currentUser.firstName + ' ' + this.currentUser.lastName;
+      }
+  }
 
   ngOnInit() {
+      AuthUtils.userLoggedIn$.subscribe((user: IUser) => {
+        this.setUser(user);
+      });
+
+      AuthUtils.userLoggedOut$.subscribe((user: IUser) => {
+          this.setUser(user);
+      });
+
+      AuthUtils.userChanged$.subscribe((user: IUser) => {
+          this.setUser(user);
+      });
+
+      AuthUtils.userUpdated$.subscribe((user: IUser) => {
+          this.setUser(user);
+      });
   }
 
   setLang(lang: string) {
     this.translateService.use(lang);
   }
+
+  setUser(user: IUser) {
+      this.currentUser = user;
+  }
+
 
   getSelectedLang(): string {
     return this.translateService.currentLang;
@@ -49,6 +80,6 @@ export class MenuComponent implements OnInit, AfterViewChecked {
   }
 
     login() {
-        location.href = environment.backendUrl + '/login';
+        this.authService.login();
     }
 }

@@ -29,12 +29,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#contacts">{{'menu.contact' | translate}}</a>
                             </li>
+                            <li class="nav-item" *ngIf="currentUser">
+                                <a class="nav-link" [routerLink]="['/admin']">{{'menu.dashboard' | translate}}</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="right-menu-container">
-                        <div class="login" (click)="login()">
-                            {{'přihlásit' | translate}}
+                        <div *ngIf="!currentUser" (click)="login()">
+                            {{('přihlásit' | translate)}}
                         </div>
+                        <div *ngIf="currentUser">
+                            {{userFullName}}
+                        </div>
+                        |
                         <div>
                             <span *ngIf="getSelectedLang() !== 'cs'" (click)="setLang('cs')">Čeština</span>
                             <span *ngIf="getSelectedLang() !== 'en'" (click)="setLang('en')">English</span>

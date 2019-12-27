@@ -5,9 +5,9 @@ import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-    template: ''
-})
-export class LoginComponent {
+        template: ''
+    })
+    export class LoginComponent {
 
     environment = environment;
 
@@ -20,19 +20,6 @@ export class LoginComponent {
         } else {
             this.router.navigate(['']);
         }
-
-        this.activatedRoute.params.subscribe((params) => {
-            const state = params.state;
-            const sessionState = params.session_state;
-            const code = params.code;
-
-            httpClient.get(environment.backendUrl + '/login/oauth2/code/oidc', { params: {
-                    code: code,
-                    session_state: sessionState,
-                    state: state
-                }
-            });
-        });
     }
 
 

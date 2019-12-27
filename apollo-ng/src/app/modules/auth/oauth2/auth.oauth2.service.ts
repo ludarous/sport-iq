@@ -23,7 +23,7 @@ export class OAuth2Service {
 
 
     login(): Observable<any> {
-        location.href = environment.backendUrl + '/login';
+        location.href = environment.backendUrl + '/oauth2/authorization/keycloak';
         return RxjsUtils.create(true);
     }
 

@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
+
     <!--
         Added the entity Activity.
     -->
@@ -18,10 +18,10 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="description" type="varchar(255)">
+            <column name="description" type="varchar(65535)">
                 <constraints nullable="true" />
             </column>
-            <column name="help" type="varchar(255)">
+            <column name="help" type="varchar(65535)">
                 <constraints nullable="true" />
             </column>
             <column name="min_age" type="integer">
@@ -52,7 +52,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="activity_id, categories_id" tableName="activity_categories"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 

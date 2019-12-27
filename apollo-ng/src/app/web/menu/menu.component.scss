@@ -197,6 +197,7 @@
 
     div {
         cursor: pointer;
+        margin: 5px;
     }
 
     div:hover {
@@ -205,9 +206,6 @@
 
     text-transform: none;
 
-    .login {
-        margin: 5px;
-    }
 }
 
 .navbar-toggler {
