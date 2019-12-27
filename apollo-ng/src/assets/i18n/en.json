@@ -45,7 +45,8 @@
 		"about": "About SportIQ",
 		"tests": "Tests",
 		"technology": "Technology",
-		"contact": "Contact"
+		"contact": "Contact",
+        "dashboard": "Dashboard"
 	},
 	"skills": {
 		"title": "Zjisti, jak jsi na tom v porovnání s nejlepšími sportovci na světě"

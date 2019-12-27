@@ -4,7 +4,7 @@
             <h1>{{'Události' | translate}}</h1>
             <div class="btn-panel">
                 <button pButton type="button" class="cyan-btn" [label]="'Vytvořit událost' | translate"
-                        [routerLink]="['/events/create']"></button>
+                        [routerLink]="['/admin/events/create']"></button>
             </div>
             <p-table [value]="events">
                 <ng-template pTemplate="header">
@@ -16,13 +16,13 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
-                    <tr class="pointer" [routerLink]="['/events/edit', item.id]">
+                    <tr class="pointer" [routerLink]="['/admin/events/edit', item.id]">
                         <td *ngFor="let col of tableCols">
                             {{col.map ? col.map(item, col) : item[col.field]}}
                         </td>
                         <td class="table-action-column">
                             <button class="ui-button-danger" type="button" icon="fa fa-trash" pButton (click)="delete($event, item)"></button>
-                            <button class="ui-button-primary" type="button" icon="fa fa-file-text-o" pButton [routerLink]="['/events/results', item.id]"></button>
+                            <button class="ui-button-primary" type="button" icon="fa fa-file-text-o" pButton [routerLink]="['/admin/events/results', item.id]"></button>
                         </td>
                     </tr>
                 </ng-template>

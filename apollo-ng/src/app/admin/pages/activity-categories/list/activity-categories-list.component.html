@@ -4,7 +4,7 @@
             <h1>{{'Kategorie aktivit' | translate}}</h1>
             <div class="btn-panel">
                 <button pButton type="button" class="cyan-btn" [label]="'Vytvořit kategorii aktivit' | translate"
-                        [routerLink]="['/activity-categories/create']"></button>
+                        [routerLink]="['/admin/activity-categories/create']"></button>
             </div>
             <p-treeTable *ngIf="categoriesNodes" [value]="categoriesNodes" [columns]="tableCols"
                          selectionMode="checkbox">
@@ -18,7 +18,7 @@
                     <tr>
                         <td>
                             <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-                            <span class="pointer" [routerLink]="['/activity-categories/edit', rowData.id]">{{rowData.name}}</span>
+                            <span class="pointer" [routerLink]="['/admin/activity-categories/edit', rowData.id]">{{rowData.name}}</span>
                         </td>
                         <td>{{rowData.description}}</td>
                         <td class="table-action-column">

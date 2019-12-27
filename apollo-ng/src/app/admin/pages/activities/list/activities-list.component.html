@@ -5,7 +5,7 @@
             <h1>{{'Aktivity' | translate}}</h1>
             <div class="btn-panel">
                 <button pButton type="button" class="cyan-btn" [label]="'Vytvořit aktivitu' | translate"
-                        [routerLink]="['/activities/create']"></button>
+                        [routerLink]="['/admin/activities/create']"></button>
             </div>
             <p-table [value]="activities">
                 <ng-template pTemplate="header">
@@ -17,7 +17,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
-                    <tr class="pointer" [routerLink]="['/activities/edit', item.id]">
+                    <tr class="pointer" [routerLink]="['/admin/activities/edit', item.id]">
                         <td *ngFor="let col of tableCols">
                             {{item[col.field]}}
                         </td>

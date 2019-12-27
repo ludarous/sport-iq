@@ -169,15 +169,15 @@ html {
 
 /* Main Layout */
 body {
-  font-family: "Source Sans Pro", Arial, sans-serif;
-  font-size: 14px;
-  font-weight: normal;
-  padding: 0;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  min-height: 100%;
-  background-color: #EEF2F6;
-  color: #424242;
+  font-family: "Source Sans Pro", Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  -webkit-font-smoothing: antialiased !important;
+  min-height: 100% !important;
+  background-color: #EEF2F6 !important;
+  color: #424242 !important;
 }
 body .layout-wrapper .topbar {
   background-color: #f6a821;
@@ -2524,7 +2524,9 @@ h2 {
 body .layout-wrapper .topbar {
   background-color: black;
   display: flex;
-  justify-content: space-between;
+}
+body .layout-wrapper .topbar #menu-button {
+  margin-left: 0;
 }
 body .layout-wrapper .topbar .topbar-search input {
   background: black;
