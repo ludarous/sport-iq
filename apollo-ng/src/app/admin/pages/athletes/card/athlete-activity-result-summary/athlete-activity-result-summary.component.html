@@ -43,9 +43,6 @@
                             <th>
                                 {{'Pořadí' | translate}}
                             </th>
-                            <th>
-                                {{'Pořadí&nbsp;v&nbsp;%' | translate}}
-                            </th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-item>
@@ -67,9 +64,6 @@
                             </td>
                             <td>
                                 {{item.rank | number: '1.0'}}
-                            </td>
-                            <td>
-                                {{item.rankInPercents | number: '1.2-2'}}
                             </td>
                         </tr>
                     </ng-template>
@@ -105,9 +99,6 @@
                             <th>
                                 {{'Pořadí' | translate}}
                             </th>
-                            <th>
-                                {{'Pořadí v&nbsp;%' | translate}}
-                            </th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-item>
@@ -133,9 +124,6 @@
                             <td>
                                 {{item.rank | number: '1.0'}}
                             </td>
-                            <td>
-                                {{item.rankInPercents | number: '1.2-2'}}
-                            </td>
                         </tr>
                         <tr *ngIf="item === null" class="delimiter-row">
 
@@ -151,7 +139,7 @@
                                        [schemeType]="'ordinal'"
                                        [results]="splitResultsChartData"
                                        [animations]="true"
-                                       [legend]="true"
+                                       [legend]="false"
                                        [legendTitle]="'Legenda'"
                                        [legendPosition]="'right'"
                                        (legendLabelClick)="onLegendLabelClick($event)"

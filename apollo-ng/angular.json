@@ -22,7 +22,7 @@
                         "stylePreprocessorOptions": {
                             "includePaths": [
                                 "src/assets/sass",
-                                "../node_modules/bootstrap/scss"
+                                "node_modules/bootstrap/scss"
                             ]
                         },
                         "assets": [
