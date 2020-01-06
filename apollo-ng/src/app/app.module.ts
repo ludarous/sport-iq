@@ -15,6 +15,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { ProtractorBrowser } from 'protractor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WebModule } from './web/web.module';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -40,6 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
         }),
 
         CoreModule,
+        WebModule
     ],
     bootstrap: [
         AppComponent

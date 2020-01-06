@@ -8,15 +8,15 @@ html {
 
 /* Main Layout */
 body {
-    font-family: $fontFamily !important;
-    font-size: $fontSize !important;
-    font-weight: normal !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    -webkit-font-smoothing: antialiased !important;
-    min-height: 100% !important;
-    background-color: $bodyBgColor !important;
-    color: $textColor !important;
+    font-family: $fontFamily;
+    font-size: $fontSize;
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    background-color: $bodyBgColor;
+    color: $textColor;
 
     .layout-wrapper {
 

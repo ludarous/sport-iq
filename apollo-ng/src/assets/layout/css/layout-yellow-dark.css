@@ -169,15 +169,15 @@ html {
 
 /* Main Layout */
 body {
-  font-family: "Source Sans Pro", Arial, sans-serif !important;
-  font-size: 14px !important;
-  font-weight: normal !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  -webkit-font-smoothing: antialiased !important;
-  min-height: 100% !important;
-  background-color: #141d26 !important;
-  color: #d8d8d8 !important;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  background-color: #141d26;
+  color: #d8d8d8;
 }
 body .layout-wrapper .topbar {
   background-color: #ffc800;
