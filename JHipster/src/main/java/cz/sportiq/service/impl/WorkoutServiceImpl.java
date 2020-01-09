@@ -51,7 +51,7 @@ public class WorkoutServiceImpl implements WorkoutService {
         Workout workout = workoutMapper.toEntity(workoutDTO);
         workout = workoutRepository.save(workout);
         WorkoutDTO result = workoutMapper.toDto(workout);
-        workoutSearchRepository.save(workout);
+        //workoutSearchRepository.save(workout); TODO: Cannot save to elasticsearch. Dont know why
         return result;
     }
 
@@ -77,7 +77,7 @@ public class WorkoutServiceImpl implements WorkoutService {
     public Page<WorkoutDTO> findAllWithEagerRelationships(Pageable pageable) {
         return workoutRepository.findAllWithEagerRelationships(pageable).map(workoutMapper::toDto);
     }
-    
+
 
     /**
      * Get one workout by id.

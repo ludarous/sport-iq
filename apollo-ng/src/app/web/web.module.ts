@@ -19,6 +19,7 @@ import { CountToTimeComponent } from './shared/count-to-time/count-to-time.compo
 import { CountToTimeService } from './shared/count-to-time/count-to-time.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { TestDetailComponent } from './tests/test-detail/test-detail.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { CommonModule } from '@angular/common';
         ContactsComponent,
         FooterComponent,
         TestsComponent,
-        CountToTimeComponent
+        CountToTimeComponent,
+        TestDetailComponent
     ],
     imports: [
         CommonModule,

@@ -10,7 +10,7 @@
         <input id="activity-result-split-compareValue" type="text" pInputText
                [(ngModel)]="athleteActivityResultSplit.compareValue"/>
     </div>
-    <div *ngIf="activityResultSettings.showCompareValue" class="ui-g-3 ui-md-2">
+    <div *ngIf="activityResultSettings.showCompareValue && computedDifference()" class="ui-g-3 ui-md-2">
         <span>{{fix(computedDifference()) + ' (' + fix(computedDifferenceInPercents()) + '%)'}}</span>
     </div>
 </div>

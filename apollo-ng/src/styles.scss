@@ -238,7 +238,6 @@ app-root {
     }
 
 
-
     body {
         background-color: white;
 
@@ -309,4 +308,12 @@ app-root {
     .athlete-info {
         width: 100%;
     }
+}
+
+/* CUSTOM RESET */
+
+ul {
+    padding-inline-start: unset;
+    margin-block-start: auto;
+    margin-block-end: auto;
 }

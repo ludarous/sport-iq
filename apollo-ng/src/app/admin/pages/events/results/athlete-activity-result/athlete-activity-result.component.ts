@@ -68,7 +68,7 @@ export class AthleteActivityResultComponent implements OnInit {
     }
 
     getActivityResultSplit(athleteActivityResultSplit: IAthleteActivityResultSplit): IActivityResultSplit {
-        return this._activityResult.resultSplits.find(rs => rs.id === athleteActivityResultSplit.activityResultSplitId);
+        return this.activityResult.resultSplits.find(rs => rs.id === athleteActivityResultSplit.activityResultSplitId);
     }
 
     fix(value: number): string {

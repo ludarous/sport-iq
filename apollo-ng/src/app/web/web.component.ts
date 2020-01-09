@@ -64,7 +64,7 @@ export class WebComponent implements OnInit, OnDestroy {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
 
-                const yOffset = -95;
+                const yOffset = -84;
                 const id = this.getAttribute('href');
                 const element = document.querySelector(id);
                 if (element) {

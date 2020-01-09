@@ -1,4 +1,4 @@
-<div class="card">
+<div *ngIf="activityResult && athleteActivityResult" class="card">
     <div class="ui-g">
         <div class="ui-g-12 ui-md-4">
             <label
@@ -13,7 +13,7 @@
             <input id="activity-result-compareValue" type="text" pInputText
                    [(ngModel)]="athleteActivityResult.compareValue"/>
         </div>
-        <div *ngIf="activityResultSettings.showCompareValue" class="ui-g-3 ui-md-2">
+        <div *ngIf="activityResultSettings.showCompareValue && computedDifference()" class="ui-g-3 ui-md-2">
             <span>{{fix(computedDifference()) + ' (' + fix(computedDifferenceInPercents()) + '%)'}}</span>
         </div>
     </div>
