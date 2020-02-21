@@ -9,7 +9,7 @@
         <br>
         <div>
           <ngb-tabset [justify]="'justified'">
-            <ngb-tab *ngFor="let testDetail of testDetails" [title]="testDetail.name">
+            <ngb-tab *ngFor="let testDetail of testDetails" [title]="(testDetail.name | translate)">
               <ng-template ngbTabContent>
                   <app-test-detail [testDetail]="testDetail"></app-test-detail>
               </ng-template>

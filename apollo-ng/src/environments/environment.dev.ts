@@ -1,4 +1,4 @@
-export const backendUrl = 'https://api.sportiq.cz';
+export const backendUrl = 'https://api.dev.sportiq.cz';
 
 export const environment = {
     production: true,

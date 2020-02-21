@@ -79,13 +79,12 @@ spring:
     oauth2:
       client:
         provider:
-          keycloak:
-            issuer-uri: http://ludarous.com:2080/auth/realms/dev
-        registration:
-          keycloak:
-            client-id: sportiq
-            client-secret: 92f93787-4c60-42a6-ab52-db50adbb3408
-
+          oidc:
+            issuer-uri: https://auth.dev.sportiq.cz/auth/realms/dev
+          registration:
+            oidc:
+              client-id: api
+              client-secret: e955f2bf-e054-4487-b1b1-52a201e59139
 server:
   port: 9090
 

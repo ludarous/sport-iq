@@ -3,10 +3,10 @@
          class="row test-section" [ngClass]="{'wow': true, 'fadeInLeft': even, 'fadeInRight': odd}"
          data-wow-duration="1s" data-wow-delay="100ms">
         <div class="col-4">
-            <div class="test-section-title">{{testSection.title}}</div>
+            <div class="test-section-title">{{(testSection.title | translate)}}</div>
         </div>
         <div class="col-8">
-            <div class="test-section-content">{{testSection.content}}</div>
+            <div class="test-section-content">{{(testSection.content | translate)}}</div>
         </div>
     </div>
 </div>

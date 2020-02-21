@@ -9,6 +9,6 @@ export const environment = {
     production: false,
     apiUrl: backendUrl + '/api',
     backendUrl,
-    logoutUrl: 'http://ludarous.com:2080/auth/realms/dev/protocol/openid-connect/logout',
+    logoutUrl: 'http://auth.dev.sportiq.cz/auth/realms/dev/protocol/openid-connect/logout',
     allowedLoginReferrers: ['*'],
 };

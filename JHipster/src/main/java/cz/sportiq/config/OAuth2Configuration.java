@@ -31,7 +31,7 @@ import java.io.IOException;
  * mode too.
  */
 @Configuration
-@Profile("dev")
+//@Profile("dev")
 public class OAuth2Configuration {
     public static final String SAVED_LOGIN_ORIGIN_URI = OAuth2Configuration.class.getName() + "_SAVED_ORIGIN";
 
@@ -44,8 +44,10 @@ public class OAuth2Configuration {
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain filterChain)
                 throws ServletException, IOException {
+                log.debug("Saving login origin URI");
                 if (request.getRemoteUser() == null && request.getRequestURI().contains("/oauth2/authorization/")) {
                     String referrer = request.getHeader("referer");
+                    log.debug("Referer: " + referrer);
                     if (!StringUtils.isBlank(referrer) &&
                         request.getSession().getAttribute(SAVED_LOGIN_ORIGIN_URI) == null) {
                         log.debug("Saving login origin URI: {}", referrer);

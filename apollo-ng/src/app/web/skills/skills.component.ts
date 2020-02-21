@@ -1,99 +1,101 @@
-import {Component, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {CountToSettings, SkillSlideComponent, SkillSlideSettings} from './skill-slide/skill-slide.component';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { CountToSettings, SkillSlideComponent, SkillSlideSettings } from './skill-slide/skill-slide.component';
 import * as $ from 'jquery';
-import {NgbSlideEvent} from '@ng-bootstrap/ng-bootstrap';
+import { NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-skills',
-  templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.scss']
+    selector: 'app-skills',
+    templateUrl: './skills.component.html',
+    styleUrls: ['./skills.component.scss']
 })
 export class SkillsComponent implements OnInit {
 
-  constructor() {
-  }
-
-  @ViewChildren(SkillSlideComponent)
-  slides: QueryList<SkillSlideComponent>;
-
-  @Input()
-  slideInterval = 5000;
-
-  countToSettingsSprint: SkillSlideSettings;
-  countToSettingsArsenal: SkillSlideSettings;
-
-  ngOnInit() {
-
-    this.countToSettingsSprint = {
-      name: '3/4 court sprint',
-      values: [
-        {
-          time: 3.04,
-          name: 'Jared Harper',
-          club: 'Boston Celtics'
-        },
-        {
-          time: 3.08,
-          name: 'Loonie Walker',
-          club: 'San Antonio Spurs'
-        },
-        {
-          time: 3.16,
-          name: 'Kemba Walker',
-          club: 'Boston Celtics'
-        },
-        {
-          time: 0,
-          name: 'TY'
-        }
-      ]
-    };
-
-    this.countToSettingsArsenal = {
-      name: 'Arsenal 40m run',
-      values: [
-        {
-          time: 4.82,
-          name: 'Thiery Henry',
-          club: 'Arsenal'
-        },
-        {
-          time: 4.78,
-          name: 'Theo Walcott',
-          club: 'Arsenal'
-        },
-        {
-          time: 4.41,
-          name: 'Hector Bellerin',
-          club: 'Arsenal'
-        },
-        {
-          time: 0,
-          name: 'TY'
-        }
-      ]
-    };
-  }
-
-
-  onSlide($event: NgbSlideEvent) {
-    let currentSlide;
-
-    this.slides.map(s => s.stopCount());
-
-    if ($event.current === 'ngb-slide-4') {
-      currentSlide = this.slides.find((item, index) => {
-        return index === 0;
-      });
-
-    } else if ($event.current === 'ngb-slide-5') {
-      currentSlide = this.slides.find((item, index) => {
-        return index === 1;
-      });
+    constructor() {
     }
 
-    if (currentSlide) {
-      currentSlide.startCount();
+    @ViewChildren(SkillSlideComponent)
+    slides: QueryList<SkillSlideComponent>;
+
+    @Input()
+    slideInterval = 5000;
+
+    countToSettingsSprint: SkillSlideSettings;
+    countToSettingsArsenal: SkillSlideSettings;
+
+    ngOnInit() {
+
+        this.countToSettingsSprint = {
+            name: '3/4 court sprint',
+            values: [
+                {
+                    time: 3.28,
+                    name: 'Stephen Curry',
+                    club: 'Golden State Warriors'
+                },
+                {
+                    time: 3.45,
+                    name: 'Kevin Durant',
+                    club: 'Brooklyn Nets'
+                },
+                {
+                    time: 3.55,
+                    name: 'DeMarcus Cousins',
+                    club: 'Los Angeles Lakers'
+                },
+                {
+                    time: 3.28,
+                    name: 'Blake Griffin',
+                    club: 'Detroit Pistons'
+                }
+            ]
+        };
+
+        this.countToSettingsArsenal = {
+            name: 'Lane agility',
+            values: [
+                {
+                    time: 11.07,
+                    name: 'Stephen Curry',
+                    club: 'Golden State Warriors'
+                },
+                {
+                    time: 12.33,
+                    name: 'Kevin Durant',
+                    club: 'Brooklyn Nets'
+                },
+                {
+                    time: 11.40,
+                    name: 'DeMarcus Cousins',
+                    club: 'Los Angeles Lakers'
+                },
+                {
+                    time: 10.95,
+                    name: 'Blake Griffin',
+                    club: 'Detroit Pistons'
+                }
+            ]
+        };
     }
-  }
+
+
+    onSlide($event: NgbSlideEvent) {
+        let currentSlide;
+
+        this.slides.map(s => s.stopCount());
+
+        if ($event.current === 'ngb-slide-4') {
+            currentSlide = this.slides.find((item, index) => {
+                return index === 0;
+            });
+
+        } else if ($event.current === 'ngb-slide-5') {
+            currentSlide = this.slides.find((item, index) => {
+                return index === 1;
+            });
+        }
+
+        if (currentSlide) {
+            currentSlide.startCount();
+        }
+    }
 }

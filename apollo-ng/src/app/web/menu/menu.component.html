@@ -6,8 +6,7 @@
                     <div class="navbar-brand">
                         <a class="logo navbar-logo" href="#home">Sport<span class="accent">iq</span></a>
                     </div>
-                    <div
-                        class="d-flex align-items-center justify-content-end" [ngClass]="{'flex-fill' : toggleButtonVisible}">
+                    <div class="d-flex align-items-center justify-content-end" [ngClass]="{'flex-fill' : toggleButtonVisible}">
                         <button #toggleButton class="navbar-toggler" type="button" data-toggle="collapse"
                                               data-target="#navbarSupportedContent"
                                               aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -29,7 +28,8 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#contacts">{{'menu.contact' | translate}}</a>
                             </li>
-                            <li class="nav-item" *ngIf="currentUser">
+<!--                            <li class="nav-item" *ngIf="currentUser">-->
+                            <li class="nav-item" *ngIf="false">
                                 <a class="nav-link" [routerLink]="['/admin']">{{'menu.dashboard' | translate}}</a>
                             </li>
                         </ul>

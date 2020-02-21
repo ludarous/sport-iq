@@ -37,7 +37,6 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
         throws IOException {
 
         String targetUrl = determineTargetUrl(request);
-
         if (response.isCommitted()) {
             log.error("Response has already been committed. Unable to redirect to " + targetUrl);
             return;
@@ -48,6 +47,7 @@ public class OAuth2AuthenticationSuccessHandler implements AuthenticationSuccess
 
     private String determineTargetUrl(HttpServletRequest request) {
         Object savedReferrer = request.getSession().getAttribute(SAVED_LOGIN_ORIGIN_URI);
+        log.debug("Saved referer URI: {}", savedReferrer);
         if (savedReferrer != null) {
             String savedLoginOrigin = request.getSession().getAttribute(SAVED_LOGIN_ORIGIN_URI).toString();
             log.debug("Redirecting to saved login origin URI: {}", savedLoginOrigin);

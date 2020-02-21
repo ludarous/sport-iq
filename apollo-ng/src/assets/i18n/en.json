@@ -1,35 +1,35 @@
 {
 	"about": {
 		"what-is-sportiq": {
-			"title": "Co je SportIQ?",
-			"point-1": "<h2>komplexní <b>nástroj</b> sestávající z <b>jedinečnýchtestů</b> a nejnovějších <b>technologií</b> (používáno týmy NBA, NHL,NFL, MLB, Premier league).<br><b>identifikuje silné stránky</b> sportovce a jeho <b>oblasti  rozvoje</b> s podporou <b>know-how</b> založeného na originálnímnámi vytvořeném <b>softwaru</b>.</h2>",
-			"point-2": "<h2>podporuje <b>nejvyšší</b> možný <b>výkonsportovců</b>.</h2>",
-			"point-3": "<h2>zaměřuje se na <b>všestrannos</b>t a <b>schopnostpohybu s míčem při maximální rychlosti</b>.</h2>",
-			"point-4": "<h2>umožňuje určit úroveň <b>pohybových schopností/ dovedností jednotlivce</b> - rychlosti, síly, vytrvalosti a předevšímkoordinace - které jsou <b>základem sportovního růstu</b>.</h2>"
+			"title": "What is SportIQ?",
+			"point-1": "A comprehensive <b>tool </b> consisting of <b>unique tests</b> and the latest <b>technologies</b> (used by NBA, NHL, NFL, MLB, Premier League).<br><b>Identifies the strengths</b> of the athlete and its <b>areas of growth</b> with the support of <b>know-how</b> based on our originaly made <b>software</b>.",
+			"point-2": "Supports <b>the highest</b> possible <b>performance of athletes</b>.",
+			"point-3": "It focuses on <b>the versatility</b> a <b>ability to move the ball at maximum speed</b>.",
+			"point-4": "It allows you to determine <b>the level of individual's motor abilities / skills</b> - speed, strength, stamina and, above all, coordination - that are <b>the basis of sports growth</b>."
 		},
 		"why-test": {
-			"title": "Proč testovat",
-			"point-1": "<h2>identifikace <b>silných a slabých stránek</b> umožňuje sportovcům a trenérům adekvátně <b>přizpůsobit trénink,   sledovat vývoj / zlepšení</b> a <b>srovnat</b> se s ostatními sportovci / týmy.</h2>",
-			"point-2": "<h2>za účelem <b>dosažení maximálního výkonu</b> sportovce</h2>",
-			"point-3": "<h2>sportovec potřebuje <b>maximální kontrolu nad základními pohyby</b>, které jsou <b>předpokladem</b> pro další vývoj a zvládnutí <b>složitějších pohybů</b> (např .: běh vs. běh s míčem (s minimální ztrátou rychlosti nebo bez ní))</h2>",
-			"point-4": "<h2><b>úroveň zvládnutí základních i složitých pohybů</b>, tj. úroveň motorických dovedností <b>měří SportIQ</b></h2>",
-			"point-5": "<h2>za účelem <b>zjištění úrovně všestrannosti a výjimečnosti</b> sportovce</h2>"
+			"title": "Why test",
+			"point-1": "Identifying <b>strengths and weaknesses</b> allows athletes and coaches to adequately <b>adapt training, track growth / improvement</b> and <b>compare</b> to other athletes / teams.",
+			"point-2": "In order to <b>achieve maximum performance</b> of athlete.",
+			"point-3": "The athlete needs <b>maximum control of the basic movements</b>, which are <b>a prerequisite</b> for further development and mastering of <b>more complex movements</b> (running without a ball vs. running with a ball with minimal speed loss).",
+			"point-4": "Determine <b>the level of basic and complex movements</b>, ie the level of motor skills.",
+			"point-5": "To determine <b>the level of versatility and uniqueness</b> of the athlete."
 		},
 		"whom": {
-			"title": "Pro koho je SportIQ?",
-			"point-1": "<h2>všem, kteří chtějí dosáhnout svého <b>maximálního sportovního výkonu</b></h2>",
-			"point-2": "<h2>všem, kteří chtějí <b>zjistit</b> svou <b>úroveň</b>.</h2>",
-			"point-3": "<h2>vhodné pro děti a dospívající od 6 let, <b>testy jsou přizpůsobeny věkové kategorii</b></h2>",
-			"point-4": "<h2><b>test pohybové všestrannosti</b> je vhodný pro sportovce jakéhokoli zaměření a pro některé sporty je k dispozici test <b>specializovaný</b>. <b>Test míčových sportů</b> ukáže, v kterém z míčových sportů by se sportovec mohl realizovat.</h2>"
+			"title": "Who is SportIQ for?",
+			"point-1": "Everyone who wants to achieve their <b>maximum sports performance.</b>",
+			"point-2": "Everyone who wants <b>to find out</b> their <b>sporting level</b>.",
+			"point-3": "Suitable for children and adolescents from 6 years - <b>tests are adapted to age category</b>.",
+			"point-4": "<b>Movement versatility test</b>  is suitable for athletes of any focus.  A <b>specialized test</b> is available for some sports. <b>The ball sports test</b> will show which ball sports the athlete could do."
 		},
 		"how": {
-			"title": "Jak SportIQ funguje?",
-			"point-1": "<h2>výběr <b>vhodného testu</b> podle věku a sportovní specializace</h2>",
-			"point-2": "<h2><b>testování</b></h2>",
-			"point-3": "<h2><b>vyhodnocení</b> testu</h2>",
-			"point-4": "<h2>pravidelné <b>cvičení / přizpůsobený trénink</b> (na základě výsledků)</h2>",
-			"point-5": "<h2><b>opětovné testování</b> ideálně po 4-6 měsících a vyhodnocení zlepšení</h2>",
-			"point-6": "<h2>další <b>korekce tréninku</b> a cvičení s ohledem na dosažené výsledky a nově stanovené cíle</h2>"
+			"title": "How SportIQ works?",
+			"point-1": "selection of <b>appropriate test</b> according to age and sport specialization.",
+			"point-2": "<b>Testing</b>.",
+			"point-3": "Test <b>evaluation</b>.",
+			"point-4": "Regular <b>drill/ customized training</b> based on results.",
+			"point-5": "<b>Retesting</b> ideally after 4-6 months and evaluation of improvement.",
+			"point-6": "Further <b>training and drill correction</b> with regard to the achieved results and newly set goals."
 		}
 	},
 	"contacts": {
@@ -49,16 +49,48 @@
         "dashboard": "Dashboard"
 	},
 	"skills": {
-		"title": "Zjisti, jak jsi na tom v porovnání s nejlepšími sportovci na světě"
+		"title": "Find out how you are compared to the best athletes in the world"
 	},
 	"technology": {
 		"title": "Technology",
 		"text-1": "We use newest technology to measure the speed, response and power used by the teams from the best leagues in the world.",
 		"text-2": "Measurement accuracy is critical in providing data to athletes they can trust. Measuring gates use an error-handling algorithm to eliminate errors caused by the intersection of gates with limbs that affect the accuracy of the results.",
 		"text-3": "We have developed our own software to collect, analyze and present data to help athletes improve their performance.",
-		"using-title": "They use measurement technology in the best leagues in the world."
+		"using-title": "Measurement technology is used in the best leagues in the world."
 	},
 	"tests": {
-		"title": "Tests"
-	}
+		"title": "Tests",
+        "point-1-title": "When to choose?",
+        "point-2-title": "Who is it for?",
+        "point-3-title": "What I get?",
+        "point-4-title": "Description",
+        "point-5-title": "Recommendation",
+        "versatile-ball-sports-test": {
+            "title": "Versatile ball sports test",
+            "when": "I want to find out the level of versatility for ball sports.",
+            "who": "Age from 6 to 13 years.",
+            "what": "A skill report that shows me what ball sport I am the best at.",
+            "desc": "Combination of ball sports determines the level of versatility: slalom with and without ball, shooting on the basket / goal, passing on target, accuracy, dribbling with the ball.",
+            "rec": "Once the level has been determined, it is recommended to choose a special test for a particular sport that will allow comparison with other athletes in that sport."
+        },
+        "versatile-test": {
+            "title": "Versatile test",
+            "when": "I want to determine the level of basic skills assumptions.",
+            "who": "Age from 5 years.",
+            "what": "Report with basic motor skills level.",
+            "desc": "It tests reaction, coordination, speed and explosive strength.",
+            "rec": "It serves as an entrance test, which is the basic prerequisite for other tests and it is recommended to choose it first."
+        },
+        "special-test": {
+            "title": "Special test",
+            "when": "I do a specific sport and I want to find out what skills I should improve and what to work on or want to try more sports and compare with others.",
+            "who": "Age from 10 years.",
+            "what": "Report with skill level in the concrete sport.",
+            "desc": "In a specific sport check skills such as slalom with and without ball, shooting on the basket/goal, passing on target, accuracy, dribbling with the ball and so on.",
+            "rec": "With regard to the result, a versatile test is recommended, which, with a special test, can detect problems in basic motor skills."
+        }
+	},
+    "footer": {
+        "operated-by": "Operated by JT Sports Management, Company ID: 01968033"
+    }
 }

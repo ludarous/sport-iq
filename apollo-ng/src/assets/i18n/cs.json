@@ -58,7 +58,39 @@
 		"text-3": " Pro sběr, analýzu a prezentaci dat jsme vyvinuli vlastní software, který pomůže sportovcům ke zvyšování jejich výkonnosti.",
 		"using-title": "Technologii měření používají v nejlepších ligách na světě"
 	},
-	"tests": {
-		"title": "Testy"
-	}
+    "tests": {
+        "title": "Testy",
+        "point-1-title": "Kdy zvolit?",
+        "point-2-title": "Komu je určen?",
+        "point-3-title": "Co získám?",
+        "point-4-title": "Popis",
+        "point-5-title": "Doporučení",
+        "versatile-ball-sports-test": {
+            "title": "Všestranný test míčových sportů",
+            "when": "Chci zjistit úroveň všestrannosti na míčové/týmové sporty.",
+            "who": "Věk od 6 do 13 let.",
+            "what": "Report s úrovní dovedností, který mi ukáže, v jakém míčovém sportu jsem nejšikovnější.",
+            "desc": "Kombinace míčových sportů zjišťuje úroveň všestrannosti -> Slalom s míčem a bez míčem, Střelba na koš/bránu, příhra na cíl, přesnost, dribling s míčem.",
+            "rec": "Po zjištění úrovně se doporučuje zvolit speciální test na konkrétní sport, který umožní porovnání s ostatními sportovci v daném sportu"
+        },
+        "versatile-test": {
+            "title": "Všestranný test",
+            "when": "Chci zjistit úroveň základních předpokladů dovedností.",
+            "who": "Věk od 5.",
+            "what": "Report s úrovní základních motorických dovedností.",
+            "desc": "Testuje reakci, koordinaci, rychlost a výbušnou sílu.",
+            "rec": "Slouží jako vstupní test, který je základním předpokladem pro ostatní testy a je doporučeno jej zvolit jako první."
+        },
+        "special-test": {
+            "title": "Speciální test",
+            "when": "Dělám konkrétní sport a chci zjistit v jaké oblatsi dovedností bych se měl zlepšit a na čem pracovat nebo chci vyzkoušet více sportů a porovnat se s ostatními.",
+            "who": "Věk od 10 let.",
+            "what": "Report s úrovní dovedností v daném sportu.",
+            "desc": "V konkrétním sportu prověří dovednosti jako jsou slalom s míčem a bez míče, střelba na koš/bránu, příhra na cíl, přesnost, dribling s míčem a podobně.",
+            "rec": "S ohledem na výsledek se doporučuje test všestranný, který s ohledem na speciální test může odhalit problémy v základních pohybových dovednostech."
+        }
+    },
+    "footer": {
+        "operated-by": "Provozuje JT Sports Management, IČ: 01968033"
+    }
 }
