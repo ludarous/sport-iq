@@ -18,7 +18,8 @@
         "title": "Workout Category"
       },
       "name": "Name",
-      "description": "Description"
+      "description": "Description",
+      "workouts": "Workouts"
     }
   }
 }

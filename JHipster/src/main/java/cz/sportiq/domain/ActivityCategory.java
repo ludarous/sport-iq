@@ -1,4 +1,5 @@
 package cz.sportiq.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -36,12 +37,17 @@ public class ActivityCategory implements Serializable {
     private String description;
 
     @OneToMany(mappedBy = "parentActivityCategory")
-    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ActivityCategory> childActivityCategories = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("activityCategories")
+    @JsonIgnoreProperties("childActivityCategories")
     private ActivityCategory parentActivityCategory;
+
+    @ManyToMany(mappedBy = "categories")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Activity> activities = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -114,6 +120,31 @@ public class ActivityCategory implements Serializable {
 
     public void setParentActivityCategory(ActivityCategory activityCategory) {
         this.parentActivityCategory = activityCategory;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
+    }
+
+    public ActivityCategory activities(Set<Activity> activities) {
+        this.activities = activities;
+        return this;
+    }
+
+    public ActivityCategory addActivities(Activity activity) {
+        this.activities.add(activity);
+        activity.getCategories().add(this);
+        return this;
+    }
+
+    public ActivityCategory removeActivities(Activity activity) {
+        this.activities.remove(activity);
+        activity.getCategories().remove(this);
+        return this;
+    }
+
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

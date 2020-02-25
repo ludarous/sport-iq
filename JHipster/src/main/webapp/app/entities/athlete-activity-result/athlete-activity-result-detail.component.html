@@ -13,16 +13,16 @@
                 <dd>
                     <span>{{athleteActivityResult.compareValue}}</span>
                 </dd>
-                <dt><span jhiTranslate="sportiqApp.athleteActivityResult.athleteActivity">Athlete Activity</span></dt>
-                <dd>
-                    <div *ngIf="athleteActivityResult.athleteActivityId">
-                        <a [routerLink]="['/athlete-activity', athleteActivityResult.athleteActivityId, 'view']">{{athleteActivityResult.athleteActivityId}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="sportiqApp.athleteActivityResult.activityResult">Activity Result</span></dt>
                 <dd>
                     <div *ngIf="athleteActivityResult.activityResultId">
                         <a [routerLink]="['/activity-result', athleteActivityResult.activityResultId, 'view']">{{athleteActivityResult.activityResultName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteActivityResult.athleteActivity">Athlete Activity</span></dt>
+                <dd>
+                    <div *ngIf="athleteActivityResult.athleteActivityId">
+                        <a [routerLink]="['/athlete-activity', athleteActivityResult.athleteActivityId, 'view']">{{athleteActivityResult.athleteActivityId}}</a>
                     </div>
                 </dd>
             </dl>

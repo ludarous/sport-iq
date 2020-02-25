@@ -15,9 +15,9 @@ public class AthleteActivityResultSplitDTO implements Serializable {
     private Float compareValue;
 
 
-    private Long athleteActivityResultId;
-
     private Long activityResultSplitId;
+
+    private Long athleteActivityResultId;
 
     public Long getId() {
         return id;
@@ -43,20 +43,20 @@ public class AthleteActivityResultSplitDTO implements Serializable {
         this.compareValue = compareValue;
     }
 
-    public Long getAthleteActivityResultId() {
-        return athleteActivityResultId;
-    }
-
-    public void setAthleteActivityResultId(Long athleteActivityResultId) {
-        this.athleteActivityResultId = athleteActivityResultId;
-    }
-
     public Long getActivityResultSplitId() {
         return activityResultSplitId;
     }
 
     public void setActivityResultSplitId(Long activityResultSplitId) {
         this.activityResultSplitId = activityResultSplitId;
+    }
+
+    public Long getAthleteActivityResultId() {
+        return athleteActivityResultId;
+    }
+
+    public void setAthleteActivityResultId(Long athleteActivityResultId) {
+        this.athleteActivityResultId = athleteActivityResultId;
     }
 
     @Override
@@ -86,8 +86,8 @@ public class AthleteActivityResultSplitDTO implements Serializable {
             "id=" + getId() +
             ", value=" + getValue() +
             ", compareValue=" + getCompareValue() +
-            ", athleteActivityResult=" + getAthleteActivityResultId() +
             ", activityResultSplit=" + getActivityResultSplitId() +
+            ", athleteActivityResult=" + getAthleteActivityResultId() +
             "}";
     }
 }

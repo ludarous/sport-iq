@@ -12,6 +12,9 @@ import org.mapstruct.*;
 public interface WorkoutCategoryMapper extends EntityMapper<WorkoutCategoryDTO, WorkoutCategory> {
 
 
+    @Mapping(target = "workouts", ignore = true)
+    @Mapping(target = "removeWorkouts", ignore = true)
+    WorkoutCategory toEntity(WorkoutCategoryDTO workoutCategoryDTO);
 
     default WorkoutCategory fromId(Long id) {
         if (id == null) {

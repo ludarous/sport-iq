@@ -14,6 +14,8 @@ import { IWorkoutCategory } from 'app/shared/model/workout-category.model';
 import { WorkoutCategoryService } from 'app/entities/workout-category/workout-category.service';
 import { ISport } from 'app/shared/model/sport.model';
 import { SportService } from 'app/entities/sport/sport.service';
+import { IEvent } from 'app/shared/model/event.model';
+import { EventService } from 'app/entities/event/event.service';
 
 @Component({
   selector: 'jhi-workout-update',
@@ -27,6 +29,8 @@ export class WorkoutUpdateComponent implements OnInit {
   workoutcategories: IWorkoutCategory[];
 
   sports: ISport[];
+
+  events: IEvent[];
 
   editForm = this.fb.group({
     id: [],
@@ -43,6 +47,7 @@ export class WorkoutUpdateComponent implements OnInit {
     protected activityService: ActivityService,
     protected workoutCategoryService: WorkoutCategoryService,
     protected sportService: SportService,
+    protected eventService: EventService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -64,6 +69,9 @@ export class WorkoutUpdateComponent implements OnInit {
     this.sportService
       .query()
       .subscribe((res: HttpResponse<ISport[]>) => (this.sports = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+    this.eventService
+      .query()
+      .subscribe((res: HttpResponse<IEvent[]>) => (this.events = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(workout: IWorkout) {
@@ -128,6 +136,10 @@ export class WorkoutUpdateComponent implements OnInit {
   }
 
   trackSportById(index: number, item: ISport) {
+    return item.id;
+  }
+
+  trackEventById(index: number, item: IEvent) {
     return item.id;
   }
 

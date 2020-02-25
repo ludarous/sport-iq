@@ -24,10 +24,10 @@
             <column name="rating_weight" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="activity_id" type="bigint">
+            <column name="result_unit_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="result_unit_id" type="bigint">
+            <column name="activity_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

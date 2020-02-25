@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 import { IAthleteActivityResult, AthleteActivityResult } from 'app/shared/model/athlete-activity-result.model';
 import { AthleteActivityResultService } from './athlete-activity-result.service';
-import { IAthleteActivity } from 'app/shared/model/athlete-activity.model';
-import { AthleteActivityService } from 'app/entities/athlete-activity/athlete-activity.service';
 import { IActivityResult } from 'app/shared/model/activity-result.model';
 import { ActivityResultService } from 'app/entities/activity-result/activity-result.service';
+import { IAthleteActivity } from 'app/shared/model/athlete-activity.model';
+import { AthleteActivityService } from 'app/entities/athlete-activity/athlete-activity.service';
 
 @Component({
   selector: 'jhi-athlete-activity-result-update',
@@ -20,23 +20,23 @@ import { ActivityResultService } from 'app/entities/activity-result/activity-res
 export class AthleteActivityResultUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  athleteactivities: IAthleteActivity[];
-
   activityresults: IActivityResult[];
+
+  athleteactivities: IAthleteActivity[];
 
   editForm = this.fb.group({
     id: [],
     value: [],
     compareValue: [],
-    athleteActivityId: [],
-    activityResultId: [null, Validators.required]
+    activityResultId: [null, Validators.required],
+    athleteActivityId: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected athleteActivityResultService: AthleteActivityResultService,
-    protected athleteActivityService: AthleteActivityService,
     protected activityResultService: ActivityResultService,
+    protected athleteActivityService: AthleteActivityService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -46,16 +46,16 @@ export class AthleteActivityResultUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ athleteActivityResult }) => {
       this.updateForm(athleteActivityResult);
     });
-    this.athleteActivityService
-      .query()
-      .subscribe(
-        (res: HttpResponse<IAthleteActivity[]>) => (this.athleteactivities = res.body),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
     this.activityResultService
       .query()
       .subscribe(
         (res: HttpResponse<IActivityResult[]>) => (this.activityresults = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+    this.athleteActivityService
+      .query()
+      .subscribe(
+        (res: HttpResponse<IAthleteActivity[]>) => (this.athleteactivities = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
@@ -65,8 +65,8 @@ export class AthleteActivityResultUpdateComponent implements OnInit {
       id: athleteActivityResult.id,
       value: athleteActivityResult.value,
       compareValue: athleteActivityResult.compareValue,
-      athleteActivityId: athleteActivityResult.athleteActivityId,
-      activityResultId: athleteActivityResult.activityResultId
+      activityResultId: athleteActivityResult.activityResultId,
+      athleteActivityId: athleteActivityResult.athleteActivityId
     });
   }
 
@@ -90,8 +90,8 @@ export class AthleteActivityResultUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       value: this.editForm.get(['value']).value,
       compareValue: this.editForm.get(['compareValue']).value,
-      athleteActivityId: this.editForm.get(['athleteActivityId']).value,
-      activityResultId: this.editForm.get(['activityResultId']).value
+      activityResultId: this.editForm.get(['activityResultId']).value,
+      athleteActivityId: this.editForm.get(['athleteActivityId']).value
     };
   }
 
@@ -111,11 +111,11 @@ export class AthleteActivityResultUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackAthleteActivityById(index: number, item: IAthleteActivity) {
+  trackActivityResultById(index: number, item: IActivityResult) {
     return item.id;
   }
 
-  trackActivityResultById(index: number, item: IActivityResult) {
+  trackAthleteActivityById(index: number, item: IAthleteActivity) {
     return item.id;
   }
 }

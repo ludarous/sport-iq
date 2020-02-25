@@ -20,7 +20,7 @@
       "name": "Name",
       "date": "Date",
       "athleteEvents": "Athlete Events",
-      "address": "Address",
+      "eventLocation": "Event Location",
       "tests": "Tests",
       "athletes": "Athletes"
     }

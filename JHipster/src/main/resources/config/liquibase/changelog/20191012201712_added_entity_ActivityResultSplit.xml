@@ -18,10 +18,10 @@
             <column name="split_value" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="activity_result_id" type="bigint">
+            <column name="split_unit_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="split_unit_id" type="bigint">
+            <column name="activity_result_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

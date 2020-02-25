@@ -88,6 +88,16 @@ entity Address {
     zipCode String required
 }
 
+entity EventLocation {
+    name String required,
+    state String,
+    city String,
+    street String,
+    streetNumber String,
+    latitude Float,
+    longitude Float
+}
+
 entity Sport {
 	name String required
 }
@@ -102,12 +112,12 @@ relationship OneToOne {
 }
 
 relationship ManyToMany {
-	Workout{activities(name)} to Activity
-    Activity{categories(name)} to ActivityCategory
-    Workout{categories(name)} to WorkoutCategory
-    Workout{sports(name)} to Sport
-    Event{tests(name)} to Workout
-    Event{athletes(email)} to Athlete
+	Workout{activities(name)} to Activity{workouts(name)}
+    Activity{categories(name)} to ActivityCategory{activities(name)}
+    Workout{categories(name)} to WorkoutCategory{workouts(name)}
+    Workout{sports(name)} to Sport{workouts(name)}
+    Event{tests(name)} to Workout{events(name)}
+    Event{athletes(email)} to Athlete{events(name)}
 }
 
 // defining multiple OneToMany relationships with comments
@@ -129,7 +139,7 @@ relationship ManyToOne {
     AthleteActivity{activity(name) required} to Activity
     AthleteActivityResult{activityResult(name) required} to ActivityResult
     AthleteActivityResultSplit{activityResultSplit(id) required} to ActivityResultSplit
-    Event{address(street)} to Address
+    Event{eventLocation(name)} to EventLocation
     ActivityResult{resultUnit(name)} to Unit
     Activity{targetUnit(name)} to Unit
     ActivityResultSplit{splitUnit(name)} to Unit

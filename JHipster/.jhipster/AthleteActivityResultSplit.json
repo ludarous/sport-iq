@@ -12,16 +12,18 @@
     ],
     "relationships": [
         {
-            "relationshipName": "athleteActivityResult",
-            "otherEntityName": "athleteActivityResult",
             "relationshipType": "many-to-one",
+            "otherEntityName": "activityResultSplit",
+            "otherEntityRelationshipName": "athleteActivityResultSplit",
+            "relationshipValidateRules": "required",
+            "relationshipName": "activityResultSplit",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipValidateRules": "required",
-            "relationshipName": "activityResultSplit",
-            "otherEntityName": "activityResultSplit",
+            "otherEntityName": "athleteActivityResult",
+            "otherEntityRelationshipName": "athleteActivityResultSplits",
+            "relationshipName": "athleteActivityResult",
             "otherEntityField": "id"
         }
     ],
@@ -34,5 +36,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

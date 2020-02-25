@@ -36,7 +36,7 @@
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="name"><span jhiTranslate="sportiqApp.event.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="date"><span jhiTranslate="sportiqApp.event.date">Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="addressStreet"><span jhiTranslate="sportiqApp.event.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="eventLocationName"><span jhiTranslate="sportiqApp.event.eventLocation">Event Location</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -46,8 +46,8 @@
                 <td>{{event.name}}</td>
                 <td>{{event.date | date:'medium'}}</td>
                 <td>
-                    <div *ngIf="event.addressId">
-                        <a [routerLink]="['/address', event.addressId , 'view' ]" >{{event.addressStreet}}</a>
+                    <div *ngIf="event.eventLocationId">
+                        <a [routerLink]="['/event-location', event.eventLocationId , 'view' ]" >{{event.eventLocationName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

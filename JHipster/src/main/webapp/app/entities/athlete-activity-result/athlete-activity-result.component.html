@@ -36,8 +36,8 @@
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="value"><span jhiTranslate="sportiqApp.athleteActivityResult.value">Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="compareValue"><span jhiTranslate="sportiqApp.athleteActivityResult.compareValue">Compare Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="athleteActivityId"><span jhiTranslate="sportiqApp.athleteActivityResult.athleteActivity">Athlete Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="activityResultName"><span jhiTranslate="sportiqApp.athleteActivityResult.activityResult">Activity Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="athleteActivityId"><span jhiTranslate="sportiqApp.athleteActivityResult.athleteActivity">Athlete Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -47,13 +47,13 @@
                 <td>{{athleteActivityResult.value}}</td>
                 <td>{{athleteActivityResult.compareValue}}</td>
                 <td>
-                    <div *ngIf="athleteActivityResult.athleteActivityId">
-                        <a [routerLink]="['/athlete-activity', athleteActivityResult.athleteActivityId , 'view' ]" >{{athleteActivityResult.athleteActivityId}}</a>
+                    <div *ngIf="athleteActivityResult.activityResultId">
+                        <a [routerLink]="['/activity-result', athleteActivityResult.activityResultId , 'view' ]" >{{athleteActivityResult.activityResultName}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="athleteActivityResult.activityResultId">
-                        <a [routerLink]="['/activity-result', athleteActivityResult.activityResultId , 'view' ]" >{{athleteActivityResult.activityResultName}}</a>
+                    <div *ngIf="athleteActivityResult.athleteActivityId">
+                        <a [routerLink]="['/athlete-activity', athleteActivityResult.athleteActivityId , 'view' ]" >{{athleteActivityResult.athleteActivityId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

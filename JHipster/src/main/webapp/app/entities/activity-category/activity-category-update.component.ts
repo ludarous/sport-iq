@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 import { IActivityCategory, ActivityCategory } from 'app/shared/model/activity-category.model';
 import { ActivityCategoryService } from './activity-category.service';
+import { IActivity } from 'app/shared/model/activity.model';
+import { ActivityService } from 'app/entities/activity/activity.service';
 
 @Component({
   selector: 'jhi-activity-category-update',
@@ -17,6 +19,8 @@ export class ActivityCategoryUpdateComponent implements OnInit {
   isSaving: boolean;
 
   activitycategories: IActivityCategory[];
+
+  activities: IActivity[];
 
   editForm = this.fb.group({
     id: [],
@@ -28,6 +32,7 @@ export class ActivityCategoryUpdateComponent implements OnInit {
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected activityCategoryService: ActivityCategoryService,
+    protected activityService: ActivityService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -43,6 +48,9 @@ export class ActivityCategoryUpdateComponent implements OnInit {
         (res: HttpResponse<IActivityCategory[]>) => (this.activitycategories = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+    this.activityService
+      .query()
+      .subscribe((res: HttpResponse<IActivity[]>) => (this.activities = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(activityCategory: IActivityCategory) {
@@ -96,5 +104,20 @@ export class ActivityCategoryUpdateComponent implements OnInit {
 
   trackActivityCategoryById(index: number, item: IActivityCategory) {
     return item.id;
+  }
+
+  trackActivityById(index: number, item: IActivity) {
+    return item.id;
+  }
+
+  getSelected(selectedVals: any[], option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

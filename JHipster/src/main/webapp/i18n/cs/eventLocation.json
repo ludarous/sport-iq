@@ -1,0 +1,29 @@
+{
+  "sportiqApp": {
+    "eventLocation": {
+      "home": {
+        "title": "Event Locations",
+        "createLabel": "Vytvořit Event Location",
+        "createOrEditLabel": "Vytvořit nebo upravit Event Location",
+        "search": "Vyhledat Event Location",
+        "notFound": "No Event Locations found"
+      },
+      "created": "Byl vytvořen potomek entity Event Location s identifikátorem {{ param }}",
+      "updated": "Potomek entity Event Location s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Event Location s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Event Location {{ id }}?"
+      },
+      "detail": {
+        "title": "Event Location"
+      },
+      "name": "Name",
+      "state": "State",
+      "city": "City",
+      "street": "Street",
+      "streetNumber": "Street Number",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
+    }
+  }
+}

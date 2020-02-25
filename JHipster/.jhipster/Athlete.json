@@ -39,11 +39,19 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
-            "relationshipName": "address",
             "otherEntityName": "address",
+            "otherEntityRelationshipName": "athlete",
+            "relationshipName": "address",
             "otherEntityField": "id",
-            "ownerSide": true,
-            "otherEntityRelationshipName": "athlete"
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "athletes",
+            "relationshipName": "events",
+            "otherEntityField": "name",
+            "ownerSide": false
         }
     ],
     "changelogDate": "20191012201720",
@@ -55,5 +63,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

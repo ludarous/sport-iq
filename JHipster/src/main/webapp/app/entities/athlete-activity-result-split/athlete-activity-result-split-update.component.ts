@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 import { IAthleteActivityResultSplit, AthleteActivityResultSplit } from 'app/shared/model/athlete-activity-result-split.model';
 import { AthleteActivityResultSplitService } from './athlete-activity-result-split.service';
-import { IAthleteActivityResult } from 'app/shared/model/athlete-activity-result.model';
-import { AthleteActivityResultService } from 'app/entities/athlete-activity-result/athlete-activity-result.service';
 import { IActivityResultSplit } from 'app/shared/model/activity-result-split.model';
 import { ActivityResultSplitService } from 'app/entities/activity-result-split/activity-result-split.service';
+import { IAthleteActivityResult } from 'app/shared/model/athlete-activity-result.model';
+import { AthleteActivityResultService } from 'app/entities/athlete-activity-result/athlete-activity-result.service';
 
 @Component({
   selector: 'jhi-athlete-activity-result-split-update',
@@ -20,23 +20,23 @@ import { ActivityResultSplitService } from 'app/entities/activity-result-split/a
 export class AthleteActivityResultSplitUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  athleteactivityresults: IAthleteActivityResult[];
-
   activityresultsplits: IActivityResultSplit[];
+
+  athleteactivityresults: IAthleteActivityResult[];
 
   editForm = this.fb.group({
     id: [],
     value: [],
     compareValue: [],
-    athleteActivityResultId: [],
-    activityResultSplitId: [null, Validators.required]
+    activityResultSplitId: [null, Validators.required],
+    athleteActivityResultId: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected athleteActivityResultSplitService: AthleteActivityResultSplitService,
-    protected athleteActivityResultService: AthleteActivityResultService,
     protected activityResultSplitService: ActivityResultSplitService,
+    protected athleteActivityResultService: AthleteActivityResultService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -46,16 +46,16 @@ export class AthleteActivityResultSplitUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ athleteActivityResultSplit }) => {
       this.updateForm(athleteActivityResultSplit);
     });
-    this.athleteActivityResultService
-      .query()
-      .subscribe(
-        (res: HttpResponse<IAthleteActivityResult[]>) => (this.athleteactivityresults = res.body),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
     this.activityResultSplitService
       .query()
       .subscribe(
         (res: HttpResponse<IActivityResultSplit[]>) => (this.activityresultsplits = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+    this.athleteActivityResultService
+      .query()
+      .subscribe(
+        (res: HttpResponse<IAthleteActivityResult[]>) => (this.athleteactivityresults = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
@@ -65,8 +65,8 @@ export class AthleteActivityResultSplitUpdateComponent implements OnInit {
       id: athleteActivityResultSplit.id,
       value: athleteActivityResultSplit.value,
       compareValue: athleteActivityResultSplit.compareValue,
-      athleteActivityResultId: athleteActivityResultSplit.athleteActivityResultId,
-      activityResultSplitId: athleteActivityResultSplit.activityResultSplitId
+      activityResultSplitId: athleteActivityResultSplit.activityResultSplitId,
+      athleteActivityResultId: athleteActivityResultSplit.athleteActivityResultId
     });
   }
 
@@ -90,8 +90,8 @@ export class AthleteActivityResultSplitUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       value: this.editForm.get(['value']).value,
       compareValue: this.editForm.get(['compareValue']).value,
-      athleteActivityResultId: this.editForm.get(['athleteActivityResultId']).value,
-      activityResultSplitId: this.editForm.get(['activityResultSplitId']).value
+      activityResultSplitId: this.editForm.get(['activityResultSplitId']).value,
+      athleteActivityResultId: this.editForm.get(['athleteActivityResultId']).value
     };
   }
 
@@ -111,11 +111,11 @@ export class AthleteActivityResultSplitUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackAthleteActivityResultById(index: number, item: IAthleteActivityResult) {
+  trackActivityResultSplitById(index: number, item: IActivityResultSplit) {
     return item.id;
   }
 
-  trackActivityResultSplitById(index: number, item: IActivityResultSplit) {
+  trackAthleteActivityResultById(index: number, item: IAthleteActivityResult) {
     return item.id;
   }
 }

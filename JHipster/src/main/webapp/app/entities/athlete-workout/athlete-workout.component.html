@@ -35,8 +35,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="note"><span jhiTranslate="sportiqApp.athleteWorkout.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="athleteEventId"><span jhiTranslate="sportiqApp.athleteWorkout.athleteEvent">Athlete Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="workoutName"><span jhiTranslate="sportiqApp.athleteWorkout.workout">Workout</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="athleteEventId"><span jhiTranslate="sportiqApp.athleteWorkout.athleteEvent">Athlete Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -45,13 +45,13 @@
                 <td><a [routerLink]="['/athlete-workout', athleteWorkout.id, 'view' ]">{{athleteWorkout.id}}</a></td>
                 <td>{{athleteWorkout.note}}</td>
                 <td>
-                    <div *ngIf="athleteWorkout.athleteEventId">
-                        <a [routerLink]="['/athlete-event', athleteWorkout.athleteEventId , 'view' ]" >{{athleteWorkout.athleteEventId}}</a>
+                    <div *ngIf="athleteWorkout.workoutId">
+                        <a [routerLink]="['/workout', athleteWorkout.workoutId , 'view' ]" >{{athleteWorkout.workoutName}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="athleteWorkout.workoutId">
-                        <a [routerLink]="['/workout', athleteWorkout.workoutId , 'view' ]" >{{athleteWorkout.workoutName}}</a>
+                    <div *ngIf="athleteWorkout.athleteEventId">
+                        <a [routerLink]="['/athlete-event', athleteWorkout.athleteEventId , 'view' ]" >{{athleteWorkout.athleteEventId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

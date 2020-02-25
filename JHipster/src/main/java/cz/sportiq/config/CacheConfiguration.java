@@ -72,6 +72,13 @@ public class CacheConfiguration {
             createCache(cm, cz.sportiq.domain.Address.class.getName());
             createCache(cm, cz.sportiq.domain.Sport.class.getName());
             createCache(cm, cz.sportiq.domain.Unit.class.getName());
+            createCache(cm, cz.sportiq.domain.Workout.class.getName() + ".events");
+            createCache(cm, cz.sportiq.domain.Activity.class.getName() + ".workouts");
+            createCache(cm, cz.sportiq.domain.WorkoutCategory.class.getName() + ".workouts");
+            createCache(cm, cz.sportiq.domain.ActivityCategory.class.getName() + ".activities");
+            createCache(cm, cz.sportiq.domain.Athlete.class.getName() + ".events");
+            createCache(cm, cz.sportiq.domain.EventLocation.class.getName());
+            createCache(cm, cz.sportiq.domain.Sport.class.getName() + ".workouts");
             // jhipster-needle-ehcache-add-entry
         };
     }

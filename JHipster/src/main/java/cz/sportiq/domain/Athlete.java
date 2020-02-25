@@ -1,4 +1,5 @@
 package cz.sportiq.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,6 +9,8 @@ import javax.validation.constraints.*;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import cz.sportiq.domain.enumeration.Sex;
 
@@ -53,6 +56,11 @@ public class Athlete implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private Address address;
+
+    @ManyToMany(mappedBy = "athletes")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Event> events = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -152,6 +160,31 @@ public class Athlete implements Serializable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public Athlete events(Set<Event> events) {
+        this.events = events;
+        return this;
+    }
+
+    public Athlete addEvents(Event event) {
+        this.events.add(event);
+        event.getAthletes().add(this);
+        return this;
+    }
+
+    public Athlete removeEvents(Event event) {
+        this.events.remove(event);
+        event.getAthletes().remove(this);
+        return this;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -18,9 +18,9 @@
         "title": "Athlete Workout"
       },
       "note": "Note",
-      "athleteEvent": "Athlete Event",
       "athleteActivities": "Athlete Activities",
-      "workout": "Workout"
+      "workout": "Workout",
+      "athleteEvent": "Athlete Event"
     }
   }
 }

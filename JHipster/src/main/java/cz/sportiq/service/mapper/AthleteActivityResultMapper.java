@@ -11,14 +11,14 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {AthleteActivityMapper.class, ActivityResultMapper.class, AthleteActivityResultSplitMapper.class})
 public interface AthleteActivityResultMapper extends EntityMapper<AthleteActivityResultDTO, AthleteActivityResult> {
 
-    @Mapping(source = "athleteActivity.id", target = "athleteActivityId")
     @Mapping(source = "activityResult.id", target = "activityResultId")
     @Mapping(source = "activityResult.name", target = "activityResultName")
+    @Mapping(source = "athleteActivity.id", target = "athleteActivityId")
     AthleteActivityResultDTO toDto(AthleteActivityResult athleteActivityResult);
 
-    @Mapping(source = "athleteActivityId", target = "athleteActivity")
     @Mapping(target = "removeAthleteActivityResultSplits", ignore = true)
     @Mapping(source = "activityResultId", target = "activityResult")
+    @Mapping(source = "athleteActivityId", target = "athleteActivity")
     AthleteActivityResult toEntity(AthleteActivityResultDTO athleteActivityResultDTO);
 
     default AthleteActivityResult fromId(Long id) {

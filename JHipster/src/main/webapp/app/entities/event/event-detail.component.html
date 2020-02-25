@@ -13,10 +13,10 @@
                 <dd>
                     <span>{{event.date}}</span>
                 </dd>
-                <dt><span jhiTranslate="sportiqApp.event.address">Address</span></dt>
+                <dt><span jhiTranslate="sportiqApp.event.eventLocation">Event Location</span></dt>
                 <dd>
-                    <div *ngIf="event.addressId">
-                        <a [routerLink]="['/address', event.addressId, 'view']">{{event.addressStreet}}</a>
+                    <div *ngIf="event.eventLocationId">
+                        <a [routerLink]="['/event-location', event.eventLocationId, 'view']">{{event.eventLocationName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="sportiqApp.event.tests">Tests</span></dt>

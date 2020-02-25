@@ -6,10 +6,10 @@ export interface IActivityResult {
   name?: string;
   resultType?: ResultType;
   ratingWeight?: number;
-  activityId?: number;
   resultSplits?: IActivityResultSplit[];
   resultUnitName?: string;
   resultUnitId?: number;
+  activityId?: number;
 }
 
 export class ActivityResult implements IActivityResult {
@@ -18,9 +18,9 @@ export class ActivityResult implements IActivityResult {
     public name?: string,
     public resultType?: ResultType,
     public ratingWeight?: number,
-    public activityId?: number,
     public resultSplits?: IActivityResultSplit[],
     public resultUnitName?: string,
-    public resultUnitId?: number
+    public resultUnitId?: number,
+    public activityId?: number
   ) {}
 }

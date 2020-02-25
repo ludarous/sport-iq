@@ -16,7 +16,11 @@ public interface ActivityMapper extends EntityMapper<ActivityDTO, Activity> {
     ActivityDTO toDto(Activity activity);
 
     @Mapping(target = "activityResults", ignore = true)
+    @Mapping(target = "removeActivityResults", ignore = true)
     @Mapping(source = "targetUnitId", target = "targetUnit")
+    @Mapping(target = "removeCategories", ignore = true)
+    @Mapping(target = "workouts", ignore = true)
+    @Mapping(target = "removeWorkouts", ignore = true)
     Activity toEntity(ActivityDTO activityDTO);
 
     default Activity fromId(Long id) {

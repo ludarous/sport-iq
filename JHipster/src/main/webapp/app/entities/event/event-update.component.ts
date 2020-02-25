@@ -10,8 +10,8 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 import { IEvent, Event } from 'app/shared/model/event.model';
 import { EventService } from './event.service';
-import { IAddress } from 'app/shared/model/address.model';
-import { AddressService } from 'app/entities/address/address.service';
+import { IEventLocation } from 'app/shared/model/event-location.model';
+import { EventLocationService } from 'app/entities/event-location/event-location.service';
 import { IWorkout } from 'app/shared/model/workout.model';
 import { WorkoutService } from 'app/entities/workout/workout.service';
 import { IAthlete } from 'app/shared/model/athlete.model';
@@ -24,7 +24,7 @@ import { AthleteService } from 'app/entities/athlete/athlete.service';
 export class EventUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  addresses: IAddress[];
+  eventlocations: IEventLocation[];
 
   workouts: IWorkout[];
 
@@ -34,7 +34,7 @@ export class EventUpdateComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     date: [],
-    addressId: [],
+    eventLocationId: [],
     tests: [],
     athletes: []
   });
@@ -42,7 +42,7 @@ export class EventUpdateComponent implements OnInit {
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected eventService: EventService,
-    protected addressService: AddressService,
+    protected eventLocationService: EventLocationService,
     protected workoutService: WorkoutService,
     protected athleteService: AthleteService,
     protected activatedRoute: ActivatedRoute,
@@ -54,9 +54,12 @@ export class EventUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ event }) => {
       this.updateForm(event);
     });
-    this.addressService
+    this.eventLocationService
       .query()
-      .subscribe((res: HttpResponse<IAddress[]>) => (this.addresses = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe(
+        (res: HttpResponse<IEventLocation[]>) => (this.eventlocations = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     this.workoutService
       .query()
       .subscribe((res: HttpResponse<IWorkout[]>) => (this.workouts = res.body), (res: HttpErrorResponse) => this.onError(res.message));
@@ -70,7 +73,7 @@ export class EventUpdateComponent implements OnInit {
       id: event.id,
       name: event.name,
       date: event.date != null ? event.date.format(DATE_TIME_FORMAT) : null,
-      addressId: event.addressId,
+      eventLocationId: event.eventLocationId,
       tests: event.tests,
       athletes: event.athletes
     });
@@ -96,7 +99,7 @@ export class EventUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       name: this.editForm.get(['name']).value,
       date: this.editForm.get(['date']).value != null ? moment(this.editForm.get(['date']).value, DATE_TIME_FORMAT) : undefined,
-      addressId: this.editForm.get(['addressId']).value,
+      eventLocationId: this.editForm.get(['eventLocationId']).value,
       tests: this.editForm.get(['tests']).value,
       athletes: this.editForm.get(['athletes']).value
     };
@@ -118,7 +121,7 @@ export class EventUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackAddressById(index: number, item: IAddress) {
+  trackEventLocationById(index: number, item: IEventLocation) {
     return item.id;
   }
 

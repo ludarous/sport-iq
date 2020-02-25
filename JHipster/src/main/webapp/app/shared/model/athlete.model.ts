@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IEvent } from 'app/shared/model/event.model';
 import { Sex } from 'app/shared/model/enumerations/sex.model';
 
 export interface IAthlete {
@@ -10,6 +11,7 @@ export interface IAthlete {
   nationality?: string;
   sex?: Sex;
   addressId?: number;
+  events?: IEvent[];
 }
 
 export class Athlete implements IAthlete {
@@ -21,6 +23,7 @@ export class Athlete implements IAthlete {
     public birthDate?: Moment,
     public nationality?: string,
     public sex?: Sex,
-    public addressId?: number
+    public addressId?: number,
+    public events?: IEvent[]
   ) {}
 }

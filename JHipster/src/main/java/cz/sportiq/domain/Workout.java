@@ -1,4 +1,5 @@
 package cz.sportiq.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -55,6 +56,11 @@ public class Workout implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "sports_id", referencedColumnName = "id"))
     private Set<Sport> sports = new HashSet<>();
 
+    @ManyToMany(mappedBy = "tests")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Event> events = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -101,11 +107,13 @@ public class Workout implements Serializable {
 
     public Workout addActivities(Activity activity) {
         this.activities.add(activity);
+        activity.getWorkouts().add(this);
         return this;
     }
 
     public Workout removeActivities(Activity activity) {
         this.activities.remove(activity);
+        activity.getWorkouts().remove(this);
         return this;
     }
 
@@ -124,11 +132,13 @@ public class Workout implements Serializable {
 
     public Workout addCategories(WorkoutCategory workoutCategory) {
         this.categories.add(workoutCategory);
+        workoutCategory.getWorkouts().add(this);
         return this;
     }
 
     public Workout removeCategories(WorkoutCategory workoutCategory) {
         this.categories.remove(workoutCategory);
+        workoutCategory.getWorkouts().remove(this);
         return this;
     }
 
@@ -147,16 +157,43 @@ public class Workout implements Serializable {
 
     public Workout addSports(Sport sport) {
         this.sports.add(sport);
+        sport.getWorkouts().add(this);
         return this;
     }
 
     public Workout removeSports(Sport sport) {
         this.sports.remove(sport);
+        sport.getWorkouts().remove(this);
         return this;
     }
 
     public void setSports(Set<Sport> sports) {
         this.sports = sports;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public Workout events(Set<Event> events) {
+        this.events = events;
+        return this;
+    }
+
+    public Workout addEvents(Event event) {
+        this.events.add(event);
+        event.getTests().add(this);
+        return this;
+    }
+
+    public Workout removeEvents(Event event) {
+        this.events.remove(event);
+        event.getTests().remove(this);
+        return this;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

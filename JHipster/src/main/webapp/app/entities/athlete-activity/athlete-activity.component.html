@@ -36,8 +36,8 @@
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="note"><span jhiTranslate="sportiqApp.athleteActivity.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="date"><span jhiTranslate="sportiqApp.athleteActivity.date">Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="athleteWorkoutId"><span jhiTranslate="sportiqApp.athleteActivity.athleteWorkout">Athlete Workout</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="activityName"><span jhiTranslate="sportiqApp.athleteActivity.activity">Activity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="athleteWorkoutId"><span jhiTranslate="sportiqApp.athleteActivity.athleteWorkout">Athlete Workout</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -47,13 +47,13 @@
                 <td>{{athleteActivity.note}}</td>
                 <td>{{athleteActivity.date | date:'medium'}}</td>
                 <td>
-                    <div *ngIf="athleteActivity.athleteWorkoutId">
-                        <a [routerLink]="['/athlete-workout', athleteActivity.athleteWorkoutId , 'view' ]" >{{athleteActivity.athleteWorkoutId}}</a>
+                    <div *ngIf="athleteActivity.activityId">
+                        <a [routerLink]="['/activity', athleteActivity.activityId , 'view' ]" >{{athleteActivity.activityName}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="athleteActivity.activityId">
-                        <a [routerLink]="['/activity', athleteActivity.activityId , 'view' ]" >{{athleteActivity.activityName}}</a>
+                    <div *ngIf="athleteActivity.athleteWorkoutId">
+                        <a [routerLink]="['/athlete-workout', athleteActivity.athleteWorkoutId , 'view' ]" >{{athleteActivity.athleteWorkoutId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

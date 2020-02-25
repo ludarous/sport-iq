@@ -16,15 +16,24 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "childActivityCategories",
             "otherEntityName": "activityCategory",
-            "otherEntityRelationshipName": "parentActivityCategory"
+            "otherEntityRelationshipName": "parentActivityCategory",
+            "relationshipName": "childActivityCategories"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "parentActivityCategory",
             "otherEntityName": "activityCategory",
+            "otherEntityRelationshipName": "childActivityCategories",
+            "relationshipName": "parentActivityCategory",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "activity",
+            "otherEntityRelationshipName": "categories",
+            "relationshipName": "activities",
+            "otherEntityField": "name",
+            "ownerSide": false
         }
     ],
     "changelogDate": "20191012201714",
@@ -36,5 +45,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

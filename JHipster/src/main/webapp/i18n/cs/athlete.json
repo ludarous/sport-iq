@@ -23,7 +23,8 @@
       "birthDate": "Birth Date",
       "nationality": "Nationality",
       "sex": "Sex",
-      "address": "Address"
+      "address": "Address",
+      "events": "Events"
     }
   }
 }

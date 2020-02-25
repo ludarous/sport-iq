@@ -30,11 +30,11 @@ public class ActivityResultSplit implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("activityResultSplits")
-    private ActivityResult activityResult;
+    private Unit splitUnit;
 
     @ManyToOne
-    @JsonIgnoreProperties("activityResultSplits")
-    private Unit splitUnit;
+    @JsonIgnoreProperties("resultSplits")
+    private ActivityResult activityResult;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -58,19 +58,6 @@ public class ActivityResultSplit implements Serializable {
         this.splitValue = splitValue;
     }
 
-    public ActivityResult getActivityResult() {
-        return activityResult;
-    }
-
-    public ActivityResultSplit activityResult(ActivityResult activityResult) {
-        this.activityResult = activityResult;
-        return this;
-    }
-
-    public void setActivityResult(ActivityResult activityResult) {
-        this.activityResult = activityResult;
-    }
-
     public Unit getSplitUnit() {
         return splitUnit;
     }
@@ -82,6 +69,19 @@ public class ActivityResultSplit implements Serializable {
 
     public void setSplitUnit(Unit unit) {
         this.splitUnit = unit;
+    }
+
+    public ActivityResult getActivityResult() {
+        return activityResult;
+    }
+
+    public ActivityResultSplit activityResult(ActivityResult activityResult) {
+        this.activityResult = activityResult;
+        return this;
+    }
+
+    public void setActivityResult(ActivityResult activityResult) {
+        this.activityResult = activityResult;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -23,6 +23,7 @@
         "address": "Address",
         "sport": "Sport",
         "unit": "Unit",
+        "eventLocation": "Event Location",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

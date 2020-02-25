@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 import { IActivityResultSplit, ActivityResultSplit } from 'app/shared/model/activity-result-split.model';
 import { ActivityResultSplitService } from './activity-result-split.service';
-import { IActivityResult } from 'app/shared/model/activity-result.model';
-import { ActivityResultService } from 'app/entities/activity-result/activity-result.service';
 import { IUnit } from 'app/shared/model/unit.model';
 import { UnitService } from 'app/entities/unit/unit.service';
+import { IActivityResult } from 'app/shared/model/activity-result.model';
+import { ActivityResultService } from 'app/entities/activity-result/activity-result.service';
 
 @Component({
   selector: 'jhi-activity-result-split-update',
@@ -20,22 +20,22 @@ import { UnitService } from 'app/entities/unit/unit.service';
 export class ActivityResultSplitUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  activityresults: IActivityResult[];
-
   units: IUnit[];
+
+  activityresults: IActivityResult[];
 
   editForm = this.fb.group({
     id: [],
     splitValue: [],
-    activityResultId: [],
-    splitUnitId: []
+    splitUnitId: [],
+    activityResultId: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected activityResultSplitService: ActivityResultSplitService,
-    protected activityResultService: ActivityResultService,
     protected unitService: UnitService,
+    protected activityResultService: ActivityResultService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -45,23 +45,23 @@ export class ActivityResultSplitUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ activityResultSplit }) => {
       this.updateForm(activityResultSplit);
     });
+    this.unitService
+      .query()
+      .subscribe((res: HttpResponse<IUnit[]>) => (this.units = res.body), (res: HttpErrorResponse) => this.onError(res.message));
     this.activityResultService
       .query()
       .subscribe(
         (res: HttpResponse<IActivityResult[]>) => (this.activityresults = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
-    this.unitService
-      .query()
-      .subscribe((res: HttpResponse<IUnit[]>) => (this.units = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(activityResultSplit: IActivityResultSplit) {
     this.editForm.patchValue({
       id: activityResultSplit.id,
       splitValue: activityResultSplit.splitValue,
-      activityResultId: activityResultSplit.activityResultId,
-      splitUnitId: activityResultSplit.splitUnitId
+      splitUnitId: activityResultSplit.splitUnitId,
+      activityResultId: activityResultSplit.activityResultId
     });
   }
 
@@ -84,8 +84,8 @@ export class ActivityResultSplitUpdateComponent implements OnInit {
       ...new ActivityResultSplit(),
       id: this.editForm.get(['id']).value,
       splitValue: this.editForm.get(['splitValue']).value,
-      activityResultId: this.editForm.get(['activityResultId']).value,
-      splitUnitId: this.editForm.get(['splitUnitId']).value
+      splitUnitId: this.editForm.get(['splitUnitId']).value,
+      activityResultId: this.editForm.get(['activityResultId']).value
     };
   }
 
@@ -105,11 +105,11 @@ export class ActivityResultSplitUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackActivityResultById(index: number, item: IActivityResult) {
+  trackUnitById(index: number, item: IUnit) {
     return item.id;
   }
 
-  trackUnitById(index: number, item: IUnit) {
+  trackActivityResultById(index: number, item: IActivityResult) {
     return item.id;
   }
 }

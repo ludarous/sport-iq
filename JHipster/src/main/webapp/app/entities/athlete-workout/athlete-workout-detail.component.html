@@ -9,16 +9,16 @@
                 <dd>
                     <span>{{athleteWorkout.note}}</span>
                 </dd>
-                <dt><span jhiTranslate="sportiqApp.athleteWorkout.athleteEvent">Athlete Event</span></dt>
-                <dd>
-                    <div *ngIf="athleteWorkout.athleteEventId">
-                        <a [routerLink]="['/athlete-event', athleteWorkout.athleteEventId, 'view']">{{athleteWorkout.athleteEventId}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="sportiqApp.athleteWorkout.workout">Workout</span></dt>
                 <dd>
                     <div *ngIf="athleteWorkout.workoutId">
                         <a [routerLink]="['/workout', athleteWorkout.workoutId, 'view']">{{athleteWorkout.workoutName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteWorkout.athleteEvent">Athlete Event</span></dt>
+                <dd>
+                    <div *ngIf="athleteWorkout.athleteEventId">
+                        <a [routerLink]="['/athlete-event', athleteWorkout.athleteEventId, 'view']">{{athleteWorkout.athleteEventId}}</a>
                     </div>
                 </dd>
             </dl>

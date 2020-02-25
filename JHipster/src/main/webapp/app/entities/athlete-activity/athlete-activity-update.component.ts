@@ -10,10 +10,10 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 import { IAthleteActivity, AthleteActivity } from 'app/shared/model/athlete-activity.model';
 import { AthleteActivityService } from './athlete-activity.service';
-import { IAthleteWorkout } from 'app/shared/model/athlete-workout.model';
-import { AthleteWorkoutService } from 'app/entities/athlete-workout/athlete-workout.service';
 import { IActivity } from 'app/shared/model/activity.model';
 import { ActivityService } from 'app/entities/activity/activity.service';
+import { IAthleteWorkout } from 'app/shared/model/athlete-workout.model';
+import { AthleteWorkoutService } from 'app/entities/athlete-workout/athlete-workout.service';
 
 @Component({
   selector: 'jhi-athlete-activity-update',
@@ -22,23 +22,23 @@ import { ActivityService } from 'app/entities/activity/activity.service';
 export class AthleteActivityUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  athleteworkouts: IAthleteWorkout[];
-
   activities: IActivity[];
+
+  athleteworkouts: IAthleteWorkout[];
 
   editForm = this.fb.group({
     id: [],
     note: [],
     date: [],
-    athleteWorkoutId: [],
-    activityId: [null, Validators.required]
+    activityId: [null, Validators.required],
+    athleteWorkoutId: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected athleteActivityService: AthleteActivityService,
-    protected athleteWorkoutService: AthleteWorkoutService,
     protected activityService: ActivityService,
+    protected athleteWorkoutService: AthleteWorkoutService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -48,15 +48,15 @@ export class AthleteActivityUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ athleteActivity }) => {
       this.updateForm(athleteActivity);
     });
+    this.activityService
+      .query()
+      .subscribe((res: HttpResponse<IActivity[]>) => (this.activities = res.body), (res: HttpErrorResponse) => this.onError(res.message));
     this.athleteWorkoutService
       .query()
       .subscribe(
         (res: HttpResponse<IAthleteWorkout[]>) => (this.athleteworkouts = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
-    this.activityService
-      .query()
-      .subscribe((res: HttpResponse<IActivity[]>) => (this.activities = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(athleteActivity: IAthleteActivity) {
@@ -64,8 +64,8 @@ export class AthleteActivityUpdateComponent implements OnInit {
       id: athleteActivity.id,
       note: athleteActivity.note,
       date: athleteActivity.date != null ? athleteActivity.date.format(DATE_TIME_FORMAT) : null,
-      athleteWorkoutId: athleteActivity.athleteWorkoutId,
-      activityId: athleteActivity.activityId
+      activityId: athleteActivity.activityId,
+      athleteWorkoutId: athleteActivity.athleteWorkoutId
     });
   }
 
@@ -89,8 +89,8 @@ export class AthleteActivityUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       note: this.editForm.get(['note']).value,
       date: this.editForm.get(['date']).value != null ? moment(this.editForm.get(['date']).value, DATE_TIME_FORMAT) : undefined,
-      athleteWorkoutId: this.editForm.get(['athleteWorkoutId']).value,
-      activityId: this.editForm.get(['activityId']).value
+      activityId: this.editForm.get(['activityId']).value,
+      athleteWorkoutId: this.editForm.get(['athleteWorkoutId']).value
     };
   }
 
@@ -110,11 +110,11 @@ export class AthleteActivityUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackAthleteWorkoutById(index: number, item: IAthleteWorkout) {
+  trackActivityById(index: number, item: IActivity) {
     return item.id;
   }
 
-  trackActivityById(index: number, item: IActivity) {
+  trackAthleteWorkoutById(index: number, item: IAthleteWorkout) {
     return item.id;
   }
 }

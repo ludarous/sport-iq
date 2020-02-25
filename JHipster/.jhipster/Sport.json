@@ -9,7 +9,16 @@
             ]
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "workout",
+            "otherEntityRelationshipName": "sports",
+            "relationshipName": "workouts",
+            "otherEntityField": "name",
+            "ownerSide": false
+        }
+    ],
     "changelogDate": "20191012201722",
     "entityTableName": "sport",
     "dto": "mapstruct",
@@ -19,5 +28,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

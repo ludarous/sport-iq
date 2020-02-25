@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 import { IActivityResult, ActivityResult } from 'app/shared/model/activity-result.model';
 import { ActivityResultService } from './activity-result.service';
-import { IActivity } from 'app/shared/model/activity.model';
-import { ActivityService } from 'app/entities/activity/activity.service';
 import { IUnit } from 'app/shared/model/unit.model';
 import { UnitService } from 'app/entities/unit/unit.service';
+import { IActivity } from 'app/shared/model/activity.model';
+import { ActivityService } from 'app/entities/activity/activity.service';
 
 @Component({
   selector: 'jhi-activity-result-update',
@@ -20,24 +20,24 @@ import { UnitService } from 'app/entities/unit/unit.service';
 export class ActivityResultUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  activities: IActivity[];
-
   units: IUnit[];
+
+  activities: IActivity[];
 
   editForm = this.fb.group({
     id: [],
     name: [],
     resultType: [],
     ratingWeight: [],
-    activityId: [],
-    resultUnitId: []
+    resultUnitId: [],
+    activityId: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected activityResultService: ActivityResultService,
-    protected activityService: ActivityService,
     protected unitService: UnitService,
+    protected activityService: ActivityService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -47,12 +47,12 @@ export class ActivityResultUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ activityResult }) => {
       this.updateForm(activityResult);
     });
-    this.activityService
-      .query()
-      .subscribe((res: HttpResponse<IActivity[]>) => (this.activities = res.body), (res: HttpErrorResponse) => this.onError(res.message));
     this.unitService
       .query()
       .subscribe((res: HttpResponse<IUnit[]>) => (this.units = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+    this.activityService
+      .query()
+      .subscribe((res: HttpResponse<IActivity[]>) => (this.activities = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(activityResult: IActivityResult) {
@@ -61,8 +61,8 @@ export class ActivityResultUpdateComponent implements OnInit {
       name: activityResult.name,
       resultType: activityResult.resultType,
       ratingWeight: activityResult.ratingWeight,
-      activityId: activityResult.activityId,
-      resultUnitId: activityResult.resultUnitId
+      resultUnitId: activityResult.resultUnitId,
+      activityId: activityResult.activityId
     });
   }
 
@@ -87,8 +87,8 @@ export class ActivityResultUpdateComponent implements OnInit {
       name: this.editForm.get(['name']).value,
       resultType: this.editForm.get(['resultType']).value,
       ratingWeight: this.editForm.get(['ratingWeight']).value,
-      activityId: this.editForm.get(['activityId']).value,
-      resultUnitId: this.editForm.get(['resultUnitId']).value
+      resultUnitId: this.editForm.get(['resultUnitId']).value,
+      activityId: this.editForm.get(['activityId']).value
     };
   }
 
@@ -108,11 +108,11 @@ export class ActivityResultUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackActivityById(index: number, item: IActivity) {
+  trackUnitById(index: number, item: IUnit) {
     return item.id;
   }
 
-  trackUnitById(index: number, item: IUnit) {
+  trackActivityById(index: number, item: IActivity) {
     return item.id;
   }
 }

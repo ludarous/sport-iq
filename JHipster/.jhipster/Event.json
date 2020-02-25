@@ -16,29 +16,30 @@
     "relationships": [
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "athleteEvents",
             "otherEntityName": "athleteEvent",
-            "otherEntityRelationshipName": "event"
+            "otherEntityRelationshipName": "event",
+            "relationshipName": "athleteEvents"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "address",
-            "otherEntityName": "address",
-            "otherEntityField": "street"
+            "otherEntityName": "eventLocation",
+            "otherEntityRelationshipName": "event",
+            "relationshipName": "eventLocation",
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "tests",
             "otherEntityName": "workout",
+            "otherEntityRelationshipName": "events",
+            "relationshipName": "tests",
             "otherEntityField": "name",
             "ownerSide": true
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "",
-            "relationshipName": "athletes",
             "otherEntityName": "athlete",
+            "otherEntityRelationshipName": "events",
+            "relationshipName": "athletes",
             "otherEntityField": "email",
             "ownerSide": true
         }
@@ -52,5 +53,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

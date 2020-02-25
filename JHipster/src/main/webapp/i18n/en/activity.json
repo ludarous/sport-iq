@@ -25,7 +25,8 @@
       "targetValue": "Target Value",
       "activityResults": "Activity Results",
       "targetUnit": "Target Unit",
-      "categories": "Categories"
+      "categories": "Categories",
+      "workouts": "Workouts"
     }
   }
 }

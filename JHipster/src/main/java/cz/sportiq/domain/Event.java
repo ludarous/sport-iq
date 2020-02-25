@@ -42,7 +42,7 @@ public class Event implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("events")
-    private Address address;
+    private EventLocation eventLocation;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -118,17 +118,17 @@ public class Event implements Serializable {
         this.athleteEvents = athleteEvents;
     }
 
-    public Address getAddress() {
-        return address;
+    public EventLocation getEventLocation() {
+        return eventLocation;
     }
 
-    public Event address(Address address) {
-        this.address = address;
+    public Event eventLocation(EventLocation eventLocation) {
+        this.eventLocation = eventLocation;
         return this;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setEventLocation(EventLocation eventLocation) {
+        this.eventLocation = eventLocation;
     }
 
     public Set<Workout> getTests() {
@@ -142,11 +142,13 @@ public class Event implements Serializable {
 
     public Event addTests(Workout workout) {
         this.tests.add(workout);
+        workout.getEvents().add(this);
         return this;
     }
 
     public Event removeTests(Workout workout) {
         this.tests.remove(workout);
+        workout.getEvents().remove(this);
         return this;
     }
 
@@ -165,11 +167,13 @@ public class Event implements Serializable {
 
     public Event addAthletes(Athlete athlete) {
         this.athletes.add(athlete);
+        athlete.getEvents().add(this);
         return this;
     }
 
     public Event removeAthletes(Athlete athlete) {
         this.athletes.remove(athlete);
+        athlete.getEvents().remove(this);
         return this;
     }
 

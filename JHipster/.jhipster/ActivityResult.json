@@ -17,22 +17,24 @@
     ],
     "relationships": [
         {
-            "relationshipName": "activity",
-            "otherEntityName": "activity",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-many",
-            "relationshipName": "resultSplits",
             "otherEntityName": "activityResultSplit",
-            "otherEntityRelationshipName": "activityResult"
+            "otherEntityRelationshipName": "activityResult",
+            "relationshipName": "resultSplits"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "resultUnit",
             "otherEntityName": "unit",
+            "otherEntityRelationshipName": "activityResult",
+            "relationshipName": "resultUnit",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "activity",
+            "otherEntityRelationshipName": "activityResults",
+            "relationshipName": "activity",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20191012201711",
@@ -44,5 +46,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

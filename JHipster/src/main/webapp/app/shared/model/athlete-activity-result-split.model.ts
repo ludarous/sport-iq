@@ -2,8 +2,8 @@ export interface IAthleteActivityResultSplit {
   id?: number;
   value?: number;
   compareValue?: number;
-  athleteActivityResultId?: number;
   activityResultSplitId?: number;
+  athleteActivityResultId?: number;
 }
 
 export class AthleteActivityResultSplit implements IAthleteActivityResultSplit {
@@ -11,7 +11,7 @@ export class AthleteActivityResultSplit implements IAthleteActivityResultSplit {
     public id?: number,
     public value?: number,
     public compareValue?: number,
-    public athleteActivityResultId?: number,
-    public activityResultSplitId?: number
+    public activityResultSplitId?: number,
+    public athleteActivityResultId?: number
   ) {}
 }

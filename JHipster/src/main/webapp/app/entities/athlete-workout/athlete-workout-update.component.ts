@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 import { JhiAlertService } from 'ng-jhipster';
 import { IAthleteWorkout, AthleteWorkout } from 'app/shared/model/athlete-workout.model';
 import { AthleteWorkoutService } from './athlete-workout.service';
-import { IAthleteEvent } from 'app/shared/model/athlete-event.model';
-import { AthleteEventService } from 'app/entities/athlete-event/athlete-event.service';
 import { IWorkout } from 'app/shared/model/workout.model';
 import { WorkoutService } from 'app/entities/workout/workout.service';
+import { IAthleteEvent } from 'app/shared/model/athlete-event.model';
+import { AthleteEventService } from 'app/entities/athlete-event/athlete-event.service';
 
 @Component({
   selector: 'jhi-athlete-workout-update',
@@ -20,22 +20,22 @@ import { WorkoutService } from 'app/entities/workout/workout.service';
 export class AthleteWorkoutUpdateComponent implements OnInit {
   isSaving: boolean;
 
-  athleteevents: IAthleteEvent[];
-
   workouts: IWorkout[];
+
+  athleteevents: IAthleteEvent[];
 
   editForm = this.fb.group({
     id: [],
     note: [],
-    athleteEventId: [],
-    workoutId: [null, Validators.required]
+    workoutId: [null, Validators.required],
+    athleteEventId: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected athleteWorkoutService: AthleteWorkoutService,
-    protected athleteEventService: AthleteEventService,
     protected workoutService: WorkoutService,
+    protected athleteEventService: AthleteEventService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -45,23 +45,23 @@ export class AthleteWorkoutUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ athleteWorkout }) => {
       this.updateForm(athleteWorkout);
     });
+    this.workoutService
+      .query()
+      .subscribe((res: HttpResponse<IWorkout[]>) => (this.workouts = res.body), (res: HttpErrorResponse) => this.onError(res.message));
     this.athleteEventService
       .query()
       .subscribe(
         (res: HttpResponse<IAthleteEvent[]>) => (this.athleteevents = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
-    this.workoutService
-      .query()
-      .subscribe((res: HttpResponse<IWorkout[]>) => (this.workouts = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(athleteWorkout: IAthleteWorkout) {
     this.editForm.patchValue({
       id: athleteWorkout.id,
       note: athleteWorkout.note,
-      athleteEventId: athleteWorkout.athleteEventId,
-      workoutId: athleteWorkout.workoutId
+      workoutId: athleteWorkout.workoutId,
+      athleteEventId: athleteWorkout.athleteEventId
     });
   }
 
@@ -84,8 +84,8 @@ export class AthleteWorkoutUpdateComponent implements OnInit {
       ...new AthleteWorkout(),
       id: this.editForm.get(['id']).value,
       note: this.editForm.get(['note']).value,
-      athleteEventId: this.editForm.get(['athleteEventId']).value,
-      workoutId: this.editForm.get(['workoutId']).value
+      workoutId: this.editForm.get(['workoutId']).value,
+      athleteEventId: this.editForm.get(['athleteEventId']).value
     };
   }
 
@@ -105,11 +105,11 @@ export class AthleteWorkoutUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackAthleteEventById(index: number, item: IAthleteEvent) {
+  trackWorkoutById(index: number, item: IWorkout) {
     return item.id;
   }
 
-  trackWorkoutById(index: number, item: IWorkout) {
+  trackAthleteEventById(index: number, item: IAthleteEvent) {
     return item.id;
   }
 }

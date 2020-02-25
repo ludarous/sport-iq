@@ -19,9 +19,9 @@ public class EventDTO implements Serializable {
     private ZonedDateTime date;
 
 
-    private Long addressId;
+    private Long eventLocationId;
 
-    private String addressStreet;
+    private String eventLocationName;
 
     private Set<WorkoutDTO> tests = new HashSet<>();
 
@@ -51,20 +51,20 @@ public class EventDTO implements Serializable {
         this.date = date;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public Long getEventLocationId() {
+        return eventLocationId;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setEventLocationId(Long eventLocationId) {
+        this.eventLocationId = eventLocationId;
     }
 
-    public String getAddressStreet() {
-        return addressStreet;
+    public String getEventLocationName() {
+        return eventLocationName;
     }
 
-    public void setAddressStreet(String addressStreet) {
-        this.addressStreet = addressStreet;
+    public void setEventLocationName(String eventLocationName) {
+        this.eventLocationName = eventLocationName;
     }
 
     public Set<WorkoutDTO> getTests() {
@@ -110,8 +110,8 @@ public class EventDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", date='" + getDate() + "'" +
-            ", address=" + getAddressId() +
-            ", address='" + getAddressStreet() + "'" +
+            ", eventLocation=" + getEventLocationId() +
+            ", eventLocation='" + getEventLocationName() + "'" +
             "}";
     }
 }

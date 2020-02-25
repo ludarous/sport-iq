@@ -19,8 +19,8 @@
       },
       "value": "Value",
       "compareValue": "Compare Value",
-      "athleteActivityResult": "Athlete Activity Result",
-      "activityResultSplit": "Activity Result Split"
+      "activityResultSplit": "Activity Result Split",
+      "athleteActivityResult": "Athlete Activity Result"
     }
   }
 }

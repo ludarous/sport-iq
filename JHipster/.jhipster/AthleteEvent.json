@@ -16,22 +16,24 @@
     ],
     "relationships": [
         {
-            "relationshipName": "event",
-            "otherEntityName": "event",
+            "relationshipType": "one-to-many",
+            "otherEntityName": "athleteWorkout",
+            "otherEntityRelationshipName": "athleteEvent",
+            "relationshipName": "athleteWorkouts"
+        },
+        {
             "relationshipType": "many-to-one",
+            "otherEntityName": "athlete",
+            "otherEntityRelationshipName": "athleteEvent",
+            "relationshipValidateRules": "required",
+            "relationshipName": "athlete",
             "otherEntityField": "id"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "athleteWorkouts",
-            "otherEntityName": "athleteWorkout",
-            "otherEntityRelationshipName": "athleteEvent"
-        },
-        {
             "relationshipType": "many-to-one",
-            "relationshipValidateRules": "required",
-            "relationshipName": "athlete",
-            "otherEntityName": "athlete",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "athleteEvents",
+            "relationshipName": "event",
             "otherEntityField": "id"
         }
     ],
@@ -44,5 +46,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

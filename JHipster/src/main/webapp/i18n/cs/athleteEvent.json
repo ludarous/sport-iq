@@ -20,9 +20,9 @@
       "note": "Note",
       "actualHeightInCm": "Actual Height In Cm",
       "actualWeightInKg": "Actual Weight In Kg",
-      "event": "Event",
       "athleteWorkouts": "Athlete Workouts",
-      "athlete": "Athlete"
+      "athlete": "Athlete",
+      "event": "Event"
     }
   }
 }

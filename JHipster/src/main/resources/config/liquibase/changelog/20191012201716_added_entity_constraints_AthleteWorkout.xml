@@ -8,17 +8,17 @@
     -->
     <changeSet id="20191012201716-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="athlete_event_id"
-                                 baseTableName="athlete_workout"
-                                 constraintName="fk_athlete_workout_athlete_event_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="athlete_event"/>
-
         <addForeignKeyConstraint baseColumnNames="workout_id"
                                  baseTableName="athlete_workout"
                                  constraintName="fk_athlete_workout_workout_id"
                                  referencedColumnNames="id"
                                  referencedTableName="workout"/>
+
+        <addForeignKeyConstraint baseColumnNames="athlete_event_id"
+                                 baseTableName="athlete_workout"
+                                 constraintName="fk_athlete_workout_athlete_event_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="athlete_event"/>
 
     </changeSet>
 </databaseChangeLog>

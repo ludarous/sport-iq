@@ -21,7 +21,8 @@
       "description": "Description",
       "activities": "Activities",
       "categories": "Categories",
-      "sports": "Sports"
+      "sports": "Sports",
+      "events": "Events"
     }
   }
 }

@@ -17,16 +17,16 @@
                 <dd>
                     <span>{{athleteEvent.actualWeightInKg}}</span>
                 </dd>
-                <dt><span jhiTranslate="sportiqApp.athleteEvent.event">Event</span></dt>
-                <dd>
-                    <div *ngIf="athleteEvent.eventId">
-                        <a [routerLink]="['/event', athleteEvent.eventId, 'view']">{{athleteEvent.eventId}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="sportiqApp.athleteEvent.athlete">Athlete</span></dt>
                 <dd>
                     <div *ngIf="athleteEvent.athleteId">
                         <a [routerLink]="['/athlete', athleteEvent.athleteId, 'view']">{{athleteEvent.athleteId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteEvent.event">Event</span></dt>
+                <dd>
+                    <div *ngIf="athleteEvent.eventId">
+                        <a [routerLink]="['/event', athleteEvent.eventId, 'view']">{{athleteEvent.eventId}}</a>
                     </div>
                 </dd>
             </dl>

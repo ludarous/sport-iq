@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-
+    
     <!--
         Added the entity AthleteWorkout.
     -->
@@ -15,14 +15,14 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="note" type="varchar(65535)">
-                <constraints nullable="true" />
-            </column>
-            <column name="athlete_event_id" type="bigint">
+            <column name="note" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="workout_id" type="bigint">
                 <constraints nullable="false" />
+            </column>
+            <column name="athlete_event_id" type="bigint">
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>

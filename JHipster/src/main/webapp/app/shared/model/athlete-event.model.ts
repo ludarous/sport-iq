@@ -5,9 +5,9 @@ export interface IAthleteEvent {
   note?: string;
   actualHeightInCm?: number;
   actualWeightInKg?: number;
-  eventId?: number;
   athleteWorkouts?: IAthleteWorkout[];
   athleteId?: number;
+  eventId?: number;
 }
 
 export class AthleteEvent implements IAthleteEvent {
@@ -16,8 +16,8 @@ export class AthleteEvent implements IAthleteEvent {
     public note?: string,
     public actualHeightInCm?: number,
     public actualWeightInKg?: number,
-    public eventId?: number,
     public athleteWorkouts?: IAthleteWorkout[],
-    public athleteId?: number
+    public athleteId?: number,
+    public eventId?: number
   ) {}
 }

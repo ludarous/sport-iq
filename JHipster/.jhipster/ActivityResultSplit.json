@@ -8,16 +8,18 @@
     ],
     "relationships": [
         {
-            "relationshipName": "activityResult",
-            "otherEntityName": "activityResult",
             "relationshipType": "many-to-one",
-            "otherEntityField": "id"
+            "otherEntityName": "unit",
+            "otherEntityRelationshipName": "activityResultSplit",
+            "relationshipName": "splitUnit",
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "splitUnit",
-            "otherEntityName": "unit",
-            "otherEntityField": "name"
+            "otherEntityName": "activityResult",
+            "otherEntityRelationshipName": "resultSplits",
+            "relationshipName": "activityResult",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20191012201712",
@@ -29,5 +31,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

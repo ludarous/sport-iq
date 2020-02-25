@@ -21,13 +21,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResultSplit.athleteActivityResult" for="field_athleteActivityResult">Athlete Activity Result</label>
-                    <select class="form-control" id="field_athleteActivityResult" name="athleteActivityResult" formControlName="athleteActivityResultId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="athleteActivityResultOption.id" *ngFor="let athleteActivityResultOption of athleteactivityresults; trackBy: trackAthleteActivityResultById">{{athleteActivityResultOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResultSplit.activityResultSplit" for="field_activityResultSplit">Activity Result Split</label>
                     <select class="form-control" id="field_activityResultSplit" name="activityResultSplit" formControlName="activityResultSplitId">
                         <option *ngIf="!editForm.get('activityResultSplitId').value" [ngValue]="null" selected></option>
@@ -39,6 +32,13 @@
                            *ngIf="editForm.get('activityResultSplitId').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResultSplit.athleteActivityResult" for="field_athleteActivityResult">Athlete Activity Result</label>
+                    <select class="form-control" id="field_athleteActivityResult" name="athleteActivityResult" formControlName="athleteActivityResultId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="athleteActivityResultOption.id" *ngFor="let athleteActivityResultOption of athleteactivityresults; trackBy: trackAthleteActivityResultById">{{athleteActivityResultOption.id}}</option>
+                    </select>
                 </div>
             </div>
             <div>

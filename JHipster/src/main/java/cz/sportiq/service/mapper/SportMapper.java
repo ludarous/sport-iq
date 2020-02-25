@@ -12,6 +12,9 @@ import org.mapstruct.*;
 public interface SportMapper extends EntityMapper<SportDTO, Sport> {
 
 
+    @Mapping(target = "workouts", ignore = true)
+    @Mapping(target = "removeWorkouts", ignore = true)
+    Sport toEntity(SportDTO sportDTO);
 
     default Sport fromId(Long id) {
         if (id == null) {

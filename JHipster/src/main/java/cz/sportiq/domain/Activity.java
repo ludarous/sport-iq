@@ -1,4 +1,5 @@
 package cz.sportiq.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -48,7 +49,7 @@ public class Activity implements Serializable {
     private Float targetValue;
 
     @OneToMany(mappedBy = "activity")
-    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ActivityResult> activityResults = new HashSet<>();
 
     @ManyToOne
@@ -61,6 +62,11 @@ public class Activity implements Serializable {
                joinColumns = @JoinColumn(name = "activity_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private Set<ActivityCategory> categories = new HashSet<>();
+
+    @ManyToMany(mappedBy = "activities")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Workout> workouts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -198,16 +204,43 @@ public class Activity implements Serializable {
 
     public Activity addCategories(ActivityCategory activityCategory) {
         this.categories.add(activityCategory);
+        activityCategory.getActivities().add(this);
         return this;
     }
 
     public Activity removeCategories(ActivityCategory activityCategory) {
         this.categories.remove(activityCategory);
+        activityCategory.getActivities().remove(this);
         return this;
     }
 
     public void setCategories(Set<ActivityCategory> activityCategories) {
         this.categories = activityCategories;
+    }
+
+    public Set<Workout> getWorkouts() {
+        return workouts;
+    }
+
+    public Activity workouts(Set<Workout> workouts) {
+        this.workouts = workouts;
+        return this;
+    }
+
+    public Activity addWorkouts(Workout workout) {
+        this.workouts.add(workout);
+        workout.getActivities().add(this);
+        return this;
+    }
+
+    public Activity removeWorkouts(Workout workout) {
+        this.workouts.remove(workout);
+        workout.getActivities().remove(this);
+        return this;
+    }
+
+    public void setWorkouts(Set<Workout> workouts) {
+        this.workouts = workouts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

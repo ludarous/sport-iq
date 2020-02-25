@@ -21,11 +21,11 @@
             <column name="compare_value" type="${floatType}">
                 <constraints nullable="true" />
             </column>
-            <column name="athlete_activity_result_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="activity_result_split_id" type="bigint">
                 <constraints nullable="false" />
+            </column>
+            <column name="athlete_activity_result_id" type="bigint">
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>

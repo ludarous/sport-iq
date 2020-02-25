@@ -17,7 +17,8 @@
       "detail": {
         "title": "Sport"
       },
-      "name": "Name"
+      "name": "Name",
+      "workouts": "Workouts"
     }
   }
 }

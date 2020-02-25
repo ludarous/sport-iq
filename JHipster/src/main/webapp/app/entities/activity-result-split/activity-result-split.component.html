@@ -35,8 +35,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="splitValue"><span jhiTranslate="sportiqApp.activityResultSplit.splitValue">Split Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="activityResultId"><span jhiTranslate="sportiqApp.activityResultSplit.activityResult">Activity Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="splitUnitName"><span jhiTranslate="sportiqApp.activityResultSplit.splitUnit">Split Unit</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="activityResultId"><span jhiTranslate="sportiqApp.activityResultSplit.activityResult">Activity Result</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -45,13 +45,13 @@
                 <td><a [routerLink]="['/activity-result-split', activityResultSplit.id, 'view' ]">{{activityResultSplit.id}}</a></td>
                 <td>{{activityResultSplit.splitValue}}</td>
                 <td>
-                    <div *ngIf="activityResultSplit.activityResultId">
-                        <a [routerLink]="['/activity-result', activityResultSplit.activityResultId , 'view' ]" >{{activityResultSplit.activityResultId}}</a>
+                    <div *ngIf="activityResultSplit.splitUnitId">
+                        <a [routerLink]="['/unit', activityResultSplit.splitUnitId , 'view' ]" >{{activityResultSplit.splitUnitName}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="activityResultSplit.splitUnitId">
-                        <a [routerLink]="['/unit', activityResultSplit.splitUnitId , 'view' ]" >{{activityResultSplit.splitUnitName}}</a>
+                    <div *ngIf="activityResultSplit.activityResultId">
+                        <a [routerLink]="['/activity-result', activityResultSplit.activityResultId , 'view' ]" >{{activityResultSplit.activityResultId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

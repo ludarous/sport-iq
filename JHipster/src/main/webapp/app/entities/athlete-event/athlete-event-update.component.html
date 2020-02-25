@@ -26,13 +26,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteEvent.event" for="field_event">Event</label>
-                    <select class="form-control" id="field_event" name="event" formControlName="eventId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="eventOption.id" *ngFor="let eventOption of events; trackBy: trackEventById">{{eventOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.athleteEvent.athlete" for="field_athlete">Athlete</label>
                     <select class="form-control" id="field_athlete" name="athlete" formControlName="athleteId">
                         <option *ngIf="!editForm.get('athleteId').value" [ngValue]="null" selected></option>
@@ -44,6 +37,13 @@
                            *ngIf="editForm.get('athleteId').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteEvent.event" for="field_event">Event</label>
+                    <select class="form-control" id="field_event" name="event" formControlName="eventId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="eventOption.id" *ngFor="let eventOption of events; trackBy: trackEventById">{{eventOption.id}}</option>
+                    </select>
                 </div>
             </div>
             <div>

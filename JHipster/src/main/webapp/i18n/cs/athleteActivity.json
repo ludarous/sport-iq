@@ -19,9 +19,9 @@
       },
       "note": "Note",
       "date": "Date",
-      "athleteWorkout": "Athlete Workout",
       "athleteActivityResults": "Athlete Activity Results",
-      "activity": "Activity"
+      "activity": "Activity",
+      "athleteWorkout": "Athlete Workout"
     }
   }
 }

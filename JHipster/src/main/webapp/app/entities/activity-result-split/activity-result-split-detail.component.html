@@ -9,16 +9,16 @@
                 <dd>
                     <span>{{activityResultSplit.splitValue}}</span>
                 </dd>
-                <dt><span jhiTranslate="sportiqApp.activityResultSplit.activityResult">Activity Result</span></dt>
-                <dd>
-                    <div *ngIf="activityResultSplit.activityResultId">
-                        <a [routerLink]="['/activity-result', activityResultSplit.activityResultId, 'view']">{{activityResultSplit.activityResultId}}</a>
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="sportiqApp.activityResultSplit.splitUnit">Split Unit</span></dt>
                 <dd>
                     <div *ngIf="activityResultSplit.splitUnitId">
                         <a [routerLink]="['/unit', activityResultSplit.splitUnitId, 'view']">{{activityResultSplit.splitUnitName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.activityResultSplit.activityResult">Activity Result</span></dt>
+                <dd>
+                    <div *ngIf="activityResultSplit.activityResultId">
+                        <a [routerLink]="['/activity-result', activityResultSplit.activityResultId, 'view']">{{activityResultSplit.activityResultId}}</a>
                     </div>
                 </dd>
             </dl>

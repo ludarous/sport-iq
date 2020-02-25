@@ -5,10 +5,10 @@ export interface IAthleteActivity {
   id?: number;
   note?: string;
   date?: Moment;
-  athleteWorkoutId?: number;
   athleteActivityResults?: IAthleteActivityResult[];
   activityName?: string;
   activityId?: number;
+  athleteWorkoutId?: number;
 }
 
 export class AthleteActivity implements IAthleteActivity {
@@ -16,9 +16,9 @@ export class AthleteActivity implements IAthleteActivity {
     public id?: number,
     public note?: string,
     public date?: Moment,
-    public athleteWorkoutId?: number,
     public athleteActivityResults?: IAthleteActivityResult[],
     public activityName?: string,
-    public activityId?: number
+    public activityId?: number,
+    public athleteWorkoutId?: number
   ) {}
 }

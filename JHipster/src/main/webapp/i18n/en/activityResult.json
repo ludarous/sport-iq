@@ -20,9 +20,9 @@
       "name": "Name",
       "resultType": "Result Type",
       "ratingWeight": "Rating Weight",
-      "activity": "Activity",
       "resultSplits": "Result Splits",
-      "resultUnit": "Result Unit"
+      "resultUnit": "Result Unit",
+      "activity": "Activity"
     }
   }
 }

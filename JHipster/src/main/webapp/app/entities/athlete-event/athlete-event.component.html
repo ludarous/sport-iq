@@ -37,8 +37,8 @@
             <th scope="col"  jhiSortBy="note"><span jhiTranslate="sportiqApp.athleteEvent.note">Note</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="actualHeightInCm"><span jhiTranslate="sportiqApp.athleteEvent.actualHeightInCm">Actual Height In Cm</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="actualWeightInKg"><span jhiTranslate="sportiqApp.athleteEvent.actualWeightInKg">Actual Weight In Kg</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="eventId"><span jhiTranslate="sportiqApp.athleteEvent.event">Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="athleteId"><span jhiTranslate="sportiqApp.athleteEvent.athlete">Athlete</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="eventId"><span jhiTranslate="sportiqApp.athleteEvent.event">Event</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -49,13 +49,13 @@
                 <td>{{athleteEvent.actualHeightInCm}}</td>
                 <td>{{athleteEvent.actualWeightInKg}}</td>
                 <td>
-                    <div *ngIf="athleteEvent.eventId">
-                        <a [routerLink]="['/event', athleteEvent.eventId , 'view' ]" >{{athleteEvent.eventId}}</a>
+                    <div *ngIf="athleteEvent.athleteId">
+                        <a [routerLink]="['/athlete', athleteEvent.athleteId , 'view' ]" >{{athleteEvent.athleteId}}</a>
                     </div>
                 </td>
                 <td>
-                    <div *ngIf="athleteEvent.athleteId">
-                        <a [routerLink]="['/athlete', athleteEvent.athleteId , 'view' ]" >{{athleteEvent.athleteId}}</a>
+                    <div *ngIf="athleteEvent.eventId">
+                        <a [routerLink]="['/event', athleteEvent.eventId , 'view' ]" >{{athleteEvent.eventId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

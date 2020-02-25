@@ -13,7 +13,16 @@
             "fieldType": "String"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "workout",
+            "otherEntityRelationshipName": "categories",
+            "relationshipName": "workouts",
+            "otherEntityField": "name",
+            "ownerSide": false
+        }
+    ],
     "changelogDate": "20191012201713",
     "entityTableName": "workout_category",
     "dto": "mapstruct",
@@ -23,5 +32,6 @@
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "readOnly": false
 }

@@ -18,8 +18,8 @@
         "title": "Activity Result Split"
       },
       "splitValue": "Split Value",
-      "activityResult": "Activity Result",
-      "splitUnit": "Split Unit"
+      "splitUnit": "Split Unit",
+      "activityResult": "Activity Result"
     }
   }
 }

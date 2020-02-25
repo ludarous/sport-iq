@@ -71,6 +71,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'unit',
         loadChildren: () => import('./unit/unit.module').then(m => m.SportiqUnitModule)
+      },
+      {
+        path: 'event-location',
+        loadChildren: () => import('./event-location/event-location.module').then(m => m.SportiqEventLocationModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

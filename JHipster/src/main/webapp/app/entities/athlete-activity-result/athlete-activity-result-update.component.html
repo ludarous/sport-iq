@@ -21,13 +21,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResult.athleteActivity" for="field_athleteActivity">Athlete Activity</label>
-                    <select class="form-control" id="field_athleteActivity" name="athleteActivity" formControlName="athleteActivityId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="athleteActivityOption.id" *ngFor="let athleteActivityOption of athleteactivities; trackBy: trackAthleteActivityById">{{athleteActivityOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResult.activityResult" for="field_activityResult">Activity Result</label>
                     <select class="form-control" id="field_activityResult" name="activityResult" formControlName="activityResultId">
                         <option *ngIf="!editForm.get('activityResultId').value" [ngValue]="null" selected></option>
@@ -39,6 +32,13 @@
                            *ngIf="editForm.get('activityResultId').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athleteActivityResult.athleteActivity" for="field_athleteActivity">Athlete Activity</label>
+                    <select class="form-control" id="field_athleteActivity" name="athleteActivity" formControlName="athleteActivityId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="athleteActivityOption.id" *ngFor="let athleteActivityOption of athleteactivities; trackBy: trackAthleteActivityById">{{athleteActivityOption.id}}</option>
+                    </select>
                 </div>
             </div>
             <div>

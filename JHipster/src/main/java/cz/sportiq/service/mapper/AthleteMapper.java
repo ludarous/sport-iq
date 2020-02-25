@@ -15,6 +15,8 @@ public interface AthleteMapper extends EntityMapper<AthleteDTO, Athlete> {
     AthleteDTO toDto(Athlete athlete);
 
     @Mapping(source = "addressId", target = "address")
+    @Mapping(target = "events", ignore = true)
+    @Mapping(target = "removeEvents", ignore = true)
     Athlete toEntity(AthleteDTO athleteDTO);
 
     default Athlete fromId(Long id) {

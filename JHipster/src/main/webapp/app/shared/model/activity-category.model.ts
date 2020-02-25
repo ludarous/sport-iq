@@ -1,4 +1,5 @@
 import { IActivityCategory } from 'app/shared/model/activity-category.model';
+import { IActivity } from 'app/shared/model/activity.model';
 
 export interface IActivityCategory {
   id?: number;
@@ -6,6 +7,7 @@ export interface IActivityCategory {
   description?: string;
   childActivityCategories?: IActivityCategory[];
   parentActivityCategoryId?: number;
+  activities?: IActivity[];
 }
 
 export class ActivityCategory implements IActivityCategory {
@@ -14,6 +16,7 @@ export class ActivityCategory implements IActivityCategory {
     public name?: string,
     public description?: string,
     public childActivityCategories?: IActivityCategory[],
-    public parentActivityCategoryId?: number
+    public parentActivityCategoryId?: number,
+    public activities?: IActivity[]
   ) {}
 }

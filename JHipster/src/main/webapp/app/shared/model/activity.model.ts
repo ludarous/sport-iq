@@ -1,5 +1,6 @@
 import { IActivityResult } from 'app/shared/model/activity-result.model';
 import { IActivityCategory } from 'app/shared/model/activity-category.model';
+import { IWorkout } from 'app/shared/model/workout.model';
 
 export interface IActivity {
   id?: number;
@@ -13,6 +14,7 @@ export interface IActivity {
   targetUnitName?: string;
   targetUnitId?: number;
   categories?: IActivityCategory[];
+  workouts?: IWorkout[];
 }
 
 export class Activity implements IActivity {
@@ -27,6 +29,7 @@ export class Activity implements IActivity {
     public activityResults?: IActivityResult[],
     public targetUnitName?: string,
     public targetUnitId?: number,
-    public categories?: IActivityCategory[]
+    public categories?: IActivityCategory[],
+    public workouts?: IWorkout[]
   ) {}
 }

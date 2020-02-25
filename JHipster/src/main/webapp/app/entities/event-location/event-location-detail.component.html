@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="eventLocation">
+            <h2><span jhiTranslate="sportiqApp.eventLocation.detail.title">Event Location</span> {{eventLocation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sportiqApp.eventLocation.name">Name</span></dt>
+                <dd>
+                    <span>{{eventLocation.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.eventLocation.state">State</span></dt>
+                <dd>
+                    <span>{{eventLocation.state}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.eventLocation.city">City</span></dt>
+                <dd>
+                    <span>{{eventLocation.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.eventLocation.street">Street</span></dt>
+                <dd>
+                    <span>{{eventLocation.street}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.eventLocation.streetNumber">Street Number</span></dt>
+                <dd>
+                    <span>{{eventLocation.streetNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.eventLocation.latitude">Latitude</span></dt>
+                <dd>
+                    <span>{{eventLocation.latitude}}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.eventLocation.longitude">Longitude</span></dt>
+                <dd>
+                    <span>{{eventLocation.longitude}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/event-location', eventLocation.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "sportiqApp": {
+    "eventLocation": {
+      "home": {
+        "title": "Event Locations",
+        "createLabel": "Create a new Event Location",
+        "createOrEditLabel": "Create or edit a Event Location",
+        "search": "Search for Event Location",
+        "notFound": "No Event Locations found"
+      },
+      "created": "A new Event Location is created with identifier {{ param }}",
+      "updated": "A Event Location is updated with identifier {{ param }}",
+      "deleted": "A Event Location is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Event Location {{ id }}?"
+      },
+      "detail": {
+        "title": "Event Location"
+      },
+      "name": "Name",
+      "state": "State",
+      "city": "City",
+      "street": "Street",
+      "streetNumber": "Street Number",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
+    }
+  }
+}

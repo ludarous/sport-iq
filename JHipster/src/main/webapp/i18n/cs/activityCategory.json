@@ -20,7 +20,8 @@
       "name": "Name",
       "description": "Description",
       "childActivityCategories": "Child Activity Categories",
-      "parentActivityCategory": "Parent Activity Category"
+      "parentActivityCategory": "Parent Activity Category",
+      "activities": "Activities"
     }
   }
 }

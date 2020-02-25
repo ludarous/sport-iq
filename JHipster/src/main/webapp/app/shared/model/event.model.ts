@@ -8,8 +8,8 @@ export interface IEvent {
   name?: string;
   date?: Moment;
   athleteEvents?: IAthleteEvent[];
-  addressStreet?: string;
-  addressId?: number;
+  eventLocationName?: string;
+  eventLocationId?: number;
   tests?: IWorkout[];
   athletes?: IAthlete[];
 }
@@ -20,8 +20,8 @@ export class Event implements IEvent {
     public name?: string,
     public date?: Moment,
     public athleteEvents?: IAthleteEvent[],
-    public addressStreet?: string,
-    public addressId?: number,
+    public eventLocationName?: string,
+    public eventLocationId?: number,
     public tests?: IWorkout[],
     public athletes?: IAthlete[]
   ) {}

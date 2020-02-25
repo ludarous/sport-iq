@@ -12,6 +12,8 @@ import { IAthlete, Athlete } from 'app/shared/model/athlete.model';
 import { AthleteService } from './athlete.service';
 import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address/address.service';
+import { IEvent } from 'app/shared/model/event.model';
+import { EventService } from 'app/entities/event/event.service';
 
 @Component({
   selector: 'jhi-athlete-update',
@@ -21,6 +23,8 @@ export class AthleteUpdateComponent implements OnInit {
   isSaving: boolean;
 
   addresses: IAddress[];
+
+  events: IEvent[];
 
   editForm = this.fb.group({
     id: [],
@@ -37,6 +41,7 @@ export class AthleteUpdateComponent implements OnInit {
     protected jhiAlertService: JhiAlertService,
     protected athleteService: AthleteService,
     protected addressService: AddressService,
+    protected eventService: EventService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -61,6 +66,9 @@ export class AthleteUpdateComponent implements OnInit {
       },
       (res: HttpErrorResponse) => this.onError(res.message)
     );
+    this.eventService
+      .query()
+      .subscribe((res: HttpResponse<IEvent[]>) => (this.events = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(athlete: IAthlete) {
@@ -123,5 +131,20 @@ export class AthleteUpdateComponent implements OnInit {
 
   trackAddressById(index: number, item: IAddress) {
     return item.id;
+  }
+
+  trackEventById(index: number, item: IEvent) {
+    return item.id;
+  }
+
+  getSelected(selectedVals: any[], option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

@@ -15,6 +15,9 @@ public interface WorkoutMapper extends EntityMapper<WorkoutDTO, Workout> {
     @Mapping(target = "removeActivities", ignore = true)
     @Mapping(target = "removeCategories", ignore = true)
     @Mapping(target = "removeSports", ignore = true)
+    @Mapping(target = "events", ignore = true)
+    @Mapping(target = "removeEvents", ignore = true)
+    Workout toEntity(WorkoutDTO workoutDTO);
 
     default Workout fromId(Long id) {
         if (id == null) {

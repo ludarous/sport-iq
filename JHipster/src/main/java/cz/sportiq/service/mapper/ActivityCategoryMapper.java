@@ -15,7 +15,10 @@ public interface ActivityCategoryMapper extends EntityMapper<ActivityCategoryDTO
     ActivityCategoryDTO toDto(ActivityCategory activityCategory);
 
     @Mapping(source = "childActivityCategories", target = "childActivityCategories")
+    @Mapping(target = "removeChildActivityCategories", ignore = true)
     @Mapping(source = "parentActivityCategoryId", target = "parentActivityCategory")
+    @Mapping(target = "activities", ignore = true)
+    @Mapping(target = "removeActivities", ignore = true)
     ActivityCategory toEntity(ActivityCategoryDTO activityCategoryDTO);
 
     default ActivityCategory fromId(Long id) {
