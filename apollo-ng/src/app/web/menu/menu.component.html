@@ -20,6 +20,10 @@
                                 <a class="nav-link" href="#aboutSportIQ">{{'menu.about' | translate}}</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="#events">{{'menu.events' | translate}}</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link" href="#tests">{{'menu.tests' | translate}}</a>
                             </li>
                             <li class="nav-item">
@@ -28,8 +32,8 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#contacts">{{'menu.contact' | translate}}</a>
                             </li>
-<!--                            <li class="nav-item" *ngIf="currentUser">-->
-                            <li class="nav-item" *ngIf="false">
+                            <li class="nav-item" *ngIf="currentUser">
+<!--                            <li class="nav-item" *ngIf="false">-->
                                 <a class="nav-link" [routerLink]="['/admin']">{{'menu.dashboard' | translate}}</a>
                             </li>
                         </ul>

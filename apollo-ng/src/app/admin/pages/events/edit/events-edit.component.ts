@@ -14,6 +14,8 @@ import {IWorkout} from '../../../entities/model/workout.model';
 import {WorkoutService} from '../../../services/rest/workout.service';
 import {AthleteService} from '../../../services/rest/athlete.service';
 import {IAthlete} from '../../../entities/model/athlete.model';
+import { EventLocationService } from '../../../services/rest/event-location.service';
+import { IEventLocation } from '../../../entities/model/event-location.model';
 
 @Component({
     selector: 'app-events-edit',
@@ -24,6 +26,7 @@ import {IAthlete} from '../../../entities/model/athlete.model';
 export class EventsEditComponent implements OnInit {
 
     constructor(private eventService: EventService,
+                private eventLocationService: EventLocationService,
                 private workoutService: WorkoutService,
                 private athleteService: AthleteService,
                 private activatedRoute: ActivatedRoute,
@@ -49,6 +52,16 @@ export class EventsEditComponent implements OnInit {
     allAthletes: Array<IAthlete>;
     suggestedAthletes: Array<IAthlete>;
 
+    allEventLocations: Array<IEventLocation>;
+    get eventLocationOptions(): Array<any> {
+        return this.allEventLocations.map(el => {
+            return {
+                label: el.name,
+                value: el.id
+            };
+        });
+    }
+
     ngOnInit() {
 
         const params$ = this.activatedRoute.params;
@@ -56,17 +69,11 @@ export class EventsEditComponent implements OnInit {
             this.eventId = +params.id;
             const getEvent$ = this.eventService.getEvent(this.eventId);
 
-            const getWorkouts$ = this.workoutService.query({
-                page: 0,
-                size: 1000,
-            });
+            const getWorkouts$ = this.workoutService.query();
+            const getAthletes$ = this.athleteService.query();
+            const getEventLocations$ = this.eventLocationService.query();
 
-            const getAthletes$ = this.athleteService.query({
-                page: 0,
-                size: 1000,
-            });
-
-            zip(getEvent$, getWorkouts$, getAthletes$).subscribe(([event, workoutsResponse, athletesResponse]) => {
+            zip(getEvent$, getWorkouts$, getAthletes$, getEventLocations$).subscribe(([event, workoutsResponse, athletesResponse, eventLocationsResponse]) => {
                 this.event = event;
 
                 this.allWorkouts = workoutsResponse.body;
@@ -76,6 +83,8 @@ export class EventsEditComponent implements OnInit {
                 this.allAthletes = athletesResponse.body;
                 this.event.athletes = this.allAthletes.filter(a => this.event.athletes.some(wa => wa.id === a.id));
                 this.suggestedAthletes = this.allAthletes.filter((a) => !this.event.athletes.some((sa) => sa.id === a.id));
+
+                this.allEventLocations = eventLocationsResponse.body;
 
                 this.date = this.event.date ? this.event.date.toDate() : null;
                 this.setEventForm(this.event);

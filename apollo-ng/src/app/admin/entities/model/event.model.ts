@@ -9,8 +9,8 @@ export interface IEvent {
     name?: string;
     date?: Moment;
     athleteEvents?: IAthleteEvent[];
-    addressStreet?: string;
-    addressId?: number;
+    eventLocationName?: string;
+    eventLocationId?: number;
     tests?: IWorkout[];
     athletes?: IAthlete[];
 }
@@ -21,8 +21,8 @@ export class Event implements IEvent {
     name: string = null;
     date: Moment = null;
     athleteEvents: IAthleteEvent[] = new Array<IAthleteEvent>();
-    addressStreet: string = null;
-    addressId: number = null;
+    eventLocationName = null;
+    eventLocationId = null;
     tests: IWorkout[] = new Array<IWorkout>();
     athletes: IAthlete[] = new Array<IAthlete>();
 

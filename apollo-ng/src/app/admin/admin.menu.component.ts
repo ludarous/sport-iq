@@ -51,6 +51,9 @@ export class AdminMenuComponent implements OnInit {
                             label: 'Sportovci', icon: 'fa fa-fw fa-users', routerLink: ['/admin/athletes']
                         },
                         {
+                            label: 'Místa události', routerLink: ['/admin/event-locations']
+                        },
+                        {
                             label: 'Kategorie aktivit', routerLink: ['/admin/activity-categories']
                         },
                         {

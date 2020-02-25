@@ -32,6 +32,10 @@ export const routes: Routes = [
             {path: 'empty', component: EmptyDemoComponent},
             {path: 'documentation', component: DocumentationComponent},
             {
+                path: 'event-locations',
+                loadChildren: () => import('./pages/event-locations/event-locations.module').then(m => m.EventLocationsModule)
+            },
+            {
                 path: 'activity-categories',
                 loadChildren: () => import('./pages/activity-categories/activity-categories.module').then(m => m.ActivityCategoriesModule)
             },

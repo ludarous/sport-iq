@@ -20,6 +20,9 @@ import { CountToTimeService } from './shared/count-to-time/count-to-time.service
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { TestDetailComponent } from './tests/test-detail/test-detail.component';
+import { EventService } from '../admin/services/rest/event.service';
+import { EventsComponent } from './events/events.component';
+import { VcSharedComponentsModule } from '../modules/shared-components/vc-shared-components.module';
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import { TestDetailComponent } from './tests/test-detail/test-detail.component';
         FooterComponent,
         TestsComponent,
         CountToTimeComponent,
-        TestDetailComponent
+        TestDetailComponent,
+        EventsComponent,
     ],
     imports: [
         CommonModule,
@@ -46,9 +50,11 @@ import { TestDetailComponent } from './tests/test-detail/test-detail.component';
         NgbTabsetModule,
         NgwWowModule,
         TranslateModule,
+        VcSharedComponentsModule,
     ],
     providers: [
         CountToTimeService,
+        EventService
     ]
 })
 export class WebModule {

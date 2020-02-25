@@ -33,6 +33,20 @@
                                         ></p-calendar>
                                     </div>
 
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="activity-result-type">{{'Místo události' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-4 ui-md-8">
+                                        <p-dropdown id="activity-result-type"
+                                                    [styleClass]="'w-100'"
+                                                    [placeholder]="'Vyberte místo události' | translate"
+                                                    [options]="eventLocationOptions"
+                                                    formControlName="eventLocationId"
+                                                    [filter]="false"
+                                                    [showClear]="true" required>
+                                        </p-dropdown>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>

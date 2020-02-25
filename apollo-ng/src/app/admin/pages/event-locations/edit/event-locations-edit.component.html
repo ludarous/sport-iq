@@ -1,0 +1,84 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card">
+            <h1>{{eventLocation?.name ? eventLocation.name : 'Nová jednotka' | translate}}</h1>
+            <div class="ui-g">
+                <div class="ui-g-6 ui-md-6 ui-sm-12">
+                    <p-panel [header]="'Základní údaje' | translate">
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <form class="form-group" *ngIf="eventLocationForm" [formGroup]="eventLocationForm"
+                                      (submit)="saveEventLocation()">
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="eventLocation-name">{{'Název' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="eventLocation-name" class="w-100" type="text" pInputText
+                                               formControlName="name"
+                                               required/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="eventLocation-state">{{'Stát' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="eventLocation-state" class="w-100" type="text" pInputText
+                                               formControlName="state"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="eventLocation-city">{{'Město' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="eventLocation-city" class="w-100" type="text" pInputText
+                                               formControlName="city"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="eventLocation-street">{{'Ulice' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="eventLocation-street" class="w-100" type="text" pInputText
+                                               formControlName="street"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="eventLocation-street-number">{{'Číslo ulice' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="eventLocation-street-number" class="w-100" type="text" pInputText
+                                               formControlName="streetNumber"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="eventLocation-latitude">{{'Zeměpisná řířka' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="eventLocation-latitude" class="w-100" type="text" pInputText
+                                               formControlName="latitude"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-4">
+                                        <label for="eventLocation-longitude">{{'Zeměpisná délka' | translate}}</label>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-8">
+                                        <input id="eventLocation-longitude" class="w-100" type="text" pInputText
+                                               formControlName="longitude"/>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </p-panel>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <button pButton type="button" class="cyan-btn"
+                            [label]="!eventLocation?.id ? ('Vytvořit jednotku výsledku' | translate) : ('Ulož jednotku výsledku' | translate)"
+                            (click)="saveEventLocation()">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

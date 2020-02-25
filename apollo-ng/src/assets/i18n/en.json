@@ -43,6 +43,7 @@
 	},
 	"menu": {
 		"about": "About SportIQ",
+        "events": "Events",
 		"tests": "Tests",
 		"technology": "Technology",
 		"contact": "Contact",
@@ -90,6 +91,9 @@
             "rec": "With regard to the result, a versatile test is recommended, which, with a special test, can detect problems in basic motor skills."
         }
 	},
+    "events": {
+        "title": "Events"
+    },
     "footer": {
         "operated-by": "Operated by JT Sports Management, Company ID: 01968033"
     }

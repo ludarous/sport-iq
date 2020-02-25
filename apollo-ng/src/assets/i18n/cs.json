@@ -43,6 +43,7 @@
 	},
 	"menu": {
 		"about": "O SportIQ",
+        "events": "Události",
 		"tests": "Testy",
 		"technology": "Technologie",
 		"contact": "Kontakt",
@@ -89,6 +90,9 @@
             "desc": "V konkrétním sportu prověří dovednosti jako jsou slalom s míčem a bez míče, střelba na koš/bránu, příhra na cíl, přesnost, dribling s míčem a podobně.",
             "rec": "S ohledem na výsledek se doporučuje test všestranný, který s ohledem na speciální test může odhalit problémy v základních pohybových dovednostech."
         }
+    },
+    "events": {
+        "title": "Události"
     },
     "footer": {
         "operated-by": "Provozuje JT Sports Management, IČ: 01968033"
