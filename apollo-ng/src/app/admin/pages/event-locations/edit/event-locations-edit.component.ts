@@ -53,6 +53,10 @@ export class EventLocationsEditComponent implements OnInit {
             streetNumber: new FormControl(eventLocation.streetNumber),
             latitude: new FormControl(eventLocation.latitude),
             longitude: new FormControl(eventLocation.longitude),
+            mapLink: new FormControl(eventLocation.mapLink),
+            capacity: new FormControl(eventLocation.capacity),
+            maxAge: new FormControl(eventLocation.maxAge),
+            minAge: new FormControl(eventLocation.minAge),
         });
     }
 

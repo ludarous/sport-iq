@@ -59,4 +59,6 @@ public interface EventService {
      * @return the list of entities.
      */
     Page<EventDTO> search(String query, Pageable pageable);
+
+    void signToEvent(Long id) throws Exception;
 }

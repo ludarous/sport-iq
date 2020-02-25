@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(EventLocationService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new EventLocation(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0);
+      elemDefault = new EventLocation(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 'AAAAAAA', 0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -62,7 +62,11 @@ describe('Service Tests', () => {
             street: 'BBBBBB',
             streetNumber: 'BBBBBB',
             latitude: 1,
-            longitude: 1
+            longitude: 1,
+            mapLink: 'BBBBBB',
+            capacity: 1,
+            maxAge: 1,
+            minAge: 1
           },
           elemDefault
         );
@@ -86,7 +90,11 @@ describe('Service Tests', () => {
             street: 'BBBBBB',
             streetNumber: 'BBBBBB',
             latitude: 1,
-            longitude: 1
+            longitude: 1,
+            mapLink: 'BBBBBB',
+            capacity: 1,
+            maxAge: 1,
+            minAge: 1
           },
           elemDefault
         );

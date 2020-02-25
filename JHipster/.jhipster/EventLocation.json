@@ -31,6 +31,22 @@
         {
             "fieldName": "longitude",
             "fieldType": "Float"
+        },
+        {
+            "fieldName": "mapLink",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "capacity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "maxAge",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "minAge",
+            "fieldType": "Integer"
         }
     ],
     "relationships": [],
@@ -44,5 +60,6 @@
     "readOnly": false,
     "clientRootFolder": "",
     "applications": "*",
-    "searchEngine": "elasticsearch"
+    "searchEngine": "elasticsearch",
+    "databaseType": "sql"
 }

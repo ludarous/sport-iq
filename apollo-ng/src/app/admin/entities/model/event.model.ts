@@ -3,14 +3,14 @@ import {IAthleteEvent} from './athlete-event.model';
 import {IWorkout} from './workout.model';
 import {IAthlete, Sex} from './athlete.model';
 import * as moment from 'moment';
+import { IEventLocation } from './event-location.model';
 
 export interface IEvent {
     id?: number;
     name?: string;
     date?: Moment;
     athleteEvents?: IAthleteEvent[];
-    eventLocationName?: string;
-    eventLocationId?: number;
+    eventLocation?: IEventLocation;
     tests?: IWorkout[];
     athletes?: IAthlete[];
 }
@@ -21,8 +21,7 @@ export class Event implements IEvent {
     name: string = null;
     date: Moment = null;
     athleteEvents: IAthleteEvent[] = new Array<IAthleteEvent>();
-    eventLocationName = null;
-    eventLocationId = null;
+    eventLocation: IEventLocation;
     tests: IWorkout[] = new Array<IWorkout>();
     athletes: IAthlete[] = new Array<IAthlete>();
 

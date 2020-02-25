@@ -23,7 +23,11 @@ export class EventLocationUpdateComponent implements OnInit {
     street: [],
     streetNumber: [],
     latitude: [],
-    longitude: []
+    longitude: [],
+    mapLink: [],
+    capacity: [],
+    maxAge: [],
+    minAge: []
   });
 
   constructor(protected eventLocationService: EventLocationService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -44,7 +48,11 @@ export class EventLocationUpdateComponent implements OnInit {
       street: eventLocation.street,
       streetNumber: eventLocation.streetNumber,
       latitude: eventLocation.latitude,
-      longitude: eventLocation.longitude
+      longitude: eventLocation.longitude,
+      mapLink: eventLocation.mapLink,
+      capacity: eventLocation.capacity,
+      maxAge: eventLocation.maxAge,
+      minAge: eventLocation.minAge
     });
   }
 
@@ -72,7 +80,11 @@ export class EventLocationUpdateComponent implements OnInit {
       street: this.editForm.get(['street']).value,
       streetNumber: this.editForm.get(['streetNumber']).value,
       latitude: this.editForm.get(['latitude']).value,
-      longitude: this.editForm.get(['longitude']).value
+      longitude: this.editForm.get(['longitude']).value,
+      mapLink: this.editForm.get(['mapLink']).value,
+      capacity: this.editForm.get(['capacity']).value,
+      maxAge: this.editForm.get(['maxAge']).value,
+      minAge: this.editForm.get(['minAge']).value
     };
   }
 

@@ -1,4 +1,6 @@
 package cz.sportiq.service.dto;
+import cz.sportiq.domain.EventLocation;
+
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -18,10 +20,7 @@ public class EventDTO implements Serializable {
 
     private ZonedDateTime date;
 
-
-    private Long eventLocationId;
-
-    private String eventLocationName;
+    private EventLocationDTO eventLocation;
 
     private Set<WorkoutDTO> tests = new HashSet<>();
 
@@ -51,20 +50,12 @@ public class EventDTO implements Serializable {
         this.date = date;
     }
 
-    public Long getEventLocationId() {
-        return eventLocationId;
+    public EventLocationDTO getEventLocation() {
+        return eventLocation;
     }
 
-    public void setEventLocationId(Long eventLocationId) {
-        this.eventLocationId = eventLocationId;
-    }
-
-    public String getEventLocationName() {
-        return eventLocationName;
-    }
-
-    public void setEventLocationName(String eventLocationName) {
-        this.eventLocationName = eventLocationName;
+    public void setEventLocation(EventLocationDTO eventLocation) {
+        this.eventLocation = eventLocation;
     }
 
     public Set<WorkoutDTO> getTests() {
@@ -110,8 +101,8 @@ public class EventDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", date='" + getDate() + "'" +
-            ", eventLocation=" + getEventLocationId() +
-            ", eventLocation='" + getEventLocationName() + "'" +
-            "}";
+            ", eventLocation=" + (getEventLocation() != null ? getEventLocation().getName() : "");
     }
+
+
 }

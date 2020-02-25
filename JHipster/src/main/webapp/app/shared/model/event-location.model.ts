@@ -7,6 +7,10 @@ export interface IEventLocation {
   streetNumber?: string;
   latitude?: number;
   longitude?: number;
+  mapLink?: string;
+  capacity?: number;
+  maxAge?: number;
+  minAge?: number;
 }
 
 export class EventLocation implements IEventLocation {
@@ -18,6 +22,10 @@ export class EventLocation implements IEventLocation {
     public street?: string,
     public streetNumber?: string,
     public latitude?: number,
-    public longitude?: number
+    public longitude?: number,
+    public mapLink?: string,
+    public capacity?: number,
+    public maxAge?: number,
+    public minAge?: number
   ) {}
 }

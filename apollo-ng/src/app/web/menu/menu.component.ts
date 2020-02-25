@@ -80,6 +80,10 @@ export class MenuComponent implements OnInit, AfterViewChecked {
   }
 
     login() {
-        this.authService.login();
+        this.authService.login().subscribe();
+    }
+
+    logout() {
+        this.authService.logout().subscribe();
     }
 }

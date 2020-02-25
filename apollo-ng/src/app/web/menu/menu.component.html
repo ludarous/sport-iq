@@ -42,7 +42,7 @@
                         <div *ngIf="!currentUser" (click)="login()">
                             {{('přihlásit' | translate)}}
                         </div>
-                        <div *ngIf="currentUser">
+                        <div *ngIf="currentUser" (click)="logout()">
                             {{userFullName}}
                         </div>
                         |

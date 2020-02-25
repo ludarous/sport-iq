@@ -1,5 +1,10 @@
 package cz.sportiq.service.impl;
 
+import cz.sportiq.domain.Athlete;
+import cz.sportiq.domain.User;
+import cz.sportiq.repository.AthleteRepository;
+import cz.sportiq.repository.UserRepository;
+import cz.sportiq.security.SecurityUtils;
 import cz.sportiq.service.EventService;
 import cz.sportiq.domain.Event;
 import cz.sportiq.repository.EventRepository;
@@ -33,10 +38,16 @@ public class EventServiceImpl implements EventService {
 
     private final EventSearchRepository eventSearchRepository;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, EventSearchRepository eventSearchRepository) {
+    private final UserRepository userRepository;
+
+    private final AthleteRepository athleteRepository;
+
+    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, EventSearchRepository eventSearchRepository, UserRepository userRepository, AthleteRepository athleteRepository) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.eventSearchRepository = eventSearchRepository;
+        this.userRepository = userRepository;
+        this.athleteRepository = athleteRepository;
     }
 
     /**
@@ -77,7 +88,7 @@ public class EventServiceImpl implements EventService {
     public Page<EventDTO> findAllWithEagerRelationships(Pageable pageable) {
         return eventRepository.findAllWithEagerRelationships(pageable).map(eventMapper::toDto);
     }
-    
+
 
     /**
      * Get one event by id.
@@ -118,5 +129,24 @@ public class EventServiceImpl implements EventService {
         log.debug("Request to search for a page of Events for query {}", query);
         return eventSearchRepository.search(queryStringQuery(query), pageable)
             .map(eventMapper::toDto);
+    }
+
+    @Override
+    public void signToEvent(Long id) throws Exception {
+        Optional<String> currentUserLoginOpt = SecurityUtils.getCurrentUserLogin();
+        Optional<Event> eventOpt = eventRepository.findById(id);
+
+        if(!currentUserLoginOpt.isPresent()) {
+            throw new Exception("User not logged in!");
+        }
+
+        if(!eventOpt.isPresent()) {
+            throw new Exception("Event not found!");
+        }
+
+        Optional<User> currentUserOpt = userRepository.findOneByLogin(currentUserLoginOpt.get());
+        Optional<Athlete> athleteOpt = athleteRepository.finOneByEmail()
+
+
     }
 }

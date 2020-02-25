@@ -47,6 +47,18 @@ public class EventLocation implements Serializable {
     @Column(name = "longitude")
     private Float longitude;
 
+    @Column(name = "map_link")
+    private String mapLink;
+
+    @Column(name = "capacity")
+    private Integer capacity;
+
+    @Column(name = "max_age")
+    private Integer maxAge;
+
+    @Column(name = "min_age")
+    private Integer minAge;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -146,6 +158,58 @@ public class EventLocation implements Serializable {
     public void setLongitude(Float longitude) {
         this.longitude = longitude;
     }
+
+    public String getMapLink() {
+        return mapLink;
+    }
+
+    public EventLocation mapLink(String mapLink) {
+        this.mapLink = mapLink;
+        return this;
+    }
+
+    public void setMapLink(String mapLink) {
+        this.mapLink = mapLink;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public EventLocation capacity(Integer capacity) {
+        this.capacity = capacity;
+        return this;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Integer getMaxAge() {
+        return maxAge;
+    }
+
+    public EventLocation maxAge(Integer maxAge) {
+        this.maxAge = maxAge;
+        return this;
+    }
+
+    public void setMaxAge(Integer maxAge) {
+        this.maxAge = maxAge;
+    }
+
+    public Integer getMinAge() {
+        return minAge;
+    }
+
+    public EventLocation minAge(Integer minAge) {
+        this.minAge = minAge;
+        return this;
+    }
+
+    public void setMinAge(Integer minAge) {
+        this.minAge = minAge;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -175,6 +239,10 @@ public class EventLocation implements Serializable {
             ", streetNumber='" + getStreetNumber() + "'" +
             ", latitude=" + getLatitude() +
             ", longitude=" + getLongitude() +
+            ", mapLink='" + getMapLink() + "'" +
+            ", capacity=" + getCapacity() +
+            ", maxAge=" + getMaxAge() +
+            ", minAge=" + getMinAge() +
             "}";
     }
 }

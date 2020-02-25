@@ -1,0 +1,66 @@
+<div class="section-container">
+
+    <div class="element-title">
+        <div class="row">
+            <div class="container">
+                <div class="section-title wow fadeInDown" data-wow-duration="1s" data-wow-delay="300ms">
+                    <h1><span>{{'events.title' | translate}}</span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" *ngFor="let event of nextEvents">
+            <div class="col-3 event-date align-center">
+                {{(event.date | datex: 'DD.MM.YYYY HH:mm')}}
+            </div>
+            <div class="col-3 event-name align-center">
+                {{event.name}}
+            </div>
+            <div class="col-3 align-center" *ngIf="event.eventLocation">
+                <div class="d-flex flex-column">
+                    <div class="event-location-name">{{event.eventLocation.name}}</div>
+                    <div class="event-location-address">
+                        {{event.eventLocation.street + ' ' + event.eventLocation.streetNumber + ', ' + event.eventLocation.city}}
+                    </div>
+                    <div class="event-location-link">
+                        <a [href]="getMapLink(event.eventLocation)" target="_blank">{{'Mapa' | translate}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 align-center">
+                <button class="btn" (click)="signToEvent(event)">{{'Přihlásit' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="showSingInDialog"
+          [showHeader]="false"
+          [dismissableMask]="true"
+          modal="modal"
+          showEffect="fade"
+          [style]="{width: '40%'}"
+          [styleClass]="'sign-in-modal'">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 d-flex">
+                <div class="sign-in-card">
+                    <div class="sign-in-card-header">{{'Už mám účet' | translate}}</div>
+                    <div class="sign-in-card-content"> {{'modals.signin.signin' | translate}}</div>
+                    <div class="sign-in-card-action"><button class="btn" (click)="signIn()">{{'Přihlásit' | translate}}</button></div>
+                </div>
+            </div>
+            <div class="col-6 d-flex">
+                <div class="sign-in-card">
+                    <div class="sign-in-card-header">{{'Ještě nemám účet' | translate}}</div>
+                    <div class="sign-in-card-content">{{'modals.signin.register' | translate}}</div>
+                    <div class="sign-in-card-action"><button class="btn" (click)="register()">{{'Registrovat' | translate}}</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+
+
+

@@ -64,6 +64,18 @@ public class EventLocationResourceIT {
     private static final Float DEFAULT_LONGITUDE = 1F;
     private static final Float UPDATED_LONGITUDE = 2F;
 
+    private static final String DEFAULT_MAP_LINK = "AAAAAAAAAA";
+    private static final String UPDATED_MAP_LINK = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_CAPACITY = 1;
+    private static final Integer UPDATED_CAPACITY = 2;
+
+    private static final Integer DEFAULT_MAX_AGE = 1;
+    private static final Integer UPDATED_MAX_AGE = 2;
+
+    private static final Integer DEFAULT_MIN_AGE = 1;
+    private static final Integer UPDATED_MIN_AGE = 2;
+
     @Autowired
     private EventLocationRepository eventLocationRepository;
 
@@ -126,7 +138,11 @@ public class EventLocationResourceIT {
             .street(DEFAULT_STREET)
             .streetNumber(DEFAULT_STREET_NUMBER)
             .latitude(DEFAULT_LATITUDE)
-            .longitude(DEFAULT_LONGITUDE);
+            .longitude(DEFAULT_LONGITUDE)
+            .mapLink(DEFAULT_MAP_LINK)
+            .capacity(DEFAULT_CAPACITY)
+            .maxAge(DEFAULT_MAX_AGE)
+            .minAge(DEFAULT_MIN_AGE);
         return eventLocation;
     }
     /**
@@ -143,7 +159,11 @@ public class EventLocationResourceIT {
             .street(UPDATED_STREET)
             .streetNumber(UPDATED_STREET_NUMBER)
             .latitude(UPDATED_LATITUDE)
-            .longitude(UPDATED_LONGITUDE);
+            .longitude(UPDATED_LONGITUDE)
+            .mapLink(UPDATED_MAP_LINK)
+            .capacity(UPDATED_CAPACITY)
+            .maxAge(UPDATED_MAX_AGE)
+            .minAge(UPDATED_MIN_AGE);
         return eventLocation;
     }
 
@@ -175,6 +195,10 @@ public class EventLocationResourceIT {
         assertThat(testEventLocation.getStreetNumber()).isEqualTo(DEFAULT_STREET_NUMBER);
         assertThat(testEventLocation.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
         assertThat(testEventLocation.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
+        assertThat(testEventLocation.getMapLink()).isEqualTo(DEFAULT_MAP_LINK);
+        assertThat(testEventLocation.getCapacity()).isEqualTo(DEFAULT_CAPACITY);
+        assertThat(testEventLocation.getMaxAge()).isEqualTo(DEFAULT_MAX_AGE);
+        assertThat(testEventLocation.getMinAge()).isEqualTo(DEFAULT_MIN_AGE);
 
         // Validate the EventLocation in Elasticsearch
         verify(mockEventLocationSearchRepository, times(1)).save(testEventLocation);
@@ -240,7 +264,11 @@ public class EventLocationResourceIT {
             .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET)))
             .andExpect(jsonPath("$.[*].streetNumber").value(hasItem(DEFAULT_STREET_NUMBER)))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())));
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
+            .andExpect(jsonPath("$.[*].mapLink").value(hasItem(DEFAULT_MAP_LINK)))
+            .andExpect(jsonPath("$.[*].capacity").value(hasItem(DEFAULT_CAPACITY)))
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)))
+            .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)));
     }
     
     @Test
@@ -260,7 +288,11 @@ public class EventLocationResourceIT {
             .andExpect(jsonPath("$.street").value(DEFAULT_STREET))
             .andExpect(jsonPath("$.streetNumber").value(DEFAULT_STREET_NUMBER))
             .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
-            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()));
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
+            .andExpect(jsonPath("$.mapLink").value(DEFAULT_MAP_LINK))
+            .andExpect(jsonPath("$.capacity").value(DEFAULT_CAPACITY))
+            .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE))
+            .andExpect(jsonPath("$.minAge").value(DEFAULT_MIN_AGE));
     }
 
     @Test
@@ -290,7 +322,11 @@ public class EventLocationResourceIT {
             .street(UPDATED_STREET)
             .streetNumber(UPDATED_STREET_NUMBER)
             .latitude(UPDATED_LATITUDE)
-            .longitude(UPDATED_LONGITUDE);
+            .longitude(UPDATED_LONGITUDE)
+            .mapLink(UPDATED_MAP_LINK)
+            .capacity(UPDATED_CAPACITY)
+            .maxAge(UPDATED_MAX_AGE)
+            .minAge(UPDATED_MIN_AGE);
         EventLocationDTO eventLocationDTO = eventLocationMapper.toDto(updatedEventLocation);
 
         restEventLocationMockMvc.perform(put("/api/event-locations")
@@ -309,6 +345,10 @@ public class EventLocationResourceIT {
         assertThat(testEventLocation.getStreetNumber()).isEqualTo(UPDATED_STREET_NUMBER);
         assertThat(testEventLocation.getLatitude()).isEqualTo(UPDATED_LATITUDE);
         assertThat(testEventLocation.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
+        assertThat(testEventLocation.getMapLink()).isEqualTo(UPDATED_MAP_LINK);
+        assertThat(testEventLocation.getCapacity()).isEqualTo(UPDATED_CAPACITY);
+        assertThat(testEventLocation.getMaxAge()).isEqualTo(UPDATED_MAX_AGE);
+        assertThat(testEventLocation.getMinAge()).isEqualTo(UPDATED_MIN_AGE);
 
         // Validate the EventLocation in Elasticsearch
         verify(mockEventLocationSearchRepository, times(1)).save(testEventLocation);
@@ -375,6 +415,10 @@ public class EventLocationResourceIT {
             .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET)))
             .andExpect(jsonPath("$.[*].streetNumber").value(hasItem(DEFAULT_STREET_NUMBER)))
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())));
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
+            .andExpect(jsonPath("$.[*].mapLink").value(hasItem(DEFAULT_MAP_LINK)))
+            .andExpect(jsonPath("$.[*].capacity").value(hasItem(DEFAULT_CAPACITY)))
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)))
+            .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)));
     }
 }

@@ -96,5 +96,11 @@
     },
     "footer": {
         "operated-by": "Provozuje JT Sports Management, IČ: 01968033"
+    },
+    "modals": {
+        "signin": {
+            "signin": "Pokud již máte vytvořený účet SportIQ pokračujte na přihlašovací stránku.",
+            "register": "Pokud ještě účet SportIQ nemáte vytvořený, pokračujte na registrační formulář."
+        }
     }
 }

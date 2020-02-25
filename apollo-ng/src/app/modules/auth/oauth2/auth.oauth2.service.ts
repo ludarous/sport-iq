@@ -9,9 +9,10 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {RxjsUtils} from '../../core/utils/rxjs.utils';
 import {CsrfService} from '../services/csrf.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class OAuth2Service {
+export class OAuth2Service implements AuthService{
 
     constructor(@Optional() private config: ModuleConfig,
                 private http: HttpClient,
@@ -55,7 +56,7 @@ export class OAuth2Service {
 
                 this.clearUser();
                 // logout from keycloak
-                location.href = environment.logoutUrl + '?redirect_uri=' + window.location.origin + '/home';
+                location.href = environment.logoutUrl + '?redirect_uri=' + window.location.origin;
                 return response;
             })
         );

@@ -41,6 +41,10 @@
             <th scope="col"  jhiSortBy="streetNumber"><span jhiTranslate="sportiqApp.eventLocation.streetNumber">Street Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="latitude"><span jhiTranslate="sportiqApp.eventLocation.latitude">Latitude</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="longitude"><span jhiTranslate="sportiqApp.eventLocation.longitude">Longitude</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="mapLink"><span jhiTranslate="sportiqApp.eventLocation.mapLink">Map Link</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="capacity"><span jhiTranslate="sportiqApp.eventLocation.capacity">Capacity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="maxAge"><span jhiTranslate="sportiqApp.eventLocation.maxAge">Max Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="minAge"><span jhiTranslate="sportiqApp.eventLocation.minAge">Min Age</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -54,6 +58,10 @@
                 <td>{{eventLocation.streetNumber}}</td>
                 <td>{{eventLocation.latitude}}</td>
                 <td>{{eventLocation.longitude}}</td>
+                <td>{{eventLocation.mapLink}}</td>
+                <td>{{eventLocation.capacity}}</td>
+                <td>{{eventLocation.maxAge}}</td>
+                <td>{{eventLocation.minAge}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

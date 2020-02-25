@@ -23,6 +23,8 @@ import { TestDetailComponent } from './tests/test-detail/test-detail.component';
 import { EventService } from '../admin/services/rest/event.service';
 import { EventsComponent } from './events/events.component';
 import { VcSharedComponentsModule } from '../modules/shared-components/vc-shared-components.module';
+import { SingInModalComponent } from './shared/modals/sing-in-modal/sing-in-modal.component';
+import { PrimeNgComponentsModule } from '../admin/shared/prime-ng-components.module';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { VcSharedComponentsModule } from '../modules/shared-components/vc-shared
         CountToTimeComponent,
         TestDetailComponent,
         EventsComponent,
+        SingInModalComponent,
     ],
     imports: [
         CommonModule,
@@ -51,6 +54,7 @@ import { VcSharedComponentsModule } from '../modules/shared-components/vc-shared
         NgwWowModule,
         TranslateModule,
         VcSharedComponentsModule,
+        PrimeNgComponentsModule,
     ],
     providers: [
         CountToTimeService,

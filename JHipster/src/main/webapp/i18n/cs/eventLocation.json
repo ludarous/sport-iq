@@ -23,7 +23,11 @@
       "street": "Street",
       "streetNumber": "Street Number",
       "latitude": "Latitude",
-      "longitude": "Longitude"
+      "longitude": "Longitude",
+      "mapLink": "Map Link",
+      "capacity": "Capacity",
+      "maxAge": "Max Age",
+      "minAge": "Min Age"
     }
   }
 }

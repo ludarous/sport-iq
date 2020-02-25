@@ -1,0 +1,31 @@
+@import "variables";
+
+.event-date {
+    font-size: 2rem;
+}
+
+.event-name {
+    font-size: 1.5rem;
+}
+
+.event-location-name {
+    font-weight: bold;
+}
+
+.align-center {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    background-color: $cyan;
+    border-color: $cyan;
+    color: white;
+    transition: all 0.5s ease 0s;
+
+    &:hover {
+        color: $cyan;
+        border-color: $cyan;
+        background-color: transparent;
+    }
+}

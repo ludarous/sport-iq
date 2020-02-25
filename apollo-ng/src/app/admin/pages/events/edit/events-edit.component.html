@@ -40,8 +40,9 @@
                                         <p-dropdown id="activity-result-type"
                                                     [styleClass]="'w-100'"
                                                     [placeholder]="'Vyberte místo události' | translate"
-                                                    [options]="eventLocationOptions"
-                                                    formControlName="eventLocationId"
+                                                    [options]="allEventLocations"
+                                                    formControlName="eventLocation"
+                                                    [optionLabel]="'name'"
                                                     [filter]="false"
                                                     [showClear]="true" required>
                                         </p-dropdown>
@@ -105,3 +106,4 @@
             </div>
         </div>
     </div>
+</div>

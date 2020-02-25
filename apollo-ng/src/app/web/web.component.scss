@@ -2,7 +2,7 @@
 @import "variables";
 @import "web.styles";
 
-:host{
+:host {
     font-family: 'Open Sans', sans-serif;
     background: #222222;
     color: #f7f7f7;
@@ -17,14 +17,15 @@
 }
 
 .section-container {
-  padding: 60px 2% 80px;
-  //min-height: calc(100vh - 95px)
+    padding: 60px 2% 80px;
+    //min-height: calc(100vh - 95px)
 }
 
 
 *:focus {
     outline: none;
 }
+
 .logo {
 
     font-family: 'Ubuntu', sans-serif;
@@ -34,7 +35,7 @@
     color: white !important;
 }
 
-a:link, a:visited, a:hover, a:focus{
+a:link, a:visited, a:hover, a:focus {
     text-decoration: none;
     color: $cyan;
 }
@@ -47,7 +48,7 @@ a:link, a:visited, a:hover, a:focus{
     cursor: pointer;
 }
 
-.section-title h1 span{
+.section-title h1 span {
     background-color: $cyan;
 }
 
@@ -100,6 +101,7 @@ a:link, a:visited, a:hover, a:focus{
 a.scroll-up {
     background: none repeat scroll 0 0 $cyan;
 }
+
 a.scroll-up i {
     color: #fff;
 }
@@ -135,4 +137,40 @@ a.scroll-up i {
 a.scroll-up:hover {
     background: transparent;
 }
+
+.sign-in-modal {
+    background-color: red;
+
+    .ui-dialog-titlebar {
+        background: black;
+    }
+
+    .ui-dialog-content {
+        background-color: #333333;
+        opacity: 0.97;
+    }
+}
+
+.sign-in-card {
+    border: 1px solid $cyan;
+    padding: 10px;
+    flex: 1;
+
+    .sign-in-card-header {
+        color: $cyan;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .sign-in-card-content {
+        min-height: 100px;
+        margin-bottom: 20px;
+    }
+
+    .sign-in-card-action {
+
+    }
+}
+
 /* End To Top */
