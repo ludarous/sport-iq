@@ -1,8 +1,8 @@
 package cz.sportiq.service.dto;
-
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link cz.sportiq.domain.AthleteEvent} entity.
@@ -17,10 +17,13 @@ public class AthleteEventDTO implements Serializable {
 
     private Float actualWeightInKg;
 
+    private Long eventId;
+
+    private String eventName;
 
     private Long athleteId;
 
-    private Long eventId;
+    private Set<AthleteWorkoutDTO> athleteWorkouts = new HashSet<AthleteWorkoutDTO>();
 
     public Long getId() {
         return id;
@@ -54,6 +57,18 @@ public class AthleteEventDTO implements Serializable {
         this.actualWeightInKg = actualWeightInKg;
     }
 
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
+    public String getEventName() { return eventName; }
+
+    public void setEventName(String eventName) { this.eventName = eventName; }
+
     public Long getAthleteId() {
         return athleteId;
     }
@@ -62,12 +77,12 @@ public class AthleteEventDTO implements Serializable {
         this.athleteId = athleteId;
     }
 
-    public Long getEventId() {
-        return eventId;
+    public Set<AthleteWorkoutDTO> getAthleteWorkouts() {
+        return athleteWorkouts;
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setAthleteWorkouts(Set<AthleteWorkoutDTO> athleteWorkouts) {
+        this.athleteWorkouts = athleteWorkouts;
     }
 
     @Override
@@ -98,8 +113,8 @@ public class AthleteEventDTO implements Serializable {
             ", note='" + getNote() + "'" +
             ", actualHeightInCm=" + getActualHeightInCm() +
             ", actualWeightInKg=" + getActualWeightInKg() +
-            ", athleteId=" + getAthleteId() +
-            ", eventId=" + getEventId() +
+            ", event=" + getEventId() +
+            ", athlete=" + getAthleteId() +
             "}";
     }
 }

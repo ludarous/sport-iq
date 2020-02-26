@@ -1,8 +1,8 @@
 package cz.sportiq.service.dto;
-
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link cz.sportiq.domain.AthleteWorkout} entity.
@@ -13,12 +13,13 @@ public class AthleteWorkoutDTO implements Serializable {
 
     private String note;
 
+    private Long athleteEventId;
 
     private Long workoutId;
 
     private String workoutName;
 
-    private Long athleteEventId;
+    private Set<AthleteActivityDTO> athleteActivities = new HashSet<AthleteActivityDTO>();
 
     public Long getId() {
         return id;
@@ -34,6 +35,14 @@ public class AthleteWorkoutDTO implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public Long getAthleteEventId() {
+        return athleteEventId;
+    }
+
+    public void setAthleteEventId(Long athleteEventId) {
+        this.athleteEventId = athleteEventId;
     }
 
     public Long getWorkoutId() {
@@ -52,12 +61,12 @@ public class AthleteWorkoutDTO implements Serializable {
         this.workoutName = workoutName;
     }
 
-    public Long getAthleteEventId() {
-        return athleteEventId;
+    public Set<AthleteActivityDTO> getAthleteActivities() {
+        return athleteActivities;
     }
 
-    public void setAthleteEventId(Long athleteEventId) {
-        this.athleteEventId = athleteEventId;
+    public void setAthleteActivities(Set<AthleteActivityDTO> athleteActivities) {
+        this.athleteActivities = athleteActivities;
     }
 
     @Override
@@ -86,9 +95,9 @@ public class AthleteWorkoutDTO implements Serializable {
         return "AthleteWorkoutDTO{" +
             "id=" + getId() +
             ", note='" + getNote() + "'" +
-            ", workoutId=" + getWorkoutId() +
-            ", workoutName='" + getWorkoutName() + "'" +
-            ", athleteEventId=" + getAthleteEventId() +
+            ", athleteEvent=" + getAthleteEventId() +
+            ", workout=" + getWorkoutId() +
+            ", workout='" + getWorkoutName() + "'" +
             "}";
     }
 }

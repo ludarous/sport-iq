@@ -1,5 +1,4 @@
 package cz.sportiq.service.dto;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,12 +11,9 @@ public class ActivityResultSplitDTO implements Serializable {
 
     private Float splitValue;
 
-
-    private Long splitUnitId;
-
-    private String splitUnitName;
-
     private Long activityResultId;
+
+    private UnitDTO splitUnit;
 
     public Long getId() {
         return id;
@@ -35,28 +31,20 @@ public class ActivityResultSplitDTO implements Serializable {
         this.splitValue = splitValue;
     }
 
-    public Long getSplitUnitId() {
-        return splitUnitId;
-    }
-
-    public void setSplitUnitId(Long unitId) {
-        this.splitUnitId = unitId;
-    }
-
-    public String getSplitUnitName() {
-        return splitUnitName;
-    }
-
-    public void setSplitUnitName(String unitName) {
-        this.splitUnitName = unitName;
-    }
-
     public Long getActivityResultId() {
         return activityResultId;
     }
 
     public void setActivityResultId(Long activityResultId) {
         this.activityResultId = activityResultId;
+    }
+
+    public UnitDTO getSplitUnit() {
+        return splitUnit;
+    }
+
+    public void setSplitUnit(UnitDTO splitUnit) {
+        this.splitUnit = splitUnit;
     }
 
     @Override
@@ -85,9 +73,7 @@ public class ActivityResultSplitDTO implements Serializable {
         return "ActivityResultSplitDTO{" +
             "id=" + getId() +
             ", splitValue=" + getSplitValue() +
-            ", splitUnitId=" + getSplitUnitId() +
-            ", splitUnitName='" + getSplitUnitName() + "'" +
-            ", activityResultId=" + getActivityResultId() +
+            ", activityResult=" + getActivityResultId() +
             "}";
     }
 }

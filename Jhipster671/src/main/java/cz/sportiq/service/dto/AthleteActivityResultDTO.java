@@ -1,8 +1,9 @@
 package cz.sportiq.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link cz.sportiq.domain.AthleteActivityResult} entity.
@@ -15,12 +16,13 @@ public class AthleteActivityResultDTO implements Serializable {
 
     private Float compareValue;
 
+    private Long athleteActivityId;
 
     private Long activityResultId;
 
     private String activityResultName;
 
-    private Long athleteActivityId;
+    private Set<AthleteActivityResultSplitDTO> athleteActivityResultSplits = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -46,6 +48,14 @@ public class AthleteActivityResultDTO implements Serializable {
         this.compareValue = compareValue;
     }
 
+    public Long getAthleteActivityId() {
+        return athleteActivityId;
+    }
+
+    public void setAthleteActivityId(Long athleteActivityId) {
+        this.athleteActivityId = athleteActivityId;
+    }
+
     public Long getActivityResultId() {
         return activityResultId;
     }
@@ -62,12 +72,12 @@ public class AthleteActivityResultDTO implements Serializable {
         this.activityResultName = activityResultName;
     }
 
-    public Long getAthleteActivityId() {
-        return athleteActivityId;
+    public Set<AthleteActivityResultSplitDTO> getAthleteActivityResultSplits() {
+        return athleteActivityResultSplits;
     }
 
-    public void setAthleteActivityId(Long athleteActivityId) {
-        this.athleteActivityId = athleteActivityId;
+    public void setAthleteActivityResultSplits(Set<AthleteActivityResultSplitDTO> athleteActivityResultSplits) {
+        this.athleteActivityResultSplits = athleteActivityResultSplits;
     }
 
     @Override
@@ -97,9 +107,9 @@ public class AthleteActivityResultDTO implements Serializable {
             "id=" + getId() +
             ", value=" + getValue() +
             ", compareValue=" + getCompareValue() +
-            ", activityResultId=" + getActivityResultId() +
-            ", activityResultName='" + getActivityResultName() + "'" +
-            ", athleteActivityId=" + getAthleteActivityId() +
+            ", athleteActivity=" + getAthleteActivityId() +
+            ", activityResult=" + getActivityResultId() +
+            ", activityResult='" + getActivityResultName() + "'" +
             "}";
     }
 }

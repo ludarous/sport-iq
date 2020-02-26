@@ -1,10 +1,11 @@
 package cz.sportiq.service.dto;
 
-import java.time.ZonedDateTime;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.util.Objects;
 import cz.sportiq.domain.enumeration.Sex;
+
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.Objects;
 
 /**
  * A DTO for the {@link cz.sportiq.domain.Athlete} entity.
@@ -32,6 +33,8 @@ public class AthleteDTO implements Serializable {
     private Long addressId;
 
     private String userId;
+
+    private String userLogin;
 
     public Long getId() {
         return id;
@@ -105,6 +108,14 @@ public class AthleteDTO implements Serializable {
         this.userId = userId;
     }
 
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -136,8 +147,9 @@ public class AthleteDTO implements Serializable {
             ", birthDate='" + getBirthDate() + "'" +
             ", nationality='" + getNationality() + "'" +
             ", sex='" + getSex() + "'" +
-            ", addressId=" + getAddressId() +
-            ", userId='" + getUserId() + "'" +
+            ", address=" + getAddressId() +
+            ", user='" + getUserId() + "'" +
+            ", user='" + getUserLogin() + "'" +
             "}";
     }
 }

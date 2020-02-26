@@ -1,8 +1,8 @@
 package cz.sportiq.service.dto;
-
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link cz.sportiq.domain.ActivityCategory} entity.
@@ -16,8 +16,9 @@ public class ActivityCategoryDTO implements Serializable {
 
     private String description;
 
-
     private Long parentActivityCategoryId;
+
+    private Set<ActivityCategoryDTO> childActivityCategories;
 
     public Long getId() {
         return id;
@@ -49,6 +50,14 @@ public class ActivityCategoryDTO implements Serializable {
 
     public void setParentActivityCategoryId(Long activityCategoryId) {
         this.parentActivityCategoryId = activityCategoryId;
+    }
+
+    public Set<ActivityCategoryDTO> getChildActivityCategories() {
+        return childActivityCategories;
+    }
+
+    public void setChildActivityCategories(Set<ActivityCategoryDTO> childActivityCategories) {
+        this.childActivityCategories = childActivityCategories;
     }
 
     @Override

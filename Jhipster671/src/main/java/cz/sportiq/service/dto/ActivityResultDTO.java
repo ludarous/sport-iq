@@ -1,11 +1,14 @@
 package cz.sportiq.service.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 import cz.sportiq.domain.enumeration.ResultType;
 
 /**
- * A DTO for the {@link cz.sportiq.domain.ActivityResult} entity.
+ * A DTO for the ActivityResult entity.
  */
 public class ActivityResultDTO implements Serializable {
 
@@ -17,12 +20,11 @@ public class ActivityResultDTO implements Serializable {
 
     private Float ratingWeight;
 
-
-    private Long resultUnitId;
-
-    private String resultUnitName;
-
     private Long activityId;
+
+    private UnitDTO resultUnit;
+
+    private Set<ActivityResultSplitDTO> resultSplits = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -56,28 +58,28 @@ public class ActivityResultDTO implements Serializable {
         this.ratingWeight = ratingWeight;
     }
 
-    public Long getResultUnitId() {
-        return resultUnitId;
-    }
-
-    public void setResultUnitId(Long unitId) {
-        this.resultUnitId = unitId;
-    }
-
-    public String getResultUnitName() {
-        return resultUnitName;
-    }
-
-    public void setResultUnitName(String unitName) {
-        this.resultUnitName = unitName;
-    }
-
     public Long getActivityId() {
         return activityId;
     }
 
     public void setActivityId(Long activityId) {
         this.activityId = activityId;
+    }
+
+    public UnitDTO getResultUnit() {
+        return resultUnit;
+    }
+
+    public void setResultUnit(UnitDTO resultUnit) {
+        this.resultUnit = resultUnit;
+    }
+
+    public Set<ActivityResultSplitDTO> getResultSplits() {
+        return resultSplits;
+    }
+
+    public void setResultSplits(Set<ActivityResultSplitDTO> resultSplits) {
+        this.resultSplits = resultSplits;
     }
 
     @Override
@@ -108,9 +110,8 @@ public class ActivityResultDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", resultType='" + getResultType() + "'" +
             ", ratingWeight=" + getRatingWeight() +
-            ", resultUnitId=" + getResultUnitId() +
-            ", resultUnitName='" + getResultUnitName() + "'" +
-            ", activityId=" + getActivityId() +
+            ", activity=" + getActivityId() +
             "}";
     }
+
 }

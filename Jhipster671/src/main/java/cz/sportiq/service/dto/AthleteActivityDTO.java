@@ -1,9 +1,10 @@
 package cz.sportiq.service.dto;
-
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link cz.sportiq.domain.AthleteActivity} entity.
@@ -16,12 +17,13 @@ public class AthleteActivityDTO implements Serializable {
 
     private ZonedDateTime date;
 
+    private Long athleteWorkoutId;
 
     private Long activityId;
 
     private String activityName;
 
-    private Long athleteWorkoutId;
+    private Set<AthleteActivityResultDTO> athleteActivityResults = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -47,6 +49,14 @@ public class AthleteActivityDTO implements Serializable {
         this.date = date;
     }
 
+    public Long getAthleteWorkoutId() {
+        return athleteWorkoutId;
+    }
+
+    public void setAthleteWorkoutId(Long athleteWorkoutId) {
+        this.athleteWorkoutId = athleteWorkoutId;
+    }
+
     public Long getActivityId() {
         return activityId;
     }
@@ -63,13 +73,12 @@ public class AthleteActivityDTO implements Serializable {
         this.activityName = activityName;
     }
 
-    public Long getAthleteWorkoutId() {
-        return athleteWorkoutId;
+    public Set<AthleteActivityResultDTO> getAthleteActivityResults() { return athleteActivityResults; }
+
+    public void setAthleteActivityResults(Set<AthleteActivityResultDTO> athleteActivityResults) {
+        this.athleteActivityResults = athleteActivityResults;
     }
 
-    public void setAthleteWorkoutId(Long athleteWorkoutId) {
-        this.athleteWorkoutId = athleteWorkoutId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -98,9 +107,9 @@ public class AthleteActivityDTO implements Serializable {
             "id=" + getId() +
             ", note='" + getNote() + "'" +
             ", date='" + getDate() + "'" +
-            ", activityId=" + getActivityId() +
-            ", activityName='" + getActivityName() + "'" +
-            ", athleteWorkoutId=" + getAthleteWorkoutId() +
+            ", athleteWorkout=" + getAthleteWorkoutId() +
+            ", activity=" + getActivityId() +
+            ", activity='" + getActivityName() + "'" +
             "}";
     }
 }
