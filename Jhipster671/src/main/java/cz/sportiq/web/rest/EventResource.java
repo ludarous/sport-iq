@@ -1,9 +1,8 @@
 package cz.sportiq.web.rest;
 
 import cz.sportiq.service.EventService;
-import cz.sportiq.web.rest.errors.BadRequestAlertException;
 import cz.sportiq.service.dto.EventDTO;
-
+import cz.sportiq.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,10 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -87,6 +85,7 @@ public class EventResource {
     /**
      * {@code GET  /events} : get all the events.
      *
+
      * @param pageable the pagination information.
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of events in body.
@@ -128,5 +127,23 @@ public class EventResource {
         log.debug("REST request to delete Event : {}", id);
         eventService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /*--------------------------- CUSTOM ENDPOINTS ------------------------------*/
+    /**
+     * {@code GET  /events/:id/sign} : sign to the "id" event.
+     *
+     * @param id the id of the eventDTO to sign.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the eventDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/events/{id}")
+    public ResponseEntity<Void> signToEvent(@PathVariable Long id) {
+        log.debug("REST request to get Event : {}", id);
+        try {
+            eventService.signToEvent(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

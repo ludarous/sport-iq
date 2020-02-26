@@ -1,12 +1,12 @@
 package cz.sportiq.web.rest;
 
 import cz.sportiq.service.AthleteActivityService;
-import cz.sportiq.web.rest.errors.BadRequestAlertException;
 import cz.sportiq.service.dto.AthleteActivityDTO;
-
+import cz.sportiq.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,9 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -87,7 +87,9 @@ public class AthleteActivityResource {
     /**
      * {@code GET  /athlete-activities} : get all the athleteActivities.
      *
+
      * @param pageable the pagination information.
+
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of athleteActivities in body.
      */
     @GetMapping("/athlete-activities")
@@ -122,5 +124,26 @@ public class AthleteActivityResource {
         log.debug("REST request to delete AthleteActivity : {}", id);
         athleteActivityService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /*--------------------------------- CUSTOM ENDPOINTS -----------------------------------------------*/
+
+    /**
+     * GET  /athlete-activities/by-activity-id-and-athlete-id : get the athleteActivity by athleteWorkoutId and activityId
+     *
+     * @param activityId activity Id
+     * @param athleteWorkoutId athlete event Id
+     * @return the ResponseEntity with status 200 (OK) and the athleteWorkout in body
+     */
+    @GetMapping("/athlete-activities/by-activity-id-and-athleteWorkout-id")
+    @Timed
+    public ResponseEntity<AthleteActivityDTO> getAthleteActivityByActivityIdAndAthleteWorkoutId(@RequestParam Long activityId, @RequestParam Long athleteWorkoutId) {
+        log.debug("REST request to get a page of AthleteActivities");
+        AthleteActivityDTO athleteActivityDTO = athleteActivityService.findByActivityIdAndAthleteWorkoutId(activityId, athleteWorkoutId);
+        if(athleteActivityDTO != null) {
+            return new ResponseEntity<>(athleteActivityDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

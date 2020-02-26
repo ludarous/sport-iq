@@ -64,9 +64,18 @@ spring:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
     cache: false
-
+  security:
+    oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: https://auth.dev.sportiq.cz/auth/realms/dev
+          registration:
+            oidc:
+              client-id: api
+              client-secret: e955f2bf-e054-4487-b1b1-52a201e59139
 server:
-  port: 8080
+  port: 9090
 
 # ===================================================================
 # JHipster specific properties
@@ -84,7 +93,7 @@ jhipster:
     allowed-origins: '*'
     allowed-methods: '*'
     allowed-headers: '*'
-    exposed-headers: 'Authorization,Link,X-Total-Count'
+    exposed-headers: 'Authorization,Link,X-Total-Count,X-CSRF-TOKEN'
     allow-credentials: true
     max-age: 1800
   mail: # specific JHipster mail property, for standard properties see MailProperties
