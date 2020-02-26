@@ -1,0 +1,49 @@
+{
+    "name": "ActivityCategory",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "activityCategory",
+            "otherEntityRelationshipName": "parentActivityCategory",
+            "relationshipName": "childActivityCategories"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "activityCategory",
+            "otherEntityRelationshipName": "childActivityCategories",
+            "relationshipName": "parentActivityCategory",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "activity",
+            "otherEntityRelationshipName": "categories",
+            "relationshipName": "activities",
+            "otherEntityField": "name",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200226073100",
+    "entityTableName": "activity_category",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

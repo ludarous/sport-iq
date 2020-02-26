@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="sportiqApp.athleteActivityResult.home.title">Athlete Activity Results</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-athlete-activity-result" [routerLink]="['/athlete-activity-result/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="sportiqApp.athleteActivityResult.home.createLabel">
+            Create a new Athlete Activity Result
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="athleteActivityResults?.length === 0">
+        <span jhiTranslate="sportiqApp.athleteActivityResult.home.notFound">No athleteActivityResults found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="athleteActivityResults?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="value"><span jhiTranslate="sportiqApp.athleteActivityResult.value">Value</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="compareValue"><span jhiTranslate="sportiqApp.athleteActivityResult.compareValue">Compare Value</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="activityResultName"><span jhiTranslate="sportiqApp.athleteActivityResult.activityResult">Activity Result</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="athleteActivityId"><span jhiTranslate="sportiqApp.athleteActivityResult.athleteActivity">Athlete Activity</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let athleteActivityResult of athleteActivityResults ;trackBy: trackId">
+                    <td><a [routerLink]="['/athlete-activity-result', athleteActivityResult.id, 'view']">{{ athleteActivityResult.id }}</a></td>
+                    <td>{{ athleteActivityResult.value }}</td>
+                    <td>{{ athleteActivityResult.compareValue }}</td>
+                    <td>
+                        <div *ngIf="athleteActivityResult.activityResultId">
+                            <a [routerLink]="['/activity-result', athleteActivityResult.activityResultId , 'view']" >{{ athleteActivityResult.activityResultName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="athleteActivityResult.athleteActivityId">
+                            <a [routerLink]="['/athlete-activity', athleteActivityResult.athleteActivityId , 'view']" >{{ athleteActivityResult.athleteActivityId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/athlete-activity-result', athleteActivityResult.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/athlete-activity-result', athleteActivityResult.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(athleteActivityResult)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="athleteActivityResults?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

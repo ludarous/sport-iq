@@ -1,0 +1,27 @@
+{
+  "sportiqApp": {
+    "activityResult": {
+      "home": {
+        "title": "Activity Results",
+        "createLabel": "Vytvořit Activity Result",
+        "createOrEditLabel": "Vytvořit nebo upravit Activity Result",
+        "notFound": "No Activity Results found"
+      },
+      "created": "Byl vytvořen potomek entity Activity Result s identifikátorem {{ param }}",
+      "updated": "Potomek entity Activity Result s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Activity Result s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Activity Result {{ id }}?"
+      },
+      "detail": {
+        "title": "Activity Result"
+      },
+      "name": "Name",
+      "resultType": "Result Type",
+      "ratingWeight": "Rating Weight",
+      "resultSplits": "Result Splits",
+      "resultUnit": "Result Unit",
+      "activity": "Activity"
+    }
+  }
+}

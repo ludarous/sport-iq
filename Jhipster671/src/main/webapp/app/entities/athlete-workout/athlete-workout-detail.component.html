@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="athleteWorkout">
+            <h2><span jhiTranslate="sportiqApp.athleteWorkout.detail.title">Athlete Workout</span> {{ athleteWorkout.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sportiqApp.athleteWorkout.note">Note</span></dt>
+                <dd>
+                    <span>{{ athleteWorkout.note }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteWorkout.workout">Workout</span></dt>
+                <dd>
+                    <div *ngIf="athleteWorkout.workoutId">
+                        <a [routerLink]="['/workout', athleteWorkout.workoutId, 'view']">{{ athleteWorkout.workoutName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteWorkout.athleteEvent">Athlete Event</span></dt>
+                <dd>
+                    <div *ngIf="athleteWorkout.athleteEventId">
+                        <a [routerLink]="['/athlete-event', athleteWorkout.athleteEventId, 'view']">{{ athleteWorkout.athleteEventId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/athlete-workout', athleteWorkout.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

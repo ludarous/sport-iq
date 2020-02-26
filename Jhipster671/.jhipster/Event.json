@@ -1,0 +1,57 @@
+{
+    "name": "Event",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "athleteEvent",
+            "otherEntityRelationshipName": "event",
+            "relationshipName": "athleteEvents"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "eventLocation",
+            "otherEntityRelationshipName": "event",
+            "relationshipName": "eventLocation",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "workout",
+            "otherEntityRelationshipName": "events",
+            "relationshipName": "tests",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "athlete",
+            "otherEntityRelationshipName": "events",
+            "relationshipName": "athletes",
+            "otherEntityField": "email",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200226072500",
+    "entityTableName": "event",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

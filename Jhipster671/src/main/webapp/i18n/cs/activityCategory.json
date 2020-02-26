@@ -1,0 +1,26 @@
+{
+  "sportiqApp": {
+    "activityCategory": {
+      "home": {
+        "title": "Activity Categories",
+        "createLabel": "Vytvořit Activity Category",
+        "createOrEditLabel": "Vytvořit nebo upravit Activity Category",
+        "notFound": "No Activity Categories found"
+      },
+      "created": "Byl vytvořen potomek entity Activity Category s identifikátorem {{ param }}",
+      "updated": "Potomek entity Activity Category s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Activity Category s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Activity Category {{ id }}?"
+      },
+      "detail": {
+        "title": "Activity Category"
+      },
+      "name": "Name",
+      "description": "Description",
+      "childActivityCategories": "Child Activity Categories",
+      "parentActivityCategory": "Parent Activity Category",
+      "activities": "Activities"
+    }
+  }
+}

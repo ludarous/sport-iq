@@ -1,0 +1,42 @@
+{
+    "name": "AthleteWorkout",
+    "fields": [
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "athleteActivity",
+            "otherEntityRelationshipName": "athleteWorkout",
+            "relationshipName": "athleteActivities"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "workout",
+            "otherEntityRelationshipName": "athleteWorkout",
+            "relationshipValidateRules": "required",
+            "relationshipName": "workout",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "athleteEvent",
+            "otherEntityRelationshipName": "athleteWorkouts",
+            "relationshipName": "athleteEvent",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200226073300",
+    "entityTableName": "athlete_workout",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

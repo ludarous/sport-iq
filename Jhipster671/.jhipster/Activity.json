@@ -1,0 +1,73 @@
+{
+    "name": "Activity",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "help",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "minAge",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "maxAge",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "targetValue",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "activityResult",
+            "otherEntityRelationshipName": "activity",
+            "relationshipName": "activityResults"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unit",
+            "otherEntityRelationshipName": "activity",
+            "relationshipName": "targetUnit",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "activityCategory",
+            "otherEntityRelationshipName": "activities",
+            "relationshipName": "categories",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "workout",
+            "otherEntityRelationshipName": "activities",
+            "relationshipName": "workouts",
+            "otherEntityField": "name",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200226072700",
+    "entityTableName": "activity",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

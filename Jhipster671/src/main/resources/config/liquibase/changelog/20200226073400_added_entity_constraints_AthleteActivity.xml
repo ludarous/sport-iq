@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity AthleteActivity.
+    -->
+    <changeSet id="20200226073400-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="activity_id"
+                                 baseTableName="athlete_activity"
+                                 constraintName="fk_athlete_activity_activity_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="activity"/>
+
+        <addForeignKeyConstraint baseColumnNames="athlete_workout_id"
+                                 baseTableName="athlete_activity"
+                                 constraintName="fk_athlete_activity_athlete_workout_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="athlete_workout"/>
+
+    </changeSet>
+</databaseChangeLog>

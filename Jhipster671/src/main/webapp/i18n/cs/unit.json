@@ -1,0 +1,23 @@
+{
+  "sportiqApp": {
+    "unit": {
+      "home": {
+        "title": "Units",
+        "createLabel": "Vytvořit Unit",
+        "createOrEditLabel": "Vytvořit nebo upravit Unit",
+        "notFound": "No Units found"
+      },
+      "created": "Byl vytvořen potomek entity Unit s identifikátorem {{ param }}",
+      "updated": "Potomek entity Unit s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Unit s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Unit {{ id }}?"
+      },
+      "detail": {
+        "title": "Unit"
+      },
+      "name": "Name",
+      "abbreviation": "Abbreviation"
+    }
+  }
+}

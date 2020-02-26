@@ -1,0 +1,23 @@
+{
+  "sportiqApp": {
+    "sport": {
+      "home": {
+        "title": "Sports",
+        "createLabel": "Vytvořit Sport",
+        "createOrEditLabel": "Vytvořit nebo upravit Sport",
+        "notFound": "No Sports found"
+      },
+      "created": "Byl vytvořen potomek entity Sport s identifikátorem {{ param }}",
+      "updated": "Potomek entity Sport s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Sport s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Sport {{ id }}?"
+      },
+      "detail": {
+        "title": "Sport"
+      },
+      "name": "Name",
+      "workouts": "Workouts"
+    }
+  }
+}

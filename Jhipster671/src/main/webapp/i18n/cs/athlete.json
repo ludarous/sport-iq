@@ -1,0 +1,30 @@
+{
+  "sportiqApp": {
+    "athlete": {
+      "home": {
+        "title": "Athletes",
+        "createLabel": "Vytvořit Athlete",
+        "createOrEditLabel": "Vytvořit nebo upravit Athlete",
+        "notFound": "No Athletes found"
+      },
+      "created": "Byl vytvořen potomek entity Athlete s identifikátorem {{ param }}",
+      "updated": "Potomek entity Athlete s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Athlete s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Athlete {{ id }}?"
+      },
+      "detail": {
+        "title": "Athlete"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "birthDate": "Birth Date",
+      "nationality": "Nationality",
+      "sex": "Sex",
+      "address": "Address",
+      "user": "User",
+      "events": "Events"
+    }
+  }
+}

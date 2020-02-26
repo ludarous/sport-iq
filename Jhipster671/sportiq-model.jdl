@@ -1,0 +1,159 @@
+enum Sex {
+	MALE, FEMALE, OTHER
+}
+
+enum ResultType {
+	LESS_IS_BETTER, MORE_IS_BETTER
+}
+
+entity Event {
+	name String required,
+    date ZonedDateTime
+}
+
+
+entity Workout {
+	name String required,
+    description String
+}
+
+entity Activity {
+   	name String required,
+    description String,
+    help String,
+    minAge Integer,
+    maxAge Integer,
+    targetValue Float,
+}
+
+entity ActivityResult {
+	name String,
+    resultType ResultType
+    ratingWeight Float,
+}
+
+entity ActivityResultSplit {
+	splitValue Float,
+}
+
+entity WorkoutCategory {
+	name String required,
+    description String
+}
+
+entity ActivityCategory {
+	name String required,
+    description String
+}
+
+entity AthleteEvent {
+	note String,
+    actualHeightInCm Float,
+    actualWeightInKg Float
+}
+
+entity AthleteWorkout {
+    note String
+}
+
+entity AthleteActivity {
+    note String,
+    date ZonedDateTime
+}
+
+entity AthleteActivityResult {
+	value Float,
+	compareValue Float
+}
+
+entity AthleteActivityResultSplit {
+	value Float,
+	compareValue Float
+}
+
+entity Athlete {
+	firstName String required,
+    lastName String required,
+    email String required,
+    birthDate ZonedDateTime,
+    nationality String,
+    sex Sex
+}
+
+
+entity Address {
+	country String required,
+    city String required,
+	street String required,
+    zipCode String required
+}
+
+entity EventLocation {
+    name String required,
+    state String,
+    city String,
+    street String,
+    streetNumber String,
+    latitude Float,
+    longitude Float,
+    capacity Integer,
+    mapLink String,
+    maxAge Integer,
+    minAge Integer,
+}
+
+entity Sport {
+	name String required
+}
+
+entity Unit {
+	name String,
+    abbreviation String,
+}
+
+relationship OneToOne {
+    Athlete{address} to Address
+    Athlete{user} to User
+}
+
+relationship ManyToMany {
+	Workout{activities(name)} to Activity{workouts(name)}
+    Activity{categories(name)} to ActivityCategory{activities(name)}
+    Workout{categories(name)} to WorkoutCategory{workouts(name)}
+    Workout{sports(name)} to Sport{workouts(name)}
+    Event{tests(name)} to Workout{events(name)}
+    Event{athletes(email)} to Athlete{events(name)}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+    AthleteEvent{athleteWorkouts} to AthleteWorkout
+    AthleteWorkout{athleteActivities} to AthleteActivity
+    AthleteActivity{athleteActivityResults} to AthleteActivityResult
+    AthleteActivityResult{athleteActivityResultSplits} to AthleteActivityResultSplit
+
+    Event{athleteEvents} to AthleteEvent
+    Activity{activityResults} to ActivityResult
+    ActivityResult{resultSplits} to ActivityResultSplit
+    ActivityCategory{childActivityCategories} to ActivityCategory{parentActivityCategory}
+}
+
+relationship ManyToOne {
+	AthleteEvent{athlete required} to Athlete
+    AthleteWorkout{workout(name) required} to Workout
+    AthleteActivity{activity(name) required} to Activity
+    AthleteActivityResult{activityResult(name) required} to ActivityResult
+    AthleteActivityResultSplit{activityResultSplit(id) required} to ActivityResultSplit
+    Event{eventLocation(name)} to EventLocation
+    ActivityResult{resultUnit(name)} to Unit
+    Activity{targetUnit(name)} to Unit
+    ActivityResultSplit{splitUnit(name)} to Unit
+}
+
+// Set pagination options
+paginate * with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

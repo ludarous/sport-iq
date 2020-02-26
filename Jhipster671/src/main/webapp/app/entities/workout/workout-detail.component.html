@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="workout">
+            <h2><span jhiTranslate="sportiqApp.workout.detail.title">Workout</span> {{ workout.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sportiqApp.workout.name">Name</span></dt>
+                <dd>
+                    <span>{{ workout.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.workout.description">Description</span></dt>
+                <dd>
+                    <span>{{ workout.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.workout.activities">Activities</span></dt>
+                <dd>
+                    <span *ngFor="let activities of workout.activities; let last = last">
+                        <a [routerLink]="['/activity', activities?.id, 'view']">{{ activities.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.workout.categories">Categories</span></dt>
+                <dd>
+                    <span *ngFor="let categories of workout.categories; let last = last">
+                        <a [routerLink]="['/workout-category', categories?.id, 'view']">{{ categories.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.workout.sports">Sports</span></dt>
+                <dd>
+                    <span *ngFor="let sports of workout.sports; let last = last">
+                        <a [routerLink]="['/sport', sports?.id, 'view']">{{ sports.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/workout', workout.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

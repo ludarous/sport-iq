@@ -1,0 +1,27 @@
+{
+  "sportiqApp": {
+    "event": {
+      "home": {
+        "title": "Events",
+        "createLabel": "Vytvořit Event",
+        "createOrEditLabel": "Vytvořit nebo upravit Event",
+        "notFound": "No Events found"
+      },
+      "created": "Byl vytvořen potomek entity Event s identifikátorem {{ param }}",
+      "updated": "Potomek entity Event s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Event s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Event {{ id }}?"
+      },
+      "detail": {
+        "title": "Event"
+      },
+      "name": "Name",
+      "date": "Date",
+      "athleteEvents": "Athlete Events",
+      "eventLocation": "Event Location",
+      "tests": "Tests",
+      "athletes": "Athletes"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="activity">
+            <h2><span jhiTranslate="sportiqApp.activity.detail.title">Activity</span> {{ activity.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sportiqApp.activity.name">Name</span></dt>
+                <dd>
+                    <span>{{ activity.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.activity.description">Description</span></dt>
+                <dd>
+                    <span>{{ activity.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.activity.help">Help</span></dt>
+                <dd>
+                    <span>{{ activity.help }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.activity.minAge">Min Age</span></dt>
+                <dd>
+                    <span>{{ activity.minAge }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.activity.maxAge">Max Age</span></dt>
+                <dd>
+                    <span>{{ activity.maxAge }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.activity.targetValue">Target Value</span></dt>
+                <dd>
+                    <span>{{ activity.targetValue }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.activity.targetUnit">Target Unit</span></dt>
+                <dd>
+                    <div *ngIf="activity.targetUnitId">
+                        <a [routerLink]="['/unit', activity.targetUnitId, 'view']">{{ activity.targetUnitName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.activity.categories">Categories</span></dt>
+                <dd>
+                    <span *ngFor="let categories of activity.categories; let last = last">
+                        <a [routerLink]="['/activity-category', categories?.id, 'view']">{{ categories.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/activity', activity.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

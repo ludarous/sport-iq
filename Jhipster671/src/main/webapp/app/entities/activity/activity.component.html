@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="sportiqApp.activity.home.title">Activities</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-activity" [routerLink]="['/activity/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="sportiqApp.activity.home.createLabel">
+            Create a new Activity
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="activities?.length === 0">
+        <span jhiTranslate="sportiqApp.activity.home.notFound">No activities found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="activities?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="sportiqApp.activity.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="sportiqApp.activity.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="help"><span jhiTranslate="sportiqApp.activity.help">Help</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="minAge"><span jhiTranslate="sportiqApp.activity.minAge">Min Age</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="maxAge"><span jhiTranslate="sportiqApp.activity.maxAge">Max Age</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="targetValue"><span jhiTranslate="sportiqApp.activity.targetValue">Target Value</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="targetUnitName"><span jhiTranslate="sportiqApp.activity.targetUnit">Target Unit</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let activity of activities ;trackBy: trackId">
+                    <td><a [routerLink]="['/activity', activity.id, 'view']">{{ activity.id }}</a></td>
+                    <td>{{ activity.name }}</td>
+                    <td>{{ activity.description }}</td>
+                    <td>{{ activity.help }}</td>
+                    <td>{{ activity.minAge }}</td>
+                    <td>{{ activity.maxAge }}</td>
+                    <td>{{ activity.targetValue }}</td>
+                    <td>
+                        <div *ngIf="activity.targetUnitId">
+                            <a [routerLink]="['/unit', activity.targetUnitId , 'view']" >{{ activity.targetUnitName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/activity', activity.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/activity', activity.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(activity)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="activities?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

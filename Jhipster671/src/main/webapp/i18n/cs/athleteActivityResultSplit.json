@@ -1,0 +1,25 @@
+{
+  "sportiqApp": {
+    "athleteActivityResultSplit": {
+      "home": {
+        "title": "Athlete Activity Result Splits",
+        "createLabel": "Vytvořit Athlete Activity Result Split",
+        "createOrEditLabel": "Vytvořit nebo upravit Athlete Activity Result Split",
+        "notFound": "No Athlete Activity Result Splits found"
+      },
+      "created": "Byl vytvořen potomek entity Athlete Activity Result Split s identifikátorem {{ param }}",
+      "updated": "Potomek entity Athlete Activity Result Split s identifikátorem {{ param }} byl upravený.",
+      "deleted": "Potomek entity Athlete Activity Result Split s identifikátorem {{ param }} bol smazaný.",
+      "delete": {
+        "question": "Jste si jisti, že chcete smazat Athlete Activity Result Split {{ id }}?"
+      },
+      "detail": {
+        "title": "Athlete Activity Result Split"
+      },
+      "value": "Value",
+      "compareValue": "Compare Value",
+      "activityResultSplit": "Activity Result Split",
+      "athleteActivityResult": "Athlete Activity Result"
+    }
+  }
+}
