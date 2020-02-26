@@ -24,7 +24,8 @@
       "nationality": "Nationality",
       "sex": "Sex",
       "address": "Address",
-      "events": "Events"
+      "events": "Events",
+      "user": "User"
     }
   }
 }

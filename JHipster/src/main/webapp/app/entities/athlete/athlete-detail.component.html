@@ -35,6 +35,10 @@
                         <a [routerLink]="['/address', athlete.addressId, 'view']">{{athlete.addressId}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.user">User</span></dt>
+                <dd>
+                    {{athlete.userLogin}}
+                </dd>
             </dl>
 
             <button type="submit"

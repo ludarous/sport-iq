@@ -52,6 +52,15 @@
             "relationshipName": "events",
             "otherEntityField": "name",
             "ownerSide": false
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "useJPADerivedIdentifier": false,
+            "otherEntityRelationshipName": "athlete"
         }
     ],
     "changelogDate": "20191012201720",
@@ -64,5 +73,6 @@
     "clientRootFolder": "",
     "applications": "*",
     "searchEngine": "elasticsearch",
-    "readOnly": false
+    "readOnly": false,
+    "databaseType": "sql"
 }

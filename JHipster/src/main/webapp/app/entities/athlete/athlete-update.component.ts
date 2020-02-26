@@ -14,6 +14,8 @@ import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/entities/address/address.service';
 import { IEvent } from 'app/shared/model/event.model';
 import { EventService } from 'app/entities/event/event.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
 
 @Component({
   selector: 'jhi-athlete-update',
@@ -26,6 +28,8 @@ export class AthleteUpdateComponent implements OnInit {
 
   events: IEvent[];
 
+  users: IUser[];
+
   editForm = this.fb.group({
     id: [],
     firstName: [null, [Validators.required]],
@@ -34,7 +38,8 @@ export class AthleteUpdateComponent implements OnInit {
     birthDate: [],
     nationality: [],
     sex: [],
-    addressId: []
+    addressId: [],
+    userId: []
   });
 
   constructor(
@@ -42,6 +47,7 @@ export class AthleteUpdateComponent implements OnInit {
     protected athleteService: AthleteService,
     protected addressService: AddressService,
     protected eventService: EventService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -69,6 +75,9 @@ export class AthleteUpdateComponent implements OnInit {
     this.eventService
       .query()
       .subscribe((res: HttpResponse<IEvent[]>) => (this.events = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+    this.userService
+      .query()
+      .subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(athlete: IAthlete) {
@@ -80,7 +89,8 @@ export class AthleteUpdateComponent implements OnInit {
       birthDate: athlete.birthDate != null ? athlete.birthDate.format(DATE_TIME_FORMAT) : null,
       nationality: athlete.nationality,
       sex: athlete.sex,
-      addressId: athlete.addressId
+      addressId: athlete.addressId,
+      userId: athlete.userId
     });
   }
 
@@ -109,7 +119,8 @@ export class AthleteUpdateComponent implements OnInit {
         this.editForm.get(['birthDate']).value != null ? moment(this.editForm.get(['birthDate']).value, DATE_TIME_FORMAT) : undefined,
       nationality: this.editForm.get(['nationality']).value,
       sex: this.editForm.get(['sex']).value,
-      addressId: this.editForm.get(['addressId']).value
+      addressId: this.editForm.get(['addressId']).value,
+      userId: this.editForm.get(['userId']).value
     };
   }
 
@@ -134,6 +145,10 @@ export class AthleteUpdateComponent implements OnInit {
   }
 
   trackEventById(index: number, item: IEvent) {
+    return item.id;
+  }
+
+  trackUserById(index: number, item: IUser) {
     return item.id;
   }
 

@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+import io.github.jhipster.domain.util.FixedPostgreSQL95Dialect;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -145,7 +147,7 @@ public class EventServiceImpl implements EventService {
         }
 
         Optional<User> currentUserOpt = userRepository.findOneByLogin(currentUserLoginOpt.get());
-        Optional<Athlete> athleteOpt = athleteRepository.finOneByEmail()
+        Optional<Athlete> athleteOpt = athleteRepository.finOneByEmail(currentUserOpt.get().getEmail());
 
 
     }

@@ -12,6 +12,8 @@ export interface IAthlete {
   sex?: Sex;
   addressId?: number;
   events?: IEvent[];
+  userLogin?: string;
+  userId?: number;
 }
 
 export class Athlete implements IAthlete {
@@ -24,6 +26,8 @@ export class Athlete implements IAthlete {
     public nationality?: string,
     public sex?: Sex,
     public addressId?: number,
-    public events?: IEvent[]
+    public events?: IEvent[],
+    public userLogin?: string,
+    public userId?: number
   ) {}
 }

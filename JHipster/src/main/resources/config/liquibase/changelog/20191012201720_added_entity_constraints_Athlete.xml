@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="address"/>
 
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="athlete"
+                                 constraintName="fk_athlete_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

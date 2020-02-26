@@ -34,7 +34,7 @@ public interface EventService {
      * @return the list of entities.
      */
     Page<EventDTO> findAllWithEagerRelationships(Pageable pageable);
-    
+
     /**
      * Get the "id" event.
      *
@@ -54,7 +54,7 @@ public interface EventService {
      * Search for the event corresponding to the query.
      *
      * @param query the query of the search.
-     * 
+     *
      * @param pageable the pagination information.
      * @return the list of entities.
      */

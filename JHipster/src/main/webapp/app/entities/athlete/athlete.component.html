@@ -41,6 +41,7 @@
             <th scope="col"  jhiSortBy="nationality"><span jhiTranslate="sportiqApp.athlete.nationality">Nationality</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="sex"><span jhiTranslate="sportiqApp.athlete.sex">Sex</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="addressId"><span jhiTranslate="sportiqApp.athlete.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="userLogin"><span jhiTranslate="sportiqApp.athlete.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -57,6 +58,9 @@
                     <div *ngIf="athlete.addressId">
                         <a [routerLink]="['/address', athlete.addressId , 'view' ]" >{{athlete.addressId}}</a>
                     </div>
+                </td>
+                <td>
+                    {{athlete.userLogin}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">
