@@ -1,19 +1,24 @@
 package cz.sportiq.service.impl;
 
-import cz.sportiq.service.EventService;
+import cz.sportiq.domain.Athlete;
 import cz.sportiq.domain.Event;
+import cz.sportiq.domain.User;
+import cz.sportiq.repository.AthleteRepository;
 import cz.sportiq.repository.EventRepository;
+import cz.sportiq.repository.UserRepository;
+import cz.sportiq.security.SecurityUtils;
+import cz.sportiq.service.EventService;
 import cz.sportiq.service.dto.EventDTO;
 import cz.sportiq.service.mapper.EventMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+
 
 /**
  * Service Implementation for managing {@link Event}.
@@ -28,9 +33,15 @@ public class EventServiceImpl implements EventService {
 
     private final EventMapper eventMapper;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper) {
+    private final UserRepository userRepository;
+
+    private final AthleteRepository athleteRepository;
+
+    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, UserRepository userRepository, AthleteRepository athleteRepository) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
+        this.userRepository = userRepository;
+        this.athleteRepository = athleteRepository;
     }
 
     /**
@@ -44,7 +55,8 @@ public class EventServiceImpl implements EventService {
         log.debug("Request to save Event : {}", eventDTO);
         Event event = eventMapper.toEntity(eventDTO);
         event = eventRepository.save(event);
-        return eventMapper.toDto(event);
+        EventDTO result = eventMapper.toDto(event);
+        return result;
     }
 
     /**
@@ -70,6 +82,7 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findAllWithEagerRelationships(pageable).map(eventMapper::toDto);
     }
 
+
     /**
      * Get one event by id.
      *
@@ -93,5 +106,24 @@ public class EventServiceImpl implements EventService {
     public void delete(Long id) {
         log.debug("Request to delete Event : {}", id);
         eventRepository.deleteById(id);
+    }
+
+    @Override
+    public void signToEvent(Long id) throws Exception {
+        Optional<String> currentUserLoginOpt = SecurityUtils.getCurrentUserLogin();
+        Optional<Event> eventOpt = eventRepository.findById(id);
+
+        if(!currentUserLoginOpt.isPresent()) {
+            throw new Exception("User not logged in!");
+        }
+
+        if(!eventOpt.isPresent()) {
+            throw new Exception("Event not found!");
+        }
+
+        Optional<User> currentUserOpt = userRepository.findOneByLogin(currentUserLoginOpt.get());
+        Optional<Athlete> athleteOpt = athleteRepository.finOneByEmail(currentUserOpt.get().getEmail());
+
+
     }
 }
