@@ -9,7 +9,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Activity} and its DTO {@link ActivityDTO}.
  */
-@Mapper(componentModel = "spring", uses = {UnitMapper.class, ActivityCategoryMapper.class})
+@Mapper(componentModel = "spring", uses = {UnitMapper.class, ActivityCategoryMapper.class, WorkoutMapper.class})
 public interface ActivityMapper extends EntityMapper<ActivityDTO, Activity> {
 
     @Mapping(source = "targetUnit.id", target = "targetUnitId")

@@ -12,6 +12,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {AthleteMapper.class, EventMapper.class})
 public interface AthleteEventMapper extends EntityMapper<AthleteEventDTO, AthleteEvent> {
 
+    @Mapping(source = "event.name", target = "eventName")
     @Mapping(source = "athlete.id", target = "athleteId")
     @Mapping(source = "event.id", target = "eventId")
     AthleteEventDTO toDto(AthleteEvent athleteEvent);
