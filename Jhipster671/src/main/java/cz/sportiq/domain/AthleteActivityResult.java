@@ -17,7 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "athlete_activity_result")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class AthleteActivityResult implements Serializable {
+public class AthleteActivityResult implements Serializable, ResultValueable {
 
     private static final long serialVersionUID = 1L;
 

@@ -122,7 +122,7 @@ public class EventServiceImpl implements EventService {
         }
 
         Optional<User> currentUserOpt = userRepository.findOneByLogin(currentUserLoginOpt.get());
-        Optional<Athlete> athleteOpt = athleteRepository.finOneByEmail(currentUserOpt.get().getEmail());
+        Optional<Athlete> athleteOpt = athleteRepository.findOneByEmail(currentUserOpt.get().getEmail());
 
 
     }

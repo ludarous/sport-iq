@@ -14,7 +14,5 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @Repository
 public interface AthleteRepository extends JpaRepository<Athlete, Long> {
-    Optional<Athlete> finOneByEmail(String email);
-
-    Optional<Athlete> finOneByUserId(String email);
+    Optional<Athlete> findOneByEmail(String email);
 }

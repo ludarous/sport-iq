@@ -7,6 +7,7 @@ import cz.sportiq.domain.Athlete;
 import cz.sportiq.repository.AthleteEventRepository;
 import cz.sportiq.service.AthleteEventService;
 import cz.sportiq.service.dto.AthleteEventDTO;
+import cz.sportiq.service.impl.custom.SummaryService;
 import cz.sportiq.service.mapper.AthleteEventMapper;
 import cz.sportiq.web.rest.errors.ExceptionTranslator;
 
@@ -57,6 +58,9 @@ public class AthleteEventResourceIT {
     private AthleteEventService athleteEventService;
 
     @Autowired
+    private SummaryService summaryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -78,7 +82,7 @@ public class AthleteEventResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final AthleteEventResource athleteEventResource = new AthleteEventResource(athleteEventService);
+        final AthleteEventResource athleteEventResource = new AthleteEventResource(athleteEventService, summaryService);
         this.restAthleteEventMockMvc = MockMvcBuilders.standaloneSetup(athleteEventResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -196,7 +200,7 @@ public class AthleteEventResourceIT {
             .andExpect(jsonPath("$.[*].actualHeightInCm").value(hasItem(DEFAULT_ACTUAL_HEIGHT_IN_CM.doubleValue())))
             .andExpect(jsonPath("$.[*].actualWeightInKg").value(hasItem(DEFAULT_ACTUAL_WEIGHT_IN_KG.doubleValue())));
     }
-    
+
     @Test
     @Transactional
     public void getAthleteEvent() throws Exception {

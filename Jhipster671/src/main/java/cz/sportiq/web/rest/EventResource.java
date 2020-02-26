@@ -136,7 +136,7 @@ public class EventResource {
      * @param id the id of the eventDTO to sign.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the eventDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/events/{id}")
+    @GetMapping("/events/{id}/sign")
     public ResponseEntity<Void> signToEvent(@PathVariable Long id) {
         log.debug("REST request to get Event : {}", id);
         try {

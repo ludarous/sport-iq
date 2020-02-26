@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "athlete_activity_result_split")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class AthleteActivityResultSplit implements Serializable {
+public class AthleteActivityResultSplit implements Serializable, ResultValueable{
 
     private static final long serialVersionUID = 1L;
 
