@@ -1,9 +1,13 @@
 package cz.sportiq.service;
 
+import cz.sportiq.domain.ActivityResultSplit;
+import cz.sportiq.domain.AthleteActivityResult;
+import cz.sportiq.domain.AthleteActivityResultSplit;
 import cz.sportiq.service.dto.AthleteActivityResultSplitDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -28,6 +32,7 @@ public interface AthleteActivityResultSplitService {
      */
     Page<AthleteActivityResultSplitDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" athleteActivityResultSplit.
      *
@@ -42,4 +47,7 @@ public interface AthleteActivityResultSplitService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    @Transactional(readOnly = true)
+    AthleteActivityResultSplit findOrCreateAthleteActivityResultSplit(ActivityResultSplit activityResultSplit, AthleteActivityResult athleteActivityResult);
 }
