@@ -46,8 +46,8 @@ public class Activity implements Serializable {
     @Column(name = "target_value")
     private Float targetValue;
 
-    @OneToMany(mappedBy = "activity")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.REMOVE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<ActivityResult> activityResults = new HashSet<>();
 
     @ManyToOne

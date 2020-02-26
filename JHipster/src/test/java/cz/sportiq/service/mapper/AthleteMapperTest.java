@@ -17,7 +17,7 @@ public class AthleteMapperTest {
 
     @Test
     public void testEntityFromId() {
-        Long id = UUID.randomUUID().toString();
+        Long id = 1L;
         assertThat(athleteMapper.fromId(id).getId()).isEqualTo(id);
         assertThat(athleteMapper.fromId(null)).isNull();
     }

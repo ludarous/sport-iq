@@ -37,8 +37,8 @@ public class ActivityResult implements Serializable {
     @Column(name = "rating_weight")
     private Float ratingWeight;
 
-    @OneToMany(mappedBy = "activityResult")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @OneToMany(mappedBy = "activityResult", cascade = CascadeType.ALL)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<ActivityResultSplit> resultSplits = new HashSet<>();
 
     @ManyToOne

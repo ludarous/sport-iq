@@ -9,15 +9,20 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Activity} and its DTO {@link ActivityDTO}.
  */
-@Mapper(componentModel = "spring", uses = {UnitMapper.class, ActivityCategoryMapper.class, WorkoutMapper.class})
+@Mapper(componentModel = "spring", uses = {
+    UnitMapper.class,
+    ActivityCategoryMapper.class,
+    WorkoutMapper.class,
+    ActivityResultMapper.class})
 public interface ActivityMapper extends EntityMapper<ActivityDTO, Activity> {
 
     @Mapping(source = "targetUnit.id", target = "targetUnitId")
     @Mapping(source = "targetUnit.name", target = "targetUnitName")
+    @Mapping(source = "activityResults", target = "activityResults")
     ActivityDTO toDto(Activity activity);
 
-    @Mapping(target = "activityResults", ignore = true)
-    @Mapping(target = "removeActivityResults", ignore = true)
+    @Mapping(target = "activityResults", ignore = false)
+    @Mapping(target = "removeActivityResults", ignore = false)
     @Mapping(source = "targetUnitId", target = "targetUnit")
     @Mapping(target = "removeCategories", ignore = true)
     @Mapping(target = "workouts", ignore = true)

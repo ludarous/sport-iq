@@ -30,7 +30,7 @@ export class AdminMenuComponent implements OnInit {
         const isAdmin = AuthUtils.isUserInRole(currentUser, [Authorities.ROLE_ADMIN]);
 
         this.model = [
-            { label: 'Dashboard', icon: 'fa fa-fw fa-dashboard', routerLink: ['/'] },
+            { label: 'Dashboard', icon: 'fa fa-fw fa-dashboard', routerLink: ['/admin'] },
         ];
 
         if (isAdmin) {

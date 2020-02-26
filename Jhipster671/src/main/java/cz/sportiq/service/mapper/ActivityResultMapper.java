@@ -14,10 +14,11 @@ public interface ActivityResultMapper extends EntityMapper<ActivityResultDTO, Ac
 
     @Mapping(source = "resultUnit", target = "resultUnit")
     @Mapping(source = "activity.id", target = "activityId")
+    @Mapping(source = "resultSplits", target = "resultSplits")
     ActivityResultDTO toDto(ActivityResult activityResult);
 
-    @Mapping(target = "resultSplits", ignore = true)
-    @Mapping(target = "removeResultSplits", ignore = true)
+    @Mapping(target = "resultSplits", ignore = false)
+    @Mapping(target = "removeResultSplits", ignore = false)
     @Mapping(source = "activityId", target = "activity")
     ActivityResult toEntity(ActivityResultDTO activityResultDTO);
 

@@ -33,7 +33,7 @@ public class AthleteActivity implements Serializable {
     @Column(name = "date")
     private ZonedDateTime date;
 
-    @OneToMany(mappedBy = "athleteActivity")
+    @OneToMany(mappedBy = "athleteActivity", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<AthleteActivityResult> athleteActivityResults = new HashSet<>();
 

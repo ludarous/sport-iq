@@ -86,7 +86,7 @@ export class AthletesEditComponent implements OnInit {
                     this.athlete = athleteResponse.body;
                     this.setAthleteForm(this.athlete);
                     this.toastService.showSuccess('Sportovec uložen');
-                    this.router.navigate(['/athletes/list']);
+                    this.router.navigate(['/admin/athletes/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
                     this.toastService.showError('Sportovec nebyl uložen', errorResponse.error.detail);

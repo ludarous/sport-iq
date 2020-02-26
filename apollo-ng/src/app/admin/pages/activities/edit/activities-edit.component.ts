@@ -84,6 +84,7 @@ export class ActivitiesEditComponent implements OnInit {
     setActivityForm(activity: IActivity) {
         this.activityForm = this.formBuilder.group(activity);
         this.activityForm.setControl('categories', this.formBuilder.array(activity.categories));
+        this.activityForm.setControl('activityResults', this.formBuilder.array(activity.activityResults));
         this.activityForm.get('name').setValidators([Validators.required, Validators.minLength(3)]);
         this.activityForm.get('minAge').setValidators([CustomValidators.integerPositive]);
         this.activityForm.get('maxAge').setValidators([CustomValidators.integerPositive]);

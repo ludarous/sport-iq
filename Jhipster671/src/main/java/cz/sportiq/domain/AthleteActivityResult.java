@@ -32,7 +32,7 @@ public class AthleteActivityResult implements Serializable, ResultValueable {
     @Column(name = "compare_value")
     private Float compareValue;
 
-    @OneToMany(mappedBy = "athleteActivityResult")
+    @OneToMany(mappedBy = "athleteActivityResult", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<AthleteActivityResultSplit> athleteActivityResultSplits = new HashSet<>();
 

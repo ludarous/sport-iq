@@ -22,6 +22,10 @@ app-root {
     color: $cyan;
 }
 
+.logo-container {
+    cursor: pointer;
+}
+
 .logo {
     font-family: 'Ubuntu', sans-serif;
     font-style: italic;
