@@ -1,0 +1,26 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="SERVER (generated)" id="1582703277969-4">
+        <addColumn tableName="athlete">
+            <column name="user_id" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1582703277969-5">
+        <addUniqueConstraint columnNames="user_id" constraintName="UC_ATHLETEUSER_ID_COL" tableName="athlete"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1582703277969-6">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="athlete" constraintName="FKqdls1olkg0mxplqpo38ywnt5h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1582703277969-1">
+        <dropUniqueConstraint constraintName="UC_ATHLETEADDRESS_ID_COL" tableName="athlete"/>
+        <addUniqueConstraint columnNames="address_id" constraintName="UC_ATHLETEADDRESS_ID_COL" tableName="athlete"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1582703277969-2">
+        <dropUniqueConstraint constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+        <addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1582703277969-3">
+        <dropUniqueConstraint constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+        <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>
