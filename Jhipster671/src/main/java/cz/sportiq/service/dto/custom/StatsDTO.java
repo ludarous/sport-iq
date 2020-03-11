@@ -1,65 +1,16 @@
 package cz.sportiq.service.dto.custom;
 
+import cz.sportiq.service.dto.AthleteActivityResultDTO;
+
 public class StatsDTO {
     private Integer totalCount;
 
-    private Float bestValue;
-    private Float worstValue;
-    private Float averageValue;
-
-    private Float bestCompareValue;
-    private Float worstCompareValue;
-    private Float averageCompareValue;
+    private ResultStatsDTO resultValueStats;
+    private ResultStatsDTO resultCompareValueStats;
+    private ResultStatsDTO resultSplitsValueStats;
+    private ResultStatsDTO resultSplitsCompareValueStats;
 
     private AthleteStatsDTO athleteStats;
-
-    public Float getBestValue() {
-        return bestValue;
-    }
-
-    public void setBestValue(Float bestValue) {
-        this.bestValue = bestValue;
-    }
-
-    public Float getWorstValue() {
-        return worstValue;
-    }
-
-    public void setWorstValue(Float worstValue) {
-        this.worstValue = worstValue;
-    }
-
-    public Float getAverageValue() {
-        return averageValue;
-    }
-
-    public void setAverageValue(Float averageValue) {
-        this.averageValue = averageValue;
-    }
-
-    public Float getBestCompareValue() {
-        return bestCompareValue;
-    }
-
-    public void setBestCompareValue(Float bestCompareValue) {
-        this.bestCompareValue = bestCompareValue;
-    }
-
-    public Float getWorstCompareValue() {
-        return worstCompareValue;
-    }
-
-    public void setWorstCompareValue(Float worstCompareValue) {
-        this.worstCompareValue = worstCompareValue;
-    }
-
-    public Float getAverageCompareValue() {
-        return averageCompareValue;
-    }
-
-    public void setAverageCompareValue(Float averageCompareValue) {
-        this.averageCompareValue = averageCompareValue;
-    }
 
     public Integer getTotalCount() {
         return totalCount;
@@ -67,6 +18,39 @@ public class StatsDTO {
 
     public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
+    }
+
+
+    public ResultStatsDTO getResultValueStats() {
+        return resultValueStats;
+    }
+
+    public void setResultValueStats(ResultStatsDTO resultValueStats) {
+        this.resultValueStats = resultValueStats;
+    }
+
+    public ResultStatsDTO getResultCompareValueStats() {
+        return resultCompareValueStats;
+    }
+
+    public void setResultCompareValueStats(ResultStatsDTO resultCompareValueStats) {
+        this.resultCompareValueStats = resultCompareValueStats;
+    }
+
+    public ResultStatsDTO getResultSplitsValueStats() {
+        return resultSplitsValueStats;
+    }
+
+    public void setResultSplitsValueStats(ResultStatsDTO resultSplitsValueStats) {
+        this.resultSplitsValueStats = resultSplitsValueStats;
+    }
+
+    public ResultStatsDTO getResultSplitsCompareValueStats() {
+        return resultSplitsCompareValueStats;
+    }
+
+    public void setResultSplitsCompareValueStats(ResultStatsDTO resultSplitsCompareValueStats) {
+        this.resultSplitsCompareValueStats = resultSplitsCompareValueStats;
     }
 
     public AthleteStatsDTO getAthleteStats() {

@@ -23,22 +23,21 @@
             <div class="col"><h3 class="text-center">{{activitySummaryChart.activityName}}</h3></div>
 
             <div class="row chart-container">
-                <ng-container
-                    *ngIf="activitySummaryChart.resultChartData.primaryCardData && activitySummaryChart.resultChartData.primaryData">
-                    <div class="col-3">
+                <ng-container>
+                    <div class="col-3" *ngIf="activitySummaryChart.resultChartData.valueCardData">
                         <ngx-charts-number-card
                             class="chart-card"
                             [view]="[200,120]"
                             [scheme]="colorScheme"
-                            [results]="activitySummaryChart.resultChartData.primaryCardData"
+                            [results]="activitySummaryChart.resultChartData.valueCardData"
                             [animations]="true"
                             [valueFormatting]="valueFormat"
                         ></ngx-charts-number-card>
                     </div>
-                    <div class="col-9" style="max-height: 100px">
+                    <div class="col-9" style="max-height: 100px" *ngIf="activitySummaryChart.resultChartData.valueData">
                         <ngx-charts-bar-horizontal *ngIf="activitySummaryChart"
                                                    [scheme]="colorScheme"
-                                                   [results]="activitySummaryChart.resultChartData.primaryData"
+                                                   [results]="activitySummaryChart.resultChartData.valueData"
                                                    [gradient]="gradient"
                                                    [xAxis]="showXAxis"
                                                    [yAxis]="showYAxis"
@@ -48,16 +47,60 @@
                                                    [showYAxisLabel]="false"
                                                    [showDataLabel]="true"
                                                    [xAxisLabel]="activitySummaryChart.resultChartData.xAxisLabel"
-                                                   [xAxisLabel]="activitySummaryChart.resultChartData.yAxisLabel"
+                                                   [yAxisLabel]="activitySummaryChart.resultChartData.yAxisLabel"
                         >
                         </ngx-charts-bar-horizontal>
                     </div>
                 </ng-container>
-                <ng-container *ngIf="activitySummaryChart.resultChartData.primarySplitsData">
-                    <div class="col-12">
+            </div>
+            <div class="row chart-container">
+                <ng-container>
+                    <div class="col-3" *ngIf="activitySummaryChart.resultChartData.compareValueCardData">
+                        <ngx-charts-number-card
+                            class="chart-card"
+                            [view]="[200,120]"
+                            [scheme]="colorScheme"
+                            [results]="activitySummaryChart.resultChartData.compareValueCardData"
+                            [animations]="true"
+                            [valueFormatting]="valueFormat"
+                        ></ngx-charts-number-card>
+                    </div>
+                    <div class="col-9" style="max-height: 100px" *ngIf="activitySummaryChart.resultChartData.compareValueData">
+                        <ngx-charts-bar-horizontal *ngIf="activitySummaryChart"
+                                                   [scheme]="colorScheme"
+                                                   [results]="activitySummaryChart.resultChartData.compareValueData"
+                                                   [gradient]="gradient"
+                                                   [xAxis]="showXAxis"
+                                                   [yAxis]="showYAxis"
+                                                   [legend]="false"
+                                                   [legendPosition]="'right'"
+                                                   [showXAxisLabel]="false"
+                                                   [showYAxisLabel]="false"
+                                                   [showDataLabel]="true"
+                                                   [xAxisLabel]="activitySummaryChart.resultChartData.xAxisLabel"
+                                                   [yAxisLabel]="activitySummaryChart.resultChartData.yAxisLabel"
+                        >
+                        </ngx-charts-bar-horizontal>
+                    </div>
+                </ng-container>
+            </div>
+
+            <div class="row chart-container">
+                <ng-container>
+                    <div class="col-3" *ngIf="activitySummaryChart.resultChartData.splitsValueCardData">
+                        <ngx-charts-number-card
+                            class="chart-card"
+                            [view]="[200,120]"
+                            [scheme]="colorScheme"
+                            [results]="activitySummaryChart.resultChartData.splitsValueCardData"
+                            [animations]="true"
+                            [valueFormatting]="valueFormat"
+                        ></ngx-charts-number-card>
+                    </div>
+                    <div class="col-9" *ngIf="activitySummaryChart.resultChartData.splitsValueData">
                         <ngx-charts-bar-horizontal-stacked
                             [scheme]="colorScheme"
-                            [results]="activitySummaryChart.resultChartData.primarySplitsData"
+                            [results]="activitySummaryChart.resultChartData.splitsValueData"
                             [gradient]="gradient"
                             [xAxis]="showXAxis"
                             [yAxis]="showYAxis"
@@ -65,11 +108,23 @@
                         </ngx-charts-bar-horizontal-stacked>
                     </div>
                 </ng-container>
-                <ng-container *ngIf="activitySummaryChart.resultChartData.compareSplitsData">
-                    <div class="col-12">
+            </div>
+            <div class="row chart-container">
+                <ng-container>
+                    <div class="col-3" *ngIf="activitySummaryChart.resultChartData.splitsCompareValueData">
+                        <ngx-charts-number-card
+                            class="chart-card"
+                            [view]="[200,120]"
+                            [scheme]="colorScheme"
+                            [results]="activitySummaryChart.resultChartData.splitsCompareValueCardData"
+                            [animations]="true"
+                            [valueFormatting]="valueFormat"
+                        ></ngx-charts-number-card>
+                    </div>
+                    <div class="col-9" *ngIf="activitySummaryChart.resultChartData.splitsCompareValueData">
                         <ngx-charts-bar-horizontal-stacked
                             [scheme]="colorScheme"
-                            [results]="activitySummaryChart.resultChartData.compareSplitsData"
+                            [results]="activitySummaryChart.resultChartData.splitsCompareValueData"
                             [gradient]="gradient"
                             [xAxis]="showXAxis"
                             [yAxis]="showYAxis"
@@ -79,8 +134,9 @@
                 </ng-container>
             </div>
         </div>
-    </ng-container>
+</ng-container>
 
-    <ng-container *ngFor="let activitySummary of workoutSummary.activitySummaries">
-        <app-athlete-activity-summary [activitySummary]="activitySummary"></app-athlete-activity-summary>
-    </ng-container>
+<ng-container *ngFor="let activitySummary of workoutSummary.activitySummaries">
+    <app-athlete-activity-summary [activitySummary]="activitySummary"></app-athlete-activity-summary>
+</ng-container>
+</div>

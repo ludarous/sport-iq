@@ -11,8 +11,6 @@ public class AthleteActivityResultSummaryDTO {
     private AthleteActivityResultDTO athleteActivityResult;
     private ActivityResultDTO activityResult;
 
-    private Set<AthleteActivityResultSplitSummaryDTO> resultSplitSummaries = new HashSet<AthleteActivityResultSplitSummaryDTO>();
-
     private StatsDTO stats;
 
 
@@ -30,14 +28,6 @@ public class AthleteActivityResultSummaryDTO {
 
     public void setActivityResult(ActivityResultDTO activityResult) {
         this.activityResult = activityResult;
-    }
-
-    public Set<AthleteActivityResultSplitSummaryDTO> getResultSplitSummaries() {
-        return resultSplitSummaries;
-    }
-
-    public void setResultSplitSummaries(Set<AthleteActivityResultSplitSummaryDTO> resultSplitSummaries) {
-        this.resultSplitSummaries = resultSplitSummaries;
     }
 
     public StatsDTO getStats() {

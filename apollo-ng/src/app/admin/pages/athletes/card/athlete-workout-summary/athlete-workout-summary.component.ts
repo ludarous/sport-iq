@@ -4,6 +4,12 @@ import { ArrayUtils } from '../../../../../modules/core/utils/array.utils';
 import { Activity } from '../../../../entities/model/activity.model';
 import { colorSets } from '@swimlane/ngx-charts/release/utils';
 import { AthleteActivitySummary } from '../../../../entities/summaries/athlete-activity-summary';
+import { AthleteActivityResult } from '../../../../entities/model/athlete-activity-result.model';
+import { ActivityResult } from '../../../../entities/model/activity-result.model';
+import { ResultStats, Stats } from '../../../../entities/summaries/stats';
+import { Athlete } from '../../../../entities/model/athlete.model';
+import { MathUtils } from '../../../../../modules/core/utils/math-utils';
+import { AthleteActivityResultSummary } from '../../../../entities/summaries/athlete-activity-result-summary';
 
 export interface ActivityChartData {
     activityName: string;
@@ -13,12 +19,17 @@ export interface ActivityChartData {
 export interface ResultChartData {
     yAxisLabel: string;
     xAxisLabel: string;
-    primaryData?: Array<any>;
-    compareData?: Array<any>;
-    primaryCardData?: any;
-    compareCardData?: any;
-    primarySplitsData?: Array<any>;
-    compareSplitsData?: Array<any>;
+    valueData?: Array<any>;
+    valueCardData?: any;
+
+    compareValueData?: Array<any>;
+    compareValueCardData?: any;
+
+    splitsValueData?: Array<any>;
+    splitsValueCardData?: any;
+
+    splitsCompareValueData?: Array<any>;
+    splitsCompareValueCardData?: any;
 }
 
 
@@ -30,20 +41,19 @@ export interface ResultChartData {
 export class AthleteWorkoutSummaryComponent implements OnInit {
 
     // options
-    showXAxis: boolean = true;
-    showYAxis: boolean = true;
-    gradient: boolean = true;
-    showXAxisLabel: boolean = true;
-    showYAxisLabel: boolean = true;
+    showXAxis = true;
+    showYAxis = true;
+    gradient = true;
+    showXAxisLabel = true;
+    showYAxisLabel = true;
     colorScheme = colorSets.find(s => s.name === 'cool');
-    schemeType: string = 'linear';
+    schemeType = 'linear';
 
     activitySummariesCharts: Array<ActivityChartData>;
 
     constructor() {
 
     }
-
 
 
     private _workoutSummary: AthleteWorkoutSummary;
@@ -73,29 +83,20 @@ export class AthleteWorkoutSummaryComponent implements OnInit {
     }
 
     getActivityResultCharts(activitySummary: AthleteActivitySummary): ResultChartData {
-        const resultSummary = activitySummary.resultSummaries[0];
+        const resultSummaries = AthleteActivityResultSummary.sortByActivityResultId(activitySummary.resultSummaries);
+        const resultSummary = resultSummaries[0];
         const resultChart: ResultChartData = {
             yAxisLabel: activitySummary.activity.name,
             xAxisLabel: resultSummary.activityResult.resultUnit.name,
         };
 
-        if (resultSummary.athleteActivityResult.value) {
+        if (resultSummary.athleteActivityResult.value && resultSummary.stats.resultValueStats) {
 
-            resultChart.primaryData = [
-                {
-                    name: 'Výsledek',
-                    value: resultSummary.athleteActivityResult.value
-                },
-                {
-                    name: 'Nejlepší',
-                    value: resultSummary.stats.bestValue
-                },
-                {
-                    name: 'Nejhorší',
-                    value: resultSummary.stats.worstValue
-                }];
+            resultChart.valueData = this.getValueData(resultSummary.athleteActivityResult,
+                resultSummary.stats.resultValueStats,
+                'value')
 
-            resultChart.primaryCardData = [{
+            resultChart.valueCardData = [{
                 name: resultSummary.activityResult.name,
                 value: resultSummary.athleteActivityResult.value,
                 extra: {
@@ -104,23 +105,13 @@ export class AthleteWorkoutSummaryComponent implements OnInit {
             }];
         }
 
-        if (resultSummary.athleteActivityResult.compareValue) {
-            resultChart.compareData = [
-                {
-                    name: 'Výsledek',
-                    value: resultSummary.athleteActivityResult.compareValue
-                },
-                {
-                    name: 'Nejlepší',
-                    value: resultSummary.stats.bestCompareValue
-                },
-                {
-                    name: 'Nejhorší',
-                    value: resultSummary.stats.worstCompareValue
-                }];
+        if (resultSummary.athleteActivityResult.compareValue  && resultSummary.stats.resultCompareValueStats) {
+            resultChart.compareValueData = this.getValueData(resultSummary.athleteActivityResult,
+                resultSummary.stats.resultCompareValueStats,
+                'compareValue')
 
-            resultChart.compareCardData = [{
-                name: resultSummary.activityResult.name,
+            resultChart.compareValueCardData = [{
+                name: resultSummary.activityResult.name + ' s míčem',
                 value: resultSummary.athleteActivityResult.compareValue,
                 extra: {
                     unit: resultSummary.activityResult.resultUnit.abbreviation
@@ -128,41 +119,41 @@ export class AthleteWorkoutSummaryComponent implements OnInit {
             }];
         }
 
-        const athleteSplits = resultSummary.athleteActivityResult.athleteActivityResultSplits;
-        if (athleteSplits && athleteSplits.length > 0) {
-           const splitsData = {
-               name: resultSummary.activityResult.name,
-               series: []
-           };
 
-            const compareSplitsData = {
-                name: resultSummary.activityResult.name,
-                series: []
-            };
-
-           for (const athleteSplit of athleteSplits) {
-                const splitResult = resultSummary.activityResult.resultSplits.find((s) => s.id === athleteSplit.activityResultSplitId);
-                const primarySerie = {
-                    name: splitResult.splitValue + '. ' + splitResult.splitUnit.name,
-                    value: athleteSplit.value
-                };
-
-               const compareSerie = {
-                   name: splitResult.splitValue + '. ' + splitResult.splitUnit.name,
-                   value: athleteSplit.compareValue
-               };
-                splitsData.series.push(primarySerie);
-                compareSplitsData.series.push(compareSerie);
-           }
-
-           resultChart.primarySplitsData = [splitsData];
-           resultChart.compareSplitsData = [compareSplitsData];
+        resultChart.splitsValueData = this.getSplitsResultData(
+            resultSummary.athleteActivityResult,
+            resultSummary.activityResult,
+            resultSummary.stats.resultSplitsValueStats,
+            'value');
 
 
+        const cardValue = MathUtils.sum(resultSummary.athleteActivityResult.athleteActivityResultSplits.map(rs => rs.value));
+        if (cardValue) {
+            resultChart.splitsValueCardData = [{
+                name: resultSummary.activityResult.name + ' (kumulativní)',
+                value: cardValue.toFixed(3),
+                extra: {
+                    unit: resultSummary.activityResult.resultUnit.abbreviation
+                }
+            }];
         }
 
+        resultChart.splitsCompareValueData = this.getSplitsResultData(
+            resultSummary.athleteActivityResult,
+            resultSummary.activityResult,
+            resultSummary.stats.resultSplitsCompareValueStats,
+            'compareValue');
 
-
+        const cardCompareValue = MathUtils.sum(resultSummary.athleteActivityResult.athleteActivityResultSplits.map(rs => rs.compareValue));
+        if (cardCompareValue) {
+            resultChart.splitsCompareValueCardData = [{
+                name: resultSummary.activityResult.name + ' (kumulativní)',
+                value: cardCompareValue.toFixed(3),
+                extra: {
+                    unit: resultSummary.activityResult.resultUnit.abbreviation
+                }
+            }];
+        }
 
 
         return resultChart;
@@ -173,6 +164,85 @@ export class AthleteWorkoutSummaryComponent implements OnInit {
             return c.value + ' ' + c.data.extra.unit;
         }
         return c.value;
+    }
+
+    getValueData(athleteActivityResult: AthleteActivityResult, resultStats: ResultStats, valueProperty: 'value' | 'compareValue'): Array<any> {
+        const valueData = [
+            {
+                name: 'Výsledek',
+                value: athleteActivityResult[valueProperty]
+            },
+            {
+                name: 'Nejlepší',
+                value: resultStats.best
+            },
+            {
+                name: 'Nejhorší',
+                value: resultStats.worst
+            }];
+        return valueData;
+    }
+
+    getSplitsValueData(athleteActivityResult: AthleteActivityResult,
+                       activityResult: ActivityResult,
+                       valueProperty: 'value' | 'compareValue',
+                       resultName: string): any {
+        const athleteSplits = athleteActivityResult.athleteActivityResultSplits;
+        if (!athleteSplits || athleteSplits.length <= 0) {
+            return null;
+        }
+
+        const resultSplitsData = {
+            name: resultName,
+            series: []
+        };
+
+        for (const athleteSplit of athleteActivityResult.athleteActivityResultSplits) {
+            const splitResult = activityResult.resultSplits
+                .find((s) => s.id === athleteSplit.activityResultSplitId);
+            const serie = {
+                name: splitResult.splitValue + '. ' + splitResult.splitUnit.name,
+                value: athleteSplit[valueProperty]
+            };
+
+            resultSplitsData.series.push(serie);
+        }
+
+        return resultSplitsData;
+    }
+
+    getSplitsResultData(athleteActivityResult: AthleteActivityResult,
+                        activityResult: ActivityResult,
+                        stats: ResultStats,
+                        valueProperty: 'value' | 'compareValue'): Array<any> {
+
+
+        if (!stats) {
+            return null;
+        }
+
+        const splitsData = [];
+        const valueData = this.getSplitsValueData(athleteActivityResult, activityResult, valueProperty, 'Výsledek');
+        if (valueData) {
+            splitsData.push(valueData);
+        }
+
+        if (stats.bestResult) {
+            const bestValueData = this.getSplitsValueData(stats.bestResult, activityResult, valueProperty, 'Nejlepší');
+            if (bestValueData) {
+                splitsData.push(bestValueData);
+            }
+        }
+
+        if (stats.worstResult) {
+            const worstValueData = this.getSplitsValueData(stats.worstResult, activityResult, valueProperty, 'Nejhorší');
+            if (worstValueData) {
+                splitsData.push(worstValueData);
+            }
+        }
+        return splitsData;
+
+
     }
 
 }

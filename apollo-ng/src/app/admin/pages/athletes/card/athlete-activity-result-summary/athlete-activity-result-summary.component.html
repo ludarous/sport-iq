@@ -93,12 +93,6 @@
                             <th>
                                 {{'Nejhorší výsledek' | translate}}
                             </th>
-                            <th>
-                                {{'Průměr' | translate}}
-                            </th>
-                            <th>
-                                {{'Pořadí' | translate}}
-                            </th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-item>
@@ -117,12 +111,6 @@
                             </td>
                             <td>
                                 {{item.worstValue ? ((item.worstValue | number: '1.2-2') + '&nbsp;' + unit) : ''}}
-                            </td>
-                            <td>
-                                {{(item.averageValue | number: '1.2-2') + '&nbsp;' + unit}}
-                            </td>
-                            <td>
-                                {{item.rank | number: '1.0'}}
                             </td>
                         </tr>
                         <tr *ngIf="item === null" class="delimiter-row">

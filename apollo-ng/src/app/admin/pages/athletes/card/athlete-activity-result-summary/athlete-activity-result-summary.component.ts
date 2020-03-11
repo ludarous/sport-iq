@@ -66,7 +66,6 @@ export class AthleteActivityResultSummaryComponent implements OnInit {
 
     set activityResultSummary(value: AthleteActivityResultSummary) {
         if (value) {
-            value.resultSplitSummaries = ActivityResultSplit.sortSummariesByActivityResultSplitValue(value.resultSplitSummaries);
             this._activityResultSummary = value;
         }
     }
@@ -114,58 +113,97 @@ export class AthleteActivityResultSummaryComponent implements OnInit {
     setSplitResultsChartData(activityResultSummary: AthleteActivityResultSummary) {
         const valueSplitResults = new SplitResultChartData(activityResultSummary.activityResult.name);
         const compareValueSplitResults = new SplitResultChartData(activityResultSummary.activityResult.name);
-        this.splitResultsChartData = [];
+
 
         let yMinScale = Number.MAX_VALUE;
         let yMaxScale = 0;
 
-        for (const resultSplitSummary of activityResultSummary.resultSplitSummaries) {
-            if (resultSplitSummary.athleteActivityResultSplit.value) {
-                valueSplitResults.series.push({
-                    value: resultSplitSummary.athleteActivityResultSplit.value,
-                    name: resultSplitSummary.activityResultSplit.splitValue + '. ' + resultSplitSummary.activityResultSplit.splitUnit.name
-                });
+        if (activityResultSummary.athleteActivityResult.athleteActivityResultSplits &&
+        activityResultSummary.athleteActivityResult.athleteActivityResultSplits.length > 0) {
+
+            this.splitResultsChartData = [];
+            for (const resultSplit of activityResultSummary.activityResult.resultSplits) {
+                const athleteSplit = activityResultSummary.athleteActivityResult.athleteActivityResultSplits
+                    .find(ars => ars.activityResultSplitId === resultSplit.id);
+
+                if (athleteSplit.value) {
+                    valueSplitResults.series.push({
+                        value: athleteSplit.value,
+                        name: resultSplit.splitValue + '. ' + resultSplit.splitUnit.name
+                    });
+                }
+
+                if (athleteSplit.compareValue) {
+                    compareValueSplitResults.series.push({
+                        value: athleteSplit.compareValue,
+                        name: resultSplit.splitValue + '. ' + resultSplit.splitUnit.name
+                    });
+                }
+
+                const currentMinValues = [];
+                const currentMaxValues = [];
+
+                if (activityResultSummary.stats.resultSplitsValueStats) {
+                    const bestResult = activityResultSummary.stats.resultSplitsValueStats.bestResult;
+                    const worstResult = activityResultSummary.stats.resultSplitsValueStats.worstResult;
+
+                    const bestValueSplit = bestResult.athleteActivityResultSplits.
+                    find(ars => ars.activityResultSplitId === resultSplit.id);
+
+                    const worstValueSplit = worstResult.athleteActivityResultSplits.
+                    find(ars => ars.activityResultSplitId === resultSplit.id);
+
+                    if (bestValueSplit) {
+                        currentMaxValues.push(bestValueSplit.value);
+                    }
+
+                    if (worstValueSplit) {
+                        currentMinValues.push(worstValueSplit.value);
+                    }
+                }
+
+                if (activityResultSummary.stats.resultSplitsCompareValueStats) {
+                    const bestCompareResult = activityResultSummary.stats.resultSplitsCompareValueStats.bestResult;
+                    const worstCompareResult = activityResultSummary.stats.resultSplitsCompareValueStats.worstResult;
+
+                    const bestCompareValueSplit = bestCompareResult.athleteActivityResultSplits.
+                    find(ars => ars.activityResultSplitId === resultSplit.id);
+
+                    const worstCompareValueSplit = worstCompareResult.athleteActivityResultSplits.
+                    find(ars => ars.activityResultSplitId === resultSplit.id);
+
+                    if (bestCompareValueSplit) {
+                        currentMaxValues.push(bestCompareValueSplit.compareValue);
+                    }
+
+                    if (worstCompareValueSplit) {
+                        currentMinValues.push(worstCompareValueSplit.compareValue);
+                    }
+                }
+
+                const currentMinValue = Math.min(...currentMinValues);
+                if (yMinScale > currentMinValue) {
+                    yMinScale = currentMinValue;
+                }
+
+                const currentMaxValue = Math.max(...currentMaxValues);
+                if (yMaxScale < currentMaxValue) {
+                    yMaxScale = currentMaxValue;
+                }
             }
 
-            if (resultSplitSummary.athleteActivityResultSplit.compareValue) {
-                compareValueSplitResults.series.push({
-                    value: resultSplitSummary.athleteActivityResultSplit.compareValue,
-                    name: resultSplitSummary.activityResultSplit.splitValue + '. ' + resultSplitSummary.activityResultSplit.splitUnit.name
-                });
+
+            this.splitResultsChartData.push(valueSplitResults);
+            this.splitResultsChartData.push(compareValueSplitResults);
+
+
+            if (ResultType.MORE_IS_BETTER.equals(this._activityResultSummary.activityResult.resultType)) {
+                this.splitResultsChartSettings =
+                    new SplitResultChartSettings(yMinScale / this.SCALE_CONSTANT, yMaxScale * this.SCALE_CONSTANT);
+            } else {
+                this.splitResultsChartSettings =
+                    new SplitResultChartSettings(yMaxScale / this.SCALE_CONSTANT, yMinScale * this.SCALE_CONSTANT);
             }
-
-            const currentMinValues = [];
-            if (resultSplitSummary.stats.worstValue) {
-                currentMinValues.push(resultSplitSummary.stats.worstValue);
-            }
-
-            if (resultSplitSummary.stats.worstCompareValue) {
-                currentMinValues.push(resultSplitSummary.stats.worstCompareValue);
-            }
-            const currentMinValue = Math.min(...currentMinValues);
-            if (yMinScale > currentMinValue) {
-                yMinScale = currentMinValue;
-            }
-
-            const currentMaxValues = [];
-            currentMaxValues.push(resultSplitSummary.stats.bestValue);
-            currentMaxValues.push(resultSplitSummary.stats.bestCompareValue);
-
-            const currentMaxValue = Math.max(...currentMaxValues);
-            if (yMaxScale < currentMaxValue) {
-                yMaxScale = currentMaxValue;
-            }
-        }
-
-
-        this.splitResultsChartData.push(valueSplitResults);
-        this.splitResultsChartData.push(compareValueSplitResults);
-
-
-        if (ResultType.MORE_IS_BETTER.equals(this._activityResultSummary.activityResult.resultType)) {
-            this.splitResultsChartSettings = new SplitResultChartSettings(yMinScale / this.SCALE_CONSTANT, yMaxScale * this.SCALE_CONSTANT);
-        } else {
-            this.splitResultsChartSettings = new SplitResultChartSettings(yMaxScale / this.SCALE_CONSTANT, yMinScale * this.SCALE_CONSTANT);
         }
     }
 

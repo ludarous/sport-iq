@@ -1,11 +1,14 @@
 package cz.sportiq.service.utils;
 
+import cz.sportiq.domain.AthleteActivityResult;
+import cz.sportiq.domain.AthleteActivityResultSplit;
 import cz.sportiq.domain.ResultValueable;
 import cz.sportiq.domain.enumeration.ResultType;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -139,4 +142,26 @@ public class StatsUtil {
             return 100F;
         }
     }
+
+    public static boolean athleteActivityResultHasSplitsWithValue(AthleteActivityResult athleteActivityResult) {
+        Set<AthleteActivityResultSplit> splits = athleteActivityResult.getAthleteActivityResultSplits();
+        return splits != null && splits.size() > 0 && splits.stream().noneMatch(s -> s.getValue() == null);
+    }
+
+    public static boolean athleteActivityResultHasSplitsWithCompareValue(AthleteActivityResult athleteActivityResult) {
+        Set<AthleteActivityResultSplit> splits = athleteActivityResult.getAthleteActivityResultSplits();
+        return splits != null && splits.size() > 0 && splits.stream().noneMatch(s -> s.getCompareValue() == null);
+    }
+
+    public static Float getSumOfSplitValues(AthleteActivityResult athleteActivityResult) {
+        List<Float> allSplitValues = athleteActivityResult.getAthleteActivityResultSplits().stream().map(rs -> rs.getValue()).collect(Collectors.toList());
+        return sum(allSplitValues);
+    }
+
+    public static Float getSumOfSplitCompareValues(AthleteActivityResult athleteActivityResult) {
+        List<Float> allSplitValues = athleteActivityResult.getAthleteActivityResultSplits().stream().map(rs -> rs.getCompareValue()).collect(Collectors.toList());
+        return sum(allSplitValues);
+    }
+
+
 }
