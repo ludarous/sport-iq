@@ -117,9 +117,9 @@ export class ActivitiesEditComponent implements OnInit {
                 this.setActivityForm(this.activity);
                 this.toastService.showSuccess('Aktivita uložena');
                 if (goBack) {
-                    this.router.navigate(['/activities/list']);
+                    this.router.navigate(['/admin/activities/list']);
                 } else {
-                    this.location.go(`/activities/edit/${this.activity.id}`);
+                    this.location.go(`/admin/activities/edit/${this.activity.id}`);
                 }
             },
             (errorResponse: HttpErrorResponse) => {

@@ -109,7 +109,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void signToEvent(Long id) throws Exception {
+    public EventDTO signToEvent(Long id) throws Exception {
         Optional<String> currentUserLoginOpt = SecurityUtils.getCurrentUserLogin();
         Optional<Event> eventOpt = eventRepository.findById(id);
 
@@ -122,8 +122,32 @@ public class EventServiceImpl implements EventService {
         }
 
         Optional<User> currentUserOpt = userRepository.findOneByLogin(currentUserLoginOpt.get());
-        Optional<Athlete> athleteOpt = athleteRepository.findOneByEmail(currentUserOpt.get().getEmail());
+        if(!currentUserOpt.isPresent()) {
+            throw new Exception("User not found!");
+        }
 
+        Optional<Athlete> athleteOpt = athleteRepository.findOneByUserId(currentUserOpt.get().getId());
+        Athlete athlete;
+        Event event = eventOpt.get();
+
+        if(!athleteOpt.isPresent()) {
+            User currentUser = currentUserOpt.get();
+            athlete = new Athlete()
+                .email(currentUser.getEmail())
+                .firstName(currentUser.getFirstName())
+                .lastName(currentUser.getLastName())
+                .user(currentUser);
+            athlete = athleteRepository.save(athlete);
+        } else {
+            athlete = athleteOpt.get();
+        }
+
+        if(!event.getAthletes().contains(athlete)) {
+            event.addAthletes(athlete);
+            event = eventRepository.save(event);
+        }
+
+        return eventMapper.toDto(event);
 
     }
 }

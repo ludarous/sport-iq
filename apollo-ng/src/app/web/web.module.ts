@@ -25,6 +25,7 @@ import { EventsComponent } from './events/events.component';
 import { VcSharedComponentsModule } from '../modules/shared-components/vc-shared-components.module';
 import { SingInModalComponent } from './shared/modals/sing-in-modal/sing-in-modal.component';
 import { PrimeNgComponentsModule } from '../admin/shared/prime-ng-components.module';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import { PrimeNgComponentsModule } from '../admin/shared/prime-ng-components.mod
         NgwWowModule,
         TranslateModule,
         VcSharedComponentsModule,
-        PrimeNgComponentsModule,
+        DialogModule
     ],
     providers: [
         CountToTimeService,

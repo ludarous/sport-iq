@@ -19,7 +19,7 @@ export class OAuth2Service implements AuthService{
                 private csrfService: CsrfService) {
     }
 
-    private currentUserId: number;
+    private currentUserId: string;
     private currentUser: IUser;
 
 
@@ -81,6 +81,7 @@ export class OAuth2Service implements AuthService{
                     return this.currentUser;
                 }), catchError((error: HttpErrorResponse, caught) => {
                     this.clearUser();
+                    AuthUtils.userUpdatedSource.next(null);
                     return throwError(error);
                 })
             );

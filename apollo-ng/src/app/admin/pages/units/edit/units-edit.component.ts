@@ -73,7 +73,7 @@ export class UnitsEditComponent implements OnInit {
                     this.unit = unitResponse.body;
                     this.setUnitForm(this.unit);
                     this.toastService.showSuccess('Jednotka uložena');
-                    this.router.navigate(['/units/list']);
+                    this.router.navigate(['/admin/units/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
                     this.toastService.showError('Jednota nebyla uložena', errorResponse.error.detail);

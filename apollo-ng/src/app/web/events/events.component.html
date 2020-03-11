@@ -29,7 +29,13 @@
                 </div>
             </div>
             <div class="col-3 align-center">
-                <button class="btn" (click)="signToEvent(event)">{{'Přihlásit' | translate}}</button>
+                <ng-container *ngIf="currentUser">
+                    <button *ngIf="!alreadySignedIn(event)" class="btn" (click)="signToEvent(event)">{{'Přihlásit' | translate}}</button>
+                    <span *ngIf="alreadySignedIn(event)">{{'K této události už jsi se registroval' | translate}}</span>
+                </ng-container>
+
+                <span *ngIf="!currentUser">{{'Pro registraci k události se prosím přihlašte' | translate}}</span>
+
             </div>
         </div>
     </div>

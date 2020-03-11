@@ -50,5 +50,5 @@ public interface EventService {
      */
     void delete(Long id);
 
-    void signToEvent(Long id) throws Exception;
+    EventDTO signToEvent(Long id) throws Exception;
 }

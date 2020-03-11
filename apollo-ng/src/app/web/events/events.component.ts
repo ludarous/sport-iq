@@ -5,6 +5,10 @@ import { Moment } from 'moment';
 import * as moment from 'moment';
 import { IEventLocation } from '../../admin/entities/model/event-location.model';
 import { AuthService } from '../../modules/auth/services/auth.service';
+import { IUser } from '../../modules/entities/user';
+import { AuthUtils } from '../../modules/core/utils/auth.utils';
+import { HttpResponse } from '@angular/common/http';
+import { even } from '@rxweb/reactive-form-validators';
 
 declare const WOW: any;
 
@@ -22,12 +26,29 @@ export class EventsComponent implements OnInit {
     nextEvents: Array<IEvent>;
     now = moment();
     showSingInDialog: any;
+    currentUser: IUser;
 
     ngOnInit() {
+        this.currentUser = this.authService.getCurrentUser();
+        this.load();
+
+        AuthUtils.userUpdated$.subscribe((user: IUser) => {
+            this.setUser(user);
+        });
+    }
+
+    load() {
         const nextEvents$ = this.eventService.query();
         nextEvents$.subscribe((nextEventsResponse) => {
             this.nextEvents = nextEventsResponse.body; // nextEventsResponse.body.filter(e => e.date.isAfter(this.now));
         });
+    }
+
+    alreadySignedIn(event: IEvent): boolean {
+        if (this.currentUser) {
+            return event.athletes.some(a => a.userId === this.currentUser.id);
+        }
+        return false;
     }
 
     getMapLink(eventLocation: IEventLocation) {
@@ -35,11 +56,15 @@ export class EventsComponent implements OnInit {
     }
 
     signToEvent(event: IEvent) {
-        if (this.authService.getCurrentUser()) {
-
-        } else {
-            this.showSingInDialog = true;
+        if (this.currentUser) {
+            this.eventService.signToEvent(event.id).subscribe((eventResponse: HttpResponse<IEvent>) => {
+               this.load();
+            });
         }
+    }
+
+    setUser(user: IUser) {
+        this.currentUser = user;
     }
 
     signIn() {

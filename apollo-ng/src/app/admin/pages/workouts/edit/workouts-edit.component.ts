@@ -81,7 +81,7 @@ export class WorkoutsEditComponent implements OnInit {
                     this.workout = workoutResponse.body;
                     this.setWorkoutForm(this.workout);
                     this.toastService.showSuccess('Test uložen');
-                    this.router.navigate(['/workouts/list']);
+                    this.router.navigate(['/admin/workouts/list']);
                 },
                 (errorResponse: HttpErrorResponse) => {
                     this.toastService.showError('Test nebyl uložen', errorResponse.error.detail);

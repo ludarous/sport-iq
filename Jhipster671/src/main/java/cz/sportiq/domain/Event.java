@@ -35,7 +35,7 @@ public class Event implements Serializable {
     private ZonedDateTime date;
 
     @OneToMany(mappedBy = "event")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<AthleteEvent> athleteEvents = new HashSet<>();
 
     @ManyToOne
@@ -43,14 +43,14 @@ public class Event implements Serializable {
     private EventLocation eventLocation;
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JoinTable(name = "event_tests",
                joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "tests_id", referencedColumnName = "id"))
     private Set<Workout> tests = new HashSet<>();
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.NONE)
     @JoinTable(name = "event_athletes",
                joinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "athletes_id", referencedColumnName = "id"))

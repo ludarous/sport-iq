@@ -222,6 +222,9 @@ app-root {
         fill: white !important;
     }
 }
+.chart-card {
+    fill: rgb(183,250,255) !important;
+}
 
 @media print {
 
@@ -238,6 +241,12 @@ app-root {
 
         text {
             fill: black !important;
+        }
+    }
+
+    .chart-card {
+        text {
+            fill: white !important;
         }
     }
 
@@ -289,6 +298,15 @@ app-root {
 
     app-topbar, app-breadcrumb, app-footer, .layout-menu-container, .print-no {
         display: none;
+    }
+
+    .activities-summary-container {
+        page-break-before: always;
+        page-break-after: auto;
+    }
+
+    .activity-summary {
+        page-break-inside: avoid;
     }
 
     .athlete-activity-summary {

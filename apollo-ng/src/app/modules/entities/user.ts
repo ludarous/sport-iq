@@ -1,7 +1,7 @@
 import {AuthoritiesBase} from './enums/authorities-base';
 
 export interface IUser {
-  id: number;
+  id: string;
   login?: string;
   firstName?: string;
   lastName?: string;
@@ -16,7 +16,7 @@ export interface IUser {
 
 
 export class User implements IUser {
-  id: number;
+  id: string;
   login: string;
   firstName: string;
   lastName: string;

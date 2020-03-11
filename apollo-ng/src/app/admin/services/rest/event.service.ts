@@ -13,6 +13,10 @@ export class EventService extends CrudBaseService<IEvent> {
         super(environment.apiUrl, '/events', injector, [Event.parseItemEnums]);
     }
 
+    signToEvent(eventId: number): Observable<any> {
+        return this.get(this.resourceUrl + `/${eventId}/sign`);
+}
+
     getEvent(eventId: number): Observable<IEvent> {
         if (eventId) {
             return this.find(eventId)

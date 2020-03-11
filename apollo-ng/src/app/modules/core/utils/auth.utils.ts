@@ -2,6 +2,7 @@ import {IUser} from '../../entities/user';
 import {Subject} from 'rxjs';
 import {AuthoritiesBase} from '../../entities/enums/authorities-base';
 import {IToken} from '../../entities/token';
+import { environment } from '../../../../environments/environment';
 
 export class AuthUtils {
 
@@ -35,14 +36,14 @@ export class AuthUtils {
 
       if (type === 'and') {
         for (const role of roles) {
-          const roleToEqual = role instanceof AuthoritiesBase  ? role : new AuthoritiesBase(role);
+          const roleToEqual = role instanceof AuthoritiesBase  ? role : new AuthoritiesBase(environment.authoritiesEnum, role);
           isInRole = user.authorities.some((a) => a.equals(roleToEqual)) && isInRole;
         }
         return isInRole;
       } else if (type === 'or') {
         for (const role of roles) {
           // isInRole = user.authorities.indexOf(role) >= 0
-          const roleToEqual = role instanceof AuthoritiesBase  ? role : new AuthoritiesBase(role);
+          const roleToEqual = role instanceof AuthoritiesBase  ? role : new AuthoritiesBase(environment.authoritiesEnum, role);
           isInRole = user.authorities.some((a) => a.equals(roleToEqual));
           if (isInRole) {
             return isInRole;

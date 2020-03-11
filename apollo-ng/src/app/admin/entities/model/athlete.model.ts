@@ -50,6 +50,9 @@ export interface IAthlete {
     addressId?: number;
 
     name: string;
+
+    userId?: string;
+    userLogin?: string;
 }
 
 export class Athlete implements IAthlete {
@@ -61,7 +64,9 @@ export class Athlete implements IAthlete {
         public birthDate?: Moment,
         public nationality?: string,
         public sex?: Sex,
-        public addressId?: number
+        public addressId?: number,
+        public userId?: string,
+        public userLogin?: string,
     ) {}
 
     get name(): string {

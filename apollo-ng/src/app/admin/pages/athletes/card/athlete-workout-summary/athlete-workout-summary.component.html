@@ -15,6 +15,72 @@
         </ng-container>
     </div>
 </div>
-<ng-container *ngFor="let activitySummary of workoutSummary.activitySummaries">
-    <app-athlete-activity-summary [activitySummary]="activitySummary"></app-athlete-activity-summary>
-</ng-container>
+<div class="activities-summary-container">
+    <h1 class="text-center">{{'Shrnutí výsledků' | translate}}</h1>
+    <ng-container *ngFor="let activitySummaryChart of activitySummariesCharts">
+        <div class="card bold-label activity-summary">
+
+            <div class="col"><h3 class="text-center">{{activitySummaryChart.activityName}}</h3></div>
+
+            <div class="row chart-container">
+                <ng-container
+                    *ngIf="activitySummaryChart.resultChartData.primaryCardData && activitySummaryChart.resultChartData.primaryData">
+                    <div class="col-3">
+                        <ngx-charts-number-card
+                            class="chart-card"
+                            [view]="[200,120]"
+                            [scheme]="colorScheme"
+                            [results]="activitySummaryChart.resultChartData.primaryCardData"
+                            [animations]="true"
+                            [valueFormatting]="valueFormat"
+                        ></ngx-charts-number-card>
+                    </div>
+                    <div class="col-9" style="max-height: 100px">
+                        <ngx-charts-bar-horizontal *ngIf="activitySummaryChart"
+                                                   [scheme]="colorScheme"
+                                                   [results]="activitySummaryChart.resultChartData.primaryData"
+                                                   [gradient]="gradient"
+                                                   [xAxis]="showXAxis"
+                                                   [yAxis]="showYAxis"
+                                                   [legend]="false"
+                                                   [legendPosition]="'right'"
+                                                   [showXAxisLabel]="false"
+                                                   [showYAxisLabel]="false"
+                                                   [showDataLabel]="true"
+                                                   [xAxisLabel]="activitySummaryChart.resultChartData.xAxisLabel"
+                                                   [xAxisLabel]="activitySummaryChart.resultChartData.yAxisLabel"
+                        >
+                        </ngx-charts-bar-horizontal>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="activitySummaryChart.resultChartData.primarySplitsData">
+                    <div class="col-12">
+                        <ngx-charts-bar-horizontal-stacked
+                            [scheme]="colorScheme"
+                            [results]="activitySummaryChart.resultChartData.primarySplitsData"
+                            [gradient]="gradient"
+                            [xAxis]="showXAxis"
+                            [yAxis]="showYAxis"
+                            [legend]="false">
+                        </ngx-charts-bar-horizontal-stacked>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="activitySummaryChart.resultChartData.compareSplitsData">
+                    <div class="col-12">
+                        <ngx-charts-bar-horizontal-stacked
+                            [scheme]="colorScheme"
+                            [results]="activitySummaryChart.resultChartData.compareSplitsData"
+                            [gradient]="gradient"
+                            [xAxis]="showXAxis"
+                            [yAxis]="showYAxis"
+                            [legend]="false">
+                        </ngx-charts-bar-horizontal-stacked>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngFor="let activitySummary of workoutSummary.activitySummaries">
+        <app-athlete-activity-summary [activitySummary]="activitySummary"></app-athlete-activity-summary>
+    </ng-container>

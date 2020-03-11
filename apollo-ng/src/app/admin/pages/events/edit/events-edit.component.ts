@@ -120,9 +120,9 @@ export class EventsEditComponent implements OnInit {
                     this.toastService.showSuccess('Událost uložena');
 
                     if (goBack) {
-                        this.router.navigate(['/events/list']);
+                        this.router.navigate(['/admin/events/list']);
                     } else {
-                        this.location.go(`/events/edit/${this.event.id}`);
+                        this.location.go(`/admin/events/edit/${this.event.id}`);
                     }
                 },
                 (errorResponse: HttpErrorResponse) => {

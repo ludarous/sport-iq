@@ -86,4 +86,8 @@ export class MenuComponent implements OnInit, AfterViewChecked {
     logout() {
         this.authService.logout().subscribe();
     }
+
+    isAdmin(): boolean {
+        return AuthUtils.isUserInRole(this.currentUser, ['ROLE_ADMIN']);
+    }
 }
