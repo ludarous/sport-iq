@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(ActivityResultService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new ActivityResult(0, 'AAAAAAA', ResultType.LESS_IS_BETTER, 0);
+      elemDefault = new ActivityResult(0, 'AAAAAAA', ResultType.LESS_IS_BETTER, 0, false);
     });
 
     describe('Service methods', () => {
@@ -57,7 +57,8 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             resultType: 'BBBBBB',
-            ratingWeight: 1
+            ratingWeight: 1,
+            mainResult: true
           },
           elemDefault
         );
@@ -76,7 +77,8 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             resultType: 'BBBBBB',
-            ratingWeight: 1
+            ratingWeight: 1,
+            mainResult: true
           },
           elemDefault
         );

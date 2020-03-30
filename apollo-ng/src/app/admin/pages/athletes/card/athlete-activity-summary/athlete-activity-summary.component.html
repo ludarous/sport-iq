@@ -1,18 +1,18 @@
 <div class="card athlete-activity-summary bold-label">
     <h3 class="text-center" *ngIf="activitySummary.activity">{{activitySummary.activity.name}}</h3>
-    <div class="ui-g">
-        <div class="ui-g-12">{{activitySummary.activity.description}}</div>
+    <div class="row">
+        <div class="col-12">{{activitySummary.activity.description}}</div>
     </div>
-    <div class="ui-g">
+    <div class="row">
         <ng-container *ngIf="activitySummary.athleteActivity.note">
-            <div class="ui-g-12 ui-md-4">
+            <div class="col-12 col-md-4">
                 <label>{{'Poznámka' | translate}}</label>
             </div>
-            <div class="ui-g-12 ui-md-8">
+            <div class="col-12 col-md-8">
                 <span>{{activitySummary.athleteActivity.note}}</span>
             </div>
         </ng-container>
-        <div class="ui-g-12" *ngFor="let activityResultSummary of activitySummary.resultSummaries">
+        <div class="col-12" *ngFor="let activityResultSummary of activitySummary.resultSummaries">
             <app-athlete-activity-result-summary [activityResultSummary]="activityResultSummary"></app-athlete-activity-result-summary>
         </div>
     </div>

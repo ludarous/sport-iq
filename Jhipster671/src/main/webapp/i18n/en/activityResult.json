@@ -19,6 +19,7 @@
       "name": "Name",
       "resultType": "Result Type",
       "ratingWeight": "Rating Weight",
+      "mainResult": "Main Result",
       "resultSplits": "Result Splits",
       "resultUnit": "Result Unit",
       "activity": "Activity"

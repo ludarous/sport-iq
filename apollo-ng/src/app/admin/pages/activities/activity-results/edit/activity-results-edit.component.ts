@@ -56,6 +56,7 @@ export class ActivityResultsEditComponent implements OnInit {
             id: new FormControl(activityResult.id),
             name: new FormControl(activityResult.name, [Validators.required]),
             activityId: new FormControl(activityResult.activityId),
+            mainResult: new FormControl(activityResult.mainResult),
             resultType: new FormControl(activityResult.resultType ?
                 activityResult.resultType :
                 ResultType.LESS_IS_BETTER, [Validators.required]),

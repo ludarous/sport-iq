@@ -44,6 +44,7 @@ export interface IActivityResult {
     activityId?: number;
     resultSplits?: IActivityResultSplit[];
     resultUnit?: IUnit;
+    mainResult?: boolean;
 }
 
 export class ActivityResult implements IActivityResult {
@@ -54,6 +55,7 @@ export class ActivityResult implements IActivityResult {
     activityId?: number;
     resultSplits?: IActivityResultSplit[] = new Array<IActivityResultSplit>();
     resultUnit?: IUnit;
+    mainResult?: boolean;
 
     static parseItemEnums(activityResult: IActivityResult): IActivityResult {
         if (activityResult) {

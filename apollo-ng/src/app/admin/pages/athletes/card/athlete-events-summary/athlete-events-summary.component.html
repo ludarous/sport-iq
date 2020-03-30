@@ -2,21 +2,21 @@
 <div class="ui-g print-only">
     <div class="logo print-logo">Sport<span class="primary">iq</span></div>
 </div>
-<div class="ui-g">
-    <div class="ui-g-12 ui-md-2 list print-no">
-        <div class="card">
-            <p-panel [header]="'Události' | translate">
-                <ul>
-                    <li *ngFor="let athleteEvent of athleteEvents"
-                        (click)="selectAthleteEvent(athleteEvent)"
-                        [ngClass]="{'selected' : selectedAthleteEvent === athleteEvent}">
-                        {{athleteEvent.eventName}}
-                    </li>
-                </ul>
-            </p-panel>
-        </div>
-    </div>
-    <div *ngIf="athleteEventSummary" class="ui-g-12 ui-md-10 list">
+<div class="row">
+<!--    <div class="ui-g-12 list print-no">-->
+<!--        <div class="card">-->
+<!--            <p-panel [header]="'Události' | translate">-->
+<!--                <ul>-->
+<!--                    <li *ngFor="let athleteEvent of athleteEvents"-->
+<!--                        (click)="selectAthleteEvent(athleteEvent)"-->
+<!--                        [ngClass]="{'selected' : selectedAthleteEvent === athleteEvent}">-->
+<!--                        {{athleteEvent.eventName}}-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </p-panel>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div *ngIf="athleteEventSummary" class="col-12 list">
         <div *ngIf="athleteEventSummary.event" class="event-summary-heading">
             <h1 class="text-center">{{athleteEventSummary.event.name}}</h1>
             <h2 class="text-center">{{athleteEventSummary.event.date | datex:'DD.MM.YYYY'}}</h2>

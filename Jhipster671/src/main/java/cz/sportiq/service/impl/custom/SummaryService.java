@@ -250,13 +250,13 @@ public class SummaryService {
         AthleteStatsDTO athleteStats = new AthleteStatsDTO();
         if (hasValues) {
             int rank = allResultsWithValue.indexOf(athleteActivityResultOptional.get());
-            athleteStats.setValueRank(rank);
+            athleteStats.setValueRank(rank + 1);
             athleteStats.setValueRankInPercents(StatsUtil.getRankInPercents(athleteStats.getValueRank(), stats.getTotalCount()));
         }
 
         if (hasCompareValues) {
             int rank = allResultsWithCompareValue.indexOf(athleteActivityResultOptional.get());
-            athleteStats.setCompareValueRank(rank);
+            athleteStats.setCompareValueRank(rank + 1);
             athleteStats.setCompareValueRankInPercents(StatsUtil.getRankInPercents(athleteStats.getCompareValueRank(), stats.getTotalCount()));
         }
         stats.setAthleteStats(athleteStats);

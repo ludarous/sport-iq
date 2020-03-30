@@ -47,6 +47,9 @@ public class ActivityResultResourceIT {
     private static final Float DEFAULT_RATING_WEIGHT = 1F;
     private static final Float UPDATED_RATING_WEIGHT = 2F;
 
+    private static final Boolean DEFAULT_MAIN_RESULT = false;
+    private static final Boolean UPDATED_MAIN_RESULT = true;
+
     @Autowired
     private ActivityResultRepository activityResultRepository;
 
@@ -97,7 +100,8 @@ public class ActivityResultResourceIT {
         ActivityResult activityResult = new ActivityResult()
             .name(DEFAULT_NAME)
             .resultType(DEFAULT_RESULT_TYPE)
-            .ratingWeight(DEFAULT_RATING_WEIGHT);
+            .ratingWeight(DEFAULT_RATING_WEIGHT)
+            .mainResult(DEFAULT_MAIN_RESULT);
         return activityResult;
     }
     /**
@@ -110,7 +114,8 @@ public class ActivityResultResourceIT {
         ActivityResult activityResult = new ActivityResult()
             .name(UPDATED_NAME)
             .resultType(UPDATED_RESULT_TYPE)
-            .ratingWeight(UPDATED_RATING_WEIGHT);
+            .ratingWeight(UPDATED_RATING_WEIGHT)
+            .mainResult(UPDATED_MAIN_RESULT);
         return activityResult;
     }
 
@@ -138,6 +143,7 @@ public class ActivityResultResourceIT {
         assertThat(testActivityResult.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testActivityResult.getResultType()).isEqualTo(DEFAULT_RESULT_TYPE);
         assertThat(testActivityResult.getRatingWeight()).isEqualTo(DEFAULT_RATING_WEIGHT);
+        assertThat(testActivityResult.isMainResult()).isEqualTo(DEFAULT_MAIN_RESULT);
     }
 
     @Test
@@ -174,7 +180,8 @@ public class ActivityResultResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(activityResult.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].resultType").value(hasItem(DEFAULT_RESULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].ratingWeight").value(hasItem(DEFAULT_RATING_WEIGHT.doubleValue())));
+            .andExpect(jsonPath("$.[*].ratingWeight").value(hasItem(DEFAULT_RATING_WEIGHT.doubleValue())))
+            .andExpect(jsonPath("$.[*].mainResult").value(hasItem(DEFAULT_MAIN_RESULT.booleanValue())));
     }
     
     @Test
@@ -190,7 +197,8 @@ public class ActivityResultResourceIT {
             .andExpect(jsonPath("$.id").value(activityResult.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.resultType").value(DEFAULT_RESULT_TYPE.toString()))
-            .andExpect(jsonPath("$.ratingWeight").value(DEFAULT_RATING_WEIGHT.doubleValue()));
+            .andExpect(jsonPath("$.ratingWeight").value(DEFAULT_RATING_WEIGHT.doubleValue()))
+            .andExpect(jsonPath("$.mainResult").value(DEFAULT_MAIN_RESULT.booleanValue()));
     }
 
     @Test
@@ -216,7 +224,8 @@ public class ActivityResultResourceIT {
         updatedActivityResult
             .name(UPDATED_NAME)
             .resultType(UPDATED_RESULT_TYPE)
-            .ratingWeight(UPDATED_RATING_WEIGHT);
+            .ratingWeight(UPDATED_RATING_WEIGHT)
+            .mainResult(UPDATED_MAIN_RESULT);
         ActivityResultDTO activityResultDTO = activityResultMapper.toDto(updatedActivityResult);
 
         restActivityResultMockMvc.perform(put("/api/activity-results")
@@ -231,6 +240,7 @@ public class ActivityResultResourceIT {
         assertThat(testActivityResult.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testActivityResult.getResultType()).isEqualTo(UPDATED_RESULT_TYPE);
         assertThat(testActivityResult.getRatingWeight()).isEqualTo(UPDATED_RATING_WEIGHT);
+        assertThat(testActivityResult.isMainResult()).isEqualTo(UPDATED_MAIN_RESULT);
     }
 
     @Test

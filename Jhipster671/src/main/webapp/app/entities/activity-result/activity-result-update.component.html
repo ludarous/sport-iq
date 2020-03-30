@@ -32,6 +32,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.mainResult" for="field_mainResult">Main Result</label>
+                    <input type="checkbox" class="form-control" name="mainResult" id="field_mainResult"
+                           formControlName="mainResult"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.resultUnit" for="field_resultUnit">Result Unit</label>
                     <select class="form-control" id="field_resultUnit" name="resultUnit" formControlName="resultUnitId">
                         <option [ngValue]="null"></option>

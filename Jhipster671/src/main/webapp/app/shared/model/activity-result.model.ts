@@ -6,6 +6,7 @@ export interface IActivityResult {
   name?: string;
   resultType?: ResultType;
   ratingWeight?: number;
+  mainResult?: boolean;
   resultSplits?: IActivityResultSplit[];
   resultUnitName?: string;
   resultUnitId?: number;
@@ -18,9 +19,12 @@ export class ActivityResult implements IActivityResult {
     public name?: string,
     public resultType?: ResultType,
     public ratingWeight?: number,
+    public mainResult?: boolean,
     public resultSplits?: IActivityResultSplit[],
     public resultUnitName?: string,
     public resultUnitId?: number,
     public activityId?: number
-  ) {}
+  ) {
+    this.mainResult = this.mainResult || false;
+  }
 }

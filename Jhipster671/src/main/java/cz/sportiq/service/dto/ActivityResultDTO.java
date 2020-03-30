@@ -24,6 +24,8 @@ public class ActivityResultDTO implements Serializable {
 
     private UnitDTO resultUnit;
 
+    private Boolean mainResult;
+
     private Set<ActivityResultSplitDTO> resultSplits = new HashSet<>();
 
     public Long getId() {
@@ -73,6 +75,10 @@ public class ActivityResultDTO implements Serializable {
     public void setResultUnit(UnitDTO resultUnit) {
         this.resultUnit = resultUnit;
     }
+
+    public Boolean getMainResult() { return mainResult; }
+
+    public void setMainResult(Boolean mainResult) { this.mainResult = mainResult; }
 
     public Set<ActivityResultSplitDTO> getResultSplits() {
         return resultSplits;

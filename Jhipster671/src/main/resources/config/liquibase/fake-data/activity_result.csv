@@ -1,11 +1,11 @@
-id;name;result_type;rating_weight
-1;rich;MORE_IS_BETTER;12480
-2;invoice solid state;LESS_IS_BETTER;65727
-3;programming;LESS_IS_BETTER;42341
-4;wireless;MORE_IS_BETTER;59203
-5;bypass functionalities JBOD;LESS_IS_BETTER;74145
-6;Branch ADP;LESS_IS_BETTER;88378
-7;Metrics South Africa connect;MORE_IS_BETTER;33995
-8;concept scale;MORE_IS_BETTER;52836
-9;Latvia;LESS_IS_BETTER;65069
-10;cutting-edge Station;MORE_IS_BETTER;75785
+id;name;result_type;rating_weight;main_result
+1;rich;MORE_IS_BETTER;12480;false
+2;synthesizing Quality;MORE_IS_BETTER;942;true
+3;programming;LESS_IS_BETTER;42341;false
+4;Gibraltar Pound monitor generating;MORE_IS_BETTER;83830;false
+5;empower connect;MORE_IS_BETTER;70498;false
+6;capacitor Designer synthesizing;MORE_IS_BETTER;95500;true
+7;best-of-breed concept scale;MORE_IS_BETTER;52836;false
+8;Borders Executive;MORE_IS_BETTER;45281;false
+9;Station Industrial Auto Loan Account;MORE_IS_BETTER;25743;true
+10;Health;MORE_IS_BETTER;90308;false

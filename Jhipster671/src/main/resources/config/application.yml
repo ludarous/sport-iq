@@ -110,12 +110,12 @@ spring:
         registration:
           oidc:
             client-id: api
-            client-secret: e955f2bf-e054-4487-b1b1-52a201e59139
+            client-secret: 2902cee0-9b7d-445c-bac7-14f2d9b43cef
 server:
   servlet:
     session:
       cookie:
-        http-only: true
+        http-only: false
 
 # Properties to be exposed on the /info management endpoint
 info:

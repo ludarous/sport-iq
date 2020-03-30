@@ -37,6 +37,9 @@ public class ActivityResult implements Serializable {
     @Column(name = "rating_weight")
     private Float ratingWeight;
 
+    @Column(name = "main_result")
+    private Boolean mainResult;
+
     @OneToMany(mappedBy = "activityResult", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<ActivityResultSplit> resultSplits = new HashSet<>();
@@ -95,6 +98,19 @@ public class ActivityResult implements Serializable {
 
     public void setRatingWeight(Float ratingWeight) {
         this.ratingWeight = ratingWeight;
+    }
+
+    public Boolean isMainResult() {
+        return mainResult;
+    }
+
+    public ActivityResult mainResult(Boolean mainResult) {
+        this.mainResult = mainResult;
+        return this;
+    }
+
+    public void setMainResult(Boolean mainResult) {
+        this.mainResult = mainResult;
     }
 
     public Set<ActivityResultSplit> getResultSplits() {
@@ -172,6 +188,7 @@ public class ActivityResult implements Serializable {
             ", name='" + getName() + "'" +
             ", resultType='" + getResultType() + "'" +
             ", ratingWeight=" + getRatingWeight() +
+            ", mainResult='" + isMainResult() + "'" +
             "}";
     }
 }

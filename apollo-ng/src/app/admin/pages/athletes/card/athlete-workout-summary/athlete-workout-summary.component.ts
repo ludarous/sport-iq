@@ -83,7 +83,7 @@ export class AthleteWorkoutSummaryComponent implements OnInit {
     }
 
     getActivityResultCharts(activitySummary: AthleteActivitySummary): ResultChartData {
-        const resultSummaries = AthleteActivityResultSummary.sortByActivityResultId(activitySummary.resultSummaries);
+        const resultSummaries = AthleteActivityResultSummary.sortByMainResult(activitySummary.resultSummaries);
         const resultSummary = resultSummaries[0];
         const resultChart: ResultChartData = {
             yAxisLabel: activitySummary.activity.name,

@@ -73,7 +73,7 @@ spring:
         registration:
           oidc:
             client-id: api
-            client-secret: 88857d4f-c9a2-4ea3-aaa5-d15e8ab3d5c6
+            client-secret: 0ea78190-8e9b-48a7-9863-8a7d47328f4f
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:

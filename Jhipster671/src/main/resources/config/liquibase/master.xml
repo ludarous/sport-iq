@@ -31,6 +31,7 @@
     <include file="config/liquibase/changelog/20200226073900_added_entity_EventLocation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200226074000_added_entity_Sport.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200226074100_added_entity_Unit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200311163411_activityResult_added_mainResult_field.xml" relativeToChangelogFile="false" />
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200226072500_added_entity_constraints_Event.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200226072600_added_entity_constraints_Workout.xml" relativeToChangelogFile="false"/>

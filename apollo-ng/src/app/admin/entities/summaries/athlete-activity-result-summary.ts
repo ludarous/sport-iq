@@ -7,10 +7,10 @@ export class AthleteActivityResultSummary {
     activityResult?: IActivityResult;
     stats?: Stats;
 
-    static sortByActivityResultId(input: Array<AthleteActivityResultSummary>, order = 1): Array<AthleteActivityResultSummary> {
+    static sortByMainResult(input: Array<AthleteActivityResultSummary>, order = 1): Array<AthleteActivityResultSummary> {
         if (input) {
             const comparer = (o1: AthleteActivityResultSummary, o2: AthleteActivityResultSummary) => {
-                const result = o1.activityResult.id - o2.activityResult.id;
+                const result =  (o1.activityResult.mainResult === o2.activityResult.mainResult) ? 0 : o1.activityResult.mainResult ? -1 : 1;
                 return result * order;
             };
             return input.sort(comparer);

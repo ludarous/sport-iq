@@ -226,6 +226,19 @@ app-root {
     fill: rgb(183,250,255) !important;
 }
 
+ngx-charts-bar-horizontal, ngx-charts-bar-horizontal-stacked {
+    svg {
+        margin-left: -20px;
+    }
+}
+
+.col-12-chart {
+    flex: 0 0 99%;
+    max-width: 98%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 @media print {
 
     .print-only {

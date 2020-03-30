@@ -28,6 +28,7 @@ export class ActivityResultUpdateComponent implements OnInit {
     name: [],
     resultType: [],
     ratingWeight: [],
+    mainResult: [],
     resultUnitId: [],
     activityId: []
   });
@@ -56,6 +57,7 @@ export class ActivityResultUpdateComponent implements OnInit {
       name: activityResult.name,
       resultType: activityResult.resultType,
       ratingWeight: activityResult.ratingWeight,
+      mainResult: activityResult.mainResult,
       resultUnitId: activityResult.resultUnitId,
       activityId: activityResult.activityId
     });
@@ -82,6 +84,7 @@ export class ActivityResultUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       resultType: this.editForm.get(['resultType'])!.value,
       ratingWeight: this.editForm.get(['ratingWeight'])!.value,
+      mainResult: this.editForm.get(['mainResult'])!.value,
       resultUnitId: this.editForm.get(['resultUnitId'])!.value,
       activityId: this.editForm.get(['activityId'])!.value
     };
