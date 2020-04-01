@@ -4,7 +4,7 @@ import { WebComponent } from './web/web.component';
 
 const routes: Routes = [
     {path: '', component: WebComponent},
-    {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
+    {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { AdminModule } from './app/admin/admin.module';
+import { DashboardModule } from './app/dashboard/dashboard.module';
 import { environment } from './environments/environment';
 import { AppModule } from './app/app.module';
 

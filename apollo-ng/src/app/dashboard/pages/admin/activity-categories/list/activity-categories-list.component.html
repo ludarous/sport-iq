@@ -1,0 +1,32 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card card-w-title">
+            <h1>{{'Kategorie aktivit' | translate}}</h1>
+            <div class="btn-panel">
+                <button pButton type="button" class="cyan-btn" [label]="'Vytvořit kategorii aktivit' | translate"
+                        [routerLink]="['/dashboard/pages/admin/activity-categories/create']"></button>
+            </div>
+            <p-treeTable *ngIf="categoriesNodes" [value]="categoriesNodes" [columns]="tableCols"
+                         selectionMode="checkbox">
+                <ng-template pTemplate="header" let-columns="columns">
+                    <tr>
+                        <th *ngFor="let col of tableCols">{{col.header}}</th>
+                        <th class="table-action-column"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                    <tr>
+                        <td>
+                            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                            <span class="pointer" [routerLink]="['/dashboard/pages/admin/activity-categories/edit', rowData.id]">{{rowData.name}}</span>
+                        </td>
+                        <td>{{rowData.description}}</td>
+                        <td class="table-action-column">
+                            <button class="ui-button-danger" type="button" icon="fa fa-trash" pButton (click)="delete($event, rowData)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-treeTable>
+        </div>
+    </div>
+</div>

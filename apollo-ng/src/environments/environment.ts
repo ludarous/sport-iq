@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-import { Authorities, AuthoritiesEnum } from '../app/admin/entities/authorities';
+import { Authorities, AuthoritiesEnum } from '../app/dashboard/entities/authorities';
 
 export const backendUrl = 'https://localhost:9090';
 export const authoritiesEnum = AuthoritiesEnum;

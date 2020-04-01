@@ -1,4 +1,4 @@
-import { AuthoritiesEnum } from '../app/admin/entities/authorities';
+import { AuthoritiesEnum } from '../app/dashboard/entities/authorities';
 
 export const backendUrl = 'https://api.sportiq.cz';
 export const authoritiesEnum = AuthoritiesEnum;

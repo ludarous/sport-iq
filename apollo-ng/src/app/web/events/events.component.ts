@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../../admin/services/rest/event.service';
-import { IEvent } from '../../admin/entities/model/event.model';
+import { EventService } from '../../dashboard/services/rest/event.service';
+import { IEvent } from '../../dashboard/entities/model/event.model';
 import { Moment } from 'moment';
 import * as moment from 'moment';
-import { IEventLocation } from '../../admin/entities/model/event-location.model';
+import { IEventLocation } from '../../dashboard/entities/model/event-location.model';
 import { AuthService } from '../../modules/auth/services/auth.service';
 import { IUser } from '../../modules/entities/user';
 import { AuthUtils } from '../../modules/core/utils/auth.utils';
