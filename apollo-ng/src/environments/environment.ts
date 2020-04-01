@@ -5,13 +5,13 @@
 
 import { Authorities, AuthoritiesEnum } from '../app/admin/entities/authorities';
 
-export const backendUrl = 'http://localhost:9090';
+export const backendUrl = 'https://localhost:9090';
 export const authoritiesEnum = AuthoritiesEnum;
 export const environment = {
     production: false,
     apiUrl: backendUrl + '/api',
     backendUrl,
-    logoutUrl: 'http://auth.dev.sportiq.cz/auth/realms/dev/protocol/openid-connect/logout',
+    logoutUrl: 'https://auth.dev.sportiq.cz/auth/realms/dev/protocol/openid-connect/logout',
     allowedLoginReferrers: ['*'],
     authoritiesEnum,
 };

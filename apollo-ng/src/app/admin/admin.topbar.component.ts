@@ -5,7 +5,8 @@ import {IUser} from '../modules/entities/user';
 
 @Component({
     selector: 'app-topbar',
-    templateUrl: './admin.topbar.component.html'
+    templateUrl: './admin.topbar.component.html',
+    styleUrls: ['./admin.component.scss']
 })
 export class AdminTopbarComponent {
 

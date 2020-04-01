@@ -31,6 +31,7 @@ import { NodeService } from './demo/service/nodeservice';
 import { BreadcrumbService } from './breadcrumb.service';
 import { PrimeNgComponentsModule } from './shared/prime-ng-components.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { AvatarModule } from 'ngx-avatar';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { TranslateModule } from '@ngx-translate/core';
         AdminRoutes,
         TranslateModule,
         PrimeNgComponentsModule,
+        AvatarModule
     ],
     declarations: [
         AdminComponent,
