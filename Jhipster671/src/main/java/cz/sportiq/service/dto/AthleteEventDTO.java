@@ -28,6 +28,8 @@ public class AthleteEventDTO implements Serializable {
 
     private Long eventId;
 
+    private String eventName;
+
     private Set<AthleteWorkoutDTO> athleteWorkouts = new HashSet<AthleteWorkoutDTO>();
 
     public Long getId() {
@@ -101,7 +103,15 @@ public class AthleteEventDTO implements Serializable {
     public void setAthleteWorkouts(Set<AthleteWorkoutDTO> athleteWorkouts) {
         this.athleteWorkouts = athleteWorkouts;
     }
-    
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -136,6 +146,7 @@ public class AthleteEventDTO implements Serializable {
             ", eventId=" + getEventId() +
             "}";
     }
+
 
 
 }

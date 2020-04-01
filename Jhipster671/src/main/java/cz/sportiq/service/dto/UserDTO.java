@@ -50,6 +50,8 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private AthleteDTO athlete;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -176,6 +178,14 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
+    public AthleteDTO getAthlete() {
+        return athlete;
+    }
+
+    public void setAthlete(AthleteDTO athlete) {
+        this.athlete = athlete;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -193,4 +203,5 @@ public class UserDTO {
             ", authorities=" + authorities +
             "}";
     }
+
 }

@@ -10,6 +10,7 @@ import cz.sportiq.repository.UserRepository;
 import cz.sportiq.security.SecurityUtils;
 import cz.sportiq.service.dto.UserDTO;
 
+import cz.sportiq.service.mapper.AthleteMapper;
 import jdk.nashorn.internal.runtime.options.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -184,6 +185,8 @@ public class UserService {
             userRepository.save(user);
             this.clearUserCaches(user);
         }
+
+        Athlete athlete = syncUserWithAthlete(user);
         return user;
     }
 
@@ -202,6 +205,13 @@ public class UserService {
         }
 
         Athlete athlete = new Athlete();
+        athlete.setUser(user);
+        athlete.setFirstName(user.getFirstName());
+        athlete.setLastName(user.getLastName());
+        athlete.setEmail(user.getEmail());
+        athlete = athleteRepository.save(athlete);
+        return athlete;
+
     }
     /**
      * Returns the user from an OAuth 2.0 login or resource server with JWT.

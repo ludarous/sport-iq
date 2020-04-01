@@ -19,10 +19,11 @@ import java.util.Optional;
 public interface AthleteRepository extends JpaRepository<Athlete, Long> {
     Optional<Athlete> findOneByEmail(String email);
 
-    @Query("select athlete from Athlete athlete " +
+    @Query(value = "select athlete from Athlete athlete " +
         "join athlete.user user " +
         "where user.id = :userId")
     Optional<Athlete> findOneByUserId(@Param("userId") String userId);
+
     @Query(value = "select distinct athlete from Athlete athlete left join fetch athlete.sports",
         countQuery = "select count(distinct athlete) from Athlete athlete")
     Page<Athlete> findAllWithEagerRelationships(Pageable pageable);

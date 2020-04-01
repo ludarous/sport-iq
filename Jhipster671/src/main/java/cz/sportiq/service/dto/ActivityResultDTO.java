@@ -28,10 +28,7 @@ public class ActivityResultDTO implements Serializable {
 
     private Float irvWorst;
 
-
-    private Long resultUnitId;
-
-    private String resultUnitName;
+    private UnitDTO resultUnit;
 
     private Long activityId;
 
@@ -102,22 +99,6 @@ public class ActivityResultDTO implements Serializable {
         this.irvWorst = irvWorst;
     }
 
-    public Long getResultUnitId() {
-        return resultUnitId;
-    }
-
-    public void setResultUnitId(Long unitId) {
-        this.resultUnitId = unitId;
-    }
-
-    public String getResultUnitName() {
-        return resultUnitName;
-    }
-
-    public void setResultUnitName(String unitName) {
-        this.resultUnitName = unitName;
-    }
-
     public Long getActivityId() {
         return activityId;
     }
@@ -132,6 +113,14 @@ public class ActivityResultDTO implements Serializable {
 
     public void setResultSplits(Set<ActivityResultSplitDTO> resultSplits) {
         this.resultSplits = resultSplits;
+    }
+
+    public UnitDTO getResultUnit() {
+        return resultUnit;
+    }
+
+    public void setResultUnit(UnitDTO resultUnit) {
+        this.resultUnit = resultUnit;
     }
 
     @Override
@@ -166,11 +155,9 @@ public class ActivityResultDTO implements Serializable {
             ", order=" + getOrder() +
             ", irvBest=" + getIrvBest() +
             ", irvWorst=" + getIrvWorst() +
-            ", resultUnitId=" + getResultUnitId() +
-            ", resultUnitName='" + getResultUnitName() + "'" +
+            ", resultUnitId=" + getResultUnit().getId() +
+            ", resultUnitName='" + getResultUnit().getName() + "'" +
             ", activityId=" + getActivityId() +
             "}";
     }
-
-
 }
