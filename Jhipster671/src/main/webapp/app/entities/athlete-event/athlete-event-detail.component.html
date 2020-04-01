@@ -20,6 +20,14 @@
                 <dd>
                     <span>{{ athleteEvent.actualWeightInKg }}</span>
                 </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteEvent.medicalFitnessAgreement">Medical Fitness Agreement</span></dt>
+                <dd>
+                    <span>{{ athleteEvent.medicalFitnessAgreement }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athleteEvent.registrationDate">Registration Date</span></dt>
+                <dd>
+                    <span>{{ athleteEvent.registrationDate }}</span>
+                </dd>
                 <dt><span jhiTranslate="sportiqApp.athleteEvent.athlete">Athlete</span></dt>
                 <dd>
                     <div *ngIf="athleteEvent.athleteId">

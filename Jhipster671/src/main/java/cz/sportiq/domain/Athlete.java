@@ -14,6 +14,8 @@ import java.util.Set;
 
 import cz.sportiq.domain.enumeration.Sex;
 
+import cz.sportiq.domain.enumeration.Laterality;
+
 /**
  * A Athlete.
  */
@@ -41,6 +43,9 @@ public class Athlete implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "birth_date")
     private ZonedDateTime birthDate;
 
@@ -51,13 +56,70 @@ public class Athlete implements Serializable {
     @Column(name = "sex")
     private Sex sex;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Address address;
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "street")
+    private String street;
+
+    @Column(name = "zip_code")
+    private String zipCode;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "hand_laterality")
+    private Laterality handLaterality;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "foot_laterality")
+    private Laterality footLaterality;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stepping_foot")
+    private Laterality steppingFoot;
+
+    @Column(name = "terms_agreement")
+    private Boolean termsAgreement;
+
+    @Column(name = "gdpr_agreement")
+    private Boolean gdprAgreement;
+
+    @Column(name = "photography_agreement")
+    private Boolean photographyAgreement;
+
+    @Column(name = "medical_fitness_agreement")
+    private Boolean medicalFitnessAgreement;
+
+    @Column(name = "marketing_agreement")
+    private Boolean marketingAgreement;
+
+    @Column(name = "lr_first_name")
+    private String lrFirstName;
+
+    @Column(name = "lr_last_name")
+    private String lrLastName;
+
+    @Column(name = "lr_email")
+    private String lrEmail;
+
+    @Column(name = "lr_phone")
+    private String lrPhone;
+
+    @Column(name = "profile_completed")
+    private Boolean profileCompleted;
 
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "athlete_sports",
+               joinColumns = @JoinColumn(name = "athlete_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "sports_id", referencedColumnName = "id"))
+    private Set<Sport> sports = new HashSet<>();
 
     @ManyToMany(mappedBy = "athletes")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -112,6 +174,19 @@ public class Athlete implements Serializable {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public Athlete phone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public ZonedDateTime getBirthDate() {
         return birthDate;
     }
@@ -151,17 +226,225 @@ public class Athlete implements Serializable {
         this.sex = sex;
     }
 
-    public Address getAddress() {
-        return address;
+    public String getCountry() {
+        return country;
     }
 
-    public Athlete address(Address address) {
-        this.address = address;
+    public Athlete country(String country) {
+        this.country = country;
         return this;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public Athlete city(String city) {
+        this.city = city;
+        return this;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public Athlete street(String street) {
+        this.street = street;
+        return this;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public Athlete zipCode(String zipCode) {
+        this.zipCode = zipCode;
+        return this;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public Laterality getHandLaterality() {
+        return handLaterality;
+    }
+
+    public Athlete handLaterality(Laterality handLaterality) {
+        this.handLaterality = handLaterality;
+        return this;
+    }
+
+    public void setHandLaterality(Laterality handLaterality) {
+        this.handLaterality = handLaterality;
+    }
+
+    public Laterality getFootLaterality() {
+        return footLaterality;
+    }
+
+    public Athlete footLaterality(Laterality footLaterality) {
+        this.footLaterality = footLaterality;
+        return this;
+    }
+
+    public void setFootLaterality(Laterality footLaterality) {
+        this.footLaterality = footLaterality;
+    }
+
+    public Laterality getSteppingFoot() {
+        return steppingFoot;
+    }
+
+    public Athlete steppingFoot(Laterality steppingFoot) {
+        this.steppingFoot = steppingFoot;
+        return this;
+    }
+
+    public void setSteppingFoot(Laterality steppingFoot) {
+        this.steppingFoot = steppingFoot;
+    }
+
+    public Boolean isTermsAgreement() {
+        return termsAgreement;
+    }
+
+    public Athlete termsAgreement(Boolean termsAgreement) {
+        this.termsAgreement = termsAgreement;
+        return this;
+    }
+
+    public void setTermsAgreement(Boolean termsAgreement) {
+        this.termsAgreement = termsAgreement;
+    }
+
+    public Boolean isGdprAgreement() {
+        return gdprAgreement;
+    }
+
+    public Athlete gdprAgreement(Boolean gdprAgreement) {
+        this.gdprAgreement = gdprAgreement;
+        return this;
+    }
+
+    public void setGdprAgreement(Boolean gdprAgreement) {
+        this.gdprAgreement = gdprAgreement;
+    }
+
+    public Boolean isPhotographyAgreement() {
+        return photographyAgreement;
+    }
+
+    public Athlete photographyAgreement(Boolean photographyAgreement) {
+        this.photographyAgreement = photographyAgreement;
+        return this;
+    }
+
+    public void setPhotographyAgreement(Boolean photographyAgreement) {
+        this.photographyAgreement = photographyAgreement;
+    }
+
+    public Boolean isMedicalFitnessAgreement() {
+        return medicalFitnessAgreement;
+    }
+
+    public Athlete medicalFitnessAgreement(Boolean medicalFitnessAgreement) {
+        this.medicalFitnessAgreement = medicalFitnessAgreement;
+        return this;
+    }
+
+    public void setMedicalFitnessAgreement(Boolean medicalFitnessAgreement) {
+        this.medicalFitnessAgreement = medicalFitnessAgreement;
+    }
+
+    public Boolean isMarketingAgreement() {
+        return marketingAgreement;
+    }
+
+    public Athlete marketingAgreement(Boolean marketingAgreement) {
+        this.marketingAgreement = marketingAgreement;
+        return this;
+    }
+
+    public void setMarketingAgreement(Boolean marketingAgreement) {
+        this.marketingAgreement = marketingAgreement;
+    }
+
+    public String getLrFirstName() {
+        return lrFirstName;
+    }
+
+    public Athlete lrFirstName(String lrFirstName) {
+        this.lrFirstName = lrFirstName;
+        return this;
+    }
+
+    public void setLrFirstName(String lrFirstName) {
+        this.lrFirstName = lrFirstName;
+    }
+
+    public String getLrLastName() {
+        return lrLastName;
+    }
+
+    public Athlete lrLastName(String lrLastName) {
+        this.lrLastName = lrLastName;
+        return this;
+    }
+
+    public void setLrLastName(String lrLastName) {
+        this.lrLastName = lrLastName;
+    }
+
+    public String getLrEmail() {
+        return lrEmail;
+    }
+
+    public Athlete lrEmail(String lrEmail) {
+        this.lrEmail = lrEmail;
+        return this;
+    }
+
+    public void setLrEmail(String lrEmail) {
+        this.lrEmail = lrEmail;
+    }
+
+    public String getLrPhone() {
+        return lrPhone;
+    }
+
+    public Athlete lrPhone(String lrPhone) {
+        this.lrPhone = lrPhone;
+        return this;
+    }
+
+    public void setLrPhone(String lrPhone) {
+        this.lrPhone = lrPhone;
+    }
+
+    public Boolean isProfileCompleted() {
+        return profileCompleted;
+    }
+
+    public Athlete profileCompleted(Boolean profileCompleted) {
+        this.profileCompleted = profileCompleted;
+        return this;
+    }
+
+    public void setProfileCompleted(Boolean profileCompleted) {
+        this.profileCompleted = profileCompleted;
     }
 
     public User getUser() {
@@ -175,6 +458,31 @@ public class Athlete implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Sport> getSports() {
+        return sports;
+    }
+
+    public Athlete sports(Set<Sport> sports) {
+        this.sports = sports;
+        return this;
+    }
+
+    public Athlete addSports(Sport sport) {
+        this.sports.add(sport);
+        sport.getAthletes().add(this);
+        return this;
+    }
+
+    public Athlete removeSports(Sport sport) {
+        this.sports.remove(sport);
+        sport.getAthletes().remove(this);
+        return this;
+    }
+
+    public void setSports(Set<Sport> sports) {
+        this.sports = sports;
     }
 
     public Set<Event> getEvents() {
@@ -226,9 +534,27 @@ public class Athlete implements Serializable {
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", email='" + getEmail() + "'" +
+            ", phone='" + getPhone() + "'" +
             ", birthDate='" + getBirthDate() + "'" +
             ", nationality='" + getNationality() + "'" +
             ", sex='" + getSex() + "'" +
+            ", country='" + getCountry() + "'" +
+            ", city='" + getCity() + "'" +
+            ", street='" + getStreet() + "'" +
+            ", zipCode='" + getZipCode() + "'" +
+            ", handLaterality='" + getHandLaterality() + "'" +
+            ", footLaterality='" + getFootLaterality() + "'" +
+            ", steppingFoot='" + getSteppingFoot() + "'" +
+            ", termsAgreement='" + isTermsAgreement() + "'" +
+            ", gdprAgreement='" + isGdprAgreement() + "'" +
+            ", photographyAgreement='" + isPhotographyAgreement() + "'" +
+            ", medicalFitnessAgreement='" + isMedicalFitnessAgreement() + "'" +
+            ", marketingAgreement='" + isMarketingAgreement() + "'" +
+            ", lrFirstName='" + getLrFirstName() + "'" +
+            ", lrLastName='" + getLrLastName() + "'" +
+            ", lrEmail='" + getLrEmail() + "'" +
+            ", lrPhone='" + getLrPhone() + "'" +
+            ", profileCompleted='" + isProfileCompleted() + "'" +
             "}";
     }
 }

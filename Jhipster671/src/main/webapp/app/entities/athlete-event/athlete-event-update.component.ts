@@ -4,6 +4,8 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IAthleteEvent, AthleteEvent } from 'app/shared/model/athlete-event.model';
 import { AthleteEventService } from './athlete-event.service';
@@ -28,6 +30,8 @@ export class AthleteEventUpdateComponent implements OnInit {
     note: [],
     actualHeightInCm: [],
     actualWeightInKg: [],
+    medicalFitnessAgreement: [],
+    registrationDate: [],
     athleteId: [null, Validators.required],
     eventId: []
   });
@@ -42,6 +46,11 @@ export class AthleteEventUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ athleteEvent }) => {
+      if (!athleteEvent.id) {
+        const today = moment().startOf('day');
+        athleteEvent.registrationDate = today;
+      }
+
       this.updateForm(athleteEvent);
 
       this.athleteService.query().subscribe((res: HttpResponse<IAthlete[]>) => (this.athletes = res.body || []));
@@ -56,6 +65,8 @@ export class AthleteEventUpdateComponent implements OnInit {
       note: athleteEvent.note,
       actualHeightInCm: athleteEvent.actualHeightInCm,
       actualWeightInKg: athleteEvent.actualWeightInKg,
+      medicalFitnessAgreement: athleteEvent.medicalFitnessAgreement,
+      registrationDate: athleteEvent.registrationDate ? athleteEvent.registrationDate.format(DATE_TIME_FORMAT) : null,
       athleteId: athleteEvent.athleteId,
       eventId: athleteEvent.eventId
     });
@@ -82,6 +93,10 @@ export class AthleteEventUpdateComponent implements OnInit {
       note: this.editForm.get(['note'])!.value,
       actualHeightInCm: this.editForm.get(['actualHeightInCm'])!.value,
       actualWeightInKg: this.editForm.get(['actualWeightInKg'])!.value,
+      medicalFitnessAgreement: this.editForm.get(['medicalFitnessAgreement'])!.value,
+      registrationDate: this.editForm.get(['registrationDate'])!.value
+        ? moment(this.editForm.get(['registrationDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       athleteId: this.editForm.get(['athleteId'])!.value,
       eventId: this.editForm.get(['eventId'])!.value
     };

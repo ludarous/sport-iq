@@ -6,6 +6,10 @@ enum ResultType {
 	LESS_IS_BETTER, MORE_IS_BETTER
 }
 
+enum Laterality {
+    LEFT, RIGHT
+}
+
 entity Event {
 	name String required,
     date ZonedDateTime
@@ -22,14 +26,17 @@ entity Activity {
     description String,
     help String,
     minAge Integer,
-    maxAge Integer,
-    targetValue Float,
+    maxAge Integer
 }
 
 entity ActivityResult {
 	name String,
     resultType ResultType
     ratingWeight Float,
+    mainResult Boolean,
+    order Integer,
+    irvBest Float,
+    irvWorst Float
 }
 
 entity ActivityResultSplit {
@@ -49,7 +56,9 @@ entity ActivityCategory {
 entity AthleteEvent {
 	note String,
     actualHeightInCm Float,
-    actualWeightInKg Float
+    actualWeightInKg Float,
+    medicalFitnessAgreement Boolean,
+    registrationDate ZonedDateTime
 }
 
 entity AthleteWorkout {
@@ -75,17 +84,27 @@ entity Athlete {
 	firstName String required,
     lastName String required,
     email String required,
+    phone String,
     birthDate ZonedDateTime,
     nationality String,
-    sex Sex
-}
-
-
-entity Address {
-	country String required,
-    city String required,
-	street String required,
-    zipCode String required
+    sex Sex,
+    country String,
+    city String,
+    street String,
+    zipCode String,
+    handLaterality Laterality,
+    footLaterality Laterality,
+    steppingFoot Laterality,
+    termsAgreement Boolean,
+    gdprAgreement Boolean,
+    photographyAgreement Boolean,
+    medicalFitnessAgreement Boolean,
+    marketingAgreement Boolean,
+    lrFirstName String,
+    lrLastName String,
+    lrEmail String,
+    lrPhone String,
+    profileCompleted Boolean
 }
 
 entity EventLocation {
@@ -97,9 +116,7 @@ entity EventLocation {
     latitude Float,
     longitude Float,
     capacity Integer,
-    mapLink String,
-    maxAge Integer,
-    minAge Integer,
+    mapLink String
 }
 
 entity Sport {
@@ -112,7 +129,6 @@ entity Unit {
 }
 
 relationship OneToOne {
-    Athlete{address} to Address
     Athlete{user} to User
 }
 
@@ -120,6 +136,7 @@ relationship ManyToMany {
 	Workout{activities(name)} to Activity{workouts(name)}
     Activity{categories(name)} to ActivityCategory{activities(name)}
     Workout{categories(name)} to WorkoutCategory{workouts(name)}
+    Athlete{sports(name)} to Sport{athletes(email)}
     Workout{sports(name)} to Sport{workouts(name)}
     Event{tests(name)} to Workout{events(name)}
     Event{athletes(email)} to Athlete{events(name)}

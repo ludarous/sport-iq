@@ -43,9 +43,6 @@ public class Activity implements Serializable {
     @Column(name = "max_age")
     private Integer maxAge;
 
-    @Column(name = "target_value")
-    private Float targetValue;
-
     @OneToMany(mappedBy = "activity", cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONE)
     private Set<ActivityResult> activityResults = new HashSet<>();
@@ -138,19 +135,6 @@ public class Activity implements Serializable {
 
     public void setMaxAge(Integer maxAge) {
         this.maxAge = maxAge;
-    }
-
-    public Float getTargetValue() {
-        return targetValue;
-    }
-
-    public Activity targetValue(Float targetValue) {
-        this.targetValue = targetValue;
-        return this;
-    }
-
-    public void setTargetValue(Float targetValue) {
-        this.targetValue = targetValue;
     }
 
     public Set<ActivityResult> getActivityResults() {
@@ -267,7 +251,6 @@ public class Activity implements Serializable {
             ", help='" + getHelp() + "'" +
             ", minAge=" + getMinAge() +
             ", maxAge=" + getMaxAge() +
-            ", targetValue=" + getTargetValue() +
             "}";
     }
 }

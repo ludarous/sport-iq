@@ -64,12 +64,6 @@ public class EventLocationResourceIT {
     private static final String DEFAULT_MAP_LINK = "AAAAAAAAAA";
     private static final String UPDATED_MAP_LINK = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_MAX_AGE = 1;
-    private static final Integer UPDATED_MAX_AGE = 2;
-
-    private static final Integer DEFAULT_MIN_AGE = 1;
-    private static final Integer UPDATED_MIN_AGE = 2;
-
     @Autowired
     private EventLocationRepository eventLocationRepository;
 
@@ -126,9 +120,7 @@ public class EventLocationResourceIT {
             .latitude(DEFAULT_LATITUDE)
             .longitude(DEFAULT_LONGITUDE)
             .capacity(DEFAULT_CAPACITY)
-            .mapLink(DEFAULT_MAP_LINK)
-            .maxAge(DEFAULT_MAX_AGE)
-            .minAge(DEFAULT_MIN_AGE);
+            .mapLink(DEFAULT_MAP_LINK);
         return eventLocation;
     }
     /**
@@ -147,9 +139,7 @@ public class EventLocationResourceIT {
             .latitude(UPDATED_LATITUDE)
             .longitude(UPDATED_LONGITUDE)
             .capacity(UPDATED_CAPACITY)
-            .mapLink(UPDATED_MAP_LINK)
-            .maxAge(UPDATED_MAX_AGE)
-            .minAge(UPDATED_MIN_AGE);
+            .mapLink(UPDATED_MAP_LINK);
         return eventLocation;
     }
 
@@ -183,8 +173,6 @@ public class EventLocationResourceIT {
         assertThat(testEventLocation.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
         assertThat(testEventLocation.getCapacity()).isEqualTo(DEFAULT_CAPACITY);
         assertThat(testEventLocation.getMapLink()).isEqualTo(DEFAULT_MAP_LINK);
-        assertThat(testEventLocation.getMaxAge()).isEqualTo(DEFAULT_MAX_AGE);
-        assertThat(testEventLocation.getMinAge()).isEqualTo(DEFAULT_MIN_AGE);
     }
 
     @Test
@@ -246,9 +234,7 @@ public class EventLocationResourceIT {
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.doubleValue())))
             .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.doubleValue())))
             .andExpect(jsonPath("$.[*].capacity").value(hasItem(DEFAULT_CAPACITY)))
-            .andExpect(jsonPath("$.[*].mapLink").value(hasItem(DEFAULT_MAP_LINK)))
-            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)))
-            .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)));
+            .andExpect(jsonPath("$.[*].mapLink").value(hasItem(DEFAULT_MAP_LINK)));
     }
     
     @Test
@@ -270,9 +256,7 @@ public class EventLocationResourceIT {
             .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.doubleValue()))
             .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.doubleValue()))
             .andExpect(jsonPath("$.capacity").value(DEFAULT_CAPACITY))
-            .andExpect(jsonPath("$.mapLink").value(DEFAULT_MAP_LINK))
-            .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE))
-            .andExpect(jsonPath("$.minAge").value(DEFAULT_MIN_AGE));
+            .andExpect(jsonPath("$.mapLink").value(DEFAULT_MAP_LINK));
     }
 
     @Test
@@ -304,9 +288,7 @@ public class EventLocationResourceIT {
             .latitude(UPDATED_LATITUDE)
             .longitude(UPDATED_LONGITUDE)
             .capacity(UPDATED_CAPACITY)
-            .mapLink(UPDATED_MAP_LINK)
-            .maxAge(UPDATED_MAX_AGE)
-            .minAge(UPDATED_MIN_AGE);
+            .mapLink(UPDATED_MAP_LINK);
         EventLocationDTO eventLocationDTO = eventLocationMapper.toDto(updatedEventLocation);
 
         restEventLocationMockMvc.perform(put("/api/event-locations")
@@ -327,8 +309,6 @@ public class EventLocationResourceIT {
         assertThat(testEventLocation.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
         assertThat(testEventLocation.getCapacity()).isEqualTo(UPDATED_CAPACITY);
         assertThat(testEventLocation.getMapLink()).isEqualTo(UPDATED_MAP_LINK);
-        assertThat(testEventLocation.getMaxAge()).isEqualTo(UPDATED_MAX_AGE);
-        assertThat(testEventLocation.getMinAge()).isEqualTo(UPDATED_MIN_AGE);
     }
 
     @Test

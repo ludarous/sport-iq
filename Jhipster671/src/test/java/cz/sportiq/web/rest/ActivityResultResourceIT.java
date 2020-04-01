@@ -50,6 +50,15 @@ public class ActivityResultResourceIT {
     private static final Boolean DEFAULT_MAIN_RESULT = false;
     private static final Boolean UPDATED_MAIN_RESULT = true;
 
+    private static final Integer DEFAULT_ORDER = 1;
+    private static final Integer UPDATED_ORDER = 2;
+
+    private static final Float DEFAULT_IRV_BEST = 1F;
+    private static final Float UPDATED_IRV_BEST = 2F;
+
+    private static final Float DEFAULT_IRV_WORST = 1F;
+    private static final Float UPDATED_IRV_WORST = 2F;
+
     @Autowired
     private ActivityResultRepository activityResultRepository;
 
@@ -101,7 +110,10 @@ public class ActivityResultResourceIT {
             .name(DEFAULT_NAME)
             .resultType(DEFAULT_RESULT_TYPE)
             .ratingWeight(DEFAULT_RATING_WEIGHT)
-            .mainResult(DEFAULT_MAIN_RESULT);
+            .mainResult(DEFAULT_MAIN_RESULT)
+            .order(DEFAULT_ORDER)
+            .irvBest(DEFAULT_IRV_BEST)
+            .irvWorst(DEFAULT_IRV_WORST);
         return activityResult;
     }
     /**
@@ -115,7 +127,10 @@ public class ActivityResultResourceIT {
             .name(UPDATED_NAME)
             .resultType(UPDATED_RESULT_TYPE)
             .ratingWeight(UPDATED_RATING_WEIGHT)
-            .mainResult(UPDATED_MAIN_RESULT);
+            .mainResult(UPDATED_MAIN_RESULT)
+            .order(UPDATED_ORDER)
+            .irvBest(UPDATED_IRV_BEST)
+            .irvWorst(UPDATED_IRV_WORST);
         return activityResult;
     }
 
@@ -144,6 +159,9 @@ public class ActivityResultResourceIT {
         assertThat(testActivityResult.getResultType()).isEqualTo(DEFAULT_RESULT_TYPE);
         assertThat(testActivityResult.getRatingWeight()).isEqualTo(DEFAULT_RATING_WEIGHT);
         assertThat(testActivityResult.isMainResult()).isEqualTo(DEFAULT_MAIN_RESULT);
+        assertThat(testActivityResult.getOrder()).isEqualTo(DEFAULT_ORDER);
+        assertThat(testActivityResult.getIrvBest()).isEqualTo(DEFAULT_IRV_BEST);
+        assertThat(testActivityResult.getIrvWorst()).isEqualTo(DEFAULT_IRV_WORST);
     }
 
     @Test
@@ -181,7 +199,10 @@ public class ActivityResultResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].resultType").value(hasItem(DEFAULT_RESULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].ratingWeight").value(hasItem(DEFAULT_RATING_WEIGHT.doubleValue())))
-            .andExpect(jsonPath("$.[*].mainResult").value(hasItem(DEFAULT_MAIN_RESULT.booleanValue())));
+            .andExpect(jsonPath("$.[*].mainResult").value(hasItem(DEFAULT_MAIN_RESULT.booleanValue())))
+            .andExpect(jsonPath("$.[*].order").value(hasItem(DEFAULT_ORDER)))
+            .andExpect(jsonPath("$.[*].irvBest").value(hasItem(DEFAULT_IRV_BEST.doubleValue())))
+            .andExpect(jsonPath("$.[*].irvWorst").value(hasItem(DEFAULT_IRV_WORST.doubleValue())));
     }
     
     @Test
@@ -198,7 +219,10 @@ public class ActivityResultResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.resultType").value(DEFAULT_RESULT_TYPE.toString()))
             .andExpect(jsonPath("$.ratingWeight").value(DEFAULT_RATING_WEIGHT.doubleValue()))
-            .andExpect(jsonPath("$.mainResult").value(DEFAULT_MAIN_RESULT.booleanValue()));
+            .andExpect(jsonPath("$.mainResult").value(DEFAULT_MAIN_RESULT.booleanValue()))
+            .andExpect(jsonPath("$.order").value(DEFAULT_ORDER))
+            .andExpect(jsonPath("$.irvBest").value(DEFAULT_IRV_BEST.doubleValue()))
+            .andExpect(jsonPath("$.irvWorst").value(DEFAULT_IRV_WORST.doubleValue()));
     }
 
     @Test
@@ -225,7 +249,10 @@ public class ActivityResultResourceIT {
             .name(UPDATED_NAME)
             .resultType(UPDATED_RESULT_TYPE)
             .ratingWeight(UPDATED_RATING_WEIGHT)
-            .mainResult(UPDATED_MAIN_RESULT);
+            .mainResult(UPDATED_MAIN_RESULT)
+            .order(UPDATED_ORDER)
+            .irvBest(UPDATED_IRV_BEST)
+            .irvWorst(UPDATED_IRV_WORST);
         ActivityResultDTO activityResultDTO = activityResultMapper.toDto(updatedActivityResult);
 
         restActivityResultMockMvc.perform(put("/api/activity-results")
@@ -241,6 +268,9 @@ public class ActivityResultResourceIT {
         assertThat(testActivityResult.getResultType()).isEqualTo(UPDATED_RESULT_TYPE);
         assertThat(testActivityResult.getRatingWeight()).isEqualTo(UPDATED_RATING_WEIGHT);
         assertThat(testActivityResult.isMainResult()).isEqualTo(UPDATED_MAIN_RESULT);
+        assertThat(testActivityResult.getOrder()).isEqualTo(UPDATED_ORDER);
+        assertThat(testActivityResult.getIrvBest()).isEqualTo(UPDATED_IRV_BEST);
+        assertThat(testActivityResult.getIrvWorst()).isEqualTo(UPDATED_IRV_WORST);
     }
 
     @Test

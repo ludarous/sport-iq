@@ -26,10 +26,27 @@
                     <th scope="col"  jhiSortBy="firstName"><span jhiTranslate="sportiqApp.athlete.firstName">First Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="lastName"><span jhiTranslate="sportiqApp.athlete.lastName">Last Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="email"><span jhiTranslate="sportiqApp.athlete.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phone"><span jhiTranslate="sportiqApp.athlete.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="birthDate"><span jhiTranslate="sportiqApp.athlete.birthDate">Birth Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="nationality"><span jhiTranslate="sportiqApp.athlete.nationality">Nationality</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="sex"><span jhiTranslate="sportiqApp.athlete.sex">Sex</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="addressId"><span jhiTranslate="sportiqApp.athlete.address">Address</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="country"><span jhiTranslate="sportiqApp.athlete.country">Country</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="city"><span jhiTranslate="sportiqApp.athlete.city">City</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="street"><span jhiTranslate="sportiqApp.athlete.street">Street</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="zipCode"><span jhiTranslate="sportiqApp.athlete.zipCode">Zip Code</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="handLaterality"><span jhiTranslate="sportiqApp.athlete.handLaterality">Hand Laterality</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="footLaterality"><span jhiTranslate="sportiqApp.athlete.footLaterality">Foot Laterality</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="steppingFoot"><span jhiTranslate="sportiqApp.athlete.steppingFoot">Stepping Foot</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="termsAgreement"><span jhiTranslate="sportiqApp.athlete.termsAgreement">Terms Agreement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="gdprAgreement"><span jhiTranslate="sportiqApp.athlete.gdprAgreement">Gdpr Agreement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="photographyAgreement"><span jhiTranslate="sportiqApp.athlete.photographyAgreement">Photography Agreement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="medicalFitnessAgreement"><span jhiTranslate="sportiqApp.athlete.medicalFitnessAgreement">Medical Fitness Agreement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="marketingAgreement"><span jhiTranslate="sportiqApp.athlete.marketingAgreement">Marketing Agreement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lrFirstName"><span jhiTranslate="sportiqApp.athlete.lrFirstName">Lr First Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lrLastName"><span jhiTranslate="sportiqApp.athlete.lrLastName">Lr Last Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lrEmail"><span jhiTranslate="sportiqApp.athlete.lrEmail">Lr Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lrPhone"><span jhiTranslate="sportiqApp.athlete.lrPhone">Lr Phone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="profileCompleted"><span jhiTranslate="sportiqApp.athlete.profileCompleted">Profile Completed</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userId"><span jhiTranslate="sportiqApp.athlete.user">User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -40,14 +57,27 @@
                     <td>{{ athlete.firstName }}</td>
                     <td>{{ athlete.lastName }}</td>
                     <td>{{ athlete.email }}</td>
+                    <td>{{ athlete.phone }}</td>
                     <td>{{ athlete.birthDate | date:'medium' }}</td>
                     <td>{{ athlete.nationality }}</td>
                     <td jhiTranslate="{{ 'sportiqApp.Sex.' + athlete.sex }}">{{ athlete.sex }}</td>
-                    <td>
-                        <div *ngIf="athlete.addressId">
-                            <a [routerLink]="['/address', athlete.addressId , 'view']" >{{ athlete.addressId }}</a>
-                        </div>
-                    </td>
+                    <td>{{ athlete.country }}</td>
+                    <td>{{ athlete.city }}</td>
+                    <td>{{ athlete.street }}</td>
+                    <td>{{ athlete.zipCode }}</td>
+                    <td jhiTranslate="{{ 'sportiqApp.Laterality.' + athlete.handLaterality }}">{{ athlete.handLaterality }}</td>
+                    <td jhiTranslate="{{ 'sportiqApp.Laterality.' + athlete.footLaterality }}">{{ athlete.footLaterality }}</td>
+                    <td jhiTranslate="{{ 'sportiqApp.Laterality.' + athlete.steppingFoot }}">{{ athlete.steppingFoot }}</td>
+                    <td>{{ athlete.termsAgreement }}</td>
+                    <td>{{ athlete.gdprAgreement }}</td>
+                    <td>{{ athlete.photographyAgreement }}</td>
+                    <td>{{ athlete.medicalFitnessAgreement }}</td>
+                    <td>{{ athlete.marketingAgreement }}</td>
+                    <td>{{ athlete.lrFirstName }}</td>
+                    <td>{{ athlete.lrLastName }}</td>
+                    <td>{{ athlete.lrEmail }}</td>
+                    <td>{{ athlete.lrPhone }}</td>
+                    <td>{{ athlete.profileCompleted }}</td>
                     <td>
                         {{ athlete.userId }}
                     </td>

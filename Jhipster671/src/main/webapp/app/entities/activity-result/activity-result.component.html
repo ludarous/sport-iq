@@ -27,6 +27,9 @@
                     <th scope="col"  jhiSortBy="resultType"><span jhiTranslate="sportiqApp.activityResult.resultType">Result Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="ratingWeight"><span jhiTranslate="sportiqApp.activityResult.ratingWeight">Rating Weight</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="mainResult"><span jhiTranslate="sportiqApp.activityResult.mainResult">Main Result</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="order"><span jhiTranslate="sportiqApp.activityResult.order">Order</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="irvBest"><span jhiTranslate="sportiqApp.activityResult.irvBest">Irv Best</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="irvWorst"><span jhiTranslate="sportiqApp.activityResult.irvWorst">Irv Worst</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="resultUnitName"><span jhiTranslate="sportiqApp.activityResult.resultUnit">Result Unit</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="activityId"><span jhiTranslate="sportiqApp.activityResult.activity">Activity</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -39,6 +42,9 @@
                     <td jhiTranslate="{{ 'sportiqApp.ResultType.' + activityResult.resultType }}">{{ activityResult.resultType }}</td>
                     <td>{{ activityResult.ratingWeight }}</td>
                     <td>{{ activityResult.mainResult }}</td>
+                    <td>{{ activityResult.order }}</td>
+                    <td>{{ activityResult.irvBest }}</td>
+                    <td>{{ activityResult.irvWorst }}</td>
                     <td>
                         <div *ngIf="activityResult.resultUnitId">
                             <a [routerLink]="['/unit', activityResult.resultUnitId , 'view']" >{{ activityResult.resultUnitName }}</a>

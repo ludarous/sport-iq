@@ -25,9 +25,7 @@ export class EventLocationUpdateComponent implements OnInit {
     latitude: [],
     longitude: [],
     capacity: [],
-    mapLink: [],
-    maxAge: [],
-    minAge: []
+    mapLink: []
   });
 
   constructor(protected eventLocationService: EventLocationService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -49,9 +47,7 @@ export class EventLocationUpdateComponent implements OnInit {
       latitude: eventLocation.latitude,
       longitude: eventLocation.longitude,
       capacity: eventLocation.capacity,
-      mapLink: eventLocation.mapLink,
-      maxAge: eventLocation.maxAge,
-      minAge: eventLocation.minAge
+      mapLink: eventLocation.mapLink
     });
   }
 
@@ -81,9 +77,7 @@ export class EventLocationUpdateComponent implements OnInit {
       latitude: this.editForm.get(['latitude'])!.value,
       longitude: this.editForm.get(['longitude'])!.value,
       capacity: this.editForm.get(['capacity'])!.value,
-      mapLink: this.editForm.get(['mapLink'])!.value,
-      maxAge: this.editForm.get(['maxAge'])!.value,
-      minAge: this.editForm.get(['minAge'])!.value
+      mapLink: this.editForm.get(['mapLink'])!.value
     };
   }
 

@@ -30,10 +30,6 @@ public class EventLocationDTO implements Serializable {
 
     private String mapLink;
 
-    private Integer maxAge;
-
-    private Integer minAge;
-
 
     public Long getId() {
         return id;
@@ -115,22 +111,6 @@ public class EventLocationDTO implements Serializable {
         this.mapLink = mapLink;
     }
 
-    public Integer getMaxAge() {
-        return maxAge;
-    }
-
-    public void setMaxAge(Integer maxAge) {
-        this.maxAge = maxAge;
-    }
-
-    public Integer getMinAge() {
-        return minAge;
-    }
-
-    public void setMinAge(Integer minAge) {
-        this.minAge = minAge;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -165,8 +145,6 @@ public class EventLocationDTO implements Serializable {
             ", longitude=" + getLongitude() +
             ", capacity=" + getCapacity() +
             ", mapLink='" + getMapLink() + "'" +
-            ", maxAge=" + getMaxAge() +
-            ", minAge=" + getMinAge() +
             "}";
     }
 }

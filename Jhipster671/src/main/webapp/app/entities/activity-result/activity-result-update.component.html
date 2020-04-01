@@ -38,6 +38,24 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.order" for="field_order">Order</label>
+                    <input type="number" class="form-control" name="order" id="field_order"
+                           formControlName="order"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.irvBest" for="field_irvBest">Irv Best</label>
+                    <input type="number" class="form-control" name="irvBest" id="field_irvBest"
+                           formControlName="irvBest"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.irvWorst" for="field_irvWorst">Irv Worst</label>
+                    <input type="number" class="form-control" name="irvWorst" id="field_irvWorst"
+                           formControlName="irvWorst"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.activityResult.resultUnit" for="field_resultUnit">Result Unit</label>
                     <select class="form-control" id="field_resultUnit" name="resultUnit" formControlName="resultUnitId">
                         <option [ngValue]="null"></option>

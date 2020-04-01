@@ -24,9 +24,7 @@
       "latitude": "Latitude",
       "longitude": "Longitude",
       "capacity": "Capacity",
-      "mapLink": "Map Link",
-      "maxAge": "Max Age",
-      "minAge": "Min Age"
+      "mapLink": "Map Link"
     }
   }
 }

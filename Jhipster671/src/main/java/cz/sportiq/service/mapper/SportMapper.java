@@ -13,6 +13,8 @@ import org.mapstruct.*;
 public interface SportMapper extends EntityMapper<SportDTO, Sport> {
 
 
+    @Mapping(target = "athletes", ignore = true)
+    @Mapping(target = "removeAthletes", ignore = true)
     @Mapping(target = "workouts", ignore = true)
     @Mapping(target = "removeWorkouts", ignore = true)
     Sport toEntity(SportDTO sportDTO);

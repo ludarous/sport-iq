@@ -19,6 +19,8 @@
       "note": "Note",
       "actualHeightInCm": "Actual Height In Cm",
       "actualWeightInKg": "Actual Weight In Kg",
+      "medicalFitnessAgreement": "Medical Fitness Agreement",
+      "registrationDate": "Registration Date",
       "athleteWorkouts": "Athlete Workouts",
       "athlete": "Athlete",
       "event": "Event"

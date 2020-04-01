@@ -17,6 +17,18 @@
         {
             "fieldName": "mainResult",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "order",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "irvBest",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "irvWorst",
+            "fieldType": "Float"
         }
     ],
     "relationships": [

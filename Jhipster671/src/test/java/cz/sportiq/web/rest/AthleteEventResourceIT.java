@@ -25,8 +25,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.util.List;
 
+import static cz.sportiq.web.rest.TestUtil.sameInstant;
 import static cz.sportiq.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -47,6 +52,12 @@ public class AthleteEventResourceIT {
 
     private static final Float DEFAULT_ACTUAL_WEIGHT_IN_KG = 1F;
     private static final Float UPDATED_ACTUAL_WEIGHT_IN_KG = 2F;
+
+    private static final Boolean DEFAULT_MEDICAL_FITNESS_AGREEMENT = false;
+    private static final Boolean UPDATED_MEDICAL_FITNESS_AGREEMENT = true;
+
+    private static final ZonedDateTime DEFAULT_REGISTRATION_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_REGISTRATION_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private AthleteEventRepository athleteEventRepository;
@@ -101,7 +112,9 @@ public class AthleteEventResourceIT {
         AthleteEvent athleteEvent = new AthleteEvent()
             .note(DEFAULT_NOTE)
             .actualHeightInCm(DEFAULT_ACTUAL_HEIGHT_IN_CM)
-            .actualWeightInKg(DEFAULT_ACTUAL_WEIGHT_IN_KG);
+            .actualWeightInKg(DEFAULT_ACTUAL_WEIGHT_IN_KG)
+            .medicalFitnessAgreement(DEFAULT_MEDICAL_FITNESS_AGREEMENT)
+            .registrationDate(DEFAULT_REGISTRATION_DATE);
         // Add required entity
         Athlete athlete;
         if (TestUtil.findAll(em, Athlete.class).isEmpty()) {
@@ -124,7 +137,9 @@ public class AthleteEventResourceIT {
         AthleteEvent athleteEvent = new AthleteEvent()
             .note(UPDATED_NOTE)
             .actualHeightInCm(UPDATED_ACTUAL_HEIGHT_IN_CM)
-            .actualWeightInKg(UPDATED_ACTUAL_WEIGHT_IN_KG);
+            .actualWeightInKg(UPDATED_ACTUAL_WEIGHT_IN_KG)
+            .medicalFitnessAgreement(UPDATED_MEDICAL_FITNESS_AGREEMENT)
+            .registrationDate(UPDATED_REGISTRATION_DATE);
         // Add required entity
         Athlete athlete;
         if (TestUtil.findAll(em, Athlete.class).isEmpty()) {
@@ -162,6 +177,8 @@ public class AthleteEventResourceIT {
         assertThat(testAthleteEvent.getNote()).isEqualTo(DEFAULT_NOTE);
         assertThat(testAthleteEvent.getActualHeightInCm()).isEqualTo(DEFAULT_ACTUAL_HEIGHT_IN_CM);
         assertThat(testAthleteEvent.getActualWeightInKg()).isEqualTo(DEFAULT_ACTUAL_WEIGHT_IN_KG);
+        assertThat(testAthleteEvent.isMedicalFitnessAgreement()).isEqualTo(DEFAULT_MEDICAL_FITNESS_AGREEMENT);
+        assertThat(testAthleteEvent.getRegistrationDate()).isEqualTo(DEFAULT_REGISTRATION_DATE);
     }
 
     @Test
@@ -198,7 +215,9 @@ public class AthleteEventResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(athleteEvent.getId().intValue())))
             .andExpect(jsonPath("$.[*].note").value(hasItem(DEFAULT_NOTE)))
             .andExpect(jsonPath("$.[*].actualHeightInCm").value(hasItem(DEFAULT_ACTUAL_HEIGHT_IN_CM.doubleValue())))
-            .andExpect(jsonPath("$.[*].actualWeightInKg").value(hasItem(DEFAULT_ACTUAL_WEIGHT_IN_KG.doubleValue())));
+            .andExpect(jsonPath("$.[*].actualWeightInKg").value(hasItem(DEFAULT_ACTUAL_WEIGHT_IN_KG.doubleValue())))
+            .andExpect(jsonPath("$.[*].medicalFitnessAgreement").value(hasItem(DEFAULT_MEDICAL_FITNESS_AGREEMENT.booleanValue())))
+            .andExpect(jsonPath("$.[*].registrationDate").value(hasItem(sameInstant(DEFAULT_REGISTRATION_DATE))));
     }
 
     @Test
@@ -214,7 +233,9 @@ public class AthleteEventResourceIT {
             .andExpect(jsonPath("$.id").value(athleteEvent.getId().intValue()))
             .andExpect(jsonPath("$.note").value(DEFAULT_NOTE))
             .andExpect(jsonPath("$.actualHeightInCm").value(DEFAULT_ACTUAL_HEIGHT_IN_CM.doubleValue()))
-            .andExpect(jsonPath("$.actualWeightInKg").value(DEFAULT_ACTUAL_WEIGHT_IN_KG.doubleValue()));
+            .andExpect(jsonPath("$.actualWeightInKg").value(DEFAULT_ACTUAL_WEIGHT_IN_KG.doubleValue()))
+            .andExpect(jsonPath("$.medicalFitnessAgreement").value(DEFAULT_MEDICAL_FITNESS_AGREEMENT.booleanValue()))
+            .andExpect(jsonPath("$.registrationDate").value(sameInstant(DEFAULT_REGISTRATION_DATE)));
     }
 
     @Test
@@ -240,7 +261,9 @@ public class AthleteEventResourceIT {
         updatedAthleteEvent
             .note(UPDATED_NOTE)
             .actualHeightInCm(UPDATED_ACTUAL_HEIGHT_IN_CM)
-            .actualWeightInKg(UPDATED_ACTUAL_WEIGHT_IN_KG);
+            .actualWeightInKg(UPDATED_ACTUAL_WEIGHT_IN_KG)
+            .medicalFitnessAgreement(UPDATED_MEDICAL_FITNESS_AGREEMENT)
+            .registrationDate(UPDATED_REGISTRATION_DATE);
         AthleteEventDTO athleteEventDTO = athleteEventMapper.toDto(updatedAthleteEvent);
 
         restAthleteEventMockMvc.perform(put("/api/athlete-events")
@@ -255,6 +278,8 @@ public class AthleteEventResourceIT {
         assertThat(testAthleteEvent.getNote()).isEqualTo(UPDATED_NOTE);
         assertThat(testAthleteEvent.getActualHeightInCm()).isEqualTo(UPDATED_ACTUAL_HEIGHT_IN_CM);
         assertThat(testAthleteEvent.getActualWeightInKg()).isEqualTo(UPDATED_ACTUAL_WEIGHT_IN_KG);
+        assertThat(testAthleteEvent.isMedicalFitnessAgreement()).isEqualTo(UPDATED_MEDICAL_FITNESS_AGREEMENT);
+        assertThat(testAthleteEvent.getRegistrationDate()).isEqualTo(UPDATED_REGISTRATION_DATE);
     }
 
     @Test

@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(EventLocationService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new EventLocation(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 0, 'AAAAAAA', 0, 0);
+      elemDefault = new EventLocation(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -62,9 +62,7 @@ describe('Service Tests', () => {
             latitude: 1,
             longitude: 1,
             capacity: 1,
-            mapLink: 'BBBBBB',
-            maxAge: 1,
-            minAge: 1
+            mapLink: 'BBBBBB'
           },
           elemDefault
         );
@@ -89,9 +87,7 @@ describe('Service Tests', () => {
             latitude: 1,
             longitude: 1,
             capacity: 1,
-            mapLink: 'BBBBBB',
-            maxAge: 1,
-            minAge: 1
+            mapLink: 'BBBBBB'
           },
           elemDefault
         );

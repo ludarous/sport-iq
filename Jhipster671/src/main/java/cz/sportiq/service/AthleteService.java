@@ -29,6 +29,13 @@ public interface AthleteService {
     Page<AthleteDTO> findAll(Pageable pageable);
 
     /**
+     * Get all the athletes with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    Page<AthleteDTO> findAllWithEagerRelationships(Pageable pageable);
+
+    /**
      * Get the "id" athlete.
      *
      * @param id the id of the entity.

@@ -12,6 +12,14 @@
         {
             "fieldName": "actualWeightInKg",
             "fieldType": "Float"
+        },
+        {
+            "fieldName": "medicalFitnessAgreement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "registrationDate",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "relationships": [

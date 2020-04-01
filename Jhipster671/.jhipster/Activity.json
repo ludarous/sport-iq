@@ -23,10 +23,6 @@
         {
             "fieldName": "maxAge",
             "fieldType": "Integer"
-        },
-        {
-            "fieldName": "targetValue",
-            "fieldType": "Float"
         }
     ],
     "relationships": [

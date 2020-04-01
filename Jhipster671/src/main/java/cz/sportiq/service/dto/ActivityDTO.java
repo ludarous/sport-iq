@@ -1,4 +1,5 @@
 package cz.sportiq.service.dto;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -23,7 +24,6 @@ public class ActivityDTO implements Serializable {
 
     private Integer maxAge;
 
-    private Float targetValue;
 
     private Long targetUnitId;
 
@@ -79,14 +79,6 @@ public class ActivityDTO implements Serializable {
 
     public void setMaxAge(Integer maxAge) {
         this.maxAge = maxAge;
-    }
-
-    public Float getTargetValue() {
-        return targetValue;
-    }
-
-    public void setTargetValue(Float targetValue) {
-        this.targetValue = targetValue;
     }
 
     public Long getTargetUnitId() {
@@ -147,9 +139,8 @@ public class ActivityDTO implements Serializable {
             ", help='" + getHelp() + "'" +
             ", minAge=" + getMinAge() +
             ", maxAge=" + getMaxAge() +
-            ", targetValue=" + getTargetValue() +
-            ", targetUnit=" + getTargetUnitId() +
-            ", targetUnit='" + getTargetUnitName() + "'" +
+            ", targetUnitId=" + getTargetUnitId() +
+            ", targetUnitName='" + getTargetUnitName() + "'" +
             "}";
     }
 }

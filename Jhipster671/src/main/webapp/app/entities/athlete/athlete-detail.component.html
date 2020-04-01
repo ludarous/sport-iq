@@ -20,6 +20,10 @@
                 <dd>
                     <span>{{ athlete.email }}</span>
                 </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.phone">Phone</span></dt>
+                <dd>
+                    <span>{{ athlete.phone }}</span>
+                </dd>
                 <dt><span jhiTranslate="sportiqApp.athlete.birthDate">Birth Date</span></dt>
                 <dd>
                     <span>{{ athlete.birthDate }}</span>
@@ -32,15 +36,83 @@
                 <dd>
                     <span jhiTranslate="{{ 'sportiqApp.Sex.' + athlete.sex }}">{{ athlete.sex }}</span>
                 </dd>
-                <dt><span jhiTranslate="sportiqApp.athlete.address">Address</span></dt>
+                <dt><span jhiTranslate="sportiqApp.athlete.country">Country</span></dt>
                 <dd>
-                    <div *ngIf="athlete.addressId">
-                        <a [routerLink]="['/address', athlete.addressId, 'view']">{{ athlete.addressId }}</a>
-                    </div>
+                    <span>{{ athlete.country }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.city">City</span></dt>
+                <dd>
+                    <span>{{ athlete.city }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.street">Street</span></dt>
+                <dd>
+                    <span>{{ athlete.street }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.zipCode">Zip Code</span></dt>
+                <dd>
+                    <span>{{ athlete.zipCode }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.handLaterality">Hand Laterality</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'sportiqApp.Laterality.' + athlete.handLaterality }}">{{ athlete.handLaterality }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.footLaterality">Foot Laterality</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'sportiqApp.Laterality.' + athlete.footLaterality }}">{{ athlete.footLaterality }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.steppingFoot">Stepping Foot</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'sportiqApp.Laterality.' + athlete.steppingFoot }}">{{ athlete.steppingFoot }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.termsAgreement">Terms Agreement</span></dt>
+                <dd>
+                    <span>{{ athlete.termsAgreement }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.gdprAgreement">Gdpr Agreement</span></dt>
+                <dd>
+                    <span>{{ athlete.gdprAgreement }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.photographyAgreement">Photography Agreement</span></dt>
+                <dd>
+                    <span>{{ athlete.photographyAgreement }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.medicalFitnessAgreement">Medical Fitness Agreement</span></dt>
+                <dd>
+                    <span>{{ athlete.medicalFitnessAgreement }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.marketingAgreement">Marketing Agreement</span></dt>
+                <dd>
+                    <span>{{ athlete.marketingAgreement }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.lrFirstName">Lr First Name</span></dt>
+                <dd>
+                    <span>{{ athlete.lrFirstName }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.lrLastName">Lr Last Name</span></dt>
+                <dd>
+                    <span>{{ athlete.lrLastName }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.lrEmail">Lr Email</span></dt>
+                <dd>
+                    <span>{{ athlete.lrEmail }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.lrPhone">Lr Phone</span></dt>
+                <dd>
+                    <span>{{ athlete.lrPhone }}</span>
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.profileCompleted">Profile Completed</span></dt>
+                <dd>
+                    <span>{{ athlete.profileCompleted }}</span>
                 </dd>
                 <dt><span jhiTranslate="sportiqApp.athlete.user">User</span></dt>
                 <dd>
                     {{ athlete.userId }}
+                </dd>
+                <dt><span jhiTranslate="sportiqApp.athlete.sports">Sports</span></dt>
+                <dd>
+                    <span *ngFor="let sports of athlete.sports; let last = last">
+                        <a [routerLink]="['/sport', sports?.id, 'view']">{{ sports.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
                 </dd>
             </dl>
 

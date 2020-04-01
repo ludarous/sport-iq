@@ -20,6 +20,9 @@
       "resultType": "Result Type",
       "ratingWeight": "Rating Weight",
       "mainResult": "Main Result",
+      "order": "Order",
+      "irvBest": "Irv Best",
+      "irvWorst": "Irv Worst",
       "resultSplits": "Result Splits",
       "resultUnit": "Result Unit",
       "activity": "Activity"

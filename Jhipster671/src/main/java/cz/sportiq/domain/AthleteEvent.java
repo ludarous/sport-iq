@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,6 +35,12 @@ public class AthleteEvent implements Serializable {
 
     @Column(name = "actual_weight_in_kg")
     private Float actualWeightInKg;
+
+    @Column(name = "medical_fitness_agreement")
+    private Boolean medicalFitnessAgreement;
+
+    @Column(name = "registration_date")
+    private ZonedDateTime registrationDate;
 
     @OneToMany(mappedBy = "athleteEvent")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -94,6 +101,32 @@ public class AthleteEvent implements Serializable {
 
     public void setActualWeightInKg(Float actualWeightInKg) {
         this.actualWeightInKg = actualWeightInKg;
+    }
+
+    public Boolean isMedicalFitnessAgreement() {
+        return medicalFitnessAgreement;
+    }
+
+    public AthleteEvent medicalFitnessAgreement(Boolean medicalFitnessAgreement) {
+        this.medicalFitnessAgreement = medicalFitnessAgreement;
+        return this;
+    }
+
+    public void setMedicalFitnessAgreement(Boolean medicalFitnessAgreement) {
+        this.medicalFitnessAgreement = medicalFitnessAgreement;
+    }
+
+    public ZonedDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public AthleteEvent registrationDate(ZonedDateTime registrationDate) {
+        this.registrationDate = registrationDate;
+        return this;
+    }
+
+    public void setRegistrationDate(ZonedDateTime registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public Set<AthleteWorkout> getAthleteWorkouts() {
@@ -171,6 +204,8 @@ public class AthleteEvent implements Serializable {
             ", note='" + getNote() + "'" +
             ", actualHeightInCm=" + getActualHeightInCm() +
             ", actualWeightInKg=" + getActualWeightInKg() +
+            ", medicalFitnessAgreement='" + isMedicalFitnessAgreement() + "'" +
+            ", registrationDate='" + getRegistrationDate() + "'" +
             "}";
     }
 }

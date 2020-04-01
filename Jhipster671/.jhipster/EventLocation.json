@@ -39,14 +39,6 @@
         {
             "fieldName": "mapLink",
             "fieldType": "String"
-        },
-        {
-            "fieldName": "maxAge",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "minAge",
-            "fieldType": "Integer"
         }
     ],
     "relationships": [],

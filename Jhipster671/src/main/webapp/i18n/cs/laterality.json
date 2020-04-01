@@ -1,0 +1,9 @@
+{
+  "sportiqApp": {
+    "Laterality": {
+      "null": "",
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT"
+    }
+  }
+}

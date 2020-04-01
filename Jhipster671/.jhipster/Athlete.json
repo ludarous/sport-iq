@@ -23,6 +23,10 @@
             ]
         },
         {
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "birthDate",
             "fieldType": "ZonedDateTime"
         },
@@ -34,23 +38,94 @@
             "fieldName": "sex",
             "fieldType": "Sex",
             "fieldValues": "MALE,FEMALE,OTHER"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "street",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "zipCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "handLaterality",
+            "fieldType": "Laterality",
+            "fieldValues": "LEFT,RIGHT"
+        },
+        {
+            "fieldName": "footLaterality",
+            "fieldType": "Laterality",
+            "fieldValues": "LEFT,RIGHT"
+        },
+        {
+            "fieldName": "steppingFoot",
+            "fieldType": "Laterality",
+            "fieldValues": "LEFT,RIGHT"
+        },
+        {
+            "fieldName": "termsAgreement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "gdprAgreement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "photographyAgreement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "medicalFitnessAgreement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "marketingAgreement",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "lrFirstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lrLastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lrEmail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lrPhone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "profileCompleted",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "address",
-            "otherEntityRelationshipName": "athlete",
-            "relationshipName": "address",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
         {
             "relationshipType": "one-to-one",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "athlete",
             "relationshipName": "user",
             "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "sport",
+            "otherEntityRelationshipName": "athletes",
+            "relationshipName": "sports",
+            "otherEntityField": "name",
             "ownerSide": true
         },
         {

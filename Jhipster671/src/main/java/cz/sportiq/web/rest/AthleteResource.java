@@ -88,12 +88,18 @@ public class AthleteResource {
      * {@code GET  /athletes} : get all the athletes.
      *
      * @param pageable the pagination information.
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of athletes in body.
      */
     @GetMapping("/athletes")
-    public ResponseEntity<List<AthleteDTO>> getAllAthletes(Pageable pageable) {
+    public ResponseEntity<List<AthleteDTO>> getAllAthletes(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Athletes");
-        Page<AthleteDTO> page = athleteService.findAll(pageable);
+        Page<AthleteDTO> page;
+        if (eagerload) {
+            page = athleteService.findAllWithEagerRelationships(pageable);
+        } else {
+            page = athleteService.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

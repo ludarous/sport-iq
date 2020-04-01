@@ -17,6 +17,7 @@
         "title": "Sport"
       },
       "name": "Name",
+      "athletes": "Athletes",
       "workouts": "Workouts"
     }
   }

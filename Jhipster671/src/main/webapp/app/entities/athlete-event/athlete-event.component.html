@@ -26,6 +26,8 @@
                     <th scope="col"  jhiSortBy="note"><span jhiTranslate="sportiqApp.athleteEvent.note">Note</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="actualHeightInCm"><span jhiTranslate="sportiqApp.athleteEvent.actualHeightInCm">Actual Height In Cm</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="actualWeightInKg"><span jhiTranslate="sportiqApp.athleteEvent.actualWeightInKg">Actual Weight In Kg</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="medicalFitnessAgreement"><span jhiTranslate="sportiqApp.athleteEvent.medicalFitnessAgreement">Medical Fitness Agreement</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="registrationDate"><span jhiTranslate="sportiqApp.athleteEvent.registrationDate">Registration Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="athleteId"><span jhiTranslate="sportiqApp.athleteEvent.athlete">Athlete</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="eventId"><span jhiTranslate="sportiqApp.athleteEvent.event">Event</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -37,6 +39,8 @@
                     <td>{{ athleteEvent.note }}</td>
                     <td>{{ athleteEvent.actualHeightInCm }}</td>
                     <td>{{ athleteEvent.actualWeightInKg }}</td>
+                    <td>{{ athleteEvent.medicalFitnessAgreement }}</td>
+                    <td>{{ athleteEvent.registrationDate | date:'medium' }}</td>
                     <td>
                         <div *ngIf="athleteEvent.athleteId">
                             <a [routerLink]="['/athlete', athleteEvent.athleteId , 'view']" >{{ athleteEvent.athleteId }}</a>

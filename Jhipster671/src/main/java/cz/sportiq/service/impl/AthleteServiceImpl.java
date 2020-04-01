@@ -62,6 +62,15 @@ public class AthleteServiceImpl implements AthleteService {
     }
 
     /**
+     * Get all the athletes with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<AthleteDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return athleteRepository.findAllWithEagerRelationships(pageable).map(athleteMapper::toDto);
+    }
+
+    /**
      * Get one athlete by id.
      *
      * @param id the id of the entity.
@@ -71,7 +80,7 @@ public class AthleteServiceImpl implements AthleteService {
     @Transactional(readOnly = true)
     public Optional<AthleteDTO> findOne(Long id) {
         log.debug("Request to get Athlete : {}", id);
-        return athleteRepository.findById(id)
+        return athleteRepository.findOneWithEagerRelationships(id)
             .map(athleteMapper::toDto);
     }
 

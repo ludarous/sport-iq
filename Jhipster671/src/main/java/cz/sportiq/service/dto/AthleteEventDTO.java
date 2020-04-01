@@ -1,4 +1,7 @@
 package cz.sportiq.service.dto;
+
+import java.time.ZonedDateTime;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -17,11 +20,13 @@ public class AthleteEventDTO implements Serializable {
 
     private Float actualWeightInKg;
 
-    private Long eventId;
+    private Boolean medicalFitnessAgreement;
 
-    private String eventName;
+    private ZonedDateTime registrationDate;
 
     private Long athleteId;
+
+    private Long eventId;
 
     private Set<AthleteWorkoutDTO> athleteWorkouts = new HashSet<AthleteWorkoutDTO>();
 
@@ -57,17 +62,21 @@ public class AthleteEventDTO implements Serializable {
         this.actualWeightInKg = actualWeightInKg;
     }
 
-    public Long getEventId() {
-        return eventId;
+    public Boolean isMedicalFitnessAgreement() {
+        return medicalFitnessAgreement;
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setMedicalFitnessAgreement(Boolean medicalFitnessAgreement) {
+        this.medicalFitnessAgreement = medicalFitnessAgreement;
     }
 
-    public String getEventName() { return eventName; }
+    public ZonedDateTime getRegistrationDate() {
+        return registrationDate;
+    }
 
-    public void setEventName(String eventName) { this.eventName = eventName; }
+    public void setRegistrationDate(ZonedDateTime registrationDate) {
+        this.registrationDate = registrationDate;
+    }
 
     public Long getAthleteId() {
         return athleteId;
@@ -77,6 +86,14 @@ public class AthleteEventDTO implements Serializable {
         this.athleteId = athleteId;
     }
 
+    public Long getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
+    }
+
     public Set<AthleteWorkoutDTO> getAthleteWorkouts() {
         return athleteWorkouts;
     }
@@ -84,7 +101,7 @@ public class AthleteEventDTO implements Serializable {
     public void setAthleteWorkouts(Set<AthleteWorkoutDTO> athleteWorkouts) {
         this.athleteWorkouts = athleteWorkouts;
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -113,8 +130,12 @@ public class AthleteEventDTO implements Serializable {
             ", note='" + getNote() + "'" +
             ", actualHeightInCm=" + getActualHeightInCm() +
             ", actualWeightInKg=" + getActualWeightInKg() +
-            ", event=" + getEventId() +
-            ", athlete=" + getAthleteId() +
+            ", medicalFitnessAgreement='" + isMedicalFitnessAgreement() + "'" +
+            ", registrationDate='" + getRegistrationDate() + "'" +
+            ", athleteId=" + getAthleteId() +
+            ", eventId=" + getEventId() +
             "}";
     }
+
+
 }

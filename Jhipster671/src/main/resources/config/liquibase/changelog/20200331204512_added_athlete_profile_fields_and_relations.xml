@@ -1,0 +1,152 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="SERVER (generated)" id="1585687521104-4">
+        <createTable tableName="athlete_sports">
+            <column name="athlete_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="sports_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-5">
+        <addColumn tableName="athlete">
+            <column name="city" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-6">
+        <addColumn tableName="athlete">
+            <column name="country" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-7">
+        <addColumn tableName="athlete">
+            <column name="foot_laterality" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-8">
+        <addColumn tableName="athlete">
+            <column name="gdpr_agreement" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-9">
+        <addColumn tableName="athlete">
+            <column name="hand_laterality" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-10">
+        <addColumn tableName="activity_result">
+            <column name="irv_best" type="float4"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-11">
+        <addColumn tableName="activity_result">
+            <column name="irv_worst" type="float4"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-12">
+        <addColumn tableName="activity_result">
+            <column name="jhi_order" type="int4"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-13">
+        <addColumn tableName="athlete">
+            <column name="lr_email" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-14">
+        <addColumn tableName="athlete">
+            <column name="lr_first_name" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-15">
+        <addColumn tableName="athlete">
+            <column name="lr_last_name" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-16">
+        <addColumn tableName="athlete">
+            <column name="lr_phone" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-17">
+        <addColumn tableName="athlete">
+            <column name="marketing_agreement" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-18">
+        <addColumn tableName="athlete">
+            <column name="medical_fitness_agreement" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-19">
+        <addColumn tableName="athlete_event">
+            <column name="medical_fitness_agreement" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-20">
+        <addColumn tableName="athlete">
+            <column name="phone" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-21">
+        <addColumn tableName="athlete">
+            <column name="photography_agreement" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-22">
+        <addColumn tableName="athlete">
+            <column name="profile_completed" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-23">
+        <addColumn tableName="athlete_event">
+            <column name="registration_date" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-24">
+        <addColumn tableName="athlete">
+            <column name="stepping_foot" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-25">
+        <addColumn tableName="athlete">
+            <column name="street" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-26">
+        <addColumn tableName="athlete">
+            <column name="terms_agreement" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-27">
+        <addColumn tableName="athlete">
+            <column name="zip_code" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-28">
+        <addForeignKeyConstraint baseColumnNames="athlete_id" baseTableName="athlete_sports" constraintName="FK84lxtawyybny9pvy37bdlso48" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="athlete" validate="true"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-29">
+        <addForeignKeyConstraint baseColumnNames="sports_id" baseTableName="athlete_sports" constraintName="FKu82kq9jdrflovhdpkb8atdfm" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="sport" validate="true"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-30">
+        <dropForeignKeyConstraint baseTableName="athlete" constraintName="fk_athlete_address_id"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-31">
+        <dropUniqueConstraint constraintName="ux_athlete_address_id" tableName="athlete"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-32">
+        <dropColumn columnName="address_id" tableName="athlete"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-33">
+        <dropColumn columnName="max_age" tableName="event_location"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-34">
+        <dropColumn columnName="min_age" tableName="event_location"/>
+    </changeSet>
+    <changeSet author="SERVER (generated)" id="1585687521104-35">
+        <dropColumn columnName="target_value" tableName="activity"/>
+    </changeSet>
+</databaseChangeLog>

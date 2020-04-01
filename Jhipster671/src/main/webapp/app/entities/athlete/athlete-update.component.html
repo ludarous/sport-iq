@@ -48,6 +48,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.phone" for="field_phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="field_phone"
+                           formControlName="phone"/>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="sportiqApp.athlete.birthDate" for="field_birthDate">Birth Date</label>
                     <div class="d-flex">
                         <input id="field_birthDate" type="datetime-local" class="form-control" name="birthDate" formControlName="birthDate" placeholder="YYYY-MM-DD HH:mm"/>
@@ -70,11 +76,111 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.address" for="field_address">Address</label>
-                    <select class="form-control" id="field_address" name="address" formControlName="addressId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="addressOption.id" *ngFor="let addressOption of addresses; trackBy: trackById">{{ addressOption.id }}</option>
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.country" for="field_country">Country</label>
+                    <input type="text" class="form-control" name="country" id="field_country"
+                           formControlName="country"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.city" for="field_city">City</label>
+                    <input type="text" class="form-control" name="city" id="field_city"
+                           formControlName="city"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.street" for="field_street">Street</label>
+                    <input type="text" class="form-control" name="street" id="field_street"
+                           formControlName="street"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.zipCode" for="field_zipCode">Zip Code</label>
+                    <input type="text" class="form-control" name="zipCode" id="field_zipCode"
+                           formControlName="zipCode"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.handLaterality" for="field_handLaterality">Hand Laterality</label>
+                    <select class="form-control" name="handLaterality" formControlName="handLaterality" id="field_handLaterality">
+                        <option value="LEFT">{{ 'sportiqApp.Laterality.LEFT' | translate }}</option>
+                        <option value="RIGHT">{{ 'sportiqApp.Laterality.RIGHT' | translate }}</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.footLaterality" for="field_footLaterality">Foot Laterality</label>
+                    <select class="form-control" name="footLaterality" formControlName="footLaterality" id="field_footLaterality">
+                        <option value="LEFT">{{ 'sportiqApp.Laterality.LEFT' | translate }}</option>
+                        <option value="RIGHT">{{ 'sportiqApp.Laterality.RIGHT' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.steppingFoot" for="field_steppingFoot">Stepping Foot</label>
+                    <select class="form-control" name="steppingFoot" formControlName="steppingFoot" id="field_steppingFoot">
+                        <option value="LEFT">{{ 'sportiqApp.Laterality.LEFT' | translate }}</option>
+                        <option value="RIGHT">{{ 'sportiqApp.Laterality.RIGHT' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.termsAgreement" for="field_termsAgreement">Terms Agreement</label>
+                    <input type="checkbox" class="form-control" name="termsAgreement" id="field_termsAgreement"
+                           formControlName="termsAgreement"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.gdprAgreement" for="field_gdprAgreement">Gdpr Agreement</label>
+                    <input type="checkbox" class="form-control" name="gdprAgreement" id="field_gdprAgreement"
+                           formControlName="gdprAgreement"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.photographyAgreement" for="field_photographyAgreement">Photography Agreement</label>
+                    <input type="checkbox" class="form-control" name="photographyAgreement" id="field_photographyAgreement"
+                           formControlName="photographyAgreement"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.medicalFitnessAgreement" for="field_medicalFitnessAgreement">Medical Fitness Agreement</label>
+                    <input type="checkbox" class="form-control" name="medicalFitnessAgreement" id="field_medicalFitnessAgreement"
+                           formControlName="medicalFitnessAgreement"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.marketingAgreement" for="field_marketingAgreement">Marketing Agreement</label>
+                    <input type="checkbox" class="form-control" name="marketingAgreement" id="field_marketingAgreement"
+                           formControlName="marketingAgreement"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.lrFirstName" for="field_lrFirstName">Lr First Name</label>
+                    <input type="text" class="form-control" name="lrFirstName" id="field_lrFirstName"
+                           formControlName="lrFirstName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.lrLastName" for="field_lrLastName">Lr Last Name</label>
+                    <input type="text" class="form-control" name="lrLastName" id="field_lrLastName"
+                           formControlName="lrLastName"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.lrEmail" for="field_lrEmail">Lr Email</label>
+                    <input type="text" class="form-control" name="lrEmail" id="field_lrEmail"
+                           formControlName="lrEmail"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.lrPhone" for="field_lrPhone">Lr Phone</label>
+                    <input type="text" class="form-control" name="lrPhone" id="field_lrPhone"
+                           formControlName="lrPhone"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sportiqApp.athlete.profileCompleted" for="field_profileCompleted">Profile Completed</label>
+                    <input type="checkbox" class="form-control" name="profileCompleted" id="field_profileCompleted"
+                           formControlName="profileCompleted"/>
                 </div>
 
                 <div class="form-group">
@@ -82,6 +188,13 @@
                     <select class="form-control" id="field_user" name="user" formControlName="userId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="sportiqApp.athlete.sports" for="field_sports">Sports</label>
+                    <select class="form-control" id="field_sports" multiple name="sports" formControlName="sports">
+                        <option [ngValue]="getSelected(editForm.get('sports')!.value, sportOption)" *ngFor="let sportOption of sports; trackBy: trackById">{{ sportOption.name }}</option>
                     </select>
                 </div>
             </div>

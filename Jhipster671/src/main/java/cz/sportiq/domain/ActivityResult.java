@@ -40,8 +40,17 @@ public class ActivityResult implements Serializable {
     @Column(name = "main_result")
     private Boolean mainResult;
 
-    @OneToMany(mappedBy = "activityResult", cascade = CascadeType.ALL)
-    @Cache(usage = CacheConcurrencyStrategy.NONE)
+    @Column(name = "jhi_order")
+    private Integer order;
+
+    @Column(name = "irv_best")
+    private Float irvBest;
+
+    @Column(name = "irv_worst")
+    private Float irvWorst;
+
+    @OneToMany(mappedBy = "activityResult")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ActivityResultSplit> resultSplits = new HashSet<>();
 
     @ManyToOne
@@ -111,6 +120,45 @@ public class ActivityResult implements Serializable {
 
     public void setMainResult(Boolean mainResult) {
         this.mainResult = mainResult;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public ActivityResult order(Integer order) {
+        this.order = order;
+        return this;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+    public Float getIrvBest() {
+        return irvBest;
+    }
+
+    public ActivityResult irvBest(Float irvBest) {
+        this.irvBest = irvBest;
+        return this;
+    }
+
+    public void setIrvBest(Float irvBest) {
+        this.irvBest = irvBest;
+    }
+
+    public Float getIrvWorst() {
+        return irvWorst;
+    }
+
+    public ActivityResult irvWorst(Float irvWorst) {
+        this.irvWorst = irvWorst;
+        return this;
+    }
+
+    public void setIrvWorst(Float irvWorst) {
+        this.irvWorst = irvWorst;
     }
 
     public Set<ActivityResultSplit> getResultSplits() {
@@ -189,6 +237,9 @@ public class ActivityResult implements Serializable {
             ", resultType='" + getResultType() + "'" +
             ", ratingWeight=" + getRatingWeight() +
             ", mainResult='" + isMainResult() + "'" +
+            ", order=" + getOrder() +
+            ", irvBest=" + getIrvBest() +
+            ", irvWorst=" + getIrvWorst() +
             "}";
     }
 }

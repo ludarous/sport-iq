@@ -9,7 +9,6 @@ export interface IActivity {
   help?: string;
   minAge?: number;
   maxAge?: number;
-  targetValue?: number;
   activityResults?: IActivityResult[];
   targetUnitName?: string;
   targetUnitId?: number;
@@ -25,7 +24,6 @@ export class Activity implements IActivity {
     public help?: string,
     public minAge?: number,
     public maxAge?: number,
-    public targetValue?: number,
     public activityResults?: IActivityResult[],
     public targetUnitName?: string,
     public targetUnitId?: number,

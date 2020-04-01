@@ -1,11 +1,11 @@
-id;note;actual_height_in_cm;actual_weight_in_kg;athlete_id
-1;Books Bedfordshire Fresh;14019;45528;1
-2;Unbranded Lodge;54997;88775;2
-3;XML attitude-oriented Incredible;67104;27533;3
-4;Pennsylvania Andorra;97042;56531;4
-5;Azerbaijanian Manat;77291;64430;5
-6;Industrial RSS hacking;58086;58163;6
-7;target Checking Account Bulgarian Lev;77782;46087;7
-8;Practical;37571;25234;8
-9;Unbranded Plastic Salad Bond Markets Units European Composite Unit (EURCO) Small;81528;28793;9
-10;Checking Account synthesizing;63293;37532;10
+id;note;actual_height_in_cm;actual_weight_in_kg;medical_fitness_agreement;registration_date;athlete_id
+1;Books Bedfordshire Fresh;14019;45528;false;2020-02-26T05:00:22;1
+2;Lodge Timor-Leste optical;49242;27885;false;2020-02-26T04:55:18;2
+3;Lari;40923;56247;true;2020-02-25T18:36:25;3
+4;Planner;2749;69910;false;2020-02-25T12:58:59;4
+5;backing up Facilitator;47272;85107;false;2020-02-25T17:35:32;5
+6;Regional Borders;2249;67919;false;2020-02-25T12:51:55;6
+7;Ergonomic Cotton Shirt Re-contextualized;6967;93553;false;2020-02-25T09:42:16;7
+8;Direct Jewelery interactive;62780;1625;true;2020-02-25T13:22:03;8
+9;morph Manager;58875;48596;false;2020-02-25T09:03:00;9
+10;Accounts pink mobile;79197;27523;false;2020-02-26T07:18:58;10

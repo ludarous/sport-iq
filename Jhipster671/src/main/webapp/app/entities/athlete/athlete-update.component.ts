@@ -4,18 +4,17 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IAthlete, Athlete } from 'app/shared/model/athlete.model';
 import { AthleteService } from './athlete.service';
-import { IAddress } from 'app/shared/model/address.model';
-import { AddressService } from 'app/entities/address/address.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { ISport } from 'app/shared/model/sport.model';
+import { SportService } from 'app/entities/sport/sport.service';
 
-type SelectableEntity = IAddress | IUser;
+type SelectableEntity = IUser | ISport;
 
 @Component({
   selector: 'jhi-athlete-update',
@@ -23,25 +22,43 @@ type SelectableEntity = IAddress | IUser;
 })
 export class AthleteUpdateComponent implements OnInit {
   isSaving = false;
-  addresses: IAddress[] = [];
   users: IUser[] = [];
+  sports: ISport[] = [];
 
   editForm = this.fb.group({
     id: [],
     firstName: [null, [Validators.required]],
     lastName: [null, [Validators.required]],
     email: [null, [Validators.required]],
+    phone: [],
     birthDate: [],
     nationality: [],
     sex: [],
-    addressId: [],
-    userId: []
+    country: [],
+    city: [],
+    street: [],
+    zipCode: [],
+    handLaterality: [],
+    footLaterality: [],
+    steppingFoot: [],
+    termsAgreement: [],
+    gdprAgreement: [],
+    photographyAgreement: [],
+    medicalFitnessAgreement: [],
+    marketingAgreement: [],
+    lrFirstName: [],
+    lrLastName: [],
+    lrEmail: [],
+    lrPhone: [],
+    profileCompleted: [],
+    userId: [],
+    sports: []
   });
 
   constructor(
     protected athleteService: AthleteService,
-    protected addressService: AddressService,
     protected userService: UserService,
+    protected sportService: SportService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -55,29 +72,9 @@ export class AthleteUpdateComponent implements OnInit {
 
       this.updateForm(athlete);
 
-      this.addressService
-        .query({ filter: 'athlete-is-null' })
-        .pipe(
-          map((res: HttpResponse<IAddress[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: IAddress[]) => {
-          if (!athlete.addressId) {
-            this.addresses = resBody;
-          } else {
-            this.addressService
-              .find(athlete.addressId)
-              .pipe(
-                map((subRes: HttpResponse<IAddress>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: IAddress[]) => (this.addresses = concatRes));
-          }
-        });
-
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+
+      this.sportService.query().subscribe((res: HttpResponse<ISport[]>) => (this.sports = res.body || []));
     });
   }
 
@@ -87,11 +84,29 @@ export class AthleteUpdateComponent implements OnInit {
       firstName: athlete.firstName,
       lastName: athlete.lastName,
       email: athlete.email,
+      phone: athlete.phone,
       birthDate: athlete.birthDate ? athlete.birthDate.format(DATE_TIME_FORMAT) : null,
       nationality: athlete.nationality,
       sex: athlete.sex,
-      addressId: athlete.addressId,
-      userId: athlete.userId
+      country: athlete.country,
+      city: athlete.city,
+      street: athlete.street,
+      zipCode: athlete.zipCode,
+      handLaterality: athlete.handLaterality,
+      footLaterality: athlete.footLaterality,
+      steppingFoot: athlete.steppingFoot,
+      termsAgreement: athlete.termsAgreement,
+      gdprAgreement: athlete.gdprAgreement,
+      photographyAgreement: athlete.photographyAgreement,
+      medicalFitnessAgreement: athlete.medicalFitnessAgreement,
+      marketingAgreement: athlete.marketingAgreement,
+      lrFirstName: athlete.lrFirstName,
+      lrLastName: athlete.lrLastName,
+      lrEmail: athlete.lrEmail,
+      lrPhone: athlete.lrPhone,
+      profileCompleted: athlete.profileCompleted,
+      userId: athlete.userId,
+      sports: athlete.sports
     });
   }
 
@@ -116,11 +131,29 @@ export class AthleteUpdateComponent implements OnInit {
       firstName: this.editForm.get(['firstName'])!.value,
       lastName: this.editForm.get(['lastName'])!.value,
       email: this.editForm.get(['email'])!.value,
+      phone: this.editForm.get(['phone'])!.value,
       birthDate: this.editForm.get(['birthDate'])!.value ? moment(this.editForm.get(['birthDate'])!.value, DATE_TIME_FORMAT) : undefined,
       nationality: this.editForm.get(['nationality'])!.value,
       sex: this.editForm.get(['sex'])!.value,
-      addressId: this.editForm.get(['addressId'])!.value,
-      userId: this.editForm.get(['userId'])!.value
+      country: this.editForm.get(['country'])!.value,
+      city: this.editForm.get(['city'])!.value,
+      street: this.editForm.get(['street'])!.value,
+      zipCode: this.editForm.get(['zipCode'])!.value,
+      handLaterality: this.editForm.get(['handLaterality'])!.value,
+      footLaterality: this.editForm.get(['footLaterality'])!.value,
+      steppingFoot: this.editForm.get(['steppingFoot'])!.value,
+      termsAgreement: this.editForm.get(['termsAgreement'])!.value,
+      gdprAgreement: this.editForm.get(['gdprAgreement'])!.value,
+      photographyAgreement: this.editForm.get(['photographyAgreement'])!.value,
+      medicalFitnessAgreement: this.editForm.get(['medicalFitnessAgreement'])!.value,
+      marketingAgreement: this.editForm.get(['marketingAgreement'])!.value,
+      lrFirstName: this.editForm.get(['lrFirstName'])!.value,
+      lrLastName: this.editForm.get(['lrLastName'])!.value,
+      lrEmail: this.editForm.get(['lrEmail'])!.value,
+      lrPhone: this.editForm.get(['lrPhone'])!.value,
+      profileCompleted: this.editForm.get(['profileCompleted'])!.value,
+      userId: this.editForm.get(['userId'])!.value,
+      sports: this.editForm.get(['sports'])!.value
     };
   }
 
@@ -142,5 +175,16 @@ export class AthleteUpdateComponent implements OnInit {
 
   trackById(index: number, item: SelectableEntity): any {
     return item.id;
+  }
+
+  getSelected(selectedVals: ISport[], option: ISport): ISport {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

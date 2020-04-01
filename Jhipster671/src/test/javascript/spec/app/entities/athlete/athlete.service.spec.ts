@@ -5,6 +5,7 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { AthleteService } from 'app/entities/athlete/athlete.service';
 import { IAthlete, Athlete } from 'app/shared/model/athlete.model';
 import { Sex } from 'app/shared/model/enumerations/sex.model';
+import { Laterality } from 'app/shared/model/enumerations/laterality.model';
 
 describe('Service Tests', () => {
   describe('Athlete Service', () => {
@@ -25,7 +26,33 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Athlete(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, 'AAAAAAA', Sex.MALE);
+      elemDefault = new Athlete(
+        0,
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        currentDate,
+        'AAAAAAA',
+        Sex.MALE,
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        Laterality.LEFT,
+        Laterality.LEFT,
+        Laterality.LEFT,
+        false,
+        false,
+        false,
+        false,
+        false,
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        false
+      );
     });
 
     describe('Service methods', () => {
@@ -73,9 +100,27 @@ describe('Service Tests', () => {
             firstName: 'BBBBBB',
             lastName: 'BBBBBB',
             email: 'BBBBBB',
+            phone: 'BBBBBB',
             birthDate: currentDate.format(DATE_TIME_FORMAT),
             nationality: 'BBBBBB',
-            sex: 'BBBBBB'
+            sex: 'BBBBBB',
+            country: 'BBBBBB',
+            city: 'BBBBBB',
+            street: 'BBBBBB',
+            zipCode: 'BBBBBB',
+            handLaterality: 'BBBBBB',
+            footLaterality: 'BBBBBB',
+            steppingFoot: 'BBBBBB',
+            termsAgreement: true,
+            gdprAgreement: true,
+            photographyAgreement: true,
+            medicalFitnessAgreement: true,
+            marketingAgreement: true,
+            lrFirstName: 'BBBBBB',
+            lrLastName: 'BBBBBB',
+            lrEmail: 'BBBBBB',
+            lrPhone: 'BBBBBB',
+            profileCompleted: true
           },
           elemDefault
         );
@@ -100,9 +145,27 @@ describe('Service Tests', () => {
             firstName: 'BBBBBB',
             lastName: 'BBBBBB',
             email: 'BBBBBB',
+            phone: 'BBBBBB',
             birthDate: currentDate.format(DATE_TIME_FORMAT),
             nationality: 'BBBBBB',
-            sex: 'BBBBBB'
+            sex: 'BBBBBB',
+            country: 'BBBBBB',
+            city: 'BBBBBB',
+            street: 'BBBBBB',
+            zipCode: 'BBBBBB',
+            handLaterality: 'BBBBBB',
+            footLaterality: 'BBBBBB',
+            steppingFoot: 'BBBBBB',
+            termsAgreement: true,
+            gdprAgreement: true,
+            photographyAgreement: true,
+            medicalFitnessAgreement: true,
+            marketingAgreement: true,
+            lrFirstName: 'BBBBBB',
+            lrLastName: 'BBBBBB',
+            lrEmail: 'BBBBBB',
+            lrPhone: 'BBBBBB',
+            profileCompleted: true
           },
           elemDefault
         );

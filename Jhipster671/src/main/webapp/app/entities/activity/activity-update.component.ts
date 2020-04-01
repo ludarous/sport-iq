@@ -30,7 +30,6 @@ export class ActivityUpdateComponent implements OnInit {
     help: [],
     minAge: [],
     maxAge: [],
-    targetValue: [],
     targetUnitId: [],
     categories: []
   });
@@ -63,7 +62,6 @@ export class ActivityUpdateComponent implements OnInit {
       help: activity.help,
       minAge: activity.minAge,
       maxAge: activity.maxAge,
-      targetValue: activity.targetValue,
       targetUnitId: activity.targetUnitId,
       categories: activity.categories
     });
@@ -92,7 +90,6 @@ export class ActivityUpdateComponent implements OnInit {
       help: this.editForm.get(['help'])!.value,
       minAge: this.editForm.get(['minAge'])!.value,
       maxAge: this.editForm.get(['maxAge'])!.value,
-      targetValue: this.editForm.get(['targetValue'])!.value,
       targetUnitId: this.editForm.get(['targetUnitId'])!.value,
       categories: this.editForm.get(['categories'])!.value
     };

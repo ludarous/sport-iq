@@ -9,8 +9,6 @@ export interface IEventLocation {
   longitude?: number;
   capacity?: number;
   mapLink?: string;
-  maxAge?: number;
-  minAge?: number;
 }
 
 export class EventLocation implements IEventLocation {
@@ -24,8 +22,6 @@ export class EventLocation implements IEventLocation {
     public latitude?: number,
     public longitude?: number,
     public capacity?: number,
-    public mapLink?: string,
-    public maxAge?: number,
-    public minAge?: number
+    public mapLink?: string
   ) {}
 }

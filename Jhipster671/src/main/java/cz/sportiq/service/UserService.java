@@ -1,13 +1,16 @@
 package cz.sportiq.service;
 
 import cz.sportiq.config.Constants;
+import cz.sportiq.domain.Athlete;
 import cz.sportiq.domain.Authority;
 import cz.sportiq.domain.User;
+import cz.sportiq.repository.AthleteRepository;
 import cz.sportiq.repository.AuthorityRepository;
 import cz.sportiq.repository.UserRepository;
 import cz.sportiq.security.SecurityUtils;
 import cz.sportiq.service.dto.UserDTO;
 
+import jdk.nashorn.internal.runtime.options.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -37,11 +40,14 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
+    private final AthleteRepository athleteRepository;
+
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, AthleteRepository athleteRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
+        this.athleteRepository = athleteRepository;
         this.cacheManager = cacheManager;
     }
 
@@ -181,6 +187,22 @@ public class UserService {
         return user;
     }
 
+    private Athlete syncUserWithAthlete(User user) {
+        Optional<Athlete> athleteOptional = athleteRepository.findOneByUserId(user.getId());
+        if(athleteOptional.isPresent()) {
+            return athleteOptional.get();
+        }
+
+        athleteOptional = athleteRepository.findOneByEmail(user.getEmail());
+        if(athleteOptional.isPresent()) {
+            Athlete athlete = athleteOptional.get();
+            athlete.setUser(user);
+            athlete = athleteRepository.save(athlete);
+            return athlete;
+        }
+
+        Athlete athlete = new Athlete();
+    }
     /**
      * Returns the user from an OAuth 2.0 login or resource server with JWT.
      * Synchronizes the user in the local repository.
@@ -214,9 +236,6 @@ public class UserService {
             }
         }
         return new UserDTO(syncUserWithIdP(attributes, user));
-
-
-
 
     }
 

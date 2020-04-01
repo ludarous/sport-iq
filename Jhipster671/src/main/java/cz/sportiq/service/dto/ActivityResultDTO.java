@@ -8,7 +8,7 @@ import java.util.Set;
 import cz.sportiq.domain.enumeration.ResultType;
 
 /**
- * A DTO for the ActivityResult entity.
+ * A DTO for the {@link cz.sportiq.domain.ActivityResult} entity.
  */
 public class ActivityResultDTO implements Serializable {
 
@@ -20,13 +20,23 @@ public class ActivityResultDTO implements Serializable {
 
     private Float ratingWeight;
 
-    private Long activityId;
-
-    private UnitDTO resultUnit;
-
     private Boolean mainResult;
 
+    private Integer order;
+
+    private Float irvBest;
+
+    private Float irvWorst;
+
+
+    private Long resultUnitId;
+
+    private String resultUnitName;
+
+    private Long activityId;
+
     private Set<ActivityResultSplitDTO> resultSplits = new HashSet<>();
+
 
     public Long getId() {
         return id;
@@ -60,6 +70,54 @@ public class ActivityResultDTO implements Serializable {
         this.ratingWeight = ratingWeight;
     }
 
+    public Boolean isMainResult() {
+        return mainResult;
+    }
+
+    public void setMainResult(Boolean mainResult) {
+        this.mainResult = mainResult;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+    public Float getIrvBest() {
+        return irvBest;
+    }
+
+    public void setIrvBest(Float irvBest) {
+        this.irvBest = irvBest;
+    }
+
+    public Float getIrvWorst() {
+        return irvWorst;
+    }
+
+    public void setIrvWorst(Float irvWorst) {
+        this.irvWorst = irvWorst;
+    }
+
+    public Long getResultUnitId() {
+        return resultUnitId;
+    }
+
+    public void setResultUnitId(Long unitId) {
+        this.resultUnitId = unitId;
+    }
+
+    public String getResultUnitName() {
+        return resultUnitName;
+    }
+
+    public void setResultUnitName(String unitName) {
+        this.resultUnitName = unitName;
+    }
+
     public Long getActivityId() {
         return activityId;
     }
@@ -67,18 +125,6 @@ public class ActivityResultDTO implements Serializable {
     public void setActivityId(Long activityId) {
         this.activityId = activityId;
     }
-
-    public UnitDTO getResultUnit() {
-        return resultUnit;
-    }
-
-    public void setResultUnit(UnitDTO resultUnit) {
-        this.resultUnit = resultUnit;
-    }
-
-    public Boolean getMainResult() { return mainResult; }
-
-    public void setMainResult(Boolean mainResult) { this.mainResult = mainResult; }
 
     public Set<ActivityResultSplitDTO> getResultSplits() {
         return resultSplits;
@@ -116,8 +162,15 @@ public class ActivityResultDTO implements Serializable {
             ", name='" + getName() + "'" +
             ", resultType='" + getResultType() + "'" +
             ", ratingWeight=" + getRatingWeight() +
-            ", activity=" + getActivityId() +
+            ", mainResult='" + isMainResult() + "'" +
+            ", order=" + getOrder() +
+            ", irvBest=" + getIrvBest() +
+            ", irvWorst=" + getIrvWorst() +
+            ", resultUnitId=" + getResultUnitId() +
+            ", resultUnitName='" + getResultUnitName() + "'" +
+            ", activityId=" + getActivityId() +
             "}";
     }
+
 
 }

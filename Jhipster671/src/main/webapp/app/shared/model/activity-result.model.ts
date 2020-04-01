@@ -7,6 +7,9 @@ export interface IActivityResult {
   resultType?: ResultType;
   ratingWeight?: number;
   mainResult?: boolean;
+  order?: number;
+  irvBest?: number;
+  irvWorst?: number;
   resultSplits?: IActivityResultSplit[];
   resultUnitName?: string;
   resultUnitId?: number;
@@ -20,6 +23,9 @@ export class ActivityResult implements IActivityResult {
     public resultType?: ResultType,
     public ratingWeight?: number,
     public mainResult?: boolean,
+    public order?: number,
+    public irvBest?: number,
+    public irvWorst?: number,
     public resultSplits?: IActivityResultSplit[],
     public resultUnitName?: string,
     public resultUnitId?: number,

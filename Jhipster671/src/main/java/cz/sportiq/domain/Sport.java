@@ -33,6 +33,11 @@ public class Sport implements Serializable {
     @ManyToMany(mappedBy = "sports")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
+    private Set<Athlete> athletes = new HashSet<>();
+
+    @ManyToMany(mappedBy = "sports")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     private Set<Workout> workouts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -55,6 +60,31 @@ public class Sport implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Athlete> getAthletes() {
+        return athletes;
+    }
+
+    public Sport athletes(Set<Athlete> athletes) {
+        this.athletes = athletes;
+        return this;
+    }
+
+    public Sport addAthletes(Athlete athlete) {
+        this.athletes.add(athlete);
+        athlete.getSports().add(this);
+        return this;
+    }
+
+    public Sport removeAthletes(Athlete athlete) {
+        this.athletes.remove(athlete);
+        athlete.getSports().remove(this);
+        return this;
+    }
+
+    public void setAthletes(Set<Athlete> athletes) {
+        this.athletes = athletes;
     }
 
     public Set<Workout> getWorkouts() {

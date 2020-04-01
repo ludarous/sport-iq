@@ -57,9 +57,6 @@ public class ActivityResourceIT {
     private static final Integer DEFAULT_MAX_AGE = 1;
     private static final Integer UPDATED_MAX_AGE = 2;
 
-    private static final Float DEFAULT_TARGET_VALUE = 1F;
-    private static final Float UPDATED_TARGET_VALUE = 2F;
-
     @Autowired
     private ActivityRepository activityRepository;
 
@@ -118,8 +115,7 @@ public class ActivityResourceIT {
             .description(DEFAULT_DESCRIPTION)
             .help(DEFAULT_HELP)
             .minAge(DEFAULT_MIN_AGE)
-            .maxAge(DEFAULT_MAX_AGE)
-            .targetValue(DEFAULT_TARGET_VALUE);
+            .maxAge(DEFAULT_MAX_AGE);
         return activity;
     }
     /**
@@ -134,8 +130,7 @@ public class ActivityResourceIT {
             .description(UPDATED_DESCRIPTION)
             .help(UPDATED_HELP)
             .minAge(UPDATED_MIN_AGE)
-            .maxAge(UPDATED_MAX_AGE)
-            .targetValue(UPDATED_TARGET_VALUE);
+            .maxAge(UPDATED_MAX_AGE);
         return activity;
     }
 
@@ -165,7 +160,6 @@ public class ActivityResourceIT {
         assertThat(testActivity.getHelp()).isEqualTo(DEFAULT_HELP);
         assertThat(testActivity.getMinAge()).isEqualTo(DEFAULT_MIN_AGE);
         assertThat(testActivity.getMaxAge()).isEqualTo(DEFAULT_MAX_AGE);
-        assertThat(testActivity.getTargetValue()).isEqualTo(DEFAULT_TARGET_VALUE);
     }
 
     @Test
@@ -223,8 +217,7 @@ public class ActivityResourceIT {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].help").value(hasItem(DEFAULT_HELP)))
             .andExpect(jsonPath("$.[*].minAge").value(hasItem(DEFAULT_MIN_AGE)))
-            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)))
-            .andExpect(jsonPath("$.[*].targetValue").value(hasItem(DEFAULT_TARGET_VALUE.doubleValue())));
+            .andExpect(jsonPath("$.[*].maxAge").value(hasItem(DEFAULT_MAX_AGE)));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -275,8 +268,7 @@ public class ActivityResourceIT {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.help").value(DEFAULT_HELP))
             .andExpect(jsonPath("$.minAge").value(DEFAULT_MIN_AGE))
-            .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE))
-            .andExpect(jsonPath("$.targetValue").value(DEFAULT_TARGET_VALUE.doubleValue()));
+            .andExpect(jsonPath("$.maxAge").value(DEFAULT_MAX_AGE));
     }
 
     @Test
@@ -304,8 +296,7 @@ public class ActivityResourceIT {
             .description(UPDATED_DESCRIPTION)
             .help(UPDATED_HELP)
             .minAge(UPDATED_MIN_AGE)
-            .maxAge(UPDATED_MAX_AGE)
-            .targetValue(UPDATED_TARGET_VALUE);
+            .maxAge(UPDATED_MAX_AGE);
         ActivityDTO activityDTO = activityMapper.toDto(updatedActivity);
 
         restActivityMockMvc.perform(put("/api/activities")
@@ -322,7 +313,6 @@ public class ActivityResourceIT {
         assertThat(testActivity.getHelp()).isEqualTo(UPDATED_HELP);
         assertThat(testActivity.getMinAge()).isEqualTo(UPDATED_MIN_AGE);
         assertThat(testActivity.getMaxAge()).isEqualTo(UPDATED_MAX_AGE);
-        assertThat(testActivity.getTargetValue()).isEqualTo(UPDATED_TARGET_VALUE);
     }
 
     @Test

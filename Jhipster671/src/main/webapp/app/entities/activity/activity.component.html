@@ -28,7 +28,6 @@
                     <th scope="col"  jhiSortBy="help"><span jhiTranslate="sportiqApp.activity.help">Help</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="minAge"><span jhiTranslate="sportiqApp.activity.minAge">Min Age</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="maxAge"><span jhiTranslate="sportiqApp.activity.maxAge">Max Age</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="targetValue"><span jhiTranslate="sportiqApp.activity.targetValue">Target Value</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="targetUnitName"><span jhiTranslate="sportiqApp.activity.targetUnit">Target Unit</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -41,7 +40,6 @@
                     <td>{{ activity.help }}</td>
                     <td>{{ activity.minAge }}</td>
                     <td>{{ activity.maxAge }}</td>
-                    <td>{{ activity.targetValue }}</td>
                     <td>
                         <div *ngIf="activity.targetUnitId">
                             <a [routerLink]="['/unit', activity.targetUnitId , 'view']" >{{ activity.targetUnitName }}</a>
