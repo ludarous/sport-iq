@@ -10,15 +10,16 @@
         </div>
     </div>
     <div class="container">
-        <div class="row" *ngFor="let event of nextEvents">
-            <div class="col-3 event-date align-center">
+        <div class="row event-container" *ngFor="let event of nextEvents">
+
+            <div class="col-3 event-date align-center justify-content-center">
                 {{(event.date | datex: 'DD.MM.YYYY HH:mm')}}
             </div>
-            <div class="col-3 event-name align-center">
+            <div class="col-3 event-name align-center justify-content-center">
                 {{event.name}}
             </div>
-            <div class="col-3 align-center" *ngIf="event.eventLocation">
-                <div class="d-flex flex-column">
+            <div class="col-3 align-center justify-content-center">
+                <div *ngIf="event.eventLocation" class="d-flex flex-column">
                     <div class="event-location-name">{{event.eventLocation.name}}</div>
                     <div class="event-location-address">
                         {{event.eventLocation.street + ' ' + event.eventLocation.streetNumber + ', ' + event.eventLocation.city}}
@@ -28,10 +29,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 align-center">
+            <div class="col-3 align-center justify-content-center">
                 <ng-container *ngIf="currentUser">
-                    <button *ngIf="!alreadySignedIn(event)" class="btn" (click)="signToEvent(event)">{{'Přihlásit' | translate}}</button>
-                    <span *ngIf="alreadySignedIn(event)">{{'K této události už jsi se registroval' | translate}}</span>
+                    <button *ngIf="!alreadySignedIn(event)" class="btn"
+                            (click)="signToEvent(event)">{{'Přihlásit' | translate}}</button>
+                    <span
+                        *ngIf="alreadySignedIn(event)">{{'K této události už jsi se registroval' | translate}}</span>
                 </ng-container>
 
                 <span *ngIf="!currentUser">{{'Pro registraci k události se prosím přihlašte' | translate}}</span>
@@ -54,14 +57,18 @@
                 <div class="sign-in-card">
                     <div class="sign-in-card-header">{{'Už mám účet' | translate}}</div>
                     <div class="sign-in-card-content"> {{'modals.signin.signin' | translate}}</div>
-                    <div class="sign-in-card-action"><button class="btn" (click)="signIn()">{{'Přihlásit' | translate}}</button></div>
+                    <div class="sign-in-card-action">
+                        <button class="btn" (click)="signIn()">{{'Přihlásit' | translate}}</button>
+                    </div>
                 </div>
             </div>
             <div class="col-6 d-flex">
                 <div class="sign-in-card">
                     <div class="sign-in-card-header">{{'Ještě nemám účet' | translate}}</div>
                     <div class="sign-in-card-content">{{'modals.signin.register' | translate}}</div>
-                    <div class="sign-in-card-action"><button class="btn" (click)="register()">{{'Registrovat' | translate}}</button></div>
+                    <div class="sign-in-card-action">
+                        <button class="btn" (click)="register()">{{'Registrovat' | translate}}</button>
+                    </div>
                 </div>
             </div>
         </div>

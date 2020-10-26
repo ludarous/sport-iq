@@ -6,6 +6,7 @@ import { AuthService } from '../modules/auth/services/auth.service';
 import { AuthUtils } from '../modules/core/utils/auth.utils';
 import { Authorities } from './entities/authorities';
 import { environment } from '../../environments/environment';
+import { BreadcrumbService } from './breadcrumb.service';
 
 @Component({
     selector: 'app-menu',
@@ -20,7 +21,8 @@ export class DashboardMenuComponent implements OnInit {
     model: any[];
 
     constructor(public app: DashboardComponent,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private breadcrumbService: BreadcrumbService) {
 
     }
 
@@ -229,6 +231,8 @@ export class DashboardMenuComponent implements OnInit {
                         ]}
             );
         }
+
+        this.breadcrumbService.setItems(this.model);
     }
 }
 

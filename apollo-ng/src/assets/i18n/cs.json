@@ -2,34 +2,35 @@
 	"about": {
 		"what-is-sportiq": {
 			"title": "Co je SportIQ?",
-			"point-1": "komplexní <b>nástroj</b> sestávající z <b>jedinečnýchtestů</b> a nejnovějších <b>technologií</b> (používáno týmy NBA, NHL,NFL, MLB, Premier league).<br><b>identifikuje silné stránky</b> sportovce a jeho <b>oblasti  rozvoje</b> s podporou <b>know-how</b> založeného na originálnímnámi vytvořeném <b>softwaru</b>.",
-			"point-2": "podporuje <b>nejvyšší</b> možný <b>výkonsportovců</b>.",
-			"point-3": "zaměřuje se na <b>všestrannos</b>t a <b>schopnostpohybu s míčem při maximální rychlosti</b>.",
-			"point-4": "umožňuje určit úroveň <b>pohybových schopností/ dovedností jednotlivce</b> - rychlosti, síly, vytrvalosti a předevšímkoordinace - které jsou <b>základem sportovního růstu</b>."
+			"point-1": "komplexní <b>nástroj</b> sestávající z <b>pohybových testů</b>, nejmodernějších <b>technologií</b> (používáno týmy NBA, NHL,NFL, MLB, Premier league) a databáze výsledků každého sportovce",
+			"point-2": "<b>identifikuje</b> a zároveň <b>dlouhodobě sleduje</b> úroveň pohybových schopností a dovedností s důrazem na sportovní <b>všestrannost</b> a <b>schopnost pohybu s míčem při maximální rychlosti</b>",
+            "point-3": "umožňuje určit úroveň <b>pohybových schopností a dovedností jednotlivce</b> - rychlosti, síly, vytrvalosti a především koordinace, které jsou <b>základem sportovního růstu</b>",
+            "point-4": "<b>identifikuje silné stránky</b> a <b>oblasti rozvoje</b> s podporou <b>know-how</b> založeného na originálním námi vytvořeném <b>softwaru</b>",
+			"point-5": "podporuje <b>rozvoj všestrannosti</b> a <b>nejvyšší</b> možný <b>výkon sportovců</b>"
 		},
 		"why-test": {
 			"title": "Proč testovat",
-			"point-1": "identifikace <b>silných a slabých stránek</b> umožňuje sportovcům a trenérům adekvátně <b>přizpůsobit trénink,   sledovat vývoj / zlepšení</b> a <b>srovnat</b> se s ostatními sportovci / týmy.",
-			"point-2": "za účelem <b>dosažení maximálního výkonu</b> sportovce",
-			"point-3": "sportovec potřebuje <b>maximální kontrolu nad základními pohyby</b>, které jsou <b>předpokladem</b> pro další vývoj a zvládnutí <b>složitějších pohybů</b> (např .: běh vs. běh s míčem (s minimální ztrátou rychlosti nebo bez ní))",
-			"point-4": "<b>úroveň zvládnutí základních i složitých pohybů</b>, tj. úroveň motorických dovedností <b>měří SportIQ</b>",
+			"point-1": "<b>Sportiq měří úroveň zvládnutí základních i složitých pohybů</b>, tj. úroveň pohybových schopností a dovedností",
+			"point-2": "u dětí jde především o <b>zjištění, sledování a rozvíjení pohybových schopností/dovedností</b> v <b>senzitivním období</b> (každá schopnost/dovednost má ideální fázi/věk pro rozvoj), za účelem <b>rozvoje všestrannosti</b>",
+			"point-3": "sportovec potřebuje <b>maximální kontrolu nad základními pohyby, které jsou <b>předpokladem pro další vývoj a zvládnutí <b>složitějších pohybů",
+			"point-4": "identifikace <b>silných a slabých stránek</b> umožňuje sportovcům a trenérům adekvátně <b>přizpůsobit trénink, sledovat vývoj / zlepšení</b> a <b>srovnat</b> se s ostatními sportovci / týmy",
 			"point-5": "za účelem <b>zjištění úrovně všestrannosti a výjimečnosti</b> sportovce"
 		},
 		"whom": {
 			"title": "Pro koho je SportIQ?",
-			"point-1": "všem, kteří chtějí dosáhnout svého <b>maximálního sportovního výkonu</b>",
-			"point-2": "všem, kteří chtějí <b>zjistit</b> svou <b>úroveň</b>.",
-			"point-3": "vhodné pro děti a dospívající od 6 let, <b>testy jsou přizpůsobeny věkové kategorii</b>",
-			"point-4": "<b>test pohybové všestrannosti</b> je vhodný pro sportovce jakéhokoli zaměření a pro některé sporty je k dispozici test <b>specializovaný</b>. <b>Test míčových sportů</b> ukáže, v kterém z míčových sportů by se sportovec mohl realizovat."
+			"point-1": "pro <b>děti</b> a <b>dospívající</b> od 6 let",
+			"point-2": "pro <b>budoucí i současné profesionální sportovce - testy jsou přizpůsobeny věkové kategorii a úrovni jedinců</b>",
+			"point-3": "pro všechny, kteří chtějí dosáhnout svého <b>maximálního sportovního výkonu</b>",
+			"point-4": "pro všechny, kteří chtějí <b>zjistit</b> svou <b>pohybovou úroveň</b> a <b>porovnat se s ostatními</b>"
 		},
 		"how": {
 			"title": "Jak SportIQ funguje?",
 			"point-1": "výběr <b>vhodného testu</b> podle věku a sportovní specializace",
 			"point-2": "<b>testování</b>",
 			"point-3": "<b>vyhodnocení</b> testu",
-			"point-4": "pravidelné <b>cvičení / přizpůsobený trénink</b> (na základě výsledků)",
-			"point-5": "<b>opětovné testování</b> ideálně po 4-6 měsících a vyhodnocení zlepšení",
-			"point-6": "další <b>korekce tréninku</b> a cvičení s ohledem na dosažené výsledky a nově stanovené cíle"
+			"point-4": "<b>doporučení</b> na co se zaměřit",
+			"point-5": "<b>opětovné testování a vyhodnocení</b> - ideálně po 4-6 měsících",
+			"point-6": "<b>sledování a porovnání výsledků</b>"
 		}
 	},
 	"contacts": {

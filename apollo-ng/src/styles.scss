@@ -239,7 +239,7 @@ ngx-charts-bar-horizontal, ngx-charts-bar-horizontal-stacked {
     padding-right: 15px;
 }
 
-@media print {
+.print {
 
     .print-only {
         display: initial;

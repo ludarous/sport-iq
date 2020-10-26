@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {EnumTranslatorService} from '../../modules/shared-components/services/enum-translator.service';
 import {ResultType} from '../entities/model/activity-result.model';
 import {Sex} from '../entities/model/athlete.model';
+import { Laterality } from '../entities/model/enums/laterality.enum';
 
 @Injectable()
 export class EnumTranslatorServiceImpl extends EnumTranslatorService {
@@ -31,6 +32,15 @@ export class EnumTranslatorServiceImpl extends EnumTranslatorService {
                     return this.translateService.instant(`Žena`);
                 } else if (enumObj.equals(Sex.OTHER)) {
                     return this.translateService.instant(`Jiné`);
+                } else {
+                    return enumObj;
+                }
+            } else if (enumObj instanceof Laterality) {
+
+                if (enumObj.equals(Laterality.RIGHT)) {
+                    return this.translateService.instant(`Pravá`);
+                } else if (enumObj.equals(Laterality.LEFT)) {
+                    return this.translateService.instant(`Levá`);
                 } else {
                     return enumObj;
                 }

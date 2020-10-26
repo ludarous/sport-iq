@@ -435,7 +435,9 @@ public class Athlete implements Serializable {
     }
 
     public Boolean isProfileCompleted() {
-        return profileCompleted;
+        return (isTermsAgreement() != null) && isTermsAgreement() &&
+            (isGdprAgreement() != null) && isGdprAgreement() &&
+            (getBirthDate() != null);
     }
 
     public Athlete profileCompleted(Boolean profileCompleted) {

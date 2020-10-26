@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EventService } from '../../dashboard/services/rest/event.service';
 import { IEvent } from '../../dashboard/entities/model/event.model';
-import { Moment } from 'moment';
 import * as moment from 'moment';
 import { IEventLocation } from '../../dashboard/entities/model/event-location.model';
 import { AuthService } from '../../modules/auth/services/auth.service';
 import { IUser } from '../../modules/entities/user';
 import { AuthUtils } from '../../modules/core/utils/auth.utils';
 import { HttpResponse } from '@angular/common/http';
-import { even } from '@rxweb/reactive-form-validators';
 
 declare const WOW: any;
 
@@ -23,6 +21,7 @@ export class EventsComponent implements OnInit {
                 private authService: AuthService) {
     }
 
+    @Input()
     nextEvents: Array<IEvent>;
     now = moment();
     showSingInDialog: any;

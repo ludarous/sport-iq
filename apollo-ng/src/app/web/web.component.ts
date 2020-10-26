@@ -7,6 +7,8 @@ import { NgwWowService } from 'ngx-wow';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../modules/auth/services/auth.service';
 import { IUser } from '../modules/entities/user';
+import { EventService } from '../dashboard/services/rest/event.service';
+import { IEvent } from '../dashboard/entities/model/event.model';
 
 @Component({
     selector: 'app-web',
@@ -17,6 +19,7 @@ export class WebComponent implements OnInit, OnDestroy {
 
     constructor(translate: TranslateService,
                 private authService: AuthService,
+                private eventService: EventService,
                 private router: Router,
                 private wowService: NgwWowService) {
 
@@ -30,12 +33,11 @@ export class WebComponent implements OnInit, OnDestroy {
     }
 
     private wowSubscription: Subscription;
-
-    title = 'Angular';
+    nextEvents: Array<IEvent>;
 
 
     ngOnInit(): void {
-
+        this.loadEvents();
         this.authService.updateUser().subscribe((user: IUser) => {
             console.log(user);
         });
@@ -84,6 +86,13 @@ export class WebComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         // unsubscribe (if necessary) to WOW observable to prevent memory leaks
         this.wowSubscription.unsubscribe();
+    }
+
+    loadEvents() {
+        const nextEvents$ = this.eventService.query();
+        nextEvents$.subscribe((nextEventsResponse) => {
+            this.nextEvents = nextEventsResponse.body; // nextEventsResponse.body.filter(e => e.date.isAfter(this.now));
+        });
     }
 
 }

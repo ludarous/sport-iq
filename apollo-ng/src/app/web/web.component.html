@@ -1,10 +1,10 @@
 <app-loader></app-loader>
 <header>
-  <app-menu></app-menu>
+  <app-menu [nextEvents]="nextEvents"></app-menu>
 </header>
 <app-home id="home"></app-home>
 <app-about id="aboutSportIQ"></app-about>
-<app-events id="events"></app-events>
+<app-events *ngIf="nextEvents && nextEvents.length > 0" id="events" [nextEvents]="nextEvents"></app-events>
 <app-tests id="tests" class="section"></app-tests>
 <app-skills></app-skills>
 <app-technologies id="technology" class="section"></app-technologies>

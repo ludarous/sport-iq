@@ -2,6 +2,7 @@ import {Component, ElementRef, ViewChild, AfterViewInit, OnDestroy, OnInit} from
 import {ScrollPanel} from 'primeng/primeng';
 import {AuthService} from '../modules/auth/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { BreadcrumbService } from './breadcrumb.service';
 
 @Component({
     selector: 'app-root',
@@ -10,7 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService,
+                private breadcrumbService: BreadcrumbService) {
     }
 
     darkTheme = false;

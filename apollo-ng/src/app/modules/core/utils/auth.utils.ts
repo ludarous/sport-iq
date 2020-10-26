@@ -57,7 +57,7 @@ export class AuthUtils {
 
   static getTokenFromResponse(response: Response): any {
     try {
-      const token = response && (<any>response).id_token;
+      const token = response && (response as any).id_token;
       if (token) {
         return token;
       }

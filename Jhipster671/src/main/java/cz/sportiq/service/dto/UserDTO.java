@@ -2,9 +2,11 @@ package cz.sportiq.service.dto;
 
 import cz.sportiq.config.Constants;
 
+import cz.sportiq.domain.Athlete;
 import cz.sportiq.domain.Authority;
 import cz.sportiq.domain.User;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
@@ -34,6 +36,9 @@ public class UserDTO {
 
     @Size(max = 256)
     private String imageUrl;
+
+    @Size(max = 256)
+    private String idpId;
 
     private boolean activated = false;
 
@@ -204,4 +209,11 @@ public class UserDTO {
             "}";
     }
 
+    public String getIdpId() {
+        return idpId;
+    }
+
+    public void setIdpId(String idpId) {
+        this.idpId = idpId;
+    }
 }

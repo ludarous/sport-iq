@@ -11,7 +11,7 @@ import cz.sportiq.security.SecurityUtils;
 import cz.sportiq.service.dto.UserDTO;
 
 import cz.sportiq.service.mapper.AthleteMapper;
-import jdk.nashorn.internal.runtime.options.Option;
+import org.javatuples.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -43,12 +43,15 @@ public class UserService {
 
     private final AthleteRepository athleteRepository;
 
+    private final AthleteMapper athleteMapper;
+
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, AthleteRepository athleteRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, AthleteRepository athleteRepository, AthleteMapper athleteMapper, CacheManager cacheManager) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
         this.athleteRepository = athleteRepository;
+        this.athleteMapper = athleteMapper;
         this.cacheManager = cacheManager;
     }
 
@@ -132,7 +135,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<User> getUserWithAuthorities(Long id) {
+    public Optional<User> getUserWithAuthorities(String id) {
         return userRepository.findOneWithAuthoritiesById(id);
     }
 
@@ -149,7 +152,7 @@ public class UserService {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
     }
 
-    private User syncUserWithIdP(Map<String, Object> details, User user) {
+    private Pair<User, Athlete> syncUserWithIdP(Map<String, Object> details, User user) {
         // save authorities in to sync user roles/groups between IdP and JHipster's local database
         Collection<String> dbAuthorities = getAuthorities();
         Collection<String> userAuthorities =
@@ -187,7 +190,7 @@ public class UserService {
         }
 
         Athlete athlete = syncUserWithAthlete(user);
-        return user;
+        return new Pair<User, Athlete>(user, athlete);
     }
 
     private Athlete syncUserWithAthlete(User user) {
@@ -245,7 +248,19 @@ public class UserService {
                 user.getAuthorities().add(authority);
             }
         }
-        return new UserDTO(syncUserWithIdP(attributes, user));
+        Pair<User, Athlete> userAthletePair = syncUserWithIdP(attributes, user);
+        UserDTO userDTO = new UserDTO(userAthletePair.getValue0());
+        if(attributes.containsKey("idp_google_sub")) {
+            userDTO.setIdpId(attributes.get("idp_google_sub").toString());
+        }
+        if(attributes.containsKey("idp_facebook_sub")) {
+            userDTO.setIdpId(attributes.get("idp_facebook_sub").toString());
+        }
+        if(attributes.containsKey("idp_google_picture")) {
+            userDTO.setImageUrl(attributes.get("idp_google_picture").toString());
+        }
+        userDTO.setAthlete(athleteMapper.toDto(userAthletePair.getValue1()));
+        return userDTO;
 
     }
 

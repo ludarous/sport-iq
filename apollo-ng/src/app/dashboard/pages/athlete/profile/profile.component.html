@@ -1,1 +1,294 @@
-<p>profile works!</p>
+<div class="ui-g">
+    <div class="ui-g-12">
+        <div class="card">
+            <form class="form-group" *ngIf="athleteForm" [formGroup]="athleteForm"
+                  (submit)="saveAthlete()">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12">
+                        <h1>{{athlete.firstName + ' ' + athlete.lastName}}</h1>
+                        Údaje označené hvězdičkou jsou nutné pro plnohodnotné používání aplikace SportIQ
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g h-100">
+                            <!--                    <div class="ui-g-6 ui-md-6 ui-sm-12">-->
+                            <p-panel class="h-100" styleClass="h-100" [header]="'Základní údaje' | translate">
+                                <div class="ui-g">
+                                    <div class="ui-g-12">
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-firstName">{{'Křestní jméno' | translate}} *</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <input id="athlete-firstName" class="w-100" type="text" pInputText
+                                                   formControlName="firstName"
+                                                   required/>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-lastName">{{'Příjmení' | translate}} *</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <input id="athlete-lastName" class="w-100" type="text" pInputText
+                                                   formControlName="lastName"
+                                                   required/>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-birthDate">{{'Datum narození' | translate}} *</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <p-calendar id="athlete-birthDate"
+                                                        formControlName="birthDate"
+                                                        [utc]="false"
+                                                        [locale]="csLocale"
+                                                        [yearNavigator]="true"
+                                                        [yearRange]="'1950:2010'"
+                                                        [dateFormat]="csLocale.dateFormat"
+                                            ></p-calendar>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-email">{{'E-mail' | translate}} *</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <input id="athlete-email" class="w-100" type="text" pInputText
+                                                   formControlName="email"
+                                                   required/>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-phone">{{'Telefon' | translate}}</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <input id="athlete-phone" class="w-100" type="text" pInputText
+                                                   formControlName="phone"
+                                                   required/>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-sex">{{'Pohlaví' | translate}} *</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <p-dropdown id="athlete-sex"
+                                                        [styleClass]="'w-100'"
+                                                        [placeholder]="'Vyberte pohlaví' | translate"
+                                                        [options]="sexTypes"
+                                                        formControlName="sex"
+                                                        [filter]="false"
+                                                        [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-12">
+                                            <div class="legal-representative-data" *ngIf="showLegalRepresentative">
+                                                <h2>{{'Údaje zákonného zástupce'}}</h2>
+                                                <br/>
+                                                <div class="ui-g-12 ui-md-4">
+                                                    <label
+                                                        for="athlete-lrFirstName">{{'Křestní jméno' | translate}} *</label>
+                                                </div>
+                                                <div class="ui-g-12 ui-md-8">
+                                                    <input id="athlete-lrFirstName" class="w-100" type="text" pInputText
+                                                           formControlName="lrFirstName"
+                                                           required/>
+                                                </div>
+
+                                                <div class="ui-g-12 ui-md-4">
+                                                    <label for="athlete-lrLastName">{{'Příjmení' | translate}} *</label>
+                                                </div>
+                                                <div class="ui-g-12 ui-md-8">
+                                                    <input id="athlete-lrLastName" class="w-100" type="text" pInputText
+                                                           formControlName="lrLastName"
+                                                           required/>
+                                                </div>
+
+                                                <div class="ui-g-12 ui-md-4">
+                                                    <label for="athlete-lrEmail">{{'E-mail' | translate}} *</label>
+                                                </div>
+                                                <div class="ui-g-12 ui-md-8">
+                                                    <input id="athlete-lrEmail" class="w-100" type="text" pInputText
+                                                           formControlName="lrEmail"
+                                                           required/>
+                                                </div>
+
+                                                <div class="ui-g-12 ui-md-4">
+                                                    <label for="athlete-lrPhone">{{'Telefon' | translate}}</label>
+                                                </div>
+                                                <div class="ui-g-12 ui-md-8">
+                                                    <input id="athlete-lrPhone" class="w-100" type="text" pInputText
+                                                           formControlName="lrPhone"
+                                                           required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-panel>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g h-100">
+                            <p-panel class="h-100" styleClass="h-100" [header]="'Bydliště' | translate">
+                                <div class="ui-g">
+                                    <div class="ui-g-12">
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-city">{{'Město' | translate}}</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <input id="athlete-city" class="w-100" type="text" pInputText
+                                                   formControlName="city"
+                                                   required/>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-street">{{'Ulice' | translate}}</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <input id="athlete-street" class="w-100" type="text" pInputText
+                                                   formControlName="street"
+                                                   required/>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-zipCode">{{'PSČ' | translate}}</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <input id="athlete-zipCode" class="w-100" type="text" pInputText
+                                                   formControlName="zipCode"
+                                                   required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-panel>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g h-100">
+                            <p-panel class="h-100" styleClass="h-100" [header]="'Sportovní informace' | translate">
+                                <div class="ui-g">
+                                    <div class="ui-g-12">
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-steppingFoot">{{'Rukovost' | translate}}</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <p-dropdown id="athlete-handLaterality"
+                                                        [styleClass]="'w-100'"
+                                                        [placeholder]="'Vyberte lateralitu' | translate"
+                                                        [options]="lateralityTypes"
+                                                        formControlName="handLaterality"
+                                                        [filter]="false"
+                                                        [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-footLaterality">{{'Nohovost' | translate}}</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <p-dropdown id="athlete-footLaterality"
+                                                        [styleClass]="'w-100'"
+                                                        [placeholder]="'Vyberte lateralitu' | translate"
+                                                        [options]="lateralityTypes"
+                                                        formControlName="footLaterality"
+                                                        [filter]="false"
+                                                        [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-steppingFoot">{{'Odrazová noha' | translate}}</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <p-dropdown id="athlete-steppingFoot"
+                                                        [styleClass]="'w-100'"
+                                                        [placeholder]="'Vyberte lateralitu' | translate"
+                                                        [options]="lateralityTypes"
+                                                        formControlName="steppingFoot"
+                                                        [filter]="false"
+                                                        [showClear]="true">
+                                            </p-dropdown>
+                                        </div>
+
+                                        <div class="ui-g-12 ui-md-4">
+                                            <label for="athlete-sports">{{'Sporty' | translate}}</label>
+                                        </div>
+                                        <div class="ui-g-12 ui-md-8">
+                                            <p-multiSelect class='w-100'
+                                                           id="athlete-sports"
+                                                           [defaultLabel]="'Vyber sport' | translate"
+                                                           [styleClass]="'w-100'"
+                                                           [options]="sports"
+                                                           [(ngModel)]="athlete.sports"
+                                                           [ngModelOptions]="{standalone: true}"
+                                                           optionLabel="name"
+                                            ></p-multiSelect>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-panel>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g h-100">
+                            <p-panel class="h-100" styleClass="h-100" [header]="'Souhlasy' | translate">
+                                <div class="ui-g">
+                                    <div class="ui-g-12">
+                                        <div class="ui-g-12 ui-12-4">
+                                            <p-checkbox name="athlete-gdprAgreement"
+                                                        binary="true"
+                                                        [label]="gdprAgreementText + ' *'"
+                                                        formControlName="gdprAgreement">
+                                            </p-checkbox>
+                                        </div>
+                                        <div class="ui-g-12 ui-12-4">
+                                            <p-checkbox name="athlete-termsAgreement"
+                                                        binary="true"
+                                                        [label]="termsAgreementText + ' *'"
+                                                        formControlName="termsAgreement">
+                                            </p-checkbox>
+                                        </div>
+                                        <div class="ui-g-12 ui-12-4">
+                                            <p-checkbox name="athlete-photographyAgreement"
+                                                        binary="true"
+                                                        [label]="photographyAgreementText"
+                                                        formControlName="photographyAgreement">
+                                            </p-checkbox>
+                                        </div>
+                                        <div class="ui-g-12 ui-12-4">
+                                            <p-checkbox name="athlete-medicalFitnessAgreement"
+                                                        binary="true"
+                                                        [label]="medicalFitnessAgreementText"
+                                                        formControlName="medicalFitnessAgreement">
+                                            </p-checkbox>
+                                        </div>
+                                        <div class="ui-g-12 ui-12-4">
+                                            <p-checkbox name="athlete-marketingAgreement"
+                                                        binary="true"
+                                                        [label]="marketingAgreementText"
+                                                        formControlName="marketingAgreement">
+                                            </p-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-panel>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <button pButton type="button" class="cyan-btn"
+                                [label]="('Uložit' | translate)"
+                                (click)="saveAthlete(!!athlete.id)">
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

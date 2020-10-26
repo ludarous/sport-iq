@@ -56,7 +56,7 @@ export class AthletesEditComponent implements OnInit {
 
             getAthlete$.subscribe((athlete: IAthlete) => {
                 this.athlete = athlete;
-                this.birthDate = this.athlete.birthDate ? this.athlete.birthDate.toDate() : null;
+                this.birthDate = this.athlete.birthDate ? this.athlete.birthDate : null;
                 this.setAthleteForm(this.athlete);
             });
 
@@ -71,7 +71,7 @@ export class AthletesEditComponent implements OnInit {
         if (this.athleteForm.valid) {
 
             const athleteToSave = this.athleteForm.value as IAthlete;
-            athleteToSave.birthDate = moment(this.birthDate);
+            athleteToSave.birthDate = this.birthDate;
 
             let saveAthlete$;
             if (athleteToSave.id) {

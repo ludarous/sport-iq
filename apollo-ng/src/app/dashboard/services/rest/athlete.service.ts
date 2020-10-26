@@ -13,6 +13,7 @@ export class AthleteService extends CrudBaseService<IAthlete> {
         super(environment.apiUrl, '/athletes', injector, [Athlete.parseItemEnums]);
     }
 
+
     getAthlete(athleteId: number): Observable<IAthlete> {
         if (athleteId) {
             return this.find(athleteId)

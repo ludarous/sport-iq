@@ -46,7 +46,7 @@
         "ngx-avatar": "^3.7.0",
         "ngx-wow": "^2.0.1",
         "primeicons": "1.0.0",
-        "primeng": "8.0.0",
+        "primeng": "^8.1.4",
         "quill": "1.1.8",
         "rxjs": "6.5.4",
         "ts-md5": "^1.2.7",

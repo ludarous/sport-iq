@@ -16,31 +16,31 @@ export class TestsComponent implements OnInit {
 
   ngOnInit() {
       this.testDetails = [
-          {
-              name: 'tests.versatile-ball-sports-test.title',
-              sections: [
-                  {
-                      title: 'tests.point-1-title',
-                      content: 'tests.versatile-ball-sports-test.when',
-                  },
-                  {
-                      title: 'tests.point-2-title',
-                      content: 'tests.versatile-ball-sports-test.who',
-                  },
-                  {
-                      title: 'tests.point-3-title',
-                      content: 'tests.versatile-ball-sports-test.what',
-                  },
-                  {
-                      title: 'tests.point-4-title',
-                      content: 'tests.versatile-ball-sports-test.desc',
-                  },
-                  {
-                      title: 'tests.point-5-title',
-                      content: 'tests.versatile-ball-sports-test.rec',
-                  }
-              ]
-          },
+          // {
+          //     name: 'tests.versatile-ball-sports-test.title',
+          //     sections: [
+          //         {
+          //             title: 'tests.point-1-title',
+          //             content: 'tests.versatile-ball-sports-test.when',
+          //         },
+          //         {
+          //             title: 'tests.point-2-title',
+          //             content: 'tests.versatile-ball-sports-test.who',
+          //         },
+          //         {
+          //             title: 'tests.point-3-title',
+          //             content: 'tests.versatile-ball-sports-test.what',
+          //         },
+          //         {
+          //             title: 'tests.point-4-title',
+          //             content: 'tests.versatile-ball-sports-test.desc',
+          //         },
+          //         {
+          //             title: 'tests.point-5-title',
+          //             content: 'tests.versatile-ball-sports-test.rec',
+          //         }
+          //     ]
+          // },
           {
               name: 'tests.versatile-test.title',
               sections: [
