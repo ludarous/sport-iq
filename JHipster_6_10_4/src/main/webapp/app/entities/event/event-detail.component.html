@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="event">
+            <h2><span>Event</span> {{ event.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{ event.name }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ event.date }}</span>
+                </dd>
+                <dt><span>Event Location</span></dt>
+                <dd>
+                    <div *ngIf="event.eventLocationId">
+                        <a [routerLink]="['/event-location', event.eventLocationId, 'view']">{{ event.eventLocationName }}</a>
+                    </div>
+                </dd>
+                <dt><span>Activities</span></dt>
+                <dd>
+                    <span *ngFor="let activities of event.activities; let last = last">
+                        <a [routerLink]="['/activity', activities?.id, 'view']">{{ activities.name }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+                <dt><span>Entrants</span></dt>
+                <dd>
+                    <span *ngFor="let entrants of event.entrants; let last = last">
+                        {{ entrants.email }}{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/event', event.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

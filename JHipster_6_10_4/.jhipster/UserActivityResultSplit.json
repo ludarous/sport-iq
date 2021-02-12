@@ -1,0 +1,41 @@
+{
+  "name": "UserActivityResultSplit",
+  "fields": [
+    {
+      "fieldName": "value",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "compareValue",
+      "fieldType": "Float"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "activityResultSplit",
+      "otherEntityRelationshipName": "userActivityResultSplit",
+      "relationshipValidateRules": "required",
+      "relationshipName": "activityResultSplit",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "userActivityResult",
+      "otherEntityRelationshipName": "athleteActivityResultSplits",
+      "relationshipName": "userActivityResult",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201029221912",
+  "entityTableName": "user_activity_result_split",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

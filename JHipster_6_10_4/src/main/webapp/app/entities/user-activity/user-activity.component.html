@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span>User Activities</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-activity" [routerLink]="['/user-activity/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new User Activity
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="userActivities?.length === 0">
+        <span>No userActivities found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="userActivities && userActivities.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="note"><span>Note</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="activityName"><span>Activity</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userEventId"><span>User Event</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let userActivity of userActivities ;trackBy: trackId">
+                    <td><a [routerLink]="['/user-activity', userActivity.id, 'view']">{{ userActivity.id }}</a></td>
+                    <td>{{ userActivity.note }}</td>
+                    <td>{{ userActivity.date | date:'medium' }}</td>
+                    <td>
+                        <div *ngIf="userActivity.activityId">
+                            <a [routerLink]="['/activity', userActivity.activityId , 'view']" >{{ userActivity.activityName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="userActivity.userEventId">
+                            <a [routerLink]="['/user-event', userActivity.userEventId , 'view']" >{{ userActivity.userEventId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/user-activity', userActivity.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/user-activity', userActivity.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(userActivity)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="userActivities && userActivities.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

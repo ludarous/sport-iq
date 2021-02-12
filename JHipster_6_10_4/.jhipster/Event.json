@@ -1,0 +1,50 @@
+{
+  "name": "Event",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "eventLocation",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "eventLocation",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "activity",
+      "otherEntityRelationshipName": "events",
+      "relationshipName": "activities",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "events",
+      "relationshipName": "entrants",
+      "otherEntityField": "email",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20201029221212",
+  "entityTableName": "event",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

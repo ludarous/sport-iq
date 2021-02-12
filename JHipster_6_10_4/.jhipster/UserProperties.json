@@ -1,0 +1,34 @@
+{
+  "name": "UserProperties",
+  "fields": [
+    {
+      "fieldName": "birthDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nationality",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sex",
+      "fieldType": "Sex",
+      "fieldValues": "MALE,FEMALE,OTHER"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201029220312",
+  "entityTableName": "user_properties",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

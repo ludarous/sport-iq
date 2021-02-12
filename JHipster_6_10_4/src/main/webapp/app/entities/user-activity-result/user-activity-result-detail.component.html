@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userActivityResult">
+            <h2><span>User Activity Result</span> {{ userActivityResult.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Value</span></dt>
+                <dd>
+                    <span>{{ userActivityResult.value }}</span>
+                </dd>
+                <dt><span>Compare Value</span></dt>
+                <dd>
+                    <span>{{ userActivityResult.compareValue }}</span>
+                </dd>
+                <dt><span>Activity Result</span></dt>
+                <dd>
+                    <div *ngIf="userActivityResult.activityResultId">
+                        <a [routerLink]="['/activity-result', userActivityResult.activityResultId, 'view']">{{ userActivityResult.activityResultName }}</a>
+                    </div>
+                </dd>
+                <dt><span>User Activity</span></dt>
+                <dd>
+                    <div *ngIf="userActivityResult.userActivityId">
+                        <a [routerLink]="['/user-activity', userActivityResult.userActivityId, 'view']">{{ userActivityResult.userActivityId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-activity-result', userActivityResult.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

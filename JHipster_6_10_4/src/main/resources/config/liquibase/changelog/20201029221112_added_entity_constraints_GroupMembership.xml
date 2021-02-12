@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity GroupMembership.
+    -->
+    <changeSet id="20201029221112-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="group_membership"
+                                 constraintName="fk_group_membership_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="group_membership_id"
+                                 baseTableName="group_membership_roles"
+                                 constraintName="fk_group_membership_roles_group_membership_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="group_membership"/>
+
+        <addForeignKeyConstraint baseColumnNames="roles_id"
+                                 baseTableName="group_membership_roles"
+                                 constraintName="fk_group_membership_roles_roles_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="membership_role"/>
+        
+        <addForeignKeyConstraint baseColumnNames="group_id"
+                                 baseTableName="group_membership"
+                                 constraintName="fk_group_membership_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_group"/>
+
+    </changeSet>
+</databaseChangeLog>

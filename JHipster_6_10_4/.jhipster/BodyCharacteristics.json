@@ -1,0 +1,44 @@
+{
+  "name": "BodyCharacteristics",
+  "fields": [
+    {
+      "fieldName": "height",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "weight",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "unit",
+      "otherEntityRelationshipName": "bodyCharacteristics",
+      "relationshipName": "heightUnit",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "unit",
+      "otherEntityRelationshipName": "bodyCharacteristics",
+      "relationshipName": "widthUnit",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201029220412",
+  "entityTableName": "body_characteristics",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

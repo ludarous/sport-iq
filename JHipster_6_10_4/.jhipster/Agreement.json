@@ -1,0 +1,37 @@
+{
+  "name": "Agreement",
+  "fields": [
+    {
+      "fieldName": "termsAgreement",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "gdprAgreement",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "photographyAgreement",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "marketingAgreement",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "medicalFitnessAgreement",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20201029220112",
+  "entityTableName": "agreement",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

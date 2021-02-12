@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="activityResultSplit">
+            <h2><span>Activity Result Split</span> {{ activityResultSplit.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Split Value</span></dt>
+                <dd>
+                    <span>{{ activityResultSplit.splitValue }}</span>
+                </dd>
+                <dt><span>Split Unit</span></dt>
+                <dd>
+                    <div *ngIf="activityResultSplit.splitUnitId">
+                        <a [routerLink]="['/unit', activityResultSplit.splitUnitId, 'view']">{{ activityResultSplit.splitUnitName }}</a>
+                    </div>
+                </dd>
+                <dt><span>Activity Result</span></dt>
+                <dd>
+                    <div *ngIf="activityResultSplit.activityResultId">
+                        <a [routerLink]="['/activity-result', activityResultSplit.activityResultId, 'view']">{{ activityResultSplit.activityResultId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/activity-result-split', activityResultSplit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

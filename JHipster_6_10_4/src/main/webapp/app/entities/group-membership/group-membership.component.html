@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span>Group Memberships</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-group-membership" [routerLink]="['/group-membership/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Group Membership
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="groupMemberships?.length === 0">
+        <span>No groupMemberships found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="groupMemberships && groupMemberships.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="created"><span>Created</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userId"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="groupId"><span>Group</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let groupMembership of groupMemberships ;trackBy: trackId">
+                    <td><a [routerLink]="['/group-membership', groupMembership.id, 'view']">{{ groupMembership.id }}</a></td>
+                    <td>{{ groupMembership.created | date:'medium' }}</td>
+                    <td>
+                        {{ groupMembership.userId }}
+                    </td>
+                    <td>
+                        <div *ngIf="groupMembership.groupId">
+                            <a [routerLink]="['/group', groupMembership.groupId , 'view']" >{{ groupMembership.groupId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/group-membership', groupMembership.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/group-membership', groupMembership.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(groupMembership)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="groupMemberships && groupMemberships.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

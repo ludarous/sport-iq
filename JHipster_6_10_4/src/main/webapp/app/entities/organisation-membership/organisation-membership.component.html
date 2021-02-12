@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span>Organisation Memberships</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-organisation-membership" [routerLink]="['/organisation-membership/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Organisation Membership
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="organisationMemberships?.length === 0">
+        <span>No organisationMemberships found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="organisationMemberships && organisationMemberships.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="created"><span>Created</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userId"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="organisationId"><span>Organisation</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let organisationMembership of organisationMemberships ;trackBy: trackId">
+                    <td><a [routerLink]="['/organisation-membership', organisationMembership.id, 'view']">{{ organisationMembership.id }}</a></td>
+                    <td>{{ organisationMembership.created | date:'medium' }}</td>
+                    <td>
+                        {{ organisationMembership.userId }}
+                    </td>
+                    <td>
+                        <div *ngIf="organisationMembership.organisationId">
+                            <a [routerLink]="['/organisation', organisationMembership.organisationId , 'view']" >{{ organisationMembership.organisationId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/organisation-membership', organisationMembership.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/organisation-membership', organisationMembership.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(organisationMembership)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="organisationMemberships && organisationMemberships.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

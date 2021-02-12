@@ -99,7 +99,7 @@ export class OAuth2Service implements AuthService{
         return user;
     }
 
-    clearUser() {
+    private clearUser() {
         this.currentUser = null;
         this.currentUserId = null;
         this.saveUserToLocalStorage(null);

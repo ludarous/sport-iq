@@ -1,0 +1,44 @@
+{
+  "name": "OrganisationMembership",
+  "fields": [
+    {
+      "fieldName": "created",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "organisationMembership",
+      "relationshipName": "user",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "membershipRole",
+      "otherEntityRelationshipName": "organisationMemberships",
+      "relationshipName": "roles",
+      "otherEntityField": "name",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "organisation",
+      "otherEntityRelationshipName": "memberships",
+      "relationshipName": "organisation",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201029220912",
+  "entityTableName": "organisation_membership",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

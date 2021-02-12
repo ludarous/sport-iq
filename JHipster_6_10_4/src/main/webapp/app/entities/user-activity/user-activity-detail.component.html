@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userActivity">
+            <h2><span>User Activity</span> {{ userActivity.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Note</span></dt>
+                <dd>
+                    <span>{{ userActivity.note }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ userActivity.date }}</span>
+                </dd>
+                <dt><span>Activity</span></dt>
+                <dd>
+                    <div *ngIf="userActivity.activityId">
+                        <a [routerLink]="['/activity', userActivity.activityId, 'view']">{{ userActivity.activityName }}</a>
+                    </div>
+                </dd>
+                <dt><span>User Event</span></dt>
+                <dd>
+                    <div *ngIf="userActivity.userEventId">
+                        <a [routerLink]="['/user-event', userActivity.userEventId, 'view']">{{ userActivity.userEventId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-activity', userActivity.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

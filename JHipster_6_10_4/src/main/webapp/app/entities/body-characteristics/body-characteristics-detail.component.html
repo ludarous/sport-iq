@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bodyCharacteristics">
+            <h2><span>Body Characteristics</span> {{ bodyCharacteristics.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Height</span></dt>
+                <dd>
+                    <span>{{ bodyCharacteristics.height }}</span>
+                </dd>
+                <dt><span>Weight</span></dt>
+                <dd>
+                    <span>{{ bodyCharacteristics.weight }}</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{ bodyCharacteristics.date }}</span>
+                </dd>
+                <dt><span>Height Unit</span></dt>
+                <dd>
+                    <div *ngIf="bodyCharacteristics.heightUnitId">
+                        <a [routerLink]="['/unit', bodyCharacteristics.heightUnitId, 'view']">{{ bodyCharacteristics.heightUnitId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Width Unit</span></dt>
+                <dd>
+                    <div *ngIf="bodyCharacteristics.widthUnitId">
+                        <a [routerLink]="['/unit', bodyCharacteristics.widthUnitId, 'view']">{{ bodyCharacteristics.widthUnitId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/body-characteristics', bodyCharacteristics.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

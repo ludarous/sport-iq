@@ -1,0 +1,67 @@
+{
+  "name": "ActivityResult",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "resultType",
+      "fieldType": "ResultType",
+      "fieldValues": "LESS_IS_BETTER,MORE_IS_BETTER"
+    },
+    {
+      "fieldName": "ratingWeight",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "mainResult",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "order",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "irvBest",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "irvWorst",
+      "fieldType": "Float"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "activityResultSplit",
+      "otherEntityRelationshipName": "activityResult",
+      "relationshipName": "resultSplits"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "unit",
+      "otherEntityRelationshipName": "activityResult",
+      "relationshipName": "resultUnit",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "activity",
+      "otherEntityRelationshipName": "activityResults",
+      "relationshipName": "activity",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201029221412",
+  "entityTableName": "activity_result",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

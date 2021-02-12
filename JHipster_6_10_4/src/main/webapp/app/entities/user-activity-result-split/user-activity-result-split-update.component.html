@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-user-activity-result-split-heading">Create or edit a User Activity Result Split</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_value">Value</label>
+                    <input type="number" class="form-control" name="value" id="field_value"
+                           formControlName="value"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_compareValue">Compare Value</label>
+                    <input type="number" class="form-control" name="compareValue" id="field_compareValue"
+                           formControlName="compareValue"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_activityResultSplit">Activity Result Split</label>
+                    <select class="form-control" id="field_activityResultSplit" name="activityResultSplit" formControlName="activityResultSplitId">
+                        <option *ngIf="!editForm.get('activityResultSplitId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="activityResultSplitOption.id" *ngFor="let activityResultSplitOption of activityresultsplits; trackBy: trackById">{{ activityResultSplitOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('activityResultSplitId')!.invalid && (editForm.get('activityResultSplitId')!.dirty || editForm.get('activityResultSplitId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('activityResultSplitId')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_userActivityResult">User Activity Result</label>
+                    <select class="form-control" id="field_userActivityResult" name="userActivityResult" formControlName="userActivityResultId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userActivityResultOption.id" *ngFor="let userActivityResultOption of useractivityresults; trackBy: trackById">{{ userActivityResultOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

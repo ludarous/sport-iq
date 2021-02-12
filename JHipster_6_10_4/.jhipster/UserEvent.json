@@ -1,0 +1,48 @@
+{
+  "name": "UserEvent",
+  "fields": [
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "registrationDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "userActivity",
+      "otherEntityRelationshipName": "userEvent",
+      "relationshipName": "athleteActivities"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "userEvent",
+      "relationshipValidateRules": "required",
+      "relationshipName": "user",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "userEvent",
+      "relationshipValidateRules": "required",
+      "relationshipName": "event",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20201029221612",
+  "entityTableName": "user_event",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-activity-result-heading">Create or edit a Activity Result</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resultType">Result Type</label>
+                    <select class="form-control" name="resultType" formControlName="resultType" id="field_resultType">
+                        <option value="LESS_IS_BETTER">LESS_IS_BETTER</option>
+                        <option value="MORE_IS_BETTER">MORE_IS_BETTER</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ratingWeight">Rating Weight</label>
+                    <input type="number" class="form-control" name="ratingWeight" id="field_ratingWeight"
+                           formControlName="ratingWeight"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_mainResult">Main Result</label>
+                    <input type="checkbox" class="form-control" name="mainResult" id="field_mainResult"
+                           formControlName="mainResult"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_order">Order</label>
+                    <input type="number" class="form-control" name="order" id="field_order"
+                           formControlName="order"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_irvBest">Irv Best</label>
+                    <input type="number" class="form-control" name="irvBest" id="field_irvBest"
+                           formControlName="irvBest"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_irvWorst">Irv Worst</label>
+                    <input type="number" class="form-control" name="irvWorst" id="field_irvWorst"
+                           formControlName="irvWorst"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_resultUnit">Result Unit</label>
+                    <select class="form-control" id="field_resultUnit" name="resultUnit" formControlName="resultUnitId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="unitOption.id" *ngFor="let unitOption of units; trackBy: trackById">{{ unitOption.name }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_activity">Activity</label>
+                    <select class="form-control" id="field_activity" name="activity" formControlName="activityId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="activityOption.id" *ngFor="let activityOption of activities; trackBy: trackById">{{ activityOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
