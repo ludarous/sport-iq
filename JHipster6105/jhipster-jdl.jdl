@@ -1,0 +1,201 @@
+enum Sex {
+	MALE, FEMALE, OTHER
+}
+
+enum ResultType {
+	LESS_IS_BETTER, MORE_IS_BETTER
+}
+
+enum Laterality {
+    LEFT, RIGHT
+}
+
+entity Agreement {
+	termsAgreement Boolean,
+    gdprAgreement Boolean,
+    photographyAgreement Boolean,
+    marketingAgreement Boolean,
+    medicalFitnessAgreement Boolean
+}
+
+entity LegalRepresentative {
+	firstName String,
+    lastName String,
+    email String,
+    phone String
+}
+
+entity UserProperties {
+	birthDate ZonedDateTime,
+    phone String,
+    nationality String,
+    sex Sex
+}
+
+entity BodyCharacteristics {
+	height Float,
+    weight Float,
+	date ZonedDateTime,
+}
+
+entity Country {
+	name String required,
+    code String,
+}
+
+entity Address {
+    city String,
+    street String,
+    zipCode String,
+}
+
+entity MembershipRole {
+	name String
+}
+
+entity Organisation {
+	name String,
+    created ZonedDateTime,
+    description String,
+}
+
+entity OrganisationMembership {
+	created ZonedDateTime,
+}
+
+entity Group {
+	name String,
+    created ZonedDateTime,
+    description String
+}
+
+entity GroupMembership {
+	created ZonedDateTime,
+}
+
+entity Event {
+	name String required,
+    date ZonedDateTime
+}
+
+entity Activity {
+   	name String required,
+    isPublic Boolean,
+    description String,
+    help String,
+}
+
+entity ActivityResult {
+	name String,
+    resultType ResultType
+    ratingWeight Float,
+    mainResult Boolean,
+    order Integer,
+    irvBest Float,
+    irvWorst Float
+}
+
+entity ActivityResultSplit {
+	splitValue Float,
+}
+
+entity UserEvent {
+	note String,
+    registrationDate ZonedDateTime
+}
+
+entity UserActivity {
+    note String,
+    date ZonedDateTime
+}
+
+entity UserActivityResult {
+	value Float,
+	compareValue Float
+}
+
+entity UserActivityResultSplit {
+	value Float,
+	compareValue Float
+}
+
+
+entity EventLocation {
+    name String required,
+    state String,
+    city String,
+    street String,
+    streetNumber String,
+    latitude Float,
+    longitude Float,
+    capacity Integer,
+    mapLink String
+}
+
+entity Sport {
+	name String required
+}
+
+entity Unit {
+	name String,
+    abbreviation String,
+}
+
+relationship OneToOne {
+    Address{country} to Country,
+}
+
+relationship ManyToMany {
+	OrganisationMembership{roles(name)} to MembershipRole{organisationMemberships}
+    GroupMembership{roles(name)} to MembershipRole{groupMemberships}
+
+	Event{activities(name)} to Activity{events(name)}
+    Event{entrants(email)} to User{events(name)}
+    Activity{visibleForOrganisations(name)} to Organisation{visibleActivities(name)}
+    Activity{visibleForGroups(name)} to Group{visibleActivities(name)}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+
+    Organisation{memberships} to OrganisationMembership{organisation}
+    Group{memberships} to GroupMembership{group}
+
+    UserEvent{athleteActivities} to UserActivity
+    UserActivity{athleteActivityResults} to UserActivityResult
+    UserActivityResult{athleteActivityResultSplits} to UserActivityResultSplit
+
+    Activity{activityResults} to ActivityResult
+    ActivityResult{resultSplits} to ActivityResultSplit
+}
+
+relationship ManyToOne {
+
+	Organisation{owner} to User
+	Group{owner} to User
+
+	OrganisationMembership{user} to User
+	GroupMembership{user} to User
+
+	BodyCharacteristics{heightUnit} to Unit
+    BodyCharacteristics{widthUnit} to Unit
+
+	UserEvent{user required} to User
+    UserEvent{event required} to Event
+    UserActivity{activity(name) required} to Activity
+    UserActivityResult{activityResult(name) required} to ActivityResult
+    UserActivityResultSplit{activityResultSplit(id) required} to ActivityResultSplit
+
+    Activity{createdBy(login)} to User
+    Event{eventLocation(name)} to EventLocation
+    ActivityResult{resultUnit(name)} to Unit
+    ActivityResultSplit{splitUnit(name)} to Unit
+}
+
+// Set pagination options
+paginate * with pagination
+
+//dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceImpl
