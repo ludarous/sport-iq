@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.sportiq.sportiq"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "JHipster6105",
+    "packageName": "com.sportiq.sportiq",
+    "packageFolder": "com/sportiq/sportiq",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MjRhNTBmOTk3ODVmZTUzM2M1NjhiOGM1N2YwOGU1ZjI2YTM2OWQxMzJmYzBmMTdjMDFjOGI5ZDA1ODM2M2ZkMGZmZTIwOGJhMTY3Yjk1MjMyNDg5YzgyNTQzYjdjNjFkZDgzNTM2NjRjNDdjYTY5YzM3NzU1Y2U1YjUxZWRiOGQ=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "darkly",
+    "clientThemeVariant": "dark",
+    "creationTimestamp": 1613148224162,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
