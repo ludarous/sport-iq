@@ -1,0 +1,36 @@
+{
+  "name": "ActivityResultSplit",
+  "fields": [
+    {
+      "fieldName": "splitValue",
+      "fieldType": "Float"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "unit",
+      "otherEntityRelationshipName": "activityResultSplit",
+      "relationshipName": "splitUnit",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "activityResult",
+      "otherEntityRelationshipName": "resultSplits",
+      "relationshipName": "activityResult",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210212223930",
+  "entityTableName": "activity_result_split",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

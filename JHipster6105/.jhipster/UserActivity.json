@@ -1,0 +1,47 @@
+{
+  "name": "UserActivity",
+  "fields": [
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "userActivityResult",
+      "otherEntityRelationshipName": "userActivity",
+      "relationshipName": "athleteActivityResults"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "activity",
+      "otherEntityRelationshipName": "userActivity",
+      "relationshipValidateRules": "required",
+      "relationshipName": "activity",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "userEvent",
+      "otherEntityRelationshipName": "athleteActivities",
+      "relationshipName": "userEvent",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210212224130",
+  "entityTableName": "user_activity",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-user-activity-result-heading">Create or edit a User Activity Result</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_value">Value</label>
+                    <input type="number" class="form-control" name="value" id="field_value"
+                           formControlName="value"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_compareValue">Compare Value</label>
+                    <input type="number" class="form-control" name="compareValue" id="field_compareValue"
+                           formControlName="compareValue"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_activityResult">Activity Result</label>
+                    <select class="form-control" id="field_activityResult" name="activityResult" formControlName="activityResult">
+                        <option *ngIf="!editForm.get('activityResult')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="activityResultOption.id === editForm.get('activityResult')!.value?.id ? editForm.get('activityResult')!.value : activityResultOption" *ngFor="let activityResultOption of activityresults; trackBy: trackById">{{ activityResultOption.name }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('activityResult')!.invalid && (editForm.get('activityResult')!.dirty || editForm.get('activityResult')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('activityResult')?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_userActivity">User Activity</label>
+                    <select class="form-control" id="field_userActivity" name="userActivity" formControlName="userActivity">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userActivityOption.id === editForm.get('userActivity')!.value?.id ? editForm.get('userActivity')!.value : userActivityOption" *ngFor="let userActivityOption of useractivities; trackBy: trackById">{{ userActivityOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

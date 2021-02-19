@@ -1,0 +1,3082 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "JHipster6105 API documentation",
+    "version": "0.0.1",
+    "title": "JHipster6105 API",
+    "contact": {},
+    "license": { "name": "unlicensed" }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    { "name": "account-resource", "description": "Account Resource" },
+    { "name": "activity-resource", "description": "Activity Resource" },
+    { "name": "activity-result-resource", "description": "Activity Result Resource" },
+    { "name": "activity-result-split-resource", "description": "Activity Result Split Resource" },
+    { "name": "address-resource", "description": "Address Resource" },
+    { "name": "agreement-resource", "description": "Agreement Resource" },
+    { "name": "body-characteristics-resource", "description": "Body Characteristics Resource" },
+    { "name": "country-resource", "description": "Country Resource" },
+    { "name": "event-location-resource", "description": "Event Location Resource" },
+    { "name": "event-resource", "description": "Event Resource" },
+    { "name": "group-membership-resource", "description": "Group Membership Resource" },
+    { "name": "group-resource", "description": "Group Resource" },
+    { "name": "legal-representative-resource", "description": "Legal Representative Resource" },
+    { "name": "membership-role-resource", "description": "Membership Role Resource" },
+    { "name": "organisation-membership-resource", "description": "Organisation Membership Resource" },
+    { "name": "organisation-resource", "description": "Organisation Resource" },
+    { "name": "sport-resource", "description": "Sport Resource" },
+    { "name": "unit-resource", "description": "Unit Resource" },
+    { "name": "user-activity-resource", "description": "User Activity Resource" },
+    { "name": "user-activity-result-resource", "description": "User Activity Result Resource" },
+    { "name": "user-activity-result-split-resource", "description": "User Activity Result Split Resource" },
+    { "name": "user-event-resource", "description": "User Event Resource" },
+    { "name": "user-jwt-controller", "description": "User JWT Controller" },
+    { "name": "user-properties-resource", "description": "User Properties Resource" },
+    { "name": "user-resource", "description": "User Resource" }
+  ],
+  "paths": {
+    "/api/account": {
+      "get": {
+        "tags": ["account-resource"],
+        "summary": "getAccount",
+        "operationId": "getAccountUsingGET",
+        "produces": ["*/*"],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserDTO" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["account-resource"],
+        "summary": "saveAccount",
+        "operationId": "saveAccountUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "userDTO", "description": "userDTO", "required": true, "schema": { "$ref": "#/definitions/UserDTO" } }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/account/change-password": {
+      "post": {
+        "tags": ["account-resource"],
+        "summary": "changePassword",
+        "operationId": "changePasswordUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "passwordChangeDto",
+            "description": "passwordChangeDto",
+            "required": true,
+            "schema": { "$ref": "#/definitions/PasswordChangeDTO" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/account/reset-password/finish": {
+      "post": {
+        "tags": ["account-resource"],
+        "summary": "finishPasswordReset",
+        "operationId": "finishPasswordResetUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "keyAndPassword",
+            "description": "keyAndPassword",
+            "required": true,
+            "schema": { "$ref": "#/definitions/KeyAndPasswordVM" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/account/reset-password/init": {
+      "post": {
+        "tags": ["account-resource"],
+        "summary": "requestPasswordReset",
+        "operationId": "requestPasswordResetUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{ "in": "body", "name": "mail", "description": "mail", "required": true, "schema": { "type": "string" } }],
+        "responses": {
+          "200": { "description": "OK" },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/activate": {
+      "get": {
+        "tags": ["account-resource"],
+        "summary": "activateAccount",
+        "operationId": "activateAccountUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "key", "in": "query", "description": "key", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/activities": {
+      "get": {
+        "tags": ["activity-resource"],
+        "summary": "getAllActivities",
+        "operationId": "getAllActivitiesUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          { "name": "eagerload", "in": "query", "description": "eagerload", "required": false, "type": "boolean", "default": false },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Activity" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["activity-resource"],
+        "summary": "createActivity",
+        "operationId": "createActivityUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "activity", "description": "activity", "required": true, "schema": { "$ref": "#/definitions/Activity" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Activity" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["activity-resource"],
+        "summary": "updateActivity",
+        "operationId": "updateActivityUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "activity", "description": "activity", "required": true, "schema": { "$ref": "#/definitions/Activity" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Activity" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/activities/{id}": {
+      "get": {
+        "tags": ["activity-resource"],
+        "summary": "getActivity",
+        "operationId": "getActivityUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Activity" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["activity-resource"],
+        "summary": "deleteActivity",
+        "operationId": "deleteActivityUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/activity-result-splits": {
+      "get": {
+        "tags": ["activity-result-split-resource"],
+        "summary": "getAllActivityResultSplits",
+        "operationId": "getAllActivityResultSplitsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/ActivityResultSplit" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["activity-result-split-resource"],
+        "summary": "createActivityResultSplit",
+        "operationId": "createActivityResultSplitUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "activityResultSplit",
+            "description": "activityResultSplit",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ActivityResultSplit" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ActivityResultSplit" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["activity-result-split-resource"],
+        "summary": "updateActivityResultSplit",
+        "operationId": "updateActivityResultSplitUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "activityResultSplit",
+            "description": "activityResultSplit",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ActivityResultSplit" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ActivityResultSplit" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/activity-result-splits/{id}": {
+      "get": {
+        "tags": ["activity-result-split-resource"],
+        "summary": "getActivityResultSplit",
+        "operationId": "getActivityResultSplitUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ActivityResultSplit" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["activity-result-split-resource"],
+        "summary": "deleteActivityResultSplit",
+        "operationId": "deleteActivityResultSplitUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/activity-results": {
+      "get": {
+        "tags": ["activity-result-resource"],
+        "summary": "getAllActivityResults",
+        "operationId": "getAllActivityResultsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/ActivityResult" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["activity-result-resource"],
+        "summary": "createActivityResult",
+        "operationId": "createActivityResultUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "activityResult",
+            "description": "activityResult",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ActivityResult" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ActivityResult" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["activity-result-resource"],
+        "summary": "updateActivityResult",
+        "operationId": "updateActivityResultUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "activityResult",
+            "description": "activityResult",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ActivityResult" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ActivityResult" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/activity-results/{id}": {
+      "get": {
+        "tags": ["activity-result-resource"],
+        "summary": "getActivityResult",
+        "operationId": "getActivityResultUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/ActivityResult" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["activity-result-resource"],
+        "summary": "deleteActivityResult",
+        "operationId": "deleteActivityResultUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/addresses": {
+      "get": {
+        "tags": ["address-resource"],
+        "summary": "getAllAddresses",
+        "operationId": "getAllAddressesUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Address" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["address-resource"],
+        "summary": "createAddress",
+        "operationId": "createAddressUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "address", "description": "address", "required": true, "schema": { "$ref": "#/definitions/Address" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Address" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["address-resource"],
+        "summary": "updateAddress",
+        "operationId": "updateAddressUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "address", "description": "address", "required": true, "schema": { "$ref": "#/definitions/Address" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Address" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/addresses/{id}": {
+      "get": {
+        "tags": ["address-resource"],
+        "summary": "getAddress",
+        "operationId": "getAddressUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Address" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["address-resource"],
+        "summary": "deleteAddress",
+        "operationId": "deleteAddressUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/agreements": {
+      "get": {
+        "tags": ["agreement-resource"],
+        "summary": "getAllAgreements",
+        "operationId": "getAllAgreementsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Agreement" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["agreement-resource"],
+        "summary": "createAgreement",
+        "operationId": "createAgreementUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "agreement",
+            "description": "agreement",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Agreement" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Agreement" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["agreement-resource"],
+        "summary": "updateAgreement",
+        "operationId": "updateAgreementUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "agreement",
+            "description": "agreement",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Agreement" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Agreement" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/agreements/{id}": {
+      "get": {
+        "tags": ["agreement-resource"],
+        "summary": "getAgreement",
+        "operationId": "getAgreementUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Agreement" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["agreement-resource"],
+        "summary": "deleteAgreement",
+        "operationId": "deleteAgreementUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/authenticate": {
+      "get": {
+        "tags": ["account-resource"],
+        "summary": "isAuthenticated",
+        "operationId": "isAuthenticatedUsingGET",
+        "produces": ["*/*"],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "string" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["user-jwt-controller"],
+        "summary": "authorize",
+        "operationId": "authorizeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "loginVM", "description": "loginVM", "required": true, "schema": { "$ref": "#/definitions/LoginVM" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/JWTToken" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/body-characteristics": {
+      "get": {
+        "tags": ["body-characteristics-resource"],
+        "summary": "getAllBodyCharacteristics",
+        "operationId": "getAllBodyCharacteristicsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/BodyCharacteristics" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["body-characteristics-resource"],
+        "summary": "createBodyCharacteristics",
+        "operationId": "createBodyCharacteristicsUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "bodyCharacteristics",
+            "description": "bodyCharacteristics",
+            "required": true,
+            "schema": { "$ref": "#/definitions/BodyCharacteristics" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/BodyCharacteristics" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["body-characteristics-resource"],
+        "summary": "updateBodyCharacteristics",
+        "operationId": "updateBodyCharacteristicsUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "bodyCharacteristics",
+            "description": "bodyCharacteristics",
+            "required": true,
+            "schema": { "$ref": "#/definitions/BodyCharacteristics" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/BodyCharacteristics" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/body-characteristics/{id}": {
+      "get": {
+        "tags": ["body-characteristics-resource"],
+        "summary": "getBodyCharacteristics",
+        "operationId": "getBodyCharacteristicsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/BodyCharacteristics" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["body-characteristics-resource"],
+        "summary": "deleteBodyCharacteristics",
+        "operationId": "deleteBodyCharacteristicsUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/countries": {
+      "get": {
+        "tags": ["country-resource"],
+        "summary": "getAllCountries",
+        "operationId": "getAllCountriesUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Country" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["country-resource"],
+        "summary": "createCountry",
+        "operationId": "createCountryUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "country", "description": "country", "required": true, "schema": { "$ref": "#/definitions/Country" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Country" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["country-resource"],
+        "summary": "updateCountry",
+        "operationId": "updateCountryUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "country", "description": "country", "required": true, "schema": { "$ref": "#/definitions/Country" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Country" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/countries/{id}": {
+      "get": {
+        "tags": ["country-resource"],
+        "summary": "getCountry",
+        "operationId": "getCountryUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Country" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["country-resource"],
+        "summary": "deleteCountry",
+        "operationId": "deleteCountryUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/event-locations": {
+      "get": {
+        "tags": ["event-location-resource"],
+        "summary": "getAllEventLocations",
+        "operationId": "getAllEventLocationsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/EventLocation" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["event-location-resource"],
+        "summary": "createEventLocation",
+        "operationId": "createEventLocationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "eventLocation",
+            "description": "eventLocation",
+            "required": true,
+            "schema": { "$ref": "#/definitions/EventLocation" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/EventLocation" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["event-location-resource"],
+        "summary": "updateEventLocation",
+        "operationId": "updateEventLocationUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "eventLocation",
+            "description": "eventLocation",
+            "required": true,
+            "schema": { "$ref": "#/definitions/EventLocation" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/EventLocation" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/event-locations/{id}": {
+      "get": {
+        "tags": ["event-location-resource"],
+        "summary": "getEventLocation",
+        "operationId": "getEventLocationUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/EventLocation" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["event-location-resource"],
+        "summary": "deleteEventLocation",
+        "operationId": "deleteEventLocationUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/events": {
+      "get": {
+        "tags": ["event-resource"],
+        "summary": "getAllEvents",
+        "operationId": "getAllEventsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          { "name": "eagerload", "in": "query", "description": "eagerload", "required": false, "type": "boolean", "default": false },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Event" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["event-resource"],
+        "summary": "createEvent",
+        "operationId": "createEventUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "event", "description": "event", "required": true, "schema": { "$ref": "#/definitions/Event" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Event" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["event-resource"],
+        "summary": "updateEvent",
+        "operationId": "updateEventUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "event", "description": "event", "required": true, "schema": { "$ref": "#/definitions/Event" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Event" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/events/{id}": {
+      "get": {
+        "tags": ["event-resource"],
+        "summary": "getEvent",
+        "operationId": "getEventUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Event" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["event-resource"],
+        "summary": "deleteEvent",
+        "operationId": "deleteEventUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/group-memberships": {
+      "get": {
+        "tags": ["group-membership-resource"],
+        "summary": "getAllGroupMemberships",
+        "operationId": "getAllGroupMembershipsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          { "name": "eagerload", "in": "query", "description": "eagerload", "required": false, "type": "boolean", "default": false },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/GroupMembership" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["group-membership-resource"],
+        "summary": "createGroupMembership",
+        "operationId": "createGroupMembershipUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "groupMembership",
+            "description": "groupMembership",
+            "required": true,
+            "schema": { "$ref": "#/definitions/GroupMembership" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/GroupMembership" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["group-membership-resource"],
+        "summary": "updateGroupMembership",
+        "operationId": "updateGroupMembershipUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "groupMembership",
+            "description": "groupMembership",
+            "required": true,
+            "schema": { "$ref": "#/definitions/GroupMembership" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/GroupMembership" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/group-memberships/{id}": {
+      "get": {
+        "tags": ["group-membership-resource"],
+        "summary": "getGroupMembership",
+        "operationId": "getGroupMembershipUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/GroupMembership" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["group-membership-resource"],
+        "summary": "deleteGroupMembership",
+        "operationId": "deleteGroupMembershipUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/groups": {
+      "get": {
+        "tags": ["group-resource"],
+        "summary": "getAllGroups",
+        "operationId": "getAllGroupsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Group" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["group-resource"],
+        "summary": "createGroup",
+        "operationId": "createGroupUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "group", "description": "group", "required": true, "schema": { "$ref": "#/definitions/Group" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Group" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["group-resource"],
+        "summary": "updateGroup",
+        "operationId": "updateGroupUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "group", "description": "group", "required": true, "schema": { "$ref": "#/definitions/Group" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Group" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/groups/{id}": {
+      "get": {
+        "tags": ["group-resource"],
+        "summary": "getGroup",
+        "operationId": "getGroupUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Group" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["group-resource"],
+        "summary": "deleteGroup",
+        "operationId": "deleteGroupUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/legal-representatives": {
+      "get": {
+        "tags": ["legal-representative-resource"],
+        "summary": "getAllLegalRepresentatives",
+        "operationId": "getAllLegalRepresentativesUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/LegalRepresentative" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["legal-representative-resource"],
+        "summary": "createLegalRepresentative",
+        "operationId": "createLegalRepresentativeUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "legalRepresentative",
+            "description": "legalRepresentative",
+            "required": true,
+            "schema": { "$ref": "#/definitions/LegalRepresentative" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/LegalRepresentative" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["legal-representative-resource"],
+        "summary": "updateLegalRepresentative",
+        "operationId": "updateLegalRepresentativeUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "legalRepresentative",
+            "description": "legalRepresentative",
+            "required": true,
+            "schema": { "$ref": "#/definitions/LegalRepresentative" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/LegalRepresentative" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/legal-representatives/{id}": {
+      "get": {
+        "tags": ["legal-representative-resource"],
+        "summary": "getLegalRepresentative",
+        "operationId": "getLegalRepresentativeUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/LegalRepresentative" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["legal-representative-resource"],
+        "summary": "deleteLegalRepresentative",
+        "operationId": "deleteLegalRepresentativeUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/membership-roles": {
+      "get": {
+        "tags": ["membership-role-resource"],
+        "summary": "getAllMembershipRoles",
+        "operationId": "getAllMembershipRolesUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/MembershipRole" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["membership-role-resource"],
+        "summary": "createMembershipRole",
+        "operationId": "createMembershipRoleUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "membershipRole",
+            "description": "membershipRole",
+            "required": true,
+            "schema": { "$ref": "#/definitions/MembershipRole" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/MembershipRole" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["membership-role-resource"],
+        "summary": "updateMembershipRole",
+        "operationId": "updateMembershipRoleUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "membershipRole",
+            "description": "membershipRole",
+            "required": true,
+            "schema": { "$ref": "#/definitions/MembershipRole" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/MembershipRole" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/membership-roles/{id}": {
+      "get": {
+        "tags": ["membership-role-resource"],
+        "summary": "getMembershipRole",
+        "operationId": "getMembershipRoleUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/MembershipRole" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["membership-role-resource"],
+        "summary": "deleteMembershipRole",
+        "operationId": "deleteMembershipRoleUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/organisation-memberships": {
+      "get": {
+        "tags": ["organisation-membership-resource"],
+        "summary": "getAllOrganisationMemberships",
+        "operationId": "getAllOrganisationMembershipsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          { "name": "eagerload", "in": "query", "description": "eagerload", "required": false, "type": "boolean", "default": false },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/OrganisationMembership" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["organisation-membership-resource"],
+        "summary": "createOrganisationMembership",
+        "operationId": "createOrganisationMembershipUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "organisationMembership",
+            "description": "organisationMembership",
+            "required": true,
+            "schema": { "$ref": "#/definitions/OrganisationMembership" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/OrganisationMembership" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["organisation-membership-resource"],
+        "summary": "updateOrganisationMembership",
+        "operationId": "updateOrganisationMembershipUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "organisationMembership",
+            "description": "organisationMembership",
+            "required": true,
+            "schema": { "$ref": "#/definitions/OrganisationMembership" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/OrganisationMembership" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/organisation-memberships/{id}": {
+      "get": {
+        "tags": ["organisation-membership-resource"],
+        "summary": "getOrganisationMembership",
+        "operationId": "getOrganisationMembershipUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/OrganisationMembership" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["organisation-membership-resource"],
+        "summary": "deleteOrganisationMembership",
+        "operationId": "deleteOrganisationMembershipUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/organisations": {
+      "get": {
+        "tags": ["organisation-resource"],
+        "summary": "getAllOrganisations",
+        "operationId": "getAllOrganisationsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Organisation" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["organisation-resource"],
+        "summary": "createOrganisation",
+        "operationId": "createOrganisationUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "organisation",
+            "description": "organisation",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Organisation" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Organisation" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["organisation-resource"],
+        "summary": "updateOrganisation",
+        "operationId": "updateOrganisationUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "organisation",
+            "description": "organisation",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Organisation" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Organisation" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/organisations/{id}": {
+      "get": {
+        "tags": ["organisation-resource"],
+        "summary": "getOrganisation",
+        "operationId": "getOrganisationUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Organisation" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["organisation-resource"],
+        "summary": "deleteOrganisation",
+        "operationId": "deleteOrganisationUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/register": {
+      "post": {
+        "tags": ["account-resource"],
+        "summary": "registerAccount",
+        "operationId": "registerAccountUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "managedUserVM",
+            "description": "managedUserVM",
+            "required": true,
+            "schema": { "$ref": "#/definitions/ManagedUserVM" }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/sports": {
+      "get": {
+        "tags": ["sport-resource"],
+        "summary": "getAllSports",
+        "operationId": "getAllSportsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Sport" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["sport-resource"],
+        "summary": "createSport",
+        "operationId": "createSportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "sport", "description": "sport", "required": true, "schema": { "$ref": "#/definitions/Sport" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Sport" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["sport-resource"],
+        "summary": "updateSport",
+        "operationId": "updateSportUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "sport", "description": "sport", "required": true, "schema": { "$ref": "#/definitions/Sport" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Sport" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/sports/{id}": {
+      "get": {
+        "tags": ["sport-resource"],
+        "summary": "getSport",
+        "operationId": "getSportUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Sport" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["sport-resource"],
+        "summary": "deleteSport",
+        "operationId": "deleteSportUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/units": {
+      "get": {
+        "tags": ["unit-resource"],
+        "summary": "getAllUnits",
+        "operationId": "getAllUnitsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/Unit" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["unit-resource"],
+        "summary": "createUnit",
+        "operationId": "createUnitUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "unit", "description": "unit", "required": true, "schema": { "$ref": "#/definitions/Unit" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Unit" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["unit-resource"],
+        "summary": "updateUnit",
+        "operationId": "updateUnitUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "unit", "description": "unit", "required": true, "schema": { "$ref": "#/definitions/Unit" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Unit" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/units/{id}": {
+      "get": {
+        "tags": ["unit-resource"],
+        "summary": "getUnit",
+        "operationId": "getUnitUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/Unit" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["unit-resource"],
+        "summary": "deleteUnit",
+        "operationId": "deleteUnitUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-activities": {
+      "get": {
+        "tags": ["user-activity-resource"],
+        "summary": "getAllUserActivities",
+        "operationId": "getAllUserActivitiesUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/UserActivity" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["user-activity-resource"],
+        "summary": "createUserActivity",
+        "operationId": "createUserActivityUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userActivity",
+            "description": "userActivity",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserActivity" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivity" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["user-activity-resource"],
+        "summary": "updateUserActivity",
+        "operationId": "updateUserActivityUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userActivity",
+            "description": "userActivity",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserActivity" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivity" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-activities/{id}": {
+      "get": {
+        "tags": ["user-activity-resource"],
+        "summary": "getUserActivity",
+        "operationId": "getUserActivityUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivity" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["user-activity-resource"],
+        "summary": "deleteUserActivity",
+        "operationId": "deleteUserActivityUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-activity-result-splits": {
+      "get": {
+        "tags": ["user-activity-result-split-resource"],
+        "summary": "getAllUserActivityResultSplits",
+        "operationId": "getAllUserActivityResultSplitsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/UserActivityResultSplit" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["user-activity-result-split-resource"],
+        "summary": "createUserActivityResultSplit",
+        "operationId": "createUserActivityResultSplitUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userActivityResultSplit",
+            "description": "userActivityResultSplit",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserActivityResultSplit" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivityResultSplit" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["user-activity-result-split-resource"],
+        "summary": "updateUserActivityResultSplit",
+        "operationId": "updateUserActivityResultSplitUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userActivityResultSplit",
+            "description": "userActivityResultSplit",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserActivityResultSplit" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivityResultSplit" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-activity-result-splits/{id}": {
+      "get": {
+        "tags": ["user-activity-result-split-resource"],
+        "summary": "getUserActivityResultSplit",
+        "operationId": "getUserActivityResultSplitUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivityResultSplit" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["user-activity-result-split-resource"],
+        "summary": "deleteUserActivityResultSplit",
+        "operationId": "deleteUserActivityResultSplitUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-activity-results": {
+      "get": {
+        "tags": ["user-activity-result-resource"],
+        "summary": "getAllUserActivityResults",
+        "operationId": "getAllUserActivityResultsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/UserActivityResult" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["user-activity-result-resource"],
+        "summary": "createUserActivityResult",
+        "operationId": "createUserActivityResultUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userActivityResult",
+            "description": "userActivityResult",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserActivityResult" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivityResult" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["user-activity-result-resource"],
+        "summary": "updateUserActivityResult",
+        "operationId": "updateUserActivityResultUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userActivityResult",
+            "description": "userActivityResult",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserActivityResult" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivityResult" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-activity-results/{id}": {
+      "get": {
+        "tags": ["user-activity-result-resource"],
+        "summary": "getUserActivityResult",
+        "operationId": "getUserActivityResultUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserActivityResult" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["user-activity-result-resource"],
+        "summary": "deleteUserActivityResult",
+        "operationId": "deleteUserActivityResultUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-events": {
+      "get": {
+        "tags": ["user-event-resource"],
+        "summary": "getAllUserEvents",
+        "operationId": "getAllUserEventsUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/UserEvent" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["user-event-resource"],
+        "summary": "createUserEvent",
+        "operationId": "createUserEventUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userEvent",
+            "description": "userEvent",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserEvent" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserEvent" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["user-event-resource"],
+        "summary": "updateUserEvent",
+        "operationId": "updateUserEventUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userEvent",
+            "description": "userEvent",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserEvent" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserEvent" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-events/{id}": {
+      "get": {
+        "tags": ["user-event-resource"],
+        "summary": "getUserEvent",
+        "operationId": "getUserEventUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserEvent" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["user-event-resource"],
+        "summary": "deleteUserEvent",
+        "operationId": "deleteUserEventUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-properties": {
+      "get": {
+        "tags": ["user-properties-resource"],
+        "summary": "getAllUserProperties",
+        "operationId": "getAllUserPropertiesUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/UserProperties" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["user-properties-resource"],
+        "summary": "createUserProperties",
+        "operationId": "createUserPropertiesUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userProperties",
+            "description": "userProperties",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserProperties" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserProperties" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["user-properties-resource"],
+        "summary": "updateUserProperties",
+        "operationId": "updateUserPropertiesUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "userProperties",
+            "description": "userProperties",
+            "required": true,
+            "schema": { "$ref": "#/definitions/UserProperties" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserProperties" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/user-properties/{id}": {
+      "get": {
+        "tags": ["user-properties-resource"],
+        "summary": "getUserProperties",
+        "operationId": "getUserPropertiesUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserProperties" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["user-properties-resource"],
+        "summary": "deleteUserProperties",
+        "operationId": "deleteUserPropertiesUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "id", "in": "path", "description": "id", "required": true, "type": "integer", "format": "int64" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": ["user-resource"],
+        "summary": "getAllUsers",
+        "operationId": "getAllUsersUsingGET",
+        "produces": ["*/*"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number of the requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          { "name": "size", "in": "query", "description": "Size of a page", "required": false, "type": "integer", "format": "int32" },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property(,asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "type": "array",
+            "items": { "type": "string" },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "$ref": "#/definitions/UserDTO" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": ["user-resource"],
+        "summary": "createUser",
+        "operationId": "createUserUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "userDTO", "description": "userDTO", "required": true, "schema": { "$ref": "#/definitions/UserDTO" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/User" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": ["user-resource"],
+        "summary": "updateUser",
+        "operationId": "updateUserUsingPUT",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [
+          { "in": "body", "name": "userDTO", "description": "userDTO", "required": true, "schema": { "$ref": "#/definitions/UserDTO" } }
+        ],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserDTO" } },
+          "201": { "description": "Created" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/users/authorities": {
+      "get": {
+        "tags": ["user-resource"],
+        "summary": "getAuthorities",
+        "operationId": "getAuthoritiesUsingGET",
+        "produces": ["*/*"],
+        "responses": {
+          "200": { "description": "OK", "schema": { "type": "array", "items": { "type": "string" } } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      }
+    },
+    "/api/users/{login:^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$}": {
+      "get": {
+        "tags": ["user-resource"],
+        "summary": "getUser",
+        "operationId": "getUserUsingGET",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "login", "in": "path", "description": "login", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "OK", "schema": { "$ref": "#/definitions/UserDTO" } },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not Found" }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": ["user-resource"],
+        "summary": "deleteUser",
+        "operationId": "deleteUserUsingDELETE",
+        "produces": ["*/*"],
+        "parameters": [{ "name": "login", "in": "path", "description": "login", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "204": { "description": "No Content" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "Activity": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "activityResults": { "type": "array", "items": { "$ref": "#/definitions/ActivityResult" } },
+        "createdBy": { "$ref": "#/definitions/User" },
+        "description": { "type": "string" },
+        "help": { "type": "string" },
+        "id": { "type": "integer", "format": "int64" },
+        "isPublic": { "type": "boolean" },
+        "name": { "type": "string" },
+        "visibleForGroups": { "type": "array", "items": { "$ref": "#/definitions/Group" } },
+        "visibleForOrganisations": { "type": "array", "items": { "$ref": "#/definitions/Organisation" } }
+      },
+      "title": "Activity"
+    },
+    "ActivityResult": {
+      "type": "object",
+      "properties": {
+        "activity": { "$ref": "#/definitions/Activity" },
+        "id": { "type": "integer", "format": "int64" },
+        "irvBest": { "type": "number", "format": "float" },
+        "irvWorst": { "type": "number", "format": "float" },
+        "mainResult": { "type": "boolean" },
+        "name": { "type": "string" },
+        "order": { "type": "integer", "format": "int32" },
+        "ratingWeight": { "type": "number", "format": "float" },
+        "resultSplits": { "type": "array", "items": { "$ref": "#/definitions/ActivityResultSplit" } },
+        "resultType": { "type": "string", "enum": ["LESS_IS_BETTER", "MORE_IS_BETTER"] },
+        "resultUnit": { "$ref": "#/definitions/Unit" }
+      },
+      "title": "ActivityResult"
+    },
+    "ActivityResultSplit": {
+      "type": "object",
+      "properties": {
+        "activityResult": { "$ref": "#/definitions/ActivityResult" },
+        "id": { "type": "integer", "format": "int64" },
+        "splitUnit": { "$ref": "#/definitions/Unit" },
+        "splitValue": { "type": "number", "format": "float" }
+      },
+      "title": "ActivityResultSplit"
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "city": { "type": "string" },
+        "country": { "$ref": "#/definitions/Country" },
+        "id": { "type": "integer", "format": "int64" },
+        "street": { "type": "string" },
+        "zipCode": { "type": "string" }
+      },
+      "title": "Address"
+    },
+    "Agreement": {
+      "type": "object",
+      "properties": {
+        "gdprAgreement": { "type": "boolean" },
+        "id": { "type": "integer", "format": "int64" },
+        "marketingAgreement": { "type": "boolean" },
+        "medicalFitnessAgreement": { "type": "boolean" },
+        "photographyAgreement": { "type": "boolean" },
+        "termsAgreement": { "type": "boolean" }
+      },
+      "title": "Agreement"
+    },
+    "BodyCharacteristics": {
+      "type": "object",
+      "properties": {
+        "date": { "type": "string", "format": "date-time" },
+        "height": { "type": "number", "format": "float" },
+        "heightUnit": { "$ref": "#/definitions/Unit" },
+        "id": { "type": "integer", "format": "int64" },
+        "weight": { "type": "number", "format": "float" },
+        "widthUnit": { "$ref": "#/definitions/Unit" }
+      },
+      "title": "BodyCharacteristics"
+    },
+    "Country": {
+      "type": "object",
+      "required": ["name"],
+      "properties": { "code": { "type": "string" }, "id": { "type": "integer", "format": "int64" }, "name": { "type": "string" } },
+      "title": "Country"
+    },
+    "Event": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "activities": { "type": "array", "items": { "$ref": "#/definitions/Activity" } },
+        "date": { "type": "string", "format": "date-time" },
+        "entrants": { "type": "array", "items": { "$ref": "#/definitions/User" } },
+        "eventLocation": { "$ref": "#/definitions/EventLocation" },
+        "id": { "type": "integer", "format": "int64" },
+        "name": { "type": "string" }
+      },
+      "title": "Event"
+    },
+    "EventLocation": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "capacity": { "type": "integer", "format": "int32" },
+        "city": { "type": "string" },
+        "id": { "type": "integer", "format": "int64" },
+        "latitude": { "type": "number", "format": "float" },
+        "longitude": { "type": "number", "format": "float" },
+        "mapLink": { "type": "string" },
+        "name": { "type": "string" },
+        "state": { "type": "string" },
+        "street": { "type": "string" },
+        "streetNumber": { "type": "string" }
+      },
+      "title": "EventLocation"
+    },
+    "Group": {
+      "type": "object",
+      "properties": {
+        "created": { "type": "string", "format": "date-time" },
+        "description": { "type": "string" },
+        "id": { "type": "integer", "format": "int64" },
+        "memberships": { "type": "array", "items": { "$ref": "#/definitions/GroupMembership" } },
+        "name": { "type": "string" },
+        "owner": { "$ref": "#/definitions/User" }
+      },
+      "title": "Group"
+    },
+    "GroupMembership": {
+      "type": "object",
+      "properties": {
+        "created": { "type": "string", "format": "date-time" },
+        "group": { "$ref": "#/definitions/Group" },
+        "id": { "type": "integer", "format": "int64" },
+        "roles": { "type": "array", "items": { "$ref": "#/definitions/MembershipRole" } },
+        "user": { "$ref": "#/definitions/User" }
+      },
+      "title": "GroupMembership"
+    },
+    "JWTToken": { "type": "object", "properties": { "id_token": { "type": "string" } }, "title": "JWTToken" },
+    "KeyAndPasswordVM": {
+      "type": "object",
+      "properties": { "key": { "type": "string" }, "newPassword": { "type": "string" } },
+      "title": "KeyAndPasswordVM"
+    },
+    "LegalRepresentative": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "firstName": { "type": "string" },
+        "id": { "type": "integer", "format": "int64" },
+        "lastName": { "type": "string" },
+        "phone": { "type": "string" }
+      },
+      "title": "LegalRepresentative"
+    },
+    "LoginVM": {
+      "type": "object",
+      "required": ["password", "username"],
+      "properties": {
+        "password": { "type": "string", "minLength": 4, "maxLength": 100 },
+        "rememberMe": { "type": "boolean" },
+        "username": { "type": "string", "minLength": 1, "maxLength": 50 }
+      },
+      "title": "LoginVM"
+    },
+    "ManagedUserVM": {
+      "type": "object",
+      "properties": {
+        "activated": { "type": "boolean" },
+        "authorities": { "type": "array", "items": { "type": "string" } },
+        "createdBy": { "type": "string" },
+        "createdDate": { "type": "string", "format": "date-time" },
+        "email": { "type": "string", "minLength": 5, "maxLength": 254 },
+        "firstName": { "type": "string", "minLength": 0, "maxLength": 50 },
+        "id": { "type": "integer", "format": "int64" },
+        "imageUrl": { "type": "string", "minLength": 0, "maxLength": 256 },
+        "langKey": { "type": "string", "minLength": 2, "maxLength": 10 },
+        "lastModifiedBy": { "type": "string" },
+        "lastModifiedDate": { "type": "string", "format": "date-time" },
+        "lastName": { "type": "string", "minLength": 0, "maxLength": 50 },
+        "login": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
+        },
+        "password": { "type": "string", "minLength": 4, "maxLength": 100 }
+      },
+      "title": "ManagedUserVM"
+    },
+    "MembershipRole": {
+      "type": "object",
+      "properties": { "id": { "type": "integer", "format": "int64" }, "name": { "type": "string" } },
+      "title": "MembershipRole"
+    },
+    "Organisation": {
+      "type": "object",
+      "properties": {
+        "created": { "type": "string", "format": "date-time" },
+        "description": { "type": "string" },
+        "id": { "type": "integer", "format": "int64" },
+        "memberships": { "type": "array", "items": { "$ref": "#/definitions/OrganisationMembership" } },
+        "name": { "type": "string" },
+        "owner": { "$ref": "#/definitions/User" }
+      },
+      "title": "Organisation"
+    },
+    "OrganisationMembership": {
+      "type": "object",
+      "properties": {
+        "created": { "type": "string", "format": "date-time" },
+        "id": { "type": "integer", "format": "int64" },
+        "organisation": { "$ref": "#/definitions/Organisation" },
+        "roles": { "type": "array", "items": { "$ref": "#/definitions/MembershipRole" } },
+        "user": { "$ref": "#/definitions/User" }
+      },
+      "title": "OrganisationMembership"
+    },
+    "PasswordChangeDTO": {
+      "type": "object",
+      "properties": { "currentPassword": { "type": "string" }, "newPassword": { "type": "string" } },
+      "title": "PasswordChangeDTO"
+    },
+    "Sport": {
+      "type": "object",
+      "required": ["name"],
+      "properties": { "id": { "type": "integer", "format": "int64" }, "name": { "type": "string" } },
+      "title": "Sport"
+    },
+    "Unit": {
+      "type": "object",
+      "properties": { "abbreviation": { "type": "string" }, "id": { "type": "integer", "format": "int64" }, "name": { "type": "string" } },
+      "title": "Unit"
+    },
+    "User": {
+      "type": "object",
+      "required": ["activated", "login"],
+      "properties": {
+        "activated": { "type": "boolean" },
+        "email": { "type": "string", "minLength": 5, "maxLength": 254 },
+        "firstName": { "type": "string", "minLength": 0, "maxLength": 50 },
+        "id": { "type": "integer", "format": "int64" },
+        "imageUrl": { "type": "string", "minLength": 0, "maxLength": 256 },
+        "langKey": { "type": "string", "minLength": 2, "maxLength": 10 },
+        "lastName": { "type": "string", "minLength": 0, "maxLength": 50 },
+        "login": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
+        },
+        "resetDate": { "type": "string", "format": "date-time" }
+      },
+      "title": "User"
+    },
+    "UserActivity": {
+      "type": "object",
+      "required": ["activity"],
+      "properties": {
+        "activity": { "$ref": "#/definitions/Activity" },
+        "athleteActivityResults": { "type": "array", "items": { "$ref": "#/definitions/UserActivityResult" } },
+        "date": { "type": "string", "format": "date-time" },
+        "id": { "type": "integer", "format": "int64" },
+        "note": { "type": "string" },
+        "userEvent": { "$ref": "#/definitions/UserEvent" }
+      },
+      "title": "UserActivity"
+    },
+    "UserActivityResult": {
+      "type": "object",
+      "required": ["activityResult"],
+      "properties": {
+        "activityResult": { "$ref": "#/definitions/ActivityResult" },
+        "athleteActivityResultSplits": { "type": "array", "items": { "$ref": "#/definitions/UserActivityResultSplit" } },
+        "compareValue": { "type": "number", "format": "float" },
+        "id": { "type": "integer", "format": "int64" },
+        "userActivity": { "$ref": "#/definitions/UserActivity" },
+        "value": { "type": "number", "format": "float" }
+      },
+      "title": "UserActivityResult"
+    },
+    "UserActivityResultSplit": {
+      "type": "object",
+      "required": ["activityResultSplit"],
+      "properties": {
+        "activityResultSplit": { "$ref": "#/definitions/ActivityResultSplit" },
+        "compareValue": { "type": "number", "format": "float" },
+        "id": { "type": "integer", "format": "int64" },
+        "userActivityResult": { "$ref": "#/definitions/UserActivityResult" },
+        "value": { "type": "number", "format": "float" }
+      },
+      "title": "UserActivityResultSplit"
+    },
+    "UserDTO": {
+      "type": "object",
+      "properties": {
+        "activated": { "type": "boolean" },
+        "authorities": { "type": "array", "items": { "type": "string" } },
+        "createdBy": { "type": "string" },
+        "createdDate": { "type": "string", "format": "date-time" },
+        "email": { "type": "string", "minLength": 5, "maxLength": 254 },
+        "firstName": { "type": "string", "minLength": 0, "maxLength": 50 },
+        "id": { "type": "integer", "format": "int64" },
+        "imageUrl": { "type": "string", "minLength": 0, "maxLength": 256 },
+        "langKey": { "type": "string", "minLength": 2, "maxLength": 10 },
+        "lastModifiedBy": { "type": "string" },
+        "lastModifiedDate": { "type": "string", "format": "date-time" },
+        "lastName": { "type": "string", "minLength": 0, "maxLength": 50 },
+        "login": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^(?>[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)|(?>[_.@A-Za-z0-9-]+)$"
+        }
+      },
+      "title": "UserDTO"
+    },
+    "UserEvent": {
+      "type": "object",
+      "required": ["event", "user"],
+      "properties": {
+        "athleteActivities": { "type": "array", "items": { "$ref": "#/definitions/UserActivity" } },
+        "event": { "$ref": "#/definitions/Event" },
+        "id": { "type": "integer", "format": "int64" },
+        "note": { "type": "string" },
+        "registrationDate": { "type": "string", "format": "date-time" },
+        "user": { "$ref": "#/definitions/User" }
+      },
+      "title": "UserEvent"
+    },
+    "UserProperties": {
+      "type": "object",
+      "properties": {
+        "birthDate": { "type": "string", "format": "date-time" },
+        "id": { "type": "integer", "format": "int64" },
+        "nationality": { "type": "string" },
+        "phone": { "type": "string" },
+        "sex": { "type": "string", "enum": ["MALE", "FEMALE", "OTHER"] }
+      },
+      "title": "UserProperties"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+id;name;result_type;rating_weight;main_result;jhi_order;irv_best;irv_worst
+1;rich;MORE_IS_BETTER;12480;false;64837;83157;78121
+2;Ouguiya Branding capacitor;MORE_IS_BETTER;53329;true;83755;4101;51462
+3;SDD communities wireless;MORE_IS_BETTER;59203;true;75692;8313;44442
+4;JBOD Tennessee Lane;LESS_IS_BETTER;87347;false;11284;58726;70498
+5;SMS Metrics;MORE_IS_BETTER;67244;true;61721;95500;56010
+6;best-of-breed concept scale;MORE_IS_BETTER;52836;false;52370;48728;62928
+7;Incredible bypassing withdrawal;MORE_IS_BETTER;62856;true;75785;99885;47635
+8;Stand-alone Credit Card Account;LESS_IS_BETTER;47252;false;14962;68986;60773
+9;JSON Fantastic;LESS_IS_BETTER;93009;false;63265;47459;24400
+10;Clothing;MORE_IS_BETTER;1146;false;74680;69898;19864

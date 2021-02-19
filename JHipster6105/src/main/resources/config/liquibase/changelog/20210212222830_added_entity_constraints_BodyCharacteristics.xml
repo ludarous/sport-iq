@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity BodyCharacteristics.
+    -->
+    <changeSet id="20210212222830-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="height_unit_id"
+                                 baseTableName="body_characteristics"
+                                 constraintName="fk_body_characteristics_height_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="width_unit_id"
+                                 baseTableName="body_characteristics"
+                                 constraintName="fk_body_characteristics_width_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit"/>
+
+    </changeSet>
+</databaseChangeLog>
